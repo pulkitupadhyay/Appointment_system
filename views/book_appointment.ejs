@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>book appointment with : </h1>
+
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+
+<% for(var i=0 ; i<emploies.length; i++){ %>
+
+   <a href="/employee/<%= emploies[i]._id %>"> <div style="display: flex; flex-direction: column; border: 2px solid red;">
+        <h2> <%= emploies[i].name %> </h2>
+        <h3> <%= emploies[i].email %> </h3>
+    </div></a>
+
+<% } %>
+
+    </div>
+
+</body>
+</html>

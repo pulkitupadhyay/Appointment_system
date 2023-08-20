@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p> ALERT!!@!  Please login after sighnup dont signup again </p>
+    
+    <form action="/employee_signUp" method="POST">
+        name: <input type="text" name="employeeName">
+        email: <input type="text" name="employeeEmail">
+        phone: <input type="text" name="employeeNumber">
+        password: <input type="text" name="employeePassword">
+        
+        <button type="submit">SignUp</button>
+    </form>
+    <form action="employee_login" method="post">
+        email: <input type="text" name="employee_email">
+        password: <input type="text" name="employee_password">
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

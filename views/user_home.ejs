@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h1>welcome <%= new_user.name %></h1>
+
+ 
+  <a href="/book_appointment"> <button> book appointment</button>  </a>
+
+
+
+  <center><h1> Your Appointments </h1></center>
+
+  <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
+
+ <% if(accepted_appintments.length == 0){  %>
+
+    <h4> No appintments Here </h4>
+ <% }  %>
+
+    <% for(var i=0; i< accepted_appintments.length; i++){  %>
+        <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
+            <% var targetId = accepted_appintments[i].employeeID %>
+             <% var  foundUser = accepted_employee.find(user => user._id.toString() === targetId); %> 
+  
+             <% var targetId_timeslot = accepted_appintments[i].time_slotId.trim(); %>
+             <% var  foundSlot = appointment_timeslot_for_accepted_reqests.find(slot => slot._id.toString() === targetId_timeslot); %> 
+  
+             <% const inputDate = new Date(foundSlot.from_date );  %>
+
+      
+             <% const day = inputDate.getDate().toString().padStart(2, '0');  %>
+             <% const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');   %>
+             <% const year = inputDate.getFullYear().toString().slice(-2);  %>
+              
+             <% const formattedDate = `${day}/${month}/20${year}`;  %>
+             
+             
+   
+             <%  const inputTime = foundSlot.time;     %>
+             <% const [hours, minutes] = inputTime.split(":");   %>
+              
+              
+            <%  const hoursNumber = parseInt(hours, 10);   %>
+            <%  const minutesNumber = parseInt(minutes, 10);   %>
+              
+             <%         const newHours = (hoursNumber + 1 ) % 24;    %>
+            <%  const newMinutes = minutesNumber;   %>
+                 
+            <%  const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;   %>
+              
+             <% var current_time = formattedTime;   %>
+
+
+
+        
+             
+             
+             
+             <h2> Appointment With : <%= foundUser.name %> </h2>
+   <h2> Employee Email  : <%= foundUser.email %>  </h2>
+   <h2> Employee Number :    <%= foundUser.number %>  </h2>
+   <h2>  Date : <%= formattedDate %>  </h2>
+
+   <h2>From : <%= foundSlot.time %> To <%= current_time %>  </h2>
+   
+    
+
+  
+    
+        </div>
+     <% } %>
+
+</div>
+
+ 
+
+<center><h1> Your Appointment requests </h1></center>
+
+
+
+<div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
+    <% if(appointment_requests1.length == 0){  %>
+
+        <h4> No appintments Here </h4>
+     <% }  %>
+    <% for(var i=0; i< appointment_requests1.length; i++){  %>
+        <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 1%;">
+            <% var targetId = appointment_requests1[i].employeeID %>
+             <% var  foundUser = appointment_employee.find(user => user._id.toString() === targetId); %> 
+  
+             <% var targetId_timeslot = appointment_requests1[i].time_slotId.trim(); %>
+             <% var  foundSlot = appointment_timeslot.find(slot => slot._id.toString() === targetId_timeslot); %> 
+  
+            
+      <%  const inputTime = foundSlot.time;     %>
+      <% const [hours, minutes] = inputTime.split(":");   %>
+       
+       
+     <%  const hoursNumber = parseInt(hours, 10);   %>
+     <%  const minutesNumber = parseInt(minutes, 10);   %>
+       
+      <%         const newHours = (hoursNumber + 1 ) % 24;    %>
+     <%  const newMinutes = minutesNumber;   %>
+          
+     <%  const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;   %>
+       
+      <% var current_time = formattedTime;   %>
+            
+            
+            
+            
+            
+             <% const inputDate = new Date(foundSlot.from_date );  %>
+
+      
+             <% const day = inputDate.getDate().toString().padStart(2, '0');  %>
+             <% const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');   %>
+             <% const year = inputDate.getFullYear().toString().slice(-2);  %>
+              
+             <% const formattedDate = `${day}/${month}/20${year}`;  %>
+             
+             
+          
+        
+             
+             
+             
+            <h2> Appointment With : <%= foundUser.name %> </h2>
+            <h2> Requester`s Email : <%= foundUser.email %>  </h2>
+            <h2> Requester`s Number :    <%= foundUser.number %>  </h2>
+            <h2> Requested Date : <%= formattedDate %>  </h2>
+            <h2>From : <%= foundSlot.time %> To <%= current_time %>  </h2>
+    
+
+    
+        </div>
+     <% } %>
+    </div>
+    
+
+
+
+</body>
+</html>

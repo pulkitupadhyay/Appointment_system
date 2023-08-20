@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  h1,p{
+    text-align: center;
+  }
+</style>
+<body>
+    <h1>welcome <%= new_employee.name %></h1>
+
+    <h1> Here is all of your appointments </h1>
+
+    <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
+      <% if(accepted_appintments.length == 0){  %>
+
+        <h4> No TIME slots Here </h4>
+     <% }  %>
+        <% for(var i=0; i< accepted_appintments.length; i++){  %>
+            <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
+                <% var targetId = accepted_appintments[i].userID %>
+                 <% var  foundUser = accepted_users.find(user => user._id.toString() === targetId); %> 
+      
+                 <% var targetId_timeslot = accepted_appintments[i].time_slotId.trim(); %>
+                 <% var  foundSlot = appointment_timeslot_for_accepted_reqests.find(slot => slot._id.toString() === targetId_timeslot); %> 
+      
+                 <% const inputDate = new Date(foundSlot.from_date );  %>
+    
+          
+                 <% const day = inputDate.getDate().toString().padStart(2, '0');  %>
+                 <% const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');   %>
+                 <% const year = inputDate.getFullYear().toString().slice(-2);  %>
+                  
+                 <% const formattedDate = `${day}/${month}/20${year}`;  %>
+                 
+                 
+    
+    
+          <%  const inputTime = foundSlot.time;     %>
+           <% const [hours, minutes] = inputTime.split(":");   %>
+            
+            
+          <%  const hoursNumber = parseInt(hours, 10);   %>
+          <%  const minutesNumber = parseInt(minutes, 10);   %>
+            
+           <%         const newHours = (hoursNumber + 1 ) % 24;    %>
+          <%  const newMinutes = minutesNumber;   %>
+               
+          <%  const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;   %>
+            
+           <% var current_time = formattedTime;   %>
+    
+    
+            
+                 
+                 
+                 
+                 <h2> Appointment With : <%= foundUser.name %> </h2>
+       <h2> Requester`s Email : <%= foundUser.email %>  </h2>
+       <h2> Requester`s Number :    <%= foundUser.number %>  </h2>
+       <h2> Requested Date : <%= formattedDate %>  </h2>
+    
+       <h2> from  <strong style="color: blue;">  <%= time_slots[i].time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
+        
+    
+      
+        
+            </div>
+         <% } %>
+
+    </div>
+
+
+
+<h1>here is all your appointment requests </h1> 
+
+
+
+
+
+
+
+
+<div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
+  <% if(appointment_requests1.length == 0){  %>
+
+    <h4> No appintments requests Here </h4>
+ <% }  %>
+    <% for(var i=0; i< appointment_requests1.length; i++){  %>
+        <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
+            <% var targetId = appointment_requests1[i].userID %>
+             <% var  foundUser = appointment_users.find(user => user._id.toString() === targetId); %> 
+  
+             <% var targetId_timeslot = appointment_requests1[i].time_slotId.trim(); %>
+             <% var  foundSlot = appointment_timeslot.find(slot => slot._id.toString() === targetId_timeslot); %> 
+  
+             <% const inputDate = new Date(foundSlot.from_date );  %>
+
+      
+             <% const day = inputDate.getDate().toString().padStart(2, '0');  %>
+             <% const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');   %>
+             <% const year = inputDate.getFullYear().toString().slice(-2);  %>
+              
+             <% const formattedDate = `${day}/${month}/20${year}`;  %>
+             
+             
+
+
+      <%  const inputTime = foundSlot.time;     %>
+       <% const [hours, minutes] = inputTime.split(":");   %>
+        
+        
+      <%  const hoursNumber = parseInt(hours, 10);   %>
+      <%  const minutesNumber = parseInt(minutes, 10);   %>
+        
+       <%         const newHours = (hoursNumber + 1 ) % 24;    %>
+      <%  const newMinutes = minutesNumber;   %>
+           
+      <%  const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;   %>
+        
+       <% var current_time = formattedTime;   %>
+
+
+        
+             
+             
+             
+             <h2> Appointment With : <%= foundUser.name %> </h2>
+   <h2> Requester`s Email : <%= foundUser.email %>  </h2>
+   <h2> Requester`s Number :    <%= foundUser.number %>  </h2>
+   <h2> Requested Date : <%= formattedDate %>  </h2>
+
+   <h2> from  <strong style="color: blue;">  <%= time_slots[i].time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
+    
+
+   <form action="/accept_request" method="post" >
+
+ <input type="text" name="slotId_to_update" value="<%= appointment_requests1[i]._id %>" style="display: none;" >
+ <button type="submit">Accept Appointment Request </button>
+
+   </form>
+
+   <form action="/Reject_request" method="post" >
+
+    <input type="text" name="slotId_to_update" value="<%= appointment_requests1[i]._id %>" style="display: none;" >
+    <button type="submit">Reject Appointment Request </button>
+   
+      </form>
+    
+        </div>
+     <% } %>
+    </div>
+    
+
+
+
+<h1>here is your all time slots that you have been aided </h1>
+
+<div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
+  <% if(time_slots.length == 0){  %>
+
+    <h4> No TIME slots Here </h4>
+ <% }  %>
+<% for(var i=0; i< time_slots.length; i++){  %>
+    <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
+        
+
+       <% const inputDate = new Date(time_slots[i].from_date);  %>
+
+      
+       <% const day = inputDate.getDate().toString().padStart(2, '0');  %>
+       <% const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');   %>
+       <% const year = inputDate.getFullYear().toString().slice(-2);  %>
+        
+       
+       <% const formattedDate = `${day}/${month}/20${year}`;  %>
+        
+        <h2> Date : <%= formattedDate %> </h2>
+      
+
+
+
+        <h2> from : <%= time_slots[i].time %> </h2>
+
+
+      <%  const inputTime = time_slots[i].time.toString();     %>
+       <% const [hours, minutes] = inputTime.split(":");   %>
+        
+        
+      <%  const hoursNumber = parseInt(hours, 10);   %>
+      <%  const minutesNumber = parseInt(minutes, 10);   %>
+        
+       <%         const newHours = (hoursNumber + 1 ) % 24;    %>
+      <%  const newMinutes = minutesNumber;   %>
+           
+      <%  const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;   %>
+        
+       <% var current_time = formattedTime;   %>
+
+
+        <h2> TO : <%= current_time %> </h2>
+
+
+
+        
+
+
+    </div>
+ <% } %>
+</div>
+
+
+
+
+
+
+<h1>Add Time Slots</h1>
+
+<form action="/add_time_slots" method="POST">
+
+
+<input type="text" name="employee_email" value="<%=new_employee.email %> ">
+from date <input type="Date" name="from_date">
+Time from <input type="time" name="from_time">
+how_many_houres you are free <input type="number" name="hours">
+days <input type="number" name="days">
+<button type="submit"> Add Time Slot </button>
+
+</form>
+
+<script>
+    const mainDiv = document.querySelector('.mainDiv');
+const childDivs = Array.from(mainDiv.children);
+
+childDivs.sort((a, b) => {
+  const dateA = parseDate(a.querySelector('h1').textContent);
+  const dateB = parseDate(b.querySelector('h1').textContent);
+  return dateA - dateB;
+});
+
+childDivs.forEach(div => mainDiv.appendChild(div));
+
+function parseDate(dateString) {
+  const [day, month, year] = dateString.split('/').map(Number);
+  return new Date(year + 2000, month - 1, day); // Converting to comparable format
+}
+</script>
+</body>
+</html>
