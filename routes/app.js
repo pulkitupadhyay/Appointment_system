@@ -234,7 +234,11 @@ if(!new_employee){
 
     } else if(employee_pass === new_employee.password){
 
-        var time_slots = await time_slot.find({ employeeID: new_employee._id})
+        var time_slots = await time_slot.find({ employeeID: new_employee._id, occupied: false})
+
+
+
+
 var time_slots1 = time_slots
         time_slots1.sort((a, b) => {
             const dateA = new Date(a.from_date);
@@ -372,7 +376,7 @@ router.get('/employee/:id', async (req,res,next)=>{
     var employee = await employee_scheema.findOne({ _id: req.params.id})
 var user = await user_scheema.findOne({ email: req.cookies.user_email})
 
-var time_slots = await time_slot.find({ employeeID: req.params.id})
+var time_slots = await time_slot.find({ employeeID: req.params.id, occupied:false})
 var time_slots1 = time_slots
         time_slots1.sort((a, b) => {
             const dateA = new Date(a.from_date);
@@ -418,6 +422,17 @@ router.post('/book_slot', async (req,res,next)=>{
             }} // Update operation
              // Return the updated document
           );
+
+
+          await time_slot.findOneAndUpdate(
+            { _id: req.body.slotId_of_slot.trim() }, // Conditions to find the document
+            { $set: { 
+                occupied:true,
+            
+            }} // Update operation
+             // Return the updated document
+          );
+
       
           res.send('acceptedd......')
     })

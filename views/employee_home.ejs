@@ -18,7 +18,7 @@
     <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
       <% if(accepted_appintments.length == 0){  %>
 
-        <h4> No TIME slots Here </h4>
+        <h4> No appointments Here </h4>
      <% }  %>
         <% for(var i=0; i< accepted_appintments.length; i++){  %>
             <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
@@ -65,6 +65,7 @@
        <h2> Requested Date : <%= formattedDate %>  </h2>
     
        <h2> from  <strong style="color: blue;">  <%= time_slots[i].time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
+       <p>  </p>
         
     
       
@@ -135,11 +136,12 @@
    <h2> Requested Date : <%= formattedDate %>  </h2>
 
    <h2> from  <strong style="color: blue;">  <%= time_slots[i].time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
-    
+    <p> <%= appointment_requests1[i].text %> </p>
 
    <form action="/accept_request" method="post" >
 
  <input type="text" name="slotId_to_update" value="<%= appointment_requests1[i]._id %>" style="display: none;" >
+ <input type="text" name="slotId_of_slot" value="<%= appointment_requests1[i].time_slotId %>" >
  <button type="submit">Accept Appointment Request </button>
 
    </form>

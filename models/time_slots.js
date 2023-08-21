@@ -15,6 +15,11 @@ var time_slots = mongoose.Schema({
   time:{
     type: String
   },
+  occupied:{
+    type: Boolean,
+    default: false
+  },
+
  
  
 
