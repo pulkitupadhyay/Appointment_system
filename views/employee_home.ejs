@@ -16,12 +16,17 @@
     <h1> Here is all of your appointments </h1>
 
     <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
+<% console.log(accepted_appintments.length) %>
       <% if(accepted_appintments.length == 0){  %>
 
         <h4> No appointments Here </h4>
-     <% }  %>
+
+     <% } else{ %>
         <% for(var i=0; i< accepted_appintments.length; i++){  %>
-            <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
+           
+          
+          
+          <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
                 <% var targetId = accepted_appintments[i].userID %>
                  <% var  foundUser = accepted_users.find(user => user._id.toString() === targetId); %> 
       
@@ -64,7 +69,7 @@
        <h2> Requester`s Number :    <%= foundUser.number %>  </h2>
        <h2> Requested Date : <%= formattedDate %>  </h2>
     
-       <h2> from  <strong style="color: blue;">  <%= time_slots[i].time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
+       <h2> from  <strong style="color: blue;">  <%= foundSlot.time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
        <p>  </p>
         
     
@@ -72,7 +77,7 @@
         
             </div>
          <% } %>
-
+<% } %>
     </div>
 
 
@@ -90,7 +95,7 @@
   <% if(appointment_requests1.length == 0){  %>
 
     <h4> No appintments requests Here </h4>
- <% }  %>
+ <% }else {  %>
     <% for(var i=0; i< appointment_requests1.length; i++){  %>
         <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
             <% var targetId = appointment_requests1[i].userID %>
@@ -135,7 +140,7 @@
    <h2> Requester`s Number :    <%= foundUser.number %>  </h2>
    <h2> Requested Date : <%= formattedDate %>  </h2>
 
-   <h2> from  <strong style="color: blue;">  <%= time_slots[i].time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
+   <h2> from  <strong style="color: blue;">  <%= foundSlot.time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
     <p> <%= appointment_requests1[i].text %> </p>
 
    <form action="/accept_request" method="post" >
@@ -154,19 +159,20 @@
       </form>
     
         </div>
-     <% } %>
+     <% } }%>
     </div>
     
 
 
 
-<h1>here is your all time slots that you have been aided </h1>
+<h1>here is your all Free time slots  </h1>
 
 <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
   <% if(time_slots.length == 0){  %>
 
     <h4> No TIME slots Here </h4>
- <% }  %>
+ <% }else { %>
+ 
 <% for(var i=0; i< time_slots.length; i++){  %>
     <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
         
@@ -212,7 +218,8 @@
 
 
     </div>
- <% } %>
+ <% }%>
+ <%  }%>
 </div>
 
 

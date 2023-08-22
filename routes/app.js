@@ -6,6 +6,115 @@ const time_slot = require('./../models/time_slots')
 const appointment_requests = require('./../models/appointment_requests')
 // const appointment_requests = require('./../models/appointment_requests')
 
+const schedule = require('node-schedule');
+const nodemailer = require('nodemailer')
+
+
+async function delete_expired_slots(){
+
+   
+    const currentDate = new Date();
+const isoString = currentDate.toISOString().split('T')[0] + 'T00:00:00.000+00:00';
+console.log(isoString);
+
+// const currentDate = new Date();
+const hours = String(currentDate.getHours()).padStart(2, '0');
+const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+const currentTime = `${hours}:${minutes}`;
+
+var slots_came_from_database = await time_slot.find({ from_date: { $lt: isoString}  })
+    console.log(slots_came_from_database)
+
+
+
+        for(var i=0; i<slots_came_from_database.length; i++){
+
+           
+            await appointment_requests.findOneAndDelete({ time_slotId : ` ${slots_came_from_database[i]._id.toString()} `})
+
+            await time_slot.findOneAndDelete({ _id: slots_came_from_database[i]._id})
+
+
+
+            
+        }
+
+
+        var slots_came_from_database_2 = await time_slot.find({  $and: [
+            { from_date : isoString },
+            { time: { $lt: currentTime} }
+          ]})
+
+          
+        for(var i=0; i<slots_came_from_database_2.length; i++){
+            await appointment_requests.findOneAndDelete({ time_slotId : slots_came_from_database_2[i]._id.toString()})
+
+            await time_slot.findOneAndDelete({ _id: slots_came_from_database_2[i]._id})
+
+
+
+        }
+ 
+    
+
+}
+
+delete_expired_slots();
+
+schedule.scheduleJob('1 */1 * * *', () => {
+    console.log("This schaduler will run every 1 hour and one minut ")
+    delete_expired_slots();
+  });
+  
+
+  async function sendMail(to, subject,text, html){
+    var config = {
+        service: 'gmail',
+        auth: {
+                user: 'photo.pulkitfourth@gmail.com',
+                pass: 'daapxuseglvonuef'
+        }
+     }
+    
+    
+     const transporter = nodemailer.createTransport(config);
+    
+    
+    
+     async function main1() {
+        // send mail with defined transport object
+        const info = await transporter.sendMail({
+          from: '"SWAAYATT👻" <photo.pulkitfourth@gmail.com>', // sender address
+          to: to, // list of receivers
+          subject: subject, // Subject line
+          text: text, // plain text body
+          html: html, // html body
+        });
+    
+     }
+      
+        // console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+      
+    main1();
+
+
+  }
+
+ 
+    
+
+ 
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -298,6 +407,8 @@ for(var i=0 ; i< accepted_appintments.length; i++){
 
 })
 
+
+// post route for adding time slots by employee
 router.post('/add_time_slots', async (req,res,next)=>{
 
   
@@ -364,11 +475,14 @@ var current_time = formattedTime;
 })
 
 
+// get rout book appintment
+
 router.get('/book_appointment', async(req,res,next)=>{
  
      var emploies = await employee_scheema.find();
 res.render('book_appointment',{emploies})
 })
+
 
 
 router.get('/employee/:id', async (req,res,next)=>{
@@ -393,6 +507,10 @@ var time_slots1 = time_slots
 
 router.post('/book_slot', async (req,res,next)=>{
 
+    var user = await user_scheema.findOne({ _id : req.body.user_id})
+    var employee = await employee_scheema.findOne({_id: req.body.employee_id})
+    var TS = await time_slot.findOne({_id: req.body.slot_id.trim()})
+
     var new_appointment_request = new appointment_requests({
         userID: req.body.user_id,
         employeeID: req.body.employee_id,
@@ -406,14 +524,44 @@ router.post('/book_slot', async (req,res,next)=>{
 
     new_appointment_request.save().then(()=>{
 
- res.send('appointment requested please wait while the employee aproove the request  ')
+
+
+
+        const inputDate = new Date(TS.from_date ); 
+    
+          
+        const day = inputDate.getDate().toString().padStart(2, '0'); 
+        const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');  
+        const year = inputDate.getFullYear().toString().slice(-2); 
+         
+     const formattedDate = `${day}/${month}/20${year}`; 
+
+// to, subject,text, html
+
+var to = employee.email
+var subject = "Appointment Request : You`ve got and appointment request"
+var text = `Hey ${employee.name} This mail is to inform you that ${user.name} has requested an apointment with you on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
+var html = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that ${user.name} has requested an apointment with you <br> 
+Here are the deteails <br> Date Requested : ${ formattedDate} <br> Time requested :  ${TS.time} <br> Messege for you : ${new_appointment_request.text}. <br> Please login in your employee account to accept or reject the appointment.</p>`
+
+sendMail(to, subject,text, html);
+
+
+
+ res.send('appointment requested please wait while the employee aproove the request::: we will mail you when the empllyee accept or reject your appointment request   ')
 
     })
 
     })
 
 
-    router.post('/accept_request', async (req,res,next)=>{
+router.post('/accept_request', async (req,res,next)=>{
+       
+       var appointment = await appointment_requests.findOne({ _id:req.body.slotId_to_update})
+       var employee = await employee_scheema.findOne({ _id: appointment.employeeID})
+       var user = await user_scheema.findOne({_id: appointment.userID})
+       var TS = await time_slot.findOne({_id: appointment.time_slotId.trim()})
+       
         await appointment_requests.findOneAndUpdate(
             { _id: req.body.slotId_to_update }, // Conditions to find the document
             { $set: { 
@@ -434,6 +582,32 @@ router.post('/book_slot', async (req,res,next)=>{
           );
 
       
+
+
+
+          const inputDate = new Date(TS.from_date ); 
+    
+          
+          const day = inputDate.getDate().toString().padStart(2, '0'); 
+          const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');  
+          const year = inputDate.getFullYear().toString().slice(-2); 
+           
+       const formattedDate = `${day}/${month}/20${year}`; 
+  
+  // to, subject,text, html
+  
+  var to = user.email
+  var subject = "Appointment Request Accepted: Congratulations "
+  var text = `Hey ${user.name} This mail is to inform you that ${employee.name} has accepted your  apointment request  on ${ formattedDate} AT ${TS.time} . Please login in your user  account to accept or reject the appointment.`
+  var html = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that ${employee.name} has accepted your  apointment request  <br> 
+  Here are the deteails <br> Date Of appointment : ${ formattedDate} <br> Time  :  ${TS.time} <br> Messege for you : ${appointment.text}. <br> Please Be on time and be petieint if the employee is Late for some resons <br> Thanks and regards <br> Swaayatt Robots Pvt Ltd.</p>`
+  
+  sendMail(to, subject,text, html);
+  
+  
+
+
+
           res.send('acceptedd......')
     })
 
