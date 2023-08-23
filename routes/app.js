@@ -23,7 +23,7 @@ const minutes = String(currentDate.getMinutes()).padStart(2, '0');
 const currentTime = `${hours}:${minutes}`;
 
 var slots_came_from_database = await time_slot.find({ from_date: { $lt: isoString}  })
-    console.log(slots_came_from_database)
+    // console.log(slots_came_from_database)
 
 
 
@@ -59,7 +59,18 @@ var slots_came_from_database = await time_slot.find({ from_date: { $lt: isoStrin
 
 }
 
-delete_expired_slots();
+router.post('/fake_login',async(req,res,next)=>{
+
+    var slot_id = req.body.slot_id;
+    // var user_id = req.body.user_id;
+    var employee_id = req.body.employee_id
+
+    res.render('fake_user_login',{slot_id,employee_id})
+})
+
+
+
+
 
 schedule.scheduleJob('1 */1 * * *', () => {
     console.log("This schaduler will run every 1 hour and one minut ")
@@ -102,27 +113,14 @@ schedule.scheduleJob('1 */1 * * *', () => {
   }
 
  
-    
-
- 
-
-
-
-
-
-
-
-
-
-
 
 
 
 // get user login and register page
 
-router.get('/user_login',(req,res,next)=>{
-    res.render('user_login')
-})
+    // router.get('/user_login',(req,res,next)=>{
+    //     res.render('user_login')
+    // })
 
 // get employee login and register page
 
@@ -134,7 +132,7 @@ router.get('/employee_login', (req,res,next)=>{
 
 router.post('/user_signUp', async (req,res,next)=>{
 
-    console.log(req.body)
+    // console.log(req.body)
     var user_name = req.body.userName
     var user_email = req.body.userEmail
     var user_number = req.body.userNumber
@@ -151,153 +149,158 @@ router.post('/user_signUp', async (req,res,next)=>{
     new_user.save().then(function(dets){
         res.cookie('user_email', new_user.email);
 
-     
-      res.redirect('/user_login')
+     console.log('registerd')
     })
+
+var slot_id = req.body.slot_id;
+var employee_id = req.body.employee_id;
+var user = await user_scheema.findOne({ email: new_user.email})
+    res.render('final_slot_book' ,{slot_id,employee_id,user})
+
 
 })
 
 // post route for user`s login
-router.post('/user_login', async (req,res,next) => {
+// router.post('/user_login', async (req,res,next) => {
     
     
     
-    var user_email = req.body.user_email
-    var user_pass = req.body.user_password
+//     var user_email = req.body.user_email
+//     var user_pass = req.body.user_password
 
-    if( !user_email || !user_pass){
-        res.send('please provide email and password , seems like you diddent enterd one of em ')
-    }
-var new_user = await user_scheema.findOne({email: user_email})
+//     if( !user_email || !user_pass){
+//         res.send('please provide email and password , seems like you diddent enterd one of em ')
+//     }
+// var new_user = await user_scheema.findOne({email: user_email})
 
 
-if(!new_user){
-        res.send('please enter a valid email addres or sign up if you diddent ')
+// if(!new_user){
+//         res.send('please enter a valid email addres or sign up if you diddent ')
 
-    }
-    else if(user_pass !== new_user.password){
-        res.send('please provide correct  email or  password , seems like you enterd wrong cridentials  ')
+//     }
+//     else if(user_pass !== new_user.password){
+//         res.send('please provide correct  email or  password , seems like you enterd wrong cridentials  ')
 
-    } else if(user_pass === new_user.password){
-        res.cookie('user_email', new_user.email);
+//     } else if(user_pass === new_user.password){
+//         res.cookie('user_email', new_user.email);
 
-var accepted_appintments = await appointment_requests.find({ userID : new_user._id , accepted: true})
-var appointment_requests1 = await appointment_requests.find({ userID : new_user._id , accepted: false})
+// var accepted_appintments = await appointment_requests.find({ userID : new_user._id , accepted: true})
+// var appointment_requests1 = await appointment_requests.find({ userID : new_user._id , accepted: false})
        
-        // var time_slots = await time_slot.find({ _id: accepted_appintments.time_slotId})
+//         // var time_slots = await time_slot.find({ _id: accepted_appintments.time_slotId})
 
 
 
-        var appointment_timeslot = []
-        var appointment_timeslot_for_accepted_reqests = []
+//         var appointment_timeslot = []
+//         var appointment_timeslot_for_accepted_reqests = []
         
-        for(var i=0 ; i< appointment_requests1.length; i++){
+//         for(var i=0 ; i< appointment_requests1.length; i++){
         
-        var app_time_slot = await time_slot.findOne({ _id : (appointment_requests1[i].time_slotId).trim() })
-        appointment_timeslot.push(app_time_slot)
+//         var app_time_slot = await time_slot.findOne({ _id : (appointment_requests1[i].time_slotId).trim() })
+//         appointment_timeslot.push(app_time_slot)
         
         
-        }
-        for(var i=0 ; i< accepted_appintments.length; i++){
+//         }
+//         for(var i=0 ; i< accepted_appintments.length; i++){
         
-            var app_time_slot = await time_slot.findOne({ _id : (accepted_appintments[i].time_slotId).trim() })
-            appointment_timeslot_for_accepted_reqests.push(app_time_slot)
+//             var app_time_slot = await time_slot.findOne({ _id : (accepted_appintments[i].time_slotId).trim() })
+//             appointment_timeslot_for_accepted_reqests.push(app_time_slot)
             
             
-            }
+//             }
 
 
           
                       
 
 
-var appointment_employee = [];
-var accepted_employee = [];
+// var appointment_employee = [];
+// var accepted_employee = [];
 
 
 
-for(var i=0; i< appointment_requests1.length; i++){
+// for(var i=0; i< appointment_requests1.length; i++){
 
-    var employee = await employee_scheema.findOne({ _id: appointment_requests1[i].employeeID})
+//     var employee = await employee_scheema.findOne({ _id: appointment_requests1[i].employeeID})
 
-    appointment_employee.push(employee)
-}
+//     appointment_employee.push(employee)
+// }
 
-for(var i=0; i< accepted_appintments.length; i++){
+// for(var i=0; i< accepted_appintments.length; i++){
 
-    var employee = await employee_scheema.findOne({ _id: accepted_appintments[i].employeeID})
+//     var employee = await employee_scheema.findOne({ _id: accepted_appintments[i].employeeID})
 
-    accepted_employee.push(employee)
-}
-
-
+//     accepted_employee.push(employee)
+// }
 
 
-var appointment_timeslot = []
-var appointment_timeslot_for_accepted_reqests = []
-
-for(var i=0 ; i< appointment_requests1.length; i++){
-
-var app_time_slot = await time_slot.findOne({ _id : (appointment_requests1[i].time_slotId).trim() })
-appointment_timeslot.push(app_time_slot)
 
 
-}
-for(var i=0 ; i< accepted_appintments.length; i++){
+// var appointment_timeslot = []
+// var appointment_timeslot_for_accepted_reqests = []
 
-    var app_time_slot = await time_slot.findOne({ _id : (accepted_appintments[i].time_slotId).trim() })
-    appointment_timeslot_for_accepted_reqests.push(app_time_slot)
+// for(var i=0 ; i< appointment_requests1.length; i++){
+
+// var app_time_slot = await time_slot.findOne({ _id : (appointment_requests1[i].time_slotId).trim() })
+// appointment_timeslot.push(app_time_slot)
+
+
+// }
+// for(var i=0 ; i< accepted_appintments.length; i++){
+
+//     var app_time_slot = await time_slot.findOne({ _id : (accepted_appintments[i].time_slotId).trim() })
+//     appointment_timeslot_for_accepted_reqests.push(app_time_slot)
     
     
-    }
+//     }
 
 
 
 
-var accepted_timeslots = [];
-var requested_timeslots = [];
+// var accepted_timeslots = [];
+// var requested_timeslots = [];
 
-for(var i=0; i< accepted_appintments.length; i++){
+// for(var i=0; i< accepted_appintments.length; i++){
 
-var slot = await time_slot.findOne({ _id : (accepted_appintments[i].time_slotId).trim() })
+// var slot = await time_slot.findOne({ _id : (accepted_appintments[i].time_slotId).trim() })
 
-accepted_timeslots.push(slot)
-
-
-}
+// accepted_timeslots.push(slot)
 
 
-for(var i=0; i< appointment_requests1.length; i++){
+// }
 
-    var slot = await time_slot.findOne({ _id : (appointment_requests1[i].time_slotId).trim() })
+
+// for(var i=0; i< appointment_requests1.length; i++){
+
+//     var slot = await time_slot.findOne({ _id : (appointment_requests1[i].time_slotId).trim() })
     
-    requested_timeslots.push(slot)
-    
-    
-    }
+//     requested_timeslots.push(slot)
     
     
+//     }
+    
+    
 
 
 
-        res.cookie('user_email', new_user.email);
+//         res.cookie('user_email', new_user.email);
 
-        res.render('user_home',{ requested_timeslots, accepted_timeslots,  new_user,appointment_requests1, accepted_employee ,appointment_employee,accepted_employee,appointment_timeslot,accepted_appintments,appointment_timeslot_for_accepted_reqests})
-
-
-
-    }
+//         res.render('user_home',{ requested_timeslots, accepted_timeslots,  new_user,appointment_requests1, accepted_employee ,appointment_employee,accepted_employee,appointment_timeslot,accepted_appintments,appointment_timeslot_for_accepted_reqests})
 
 
 
+//     }
 
-})
+
+
+
+// })
 
 // post route for employee`s signUp
 
 router.post('/employee_signUp', async (req,res,next)=>{
 
-    console.log(req.body)
+  
     var employee_name = req.body.employeeName
     var employee_email = req.body.employeeEmail
     var employee_number = req.body.employeeNumber
@@ -355,7 +358,7 @@ var time_slots1 = time_slots
             return dateA - dateB;
           });
           
-          console.log(time_slots1);
+         
 var appointment_requests1 = await appointment_requests.find({ employeeID : new_employee._id , accepted: false})
 var accepted_appintments = await appointment_requests.find({ employeeID : new_employee._id , accepted: true})
 
@@ -378,7 +381,7 @@ for(var i=0; i< accepted_appintments.length; i++){
 
 
 var appointment_timeslot = []
-var appointment_timeslot_for_accepted_reqests = []
+var appointment_timeslot_for_accepted_reqests = [{_id: 'main'},]
 
 for(var i=0 ; i< appointment_requests1.length; i++){
 
@@ -488,7 +491,7 @@ res.render('book_appointment',{emploies})
 router.get('/employee/:id', async (req,res,next)=>{
 
     var employee = await employee_scheema.findOne({ _id: req.params.id})
-var user = await user_scheema.findOne({ email: req.cookies.user_email})
+// var user = await user_scheema.findOne({ email: req.cookies.user_email})
 
 var time_slots = await time_slot.find({ employeeID: req.params.id, occupied:false})
 var time_slots1 = time_slots
@@ -500,32 +503,41 @@ var time_slots1 = time_slots
 
 
 
-    res.render('with_perticuler_employee',{ employee, user, time_slots})
+    res.render('with_perticuler_employee',{ employee, time_slots})
 
 })
 
 
 router.post('/book_slot', async (req,res,next)=>{
 
+  
+    
     var user = await user_scheema.findOne({ _id : req.body.user_id})
     var employee = await employee_scheema.findOne({_id: req.body.employee_id})
     var TS = await time_slot.findOne({_id: req.body.slot_id.trim()})
-
+   
     var new_appointment_request = new appointment_requests({
         userID: req.body.user_id,
         employeeID: req.body.employee_id,
         text: req.body.text_associated,
-        time_slotId: req.body.slot_id
-
+        time_slotId: req.body.slot_id,
+        accepted: true
     })
 
-
+    await time_slot.findOneAndUpdate(
+        { _id: req.body.slot_id.trim()}, // Conditions to find the document
+        { $set: { 
+            occupied:true,
+        
+        }} 
+        
+     );
 
 
     new_appointment_request.save().then(()=>{
 
 
-
+       
 
         const inputDate = new Date(TS.from_date ); 
     
@@ -538,14 +550,20 @@ router.post('/book_slot', async (req,res,next)=>{
 
 // to, subject,text, html
 
-var to = employee.email
-var subject = "Appointment Request : You`ve got and appointment request"
-var text = `Hey ${employee.name} This mail is to inform you that ${user.name} has requested an apointment with you on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
-var html = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that ${user.name} has requested an apointment with you <br> 
-Here are the deteails <br> Date Requested : ${ formattedDate} <br> Time requested :  ${TS.time} <br> Messege for you : ${new_appointment_request.text}. <br> Please login in your employee account to accept or reject the appointment.</p>`
+var to1 = employee.email
+var subject1 = "Appointment Booked : You`ve got an appointment"
+var text1 = `Hey ${employee.name} This mail is to inform you that your appointment is booked with ${user.name}  on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
+var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your appointment is booked with ${user.name} <br> 
+Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Messege for you : ${new_appointment_request.text}. <br> Please login in your employee account to know more .</p>`
 
-sendMail(to, subject,text, html);
+sendMail(to1, subject1,text1, html1);
 
+var to2 = user.email
+var subject2 = "Appointment Booked : You`ve got an appointment"
+var text2 = `Hey ${user.name} This mail is to inform you that your appointment is booked with ${employee.name}  on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
+var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment is booked with ${employee.name} <br> 
+Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Please be on time and be petint if employee gets late . <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
+sendMail(to2, subject2,text2, html2);
 
 
  res.send('appointment requested please wait while the employee aproove the request::: we will mail you when the empllyee accept or reject your appointment request   ')
@@ -555,72 +573,72 @@ sendMail(to, subject,text, html);
     })
 
 
-router.post('/accept_request', async (req,res,next)=>{
+// router.post('/accept_request', async (req,res,next)=>{
        
-       var appointment = await appointment_requests.findOne({ _id:req.body.slotId_to_update})
-       var employee = await employee_scheema.findOne({ _id: appointment.employeeID})
-       var user = await user_scheema.findOne({_id: appointment.userID})
-       var TS = await time_slot.findOne({_id: appointment.time_slotId.trim()})
+//        var appointment = await appointment_requests.findOne({ _id:req.body.slotId_to_update})
+//        var employee = await employee_scheema.findOne({ _id: appointment.employeeID})
+//        var user = await user_scheema.findOne({_id: appointment.userID})
+//        var TS = await time_slot.findOne({_id: appointment.time_slotId.trim()})
        
-        await appointment_requests.findOneAndUpdate(
-            { _id: req.body.slotId_to_update }, // Conditions to find the document
-            { $set: { 
-                accepted:true,
+//         await appointment_requests.findOneAndUpdate(
+//             { _id: req.body.slotId_to_update }, // Conditions to find the document
+//             { $set: { 
+//                 accepted:true,
             
-            }} // Update operation
-             // Return the updated document
-          );
+//             }} // Update operation
+//              // Return the updated document
+//           );
 
 
-          await time_slot.findOneAndUpdate(
-            { _id: req.body.slotId_of_slot.trim() }, // Conditions to find the document
-            { $set: { 
-                occupied:true,
+//           await time_slot.findOneAndUpdate(
+//             { _id: req.body.slotId_of_slot.trim() }, // Conditions to find the document
+//             { $set: { 
+//                 occupied:true,
             
-            }} // Update operation
-             // Return the updated document
-          );
+//             }} // Update operation
+//              // Return the updated document
+//           );
 
       
 
 
 
-          const inputDate = new Date(TS.from_date ); 
+//           const inputDate = new Date(TS.from_date ); 
     
           
-          const day = inputDate.getDate().toString().padStart(2, '0'); 
-          const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');  
-          const year = inputDate.getFullYear().toString().slice(-2); 
+//           const day = inputDate.getDate().toString().padStart(2, '0'); 
+//           const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');  
+//           const year = inputDate.getFullYear().toString().slice(-2); 
            
-       const formattedDate = `${day}/${month}/20${year}`; 
+//        const formattedDate = `${day}/${month}/20${year}`; 
   
-  // to, subject,text, html
+//   // to, subject,text, html
   
-  var to = user.email
-  var subject = "Appointment Request Accepted: Congratulations "
-  var text = `Hey ${user.name} This mail is to inform you that ${employee.name} has accepted your  apointment request  on ${ formattedDate} AT ${TS.time} . Please login in your user  account to accept or reject the appointment.`
-  var html = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that ${employee.name} has accepted your  apointment request  <br> 
-  Here are the deteails <br> Date Of appointment : ${ formattedDate} <br> Time  :  ${TS.time} <br> Messege for you : ${appointment.text}. <br> Please Be on time and be petieint if the employee is Late for some resons <br> Thanks and regards <br> Swaayatt Robots Pvt Ltd.</p>`
+//   var to = user.email
+//   var subject = "Appointment Request Accepted: Congratulations "
+//   var text = `Hey ${user.name} This mail is to inform you that ${employee.name} has accepted your  apointment request  on ${ formattedDate} AT ${TS.time} . Please login in your user  account to accept or reject the appointment.`
+//   var html = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that ${employee.name} has accepted your  apointment request  <br> 
+//   Here are the deteails <br> Date Of appointment : ${ formattedDate} <br> Time  :  ${TS.time} <br> Messege for you : ${appointment.text}. <br> Please Be on time and be petieint if the employee is Late for some resons <br> Thanks and regards <br> Swaayatt Robots Pvt Ltd.</p>`
   
-  sendMail(to, subject,text, html);
+//   sendMail(to, subject,text, html);
   
   
 
 
 
-          res.send('acceptedd......')
-    })
+//           res.send('acceptedd......')
+//     })
 
-router.post('/Reject_request', async (req,res,next)=>{
-    await appointment_requests.findOneAndDelete({ _id : req.body.slotId_to_update})
+// router.post('/Reject_request', async (req,res,next)=>{
+    // await appointment_requests.findOneAndDelete({ _id : req.body.slotId_to_update})
 
 
-    res.send('deleted')
-})
+    // res.send('deleted')
+// })
 
 
 router.get("/",(req,res)=>{
-    res.render('home')
+    res.redirect('/employee_login')
 })
 
 

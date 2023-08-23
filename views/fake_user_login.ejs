@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<style>
+     .main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  h1{
+    text-align: center;
+  }
+  h2{
+    margin-top: 1%;
+  }
+  .mainDiv h2{
+    font-size: 1rem !important  ;
+  }
+  form input{
+    font-size: 1rem !important  ;
+
+  }
+</style>
+<body>
+  <div class="main">
+
+    <div style="display: flex;  padding: 2%; margin-top: 5rem; height: 40rem; flex-direction: column; align-items: center; justify-content: center; width: 60%; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; ">
+  
+        <h1 style=" font-family: sans-serif; font-weight: bold;" > Please Provide some Details </h1>
+  
+  <div style="margin-top: 2rem; display: flex;  padding: 2%; flex-direction: column; align-items: center; justify-content: center; width: 40%; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; " >
+        <form action="/user_signUp" method="POST" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <div> <label for="name">  Name :   </label> <input class="my-3" type="text" name="userName"></div> 
+     <div> <label for="Email">  Email :  </label> <input class="my-3" type="text" name="userEmail"> </div>
+     <div> <label for="Number">  Number : </label><input class="my-3" type="number" name="userNumber"></div>
+
+           <input type="text" name="userPassword" value="1234" style="display: none;">
+         
+
+          <input type="text" name = 'slot_id' value=" <%= slot_id %> " style="display: none;" >
+          
+          <input type="text" name="employee_id" value="<%= employee_id %>" style="display: none;">
+
+
+         <button class="btn-primary" style="padding: 4%; width: 60%; border-radius: 2rem;" type="submit">Proceed</button>
+  
+  
+        </form>
+    </div>
+    </div>
+
+
+   
+
+
+    
+
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

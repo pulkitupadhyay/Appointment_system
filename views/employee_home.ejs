@@ -5,17 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <style>
   h1,p{
     text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    padding: 1%;
+  }
+  h1{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+  }
+  p,h4{
+    font-size: 1rem;  
+  }
+  h2{
+    font-size: 1rem;  
+
+  }
+
+
+  .main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  label{
+    font-weight: bold;
+
   }
 </style>
 <body>
+  <div class="main">
     <h1>welcome <%= new_employee.name %></h1>
 
     <h1> Here is all of your appointments </h1>
 
-    <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
+    <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; padding: 2%; width: 70%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
 <% console.log(accepted_appintments.length) %>
       <% if(accepted_appintments.length == 0){  %>
 
@@ -26,7 +55,7 @@
            
           
           
-          <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
+          <div style="border: 2px solid rgb(49, 45, 45); display: flex; flex-direction: column; padding: 2%;">
                 <% var targetId = accepted_appintments[i].userID %>
                  <% var  foundUser = accepted_users.find(user => user._id.toString() === targetId); %> 
       
@@ -64,12 +93,12 @@
                  
                  
                  
-                 <h2> Appointment With : <%= foundUser.name %> </h2>
-       <h2> Requester`s Email : <%= foundUser.email %>  </h2>
-       <h2> Requester`s Number :    <%= foundUser.number %>  </h2>
-       <h2> Requested Date : <%= formattedDate %>  </h2>
+                <strong> <h2> Appointment With </strong> : <%= foundUser.name %> </h2>
+      <strong> <h2> <%= foundUser.name %>`s Email </strong>: <%= foundUser.email %>  </h2>
+     <strong>  <h2> <%= foundUser.name %>`s Number </strong>:    <%= foundUser.number %>  </h2>
+      <strong> <h2>  Date </strong>: <%= formattedDate %>  </h2>
     
-       <h2> from  <strong style="color: blue;">  <%= foundSlot.time %> </strong> To  <strong style="color: blue;"><%= current_time %> </strong>  </h2>
+       <h2> <strong>From  </strong> <strong style="color: blue;">  <%= foundSlot.time %> </strong> <strong> To </strong>   <strong style="color: blue;"><%= current_time %> </strong>  </h2>
        <p>  </p>
         
     
@@ -80,7 +109,7 @@
 <% } %>
     </div>
 
-
+<!-- 
 
 <h1>here is all your appointment requests </h1> 
 
@@ -161,20 +190,20 @@
         </div>
      <% } }%>
     </div>
-    
+     -->
 
 
 
 <h1>here is your all Free time slots  </h1>
 
-<div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;">
+<div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; padding: 2%; width: 70%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
   <% if(time_slots.length == 0){  %>
 
     <h4> No TIME slots Here </h4>
  <% }else { %>
  
 <% for(var i=0; i< time_slots.length; i++){  %>
-    <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 2%;">
+    <div style="border: 2px solid red; display: flex; flex-direction: column; padding: 1%;">
         
 
        <% const inputDate = new Date(time_slots[i].from_date);  %>
@@ -187,12 +216,12 @@
        
        <% const formattedDate = `${day}/${month}/20${year}`;  %>
         
-        <h2> Date : <%= formattedDate %> </h2>
+        <h2> <strong>  Date</strong> : <%= formattedDate %> </h2>
       
 
 
 
-        <h2> from : <%= time_slots[i].time %> </h2>
+        <h2> <strong> from</strong> : <%= time_slots[i].time %> </h2>
 
 
       <%  const inputTime = time_slots[i].time.toString();     %>
@@ -210,7 +239,7 @@
        <% var current_time = formattedTime;   %>
 
 
-        <h2> TO : <%= current_time %> </h2>
+        <h2> <strong> TO </strong>: <%= current_time %> </h2>
 
 
 
@@ -229,17 +258,57 @@
 
 <h1>Add Time Slots</h1>
 
-<form action="/add_time_slots" method="POST">
+<div style="display: flex; width: 70%; flex-direction:column;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; justify-content: center; padding: 2%;">
+
+<div style="display: flex; flex-direction: row; justify-content: space-around; width: 79%;"> <label> Date </label> <label>Time </label><label>How many hours you are free </label><label>Days </label></div>
+  <form action="/add_time_slots" method="POST" style="display: flex; flex-direction: row;  padding: 2%; justify-content: space-around;" >
 
 
-<input type="text" name="employee_email" value="<%=new_employee.email %> ">
-from date <input type="Date" name="from_date">
-Time from <input type="time" name="from_time">
-how_many_houres you are free <input type="number" name="hours">
-days <input type="number" name="days">
-<button type="submit"> Add Time Slot </button>
+<input type="text" name="employee_email" value="<%=new_employee.email %> " style="display: none;" >
+ <input class="mx-3" type="Date" name="from_date">
+ <input class="mx-3" type="time" name="from_time">
+ <input class="mx-3" type="number" name="hours">
+ <input class="mx-3" type="number" name="days">
+<button class="btn-primary" type="submit" style="padding: 1%; border-radius: 2rem;" > Add Time Slot </button>
 
 </form>
+</div>
+
+<h1>Create Evant / Invite People  </h1>
+
+        
+        <div class="my-4" style="display: flex; padding: 2%; width: 70% ; flex-direction: row; justify-content: space-around; margin-top: 2rem;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
+  <div style="display: flex; flex-direction: column; border: 1px solid black;padding: 1%; ">
+  <h1> Create an 1 Hour Event</h1>
+  <input style="visibility: hidden;" type="text" id="linkInput" value="http://localhost:3000/employee/<%=new_employee._id%>" readonly>
+  <p> <strong>Duration : </strong> One Hour</p>
+  <p> <strong>Type : </strong> Meeting /Interview</p>
+  <button id="copyButton" class="btn-primary my-3" style="padding: 1%; border-radius: 2rem;" > Copy Link</button>
+
+</div>
+  <div style="display: flex; flex-direction: column; border: 1px solid black;padding: 1%; ">
+  <h1> Create an 30 Min Meeting </h1>
+  <input style="visibility: hidden;" type="text" id="linkInput1" value="http://localhost:3000/employee/<%=new_employee._id%>" readonly>
+  <p> <strong>Duration : </strong> 30 Min</p>
+  <p> <strong>Type : </strong>(coming soon)</p>
+  <button id="copyButton1" class="btn-primary my-3" style="padding: 1%; border-radius: 2rem;" > Copy Link</button>
+
+
+</div>
+</div>
+<script>
+    const copyButton = document.getElementById("copyButton");
+  const linkInput = document.getElementById("linkInput");
+
+  copyButton.addEventListener("click", () => {
+    navigator.clipboard.writeText(linkInput.value).then(() => {
+      copyButton.textContent = "Copied 👻";
+      console.log("Link copied to clipboard");
+    }).catch((error) => {
+      console.error("Failed to copy link: ", error);
+    });
+  });
+</script>
 
 <script>
     const mainDiv = document.querySelector('.mainDiv');
@@ -258,5 +327,9 @@ function parseDate(dateString) {
   return new Date(year + 2000, month - 1, day); // Converting to comparable format
 }
 </script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </body>
 </html>
