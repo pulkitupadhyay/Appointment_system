@@ -30,7 +30,7 @@ var slots_came_from_database = await time_slot.find({ from_date: { $lt: isoStrin
         for(var i=0; i<slots_came_from_database.length; i++){
 
            
-            await appointment_requests.findOneAndDelete({ time_slotId : ` ${slots_came_from_database[i]._id.toString()} `})
+            await appointment_requests.findOneAndDelete({ time_slotId : slots_came_from_database[i]._id.toString()})
 
             await time_slot.findOneAndDelete({ _id: slots_came_from_database[i]._id})
 
@@ -70,6 +70,7 @@ router.post('/fake_login',async(req,res,next)=>{
 
 
 
+// delete_expired_slots();
 
 
 schedule.scheduleJob('1 */1 * * *', () => {
@@ -520,7 +521,7 @@ router.post('/book_slot', async (req,res,next)=>{
         userID: req.body.user_id,
         employeeID: req.body.employee_id,
         text: req.body.text_associated,
-        time_slotId: req.body.slot_id,
+        time_slotId: req.body.slot_id.trim(),
         accepted: true
     })
 
@@ -566,8 +567,7 @@ Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <
 sendMail(to2, subject2,text2, html2);
 
 
- res.send('appointment requested please wait while the employee aproove the request::: we will mail you when the empllyee accept or reject your appointment request   ')
-
+res.render('after_slot_booked')
     })
 
     })
