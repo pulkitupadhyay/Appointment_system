@@ -26,10 +26,7 @@ const mongoose=require("mongoose");
 // mongoose.set('strictQuery',true);
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/appointment_system_database") 
-.then(function(){
-  console.log("connected to db");
-})
+
 
 
 
@@ -38,4 +35,15 @@ app.use("/",Route)
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(3000);
+
+
+
+mongoose.connect("mongodb+srv://pulkit_ji:shraddhap@cluster0.xbds8cy.mongodb.net/appointment_systems_database?retryWrites=true&w=majority") 
+.then(function(){
+
+  console.log("connected to db");
+  app.listen(process.env.port || 3000, ()=>{
+    console.log('Listening on port')
+  });
+
+})

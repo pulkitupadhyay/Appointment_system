@@ -41,7 +41,7 @@
         
    <form action="/book_slot" method="post" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <input type="text" name = 'slot_id' value=" <%= slot_id %> " style="display: none;" >
-   <input type="text" name="user_id" value="<%=user.id%>"  style="display: none;">       
+   <input type="text" name="user_id" value="<%=user._id%>"  style="display: none;">       
     <input type="text" name="employee_id" value="<%= employee_id %>" style="display: none;">
     <textarea type="text" name="text_associated"  placeholder="please write some text for employee" rows="4" cols="50"> </textarea>
     <button class="btn-primary mt-4" style="padding: 4%; width: 80%; border-radius: 2rem;" type="submit">Book Appointment</button>

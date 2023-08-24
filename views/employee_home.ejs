@@ -45,7 +45,7 @@
     <h1> Here is all of your appointments </h1>
 
     <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; padding: 2%; width: 70%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
-<% console.log(accepted_appintments.length) %>
+
       <% if(accepted_appintments.length == 0){  %>
 
         <h4> No appointments Here </h4>
@@ -60,6 +60,13 @@
                  <% var  foundUser = accepted_users.find(user => user._id.toString() === targetId); %> 
       
                  <% var targetId_timeslot = accepted_appintments[i].time_slotId.trim(); %>
+              
+
+           <% if(appointment_timeslot_for_accepted_reqests.length == 0 ){ %>
+         
+          <p>No Appointments Here</p>
+          <%  }else{ %>
+
                  <% var  foundSlot = appointment_timeslot_for_accepted_reqests.find(slot => slot._id.toString() === targetId_timeslot); %> 
       
                  <% const inputDate = new Date(foundSlot.from_date );  %>
@@ -101,10 +108,11 @@
        <h2> <strong>From  </strong> <strong style="color: blue;">  <%= foundSlot.time %> </strong> <strong> To </strong>   <strong style="color: blue;"><%= current_time %> </strong>  </h2>
        <p>  </p>
         
-    
+       <%}%>
       
         
             </div>
+    
          <% } %>
 <% } %>
     </div>

@@ -146,17 +146,35 @@ router.post('/user_signUp', async (req,res,next)=>{
         number:user_number
 
     })
-
-    new_user.save().then(function(dets){
-        res.cookie('user_email', new_user.email);
-
+var user;
+    new_user.save().then(async function(dets){
      console.log('registerd')
+      
+     try {
+        var user1 = await user_scheema.findOne({ email: new_user.email });
+        console.log('user saved', user1);
+    
+        user=user1
+        console.log(user) 
+        var slot_id = req.body.slot_id;
+var employee_id = req.body.employee_id;
+
+
+
+
+res.cookie('user_email', new_user.email);
+
+
+res.render('final_slot_book' ,{slot_id,employee_id,user}) 
+    
+    } catch (error) {
+        console.error('Error:', error);
+      }
     })
 
-var slot_id = req.body.slot_id;
-var employee_id = req.body.employee_id;
-var user = await user_scheema.findOne({ email: new_user.email})
-    res.render('final_slot_book' ,{slot_id,employee_id,user})
+
+    
+
 
 
 })
@@ -345,7 +363,7 @@ if(!new_employee){
     else if(employee_pass !== new_employee.password){
         res.send('please provide correct  email or  password , seems like you enterd wrong cridentials  ')
 
-    } else if(employee_pass === new_employee.password){
+    }else if(employee_pass === new_employee.password){
 
         var time_slots = await time_slot.find({ employeeID: new_employee._id, occupied: false})
 
@@ -382,7 +400,7 @@ for(var i=0; i< accepted_appintments.length; i++){
 
 
 var appointment_timeslot = []
-var appointment_timeslot_for_accepted_reqests = [{_id: 'main'},]
+var appointment_timeslot_for_accepted_reqests = []
 
 for(var i=0 ; i< appointment_requests1.length; i++){
 
@@ -394,8 +412,13 @@ appointment_timeslot.push(app_time_slot)
 for(var i=0 ; i< accepted_appintments.length; i++){
 
     var app_time_slot = await time_slot.findOne({ _id : (accepted_appintments[i].time_slotId).trim() })
+
+    if(app_time_slot === null ){
+       
+    }else{
+
     appointment_timeslot_for_accepted_reqests.push(app_time_slot)
-    
+}
     
     }
 
@@ -537,10 +560,7 @@ router.post('/book_slot', async (req,res,next)=>{
 
     new_appointment_request.save().then(()=>{
 
-
-       
-
-        const inputDate = new Date(TS.from_date ); 
+ const inputDate = new Date(TS.from_date ); 
     
           
         const day = inputDate.getDate().toString().padStart(2, '0'); 
