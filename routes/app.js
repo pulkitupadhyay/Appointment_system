@@ -655,7 +655,7 @@ res.render('after_slot_booked')
 
     // res.send('deleted')
 // })
-
+// for git pusllllllllaklfjhlksdjfklsdjfkj
 
 router.get("/",(req,res)=>{
     res.redirect('/employee_login')
