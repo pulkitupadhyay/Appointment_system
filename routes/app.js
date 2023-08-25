@@ -655,6 +655,12 @@ router.post('/delete_appointment', async (req,res,next)=>{
 
     res.send('Appointment canceled')
 })
+router.post('/remove_timeslot', async (req,res,next)=>{
+    await time_slot.findOneAndDelete({ _id : req.body.app_id})
+
+
+    res.send('Timeslot Removed')
+})
 // for git pusllllllllaklfjhlksdjfklsdjfkj
 
 

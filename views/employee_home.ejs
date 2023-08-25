@@ -290,7 +290,11 @@ document.querySelector('.show_reSchedule1').style.display = 'none'
 
         
 
-
+        <form action="/remove_timeslot" style="display: flex; flex-direction: column; width: 100%;" method="post">
+          <input type="text" name="app_id" value="<%=time_slots[i]._id%>" style="display: none;" >  
+          <button class="btn-danger show_reSchedule1 my-1" style="border-radius: 1rem;" type="submit" >Remove TimeSlot </button>
+          
+          </form>
     </div>
  <% }%>
  <%  }%>
