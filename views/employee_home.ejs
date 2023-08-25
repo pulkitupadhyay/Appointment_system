@@ -106,16 +106,53 @@
       <strong> <h2>  Date </strong>: <%= formattedDate %>  </h2>
     
        <h2> <strong>From  </strong> <strong style="color: blue;">  <%= foundSlot.time %> </strong> <strong> To </strong>   <strong style="color: blue;"><%= current_time %> </strong>  </h2>
-       <p>  </p>
+       <h2>   <strong> Text : </strong> <%= accepted_appintments[i].text %></h2>
         
        <%}%>
       
         
+<button class="btn-primary show_reSchedule my-1" style="border-radius: 1rem;" >ReSchedule Appointment </button>
+
+<form action="/delete_appointment" style="display: flex; flex-direction: column; width: 100%;" method="post">
+<input type="text" name="app_id" value="<%=accepted_appintments[i]._id%>" style="display: none;" >  
+<button class="btn-danger show_reSchedule1 my-1" style="border-radius: 1rem;" type="submit" >Cancel Appointment </button>
+
+</form>
+
+
+<style>
+  .btbt{
+    display: none; 
+  }
+</style>
+<form action="/reSchedule_appointment" class="btbt my-1" method="post" >
+
+<input type="text" name="appointment_id_to_reschedule" value="<%=accepted_appintments[i]._id%>" style="display: none;" >
+<input class="mx-3" type="Date" name="from_date">
+<input class="mx-3" type="time" name="from_time">
+<input class="mx-3" type="number" name="hours" value="1" style="display: none;">
+<input class="mx-3" type="number" name="days" value="1" style="display: none;">
+<button type="submit" class="btn-primary my-1">Reschedule Appointment</button>
+
+</form>
+
             </div>
     
          <% } %>
 <% } %>
     </div>
+
+
+
+    <script>
+      document.querySelector('.show_reSchedule').addEventListener('click',()=>{
+  console.log('clisdf;lkajsdfkl')
+document.querySelector('.show_reSchedule1').style.display = 'none'
+  document.querySelector('.btbt').style.display = 'flex'
+  document.querySelector('.show_reSchedule').style.visibility = 'hidden'
+
+})
+    </script>
 
 <!-- 
 
@@ -202,7 +239,7 @@
 
 
 
-<h1>here is your all Free time slots  </h1>
+<h1>Here is your all Free Time Slots  </h1>
 
 <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; padding: 2%; width: 70%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
   <% if(time_slots.length == 0){  %>
@@ -269,7 +306,7 @@
 <div style="display: flex; width: 70%; flex-direction:column;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; justify-content: center; padding: 2%;">
 
 <div style="display: flex; flex-direction: row; justify-content: space-around; width: 79%;"> <label> Date </label> <label>Time </label><label>How many hours you are free </label><label>Days </label></div>
-  <form action="/add_time_slots" method="POST" style="display: flex; flex-direction: row;  padding: 2%; justify-content: space-around;" >
+  <form action="/add_time_slots" class="rechedule_div" method="POST" style="display: flex; flex-direction: row;  padding: 2%; justify-content: space-around;" >
 
 
 <input type="text" name="employee_email" value="<%=new_employee.email %> " style="display: none;" >
@@ -334,6 +371,10 @@ function parseDate(dateString) {
   const [day, month, year] = dateString.split('/').map(Number);
   return new Date(year + 2000, month - 1, day); // Converting to comparable format
 }
+
+
+
+
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

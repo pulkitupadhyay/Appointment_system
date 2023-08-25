@@ -649,13 +649,131 @@ res.render('after_slot_booked')
 //           res.send('acceptedd......')
 //     })
 
-// router.post('/Reject_request', async (req,res,next)=>{
-    // await appointment_requests.findOneAndDelete({ _id : req.body.slotId_to_update})
+router.post('/delete_appointment', async (req,res,next)=>{
+    await appointment_requests.findOneAndDelete({ _id : req.body.app_id})
 
 
-    // res.send('deleted')
-// })
+    res.send('Appointment canceled')
+})
 // for git pusllllllllaklfjhlksdjfklsdjfkj
+
+
+router.post('/reSchedule_appointment', async (req,res,next)=>{
+
+    const inputDate = req.body.from_date;
+
+    // Convert the input date to a Date object
+    const dateObject = new Date(inputDate);
+    
+    // Add two days to the date
+    // dateObject.setDate(dateObject.getDate() + i-1);
+    
+    // Format the result back to "YYYY-MM-DD" format
+    const formattedDate = dateObject.toISOString().split('T')[0];
+
+
+// Input time in the format "23:59"
+const inputTime = req.body.from_time;
+
+// Split the input time into hours and minutes
+const [hours, minutes] = inputTime.split(":");
+
+// Convert hours and minutes to numbers
+const hoursNumber = parseInt(hours, 10);
+const minutesNumber = parseInt(minutes, 10);
+
+// Calculate the new time after adding an hour
+const newHours = (hoursNumber + 0 ) % 24; // Ensure it wraps around to the next day if needed
+const newMinutes = minutesNumber;
+
+// Format the result to "HH:mm" format
+const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;
+
+var current_time = formattedTime;
+
+
+var existing_t_s = await time_slot.findOne({ $and:[{from_date: formattedDate}, {time: current_time}, {occupied: false}] })
+
+if(existing_t_s){
+
+var ar = await appointment_requests.findOne({ _id :req.body.appointment_id_to_reschedule })
+await await time_slot.findOneAndUpdate( { _id: ar.time_slotId}, // Conditions to find the document
+{ $set: { 
+    occupied: false,
+
+}} )
+
+await appointment_requests.findOneAndUpdate(
+    { _id: req.body.appointment_id_to_reschedule}, // Conditions to find the document
+    { $set: { 
+        time_slotId: existing_t_s._id,
+    
+    }} 
+    
+ );
+
+await time_slot.findOneAndUpdate( { _id: existing_t_s._id}, // Conditions to find the document
+{ $set: { 
+    occupied: true,
+
+}} )
+
+
+    console.log(existing_t_s)
+res.send('ReScheduled!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+
+
+
+
+
+
+
+}else{
+
+var ar = await appointment_requests.findOne({ _id :req.body.appointment_id_to_reschedule })
+
+ var new_Ts = new time_slot({
+
+    employeeID: ar.employeeID,
+    from_date: formattedDate,
+    time: formattedTime,
+    occupied: true,
+
+ })
+
+
+   await new_Ts.save()
+
+   var existing_t_s_a = await time_slot.findOne({ $and:[{from_date: formattedDate}, {time: current_time}, {occupied: true}] })
+
+
+console.log(existing_t_s_a)
+
+await await time_slot.findOneAndUpdate( { _id: ar.time_slotId}, // Conditions to find the document
+{ $set: { 
+    occupied: false,
+
+}} )
+
+await appointment_requests.findOneAndUpdate({ _id: ar._id}, // Conditions to find the document
+{ $set: { 
+    time_slotId: existing_t_s_a._id,
+
+}} 
+    )
+
+
+res.send('ReScheduled!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+
+
+
+
+}
+
+
+})
+
+
 
 router.get("/",(req,res)=>{
     res.redirect('/employee_login')

@@ -433,7 +433,8 @@ const results = await time_slots.filter(item => item.from_date[8] + item.from_da
 console.log(results)
 var times = [];
 
-document.querySelector('.last_for_display_time').innerHTML = ``
+document.querySelector('.last_for_display_time').innerHTML = ``;
+
 for(i=0; i<= results.length ; i++){ 
 
  document.querySelector('.last_for_display_time').innerHTML += `
