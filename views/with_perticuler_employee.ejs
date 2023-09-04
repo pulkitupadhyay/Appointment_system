@@ -348,7 +348,7 @@
 var timeS = <%- JSON.stringify(dateOccupied) %>;
 var time_slots = <%- JSON.stringify(time_slots) %>;
 
-console.log(timeS)
+console.log(time_slots)
 
   let nav = 0;
 let clicked = null;
@@ -385,7 +385,7 @@ month: 'numeric',
 day: 'numeric',
 });
 const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
-
+console.log(paddingDays + 'a;sldkfja;sldkfj')
 document.getElementById('monthDisplay').innerText = 
 `${dt.toLocaleDateString('en-us', { month: 'long' })} ${year}`;
 
@@ -395,8 +395,6 @@ calendar.innerHTML = '';
 
 
 
-// let dateJi = <%= JSON.stringify(time_slots[0].time) %>;
-// console.log(dateJi)
 
 for(let i = 1; i <= paddingDays + daysInMonth; i++) {
 const daySquare = document.createElement('div');
@@ -407,7 +405,9 @@ if (i > paddingDays) {
   daySquare.innerText = i - paddingDays;
   // const eventForDay = events.find(e => e.date === dayString);
    const dayString = `${i - paddingDays}/${month + 1}/${year}`;
- console.log(dayString)
+   const parts = dayString.split('/');
+   const formattedDate = `${parts[0].padStart(2, '0')}/${month + 1}/${parts[2]}`;
+ console.log('this is daystring'+ formattedDate)
   
  daySquare.classList.add(`day_${i - paddingDays}`);
  
@@ -418,35 +418,38 @@ if (i > paddingDays) {
       }
  
  
-      if (await timeS.includes(dayString)) {
+      if (await timeS.includes(formattedDate)) {
 
+        const searchTerm = i - paddingDays ;
+console.log('this is st' + searchTerm)
   console.log(`${dayString} is present in the array.`);
 
 document.querySelector(`.day_${i - paddingDays}`).style.backgroundColor = "green"
 
 document.querySelector(`.day_${i - paddingDays}`).addEventListener('click',async ()=>{
-console.log(i - paddingDays)
+console.log(i - paddingDays + 'ddddddd' )
 
-const searchTerm = i - paddingDays ;
 
-const results = await time_slots.filter(item => item.from_date[8] + item.from_date[9] === searchTerm.toString());
-console.log(results)
+
+
+const results = await time_slots.filter(item => item.from_date[8] + item.from_date[9] === searchTerm.toString().padStart(2, '0'));
 var times = [];
+console.log(results )
 
 document.querySelector('.last_for_display_time').innerHTML = ``;
 
-for(i=0; i<= results.length ; i++){ 
-
+for(var f=0; f<= results.length ; f++){ 
+console.log(results[f])
  document.querySelector('.last_for_display_time').innerHTML += `
 
 
  
       <div class="my-2" style="border-radius: 1rem;justify-content:center; align-items:center; width:100%; display: flex; flex-direction: column; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;  padding: 1.5%;">
-          <h1>${results[i].time}</h1>
+          <h1>${results[f].time}</h1>
 
       <form action="/fake_login" method="post" style="display: flex; flex-direction: column;justify-content:center; align-items:center;">
 
-              <input type="text" name = 'slot_id' value="${results[i]._id}" style="display: none;" >
+              <input type="text" name = 'slot_id' value="${results[f]._id}" style="display: none;" >
             
               <input type="text" name="employee_id" value="<%= employee._id %>" style="display: none;">
 
