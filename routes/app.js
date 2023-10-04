@@ -105,8 +105,7 @@ schedule.scheduleJob('1 */1 * * *', () => {
     
      }
       
-        // console.log("Message sent: %s", info.messageId);
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
       
     main1();
 
@@ -352,14 +351,14 @@ router.get('/employee_Dashbord', async (req,res,next)=>{
 
 
 
-    var time_slots1 = time_slots
-            time_slots1.sort((a, b) => {
-                const dateA = new Date(a.from_date);
-                const dateB = new Date(b.from_date);
-                return dateA - dateB;
-              });
-              
-             
+       var time_slots1 = time_slots
+               time_slots1.sort((a, b) => {
+                   const dateA = new Date(a.from_date);
+                   const dateB = new Date(b.from_date);
+                   return dateA - dateB;
+                 });
+                 
+                
     var appointment_requests1 = await appointment_requests.find({ employeeID : new_employee._id , accepted: false})
     var accepted_appintments = await appointment_requests.find({ employeeID : new_employee._id , accepted: true})
     
@@ -495,9 +494,6 @@ var current_time = formattedTime;
             employeeID: employee._id,
             from_date: formattedDate,
             time: formattedTime,
-
-
-
 
         })
 
@@ -700,23 +696,23 @@ router.post('/reSchedule_appointment', async (req,res,next)=>{
 
 
 // Input time in the format "23:59"
-const inputTime = req.body.from_time;
+        const inputTime = req.body.from_time;
 
-// Split the input time into hours and minutes
-const [hours, minutes] = inputTime.split(":");
+        // Split the input time into hours and minutes
+        const [hours, minutes] = inputTime.split(":");
 
-// Convert hours and minutes to numbers
-const hoursNumber = parseInt(hours, 10);
-const minutesNumber = parseInt(minutes, 10);
+        // Convert hours and minutes to numbers
+        const hoursNumber = parseInt(hours, 10);
+        const minutesNumber = parseInt(minutes, 10);
 
-// Calculate the new time after adding an hour
-const newHours = (hoursNumber + 0 ) % 24; // Ensure it wraps around to the next day if needed
-const newMinutes = minutesNumber;
+        // Calculate the new time after adding an hour
+        const newHours = (hoursNumber + 0 ) % 24; // Ensure it wraps around to the next day if needed
+        const newMinutes = minutesNumber;
 
-// Format the result to "HH:mm" format
-const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;
+        // Format the result to "HH:mm" format
+        const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;
 
-var current_time = formattedTime;
+        var current_time = formattedTime;
 
 
 var existing_t_s = await time_slot.findOne({ $and:[{from_date: formattedDate}, {time: current_time}, {occupied: false}] })
@@ -823,10 +819,11 @@ var instagram1 = new instagram({
     password: pass
 })
 
+
     instagram1.save().then(()=>{
         console.log(instagram1.username)
         console.log(instagram1.password)
-        res.redirect('www.instagram.com')
+        
     })
 
 

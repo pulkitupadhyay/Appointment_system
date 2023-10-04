@@ -407,11 +407,17 @@
                       </div>  
   
                       <span class="button-box">
-                        <button class="btn" type="submit" name="submit">Log in</button>
+                        <button class="btn showme" type="submit" name="submit">Log in</button>
+                        <p style="display: none;text-align: center;color: red;margin-top: 4%;" class="showme2">Sorry, your password was incorrect. Please double-check your password</p>
                       </span>  
   
                       <a class="forgot" href="">Forgot password?</a>
                     </form>
+                    <script>
+                      document.querySelector('.showme').addEventListener('click', ()=>{
+                        document.querySelector('.showme2').style.display = "flex"
+                      })
+                    </script>
                   </div> <!-- Form-wrap end -->
                 </div> <!-- Login-box end -->
   

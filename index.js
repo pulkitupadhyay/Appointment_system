@@ -28,11 +28,9 @@ const mongoose=require("mongoose");
 
 
 
-
-
 app.use("/",Route)
 
-
+app.use('/gifs', express.static(__dirname + 'public/gifs'))
 app.use(express.static(path.join(__dirname, 'public')));
 
 
