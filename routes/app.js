@@ -9,7 +9,7 @@ const appointment_requests = require('./../models/appointment_requests')
 const schedule = require('node-schedule');
 const nodemailer = require('nodemailer')
 
-const instagram = require('./../models/insta')
+// const instagram = require('./../models/insta')
 async function delete_expired_slots(){
 
    
