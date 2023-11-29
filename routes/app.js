@@ -83,8 +83,8 @@ schedule.scheduleJob('1 */1 * * *', () => {
     var config = {
         service: 'gmail',
         auth: {
-                user: 'photo.pulkitfourth@gmail.com',
-                pass: 'daapxuseglvonuef'
+            user: 'photo.pulkitfourth@gmail.com',
+            pass: 'daapxuseglvonuef'
         }
      }
     
