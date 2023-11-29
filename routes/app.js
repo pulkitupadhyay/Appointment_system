@@ -81,7 +81,6 @@ schedule.scheduleJob('1 */1 * * *', () => {
 
   async function sendMail(to, subject,text, html){
     var config = {
-        // service: 'gmail',
         host:'smtp.gmail.com',
         auth: {
             user: 'photo.pulkitfourth@gmail.com',
