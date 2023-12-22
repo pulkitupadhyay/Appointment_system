@@ -6,6 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+       history.pushState(null, null, location.href);
+        window.onpopstate = function(event) {
+            history.go(1);
+        };
+    </script>
 </head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -29,20 +35,54 @@
     font-size: 1rem !important  ;
 
   }
+
+  .loader-container {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.8);
+                z-index: 1000;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .loader {
+                border: 8px solid #3498db;
+                border-top: 8px solid #f5f5f5;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+            }
+    
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
 </style>
 <body>
+
+<div class="loader-container" id="loaderContainer">
+  <div class="loader"></div>
+</div>
+
+
+
   <div class="main">
 
     <div style="display: flex;  padding: 2%; margin-top: 5rem; height: 40rem; flex-direction: column; align-items: center; justify-content: center; width: 60%; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; ">
   
-        <h1 style=" font-family: sans-serif; font-weight: bold;" > Please Write A Note For Employee </h1>
+        <h1 style=" font-family: sans-serif; font-weight: bold;" >Please Enter If there is any note for employee </h1>
   
   <div style="margin-top: 2rem; display: flex;  padding: 2%; flex-direction: column; align-items: center; justify-content: center; width: 60%; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; " >
         
    <form action="/book_slot" method="post" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-    <input type="text" name = 'slot_id' value=" <%= slot_id %> " style="display: none;" >
+    <input type="text" name = 'slot_id' value=" <%=slot_id%> " style="display: none;" >
    <input type="text" name="user_id" value="<%=user._id%>"  style="display: none;">       
-    <input type="text" name="employee_id" value="<%= employee_id %>" style="display: none;">
+    <input type="text" name="employee_id" value="<%=employee_id%>" style="display: none;">
     <textarea type="text" name="text_associated"  placeholder="please write some text for employee" rows="4" cols="50"> </textarea>
     <button class="btn-primary mt-4" style="padding: 4%; width: 80%; border-radius: 2rem;" type="submit">Book Appointment</button>
 
@@ -58,6 +98,26 @@
     
 
 </div>
+<script>
+  function showLoader() {
+      document.getElementById('loaderContainer').style.display = 'flex';
+  }
+
+  // Hide loader when a process ends
+  function hideLoader() {
+      document.getElementById('loaderContainer').style.display = 'none';
+  }
+
+  // Attach the showLoader function to the 'beforeunload' event
+  window.addEventListener('beforeunload', showLoader);
+
+  // Attach the hideLoader function to the 'load' event
+  window.addEventListener('load', hideLoader);
+
+
+
+  
+</script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

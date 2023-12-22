@@ -40,7 +40,7 @@ mongoose.connect("mongodb+srv://pulkit_ji:shraddhap@cluster0.xbds8cy.mongodb.net
 .then(function(){
 
   console.log("connected to db");
-  app.listen(process.env.port || 3000, ()=>{
+  app.listen(process.env.port || 4000,'0.0.0.0',()=>{
     console.log('Listening on port')
   });
 

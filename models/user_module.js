@@ -15,8 +15,8 @@ var userSchema=mongoose.Schema({
     type: String,
     required: true
   },
-  number:{
-    type: Number,
+  timezone:{
+    type: String,
     required: true
   }
 })

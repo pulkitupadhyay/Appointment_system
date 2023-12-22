@@ -4,67 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
 
-<style>
-     .main{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  h1{
-    text-align: center;
-  }
-  h2{
-    margin-top: 1%;
-  }
-  .mainDiv h2{
-    font-size: 1rem !important  ;
-  }
-  form input{
-    font-size: 1rem !important  ;
+        .main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;
+            margin-top: 5rem;
+            padding: 2%;
+            height: auto;
+        }
 
-  }
-</style>
-<body>
-  <div class="main">
+        h1 {
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
 
-    <div style="display: flex;  padding: 2%; margin-top: 5rem; height: 40rem; flex-direction: column; align-items: center; justify-content: center; width: 60%; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; ">
-  
-        <h1 style=" font-family: sans-serif; font-weight: bold;" > Please Provide some Details </h1>
-  
-  <div style="margin-top: 2rem; display: flex;  padding: 2%; flex-direction: column; align-items: center; justify-content: center; width: 40%; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; " >
-        <form action="/user_signUp" method="POST" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-    <div> <label for="name">  Name :   </label> <input class="my-3" type="text" name="userName"></div> 
-     <div> <label for="Email">  Email :  </label> <input class="my-3" type="text" name="userEmail"> </div>
-     <div> <label for="Number">  Number : </label><input class="my-3" type="number" name="userNumber"></div>
+        form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+        }
 
-           <input type="text" name="userPassword" value="1234" style="display: none;">
-         
+        label {
+            margin-bottom: 0.5rem;
+        }
 
-          <input type="text" name = 'slot_id' value=" <%= slot_id %> " style="display: none;" >
-          
-          <input type="text" name="employee_id" value="<%= employee_id %>" style="display: none;">
+        input, select {
+            margin-bottom: 1rem;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            padding: 4%;
+            width: 60%;
+            border-radius: 2rem;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        @media screen and (max-width: 768px) {
+            .main {
+                width: 90%;
+            }
+
+            .btn-primary {
+                width: 100%;
+            }
+        }
 
 
-         <button class="btn-primary" style="padding: 4%; width: 60%; border-radius: 2rem;" type="submit">Proceed</button>
-  
-  
-        </form>
-    </div>
-    </div>
 
-
-   
-
-
+    .loader-container {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.8);
+                z-index: 1000;
+                justify-content: center;
+                align-items: center;
+            }
     
+            .loader {
+                border: 8px solid #3498db;
+                border-top: 8px solid #f5f5f5;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+            }
+    
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+    </style>
 
+    <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function(event) {
+            history.go(1);
+        };
+    </script>
+</head>
+<body>
+
+<div class="loader-container" id="loaderContainer">
+  <div class="loader"></div>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+    <div class="main">
+        <h1 style="margin: 2rem; font-size: 1.3rem;" >Please Provide Some Details</h1>
+        <div style="padding:1rem;" >
+            <form action="/user_signUp" method="POST">
+                <div>
+                    <label for="name">Name:</label>
+                    <input class="my-3" type="text" name="userName">
+                </div>
+                <div>
+                    <label for="Email">Email:</label>
+                    <input class="my-3" type="text" name="userEmail">
+                </div>
+                <div>
+                    <label for="Text">Timezone:</label>
+                    <select id="selectOption" name="Timezone">
+                        <% for(var k = 0 ; k < timezones.timezones.length; k++){ %>
+                            <option value="<%= timezones.timezones[k] %>"><%= timezones.timezones[k] %></option>
+                        <% } %>
+                    </select>
+                </div>
+                <input type="text" name="userPassword" value="1234" style="display: none;">
+                <input type="text" name="slot_id" value="<%=slot_id%>" style="display: none;">
+                <input type="text" name="employee_id" value="<%=employee_id%>" style="display: none;">
+                <button class="btn-primary" type="submit">Proceed</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+      function showLoader() {
+      document.getElementById('loaderContainer').style.display = 'flex';
+  }
+
+  // Hide loader when a process ends
+  function hideLoader() {
+      document.getElementById('loaderContainer').style.display = 'none';
+  }
+
+  // Attach the showLoader function to the 'beforeunload' event
+  window.addEventListener('beforeunload', showLoader);
+
+  // Attach the hideLoader function to the 'load' event
+  window.addEventListener('load', hideLoader);
+
+
+
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

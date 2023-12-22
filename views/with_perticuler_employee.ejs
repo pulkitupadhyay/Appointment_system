@@ -140,6 +140,274 @@
 
   
 </style>
+<style>
+  body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            padding:7px;
+            width: 78%;
+            border-radius: 15px;
+            /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); */
+        }
+
+        input {
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #time-picker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #hour, #minute {
+            width: 30%;
+        }
+
+        span {
+            font-size: 18px;
+        }
+
+        #ampm {
+            width: 60px;
+        }
+
+        .fbtn {
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .fbtn:hover {
+            background-color: #2980b9;
+        }
+
+
+/* for responsiveness  */
+
+@media screen and (max-width: 768px) {
+            .mainDiv {
+                flex-direction: column;
+                align-items: center;
+                width: 90vw;
+                height: 50vw;
+            }
+
+            .mainddddd {
+                width: 100%;
+                padding-top: 2%;
+                height: 25rem;
+            }
+
+            #container {
+                width: 100%;
+            }
+
+            #header {
+                flex-direction: column;
+            }
+
+            #calendar {
+                flex-direction: column;
+            }
+
+            .day {
+                width: calc(20% - 10px);
+                margin: 5px;
+            }
+
+            #newEventModal, #deleteEventModal {
+                width: 80%;
+                left: 10%;
+            }
+            form{
+              width: 47%;
+            }
+            #time-picker{
+              flex-direction: row;
+              flex-wrap: wrap;
+            }
+            .last_for_display_time{
+              width: 100%;
+            }
+        }
+
+
+.mainddddd{
+  width: 90%; display: flex; flex-direction: row;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;  padding: 1.5%;
+}
+
+</style>
+
+<style>
+  body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+  }
+
+  .mainDiv {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vw;
+  }
+
+  #container {
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+  }
+
+  #header {
+      padding: 10px;
+      color: #d36c6c;
+      font-size: 18px;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+  }
+
+  #header button {
+      background-color: #92a1d1;
+  }
+
+  #weekdays, #calendar {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  #weekdays div, .day {
+      width: calc(14.2857% - 10px);
+      padding: 10px;
+      margin: 5px;
+      
+  }
+
+  .day {
+      cursor: pointer;
+      box-sizing: border-box;
+      background-color: white;
+      box-shadow: 0px 0px 3px #CBD4C2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+     
+  }
+
+  .day:hover {
+      background-color: #e8faed;
+  }
+
+  .day + #currentDay {
+      background-color: #e8f4fa;
+  }
+
+  #newEventModal, #deleteEventModal {
+      width: 80%;
+      left: 10%;
+  }
+
+  .mainddddd {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;
+      padding: 1.5%;
+  }
+
+  @media screen and (max-width: 768px) {
+     
+    body {
+      font-family: 'Arial', sans-serif;
+      /* display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh; */
+      margin: 0;
+      background-color: #f5f5f5;
+      display: block;
+  }
+    
+    
+    
+    
+    .mainDiv {
+          flex-direction: column;
+          align-items: center;
+          width: 90vw;
+          height: 50vw;
+      }
+/* .last_for_display_time{
+  display: none;
+} */
+      .mainddddd {
+          width: 90%;
+          padding-top: 2%;
+          /* height: 87vw; */
+          flex-direction: column;
+      }
+
+      #container {
+          width: 100%;
+      }
+
+      #header {
+          flex-direction: column;
+      }
+
+      #calendar {
+          flex-direction: row;
+      }
+
+      .day {
+          width: calc(20% - 10px);
+          margin: 5px;
+      }
+
+      #newEventModal, #deleteEventModal {
+          width: 80%;
+          left: 10%;
+      }
+      #weekdays div, .day{
+        width: calc(11% - 10px);
+    margin-left: 4%;
+    height: 8vw;
+      }
+  }
+</style>
+
+
 <body>
   <div class="main">
 
@@ -151,149 +419,16 @@
 
 
 
-<h1 class="my-5" style="font-family: sans-serif; font-weight: bold;" >Book 1 Hour meeting with  <%= capitalizeFirstLetter(employee.name); %> </h1> 
-
-
-
-
-<!--   
-  <div class="mainDiv my-4" style="display: flex; padding: 2%; flex-direction: row; justify-content: space-around; width: 100%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; width: 70%;">
-<% let dateOccupied = [] %>
-<% if(time_slots.length == 0 ){ %>
-<p> sorry!! there is no time slots </p>
-<% }else { %>
-
-  <% for(var i=0; i< time_slots.length; i++){  %>
-      <div class="my-2" style="border-radius: 1rem; display: flex; flex-direction: column; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;  padding: 1.5%;">
-          
-
-        <% const inputDate = new Date(time_slots[i].from_date);  %>
-
-        
-        <% const day = inputDate.getDate().toString().padStart(2, '0');  %>
-        <% const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');   %>
-        <% const month2 = (inputDate.getMonth() + 1)  %>
-        
-        <% const year = inputDate.getFullYear().toString().slice(-2);  %>
-          
-        
-        <% const formattedDate = `${day}/${month}/20${year}`;  %>
-
-        <% const formattedDate2 = `${day}/${month2}/20${year}`; %>
-          <% dateOccupied.push(formattedDate2) %>
-          <h2> <strong> Date </strong>: <%= formattedDate %> </h2>
-        
-
-
-
-          <h2> <strong> from </strong>: <%= time_slots[i].time %> </h2>
-
-
-        <%  const inputTime = time_slots[i].time.toString();     %>
-        <% const [hours, minutes] = inputTime.split(":");   %>
-          
-          
-        <%  const hoursNumber = parseInt(hours, 10);   %>
-        <%  const minutesNumber = parseInt(minutes, 10);   %>
-          
-        <%         const newHours = (hoursNumber + 1 ) % 24;    %>
-        <%  const newMinutes = minutesNumber;   %>
-            
-        <%  const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;   %>
-          
-        <% var current_time = formattedTime;   %>
-
-
-          <h2> <strong> TO </strong>: <%= current_time %> </h2>
-
-
-
-          <form action="/fake_login" method="post" style="display: flex; flex-direction: column;">
-
-              <input type="text" name = 'slot_id' value=" <%= time_slots[i]._id %> " style="display: none;" >
-            
-              <input type="text" name="employee_id" value="<%= employee._id %>" style="display: none;">
-
-                
-
-              <button type="submit" class="btn-primary my-2" style="border-radius: 2rem; padding: 2%;"> Book This Slot </button> 
-
-
-          </form>
-         
-
-      </div>
-  <% } }%>
- 
-  </div> -->
-<!-- 
-
-<div class="my-3" style="display: flex; flex-direction: row; justify-content: center;">
-
-
-<div class="oneside" style="display: flex; border: 2px solid black;flex-direction: column;padding:1%;">
-
-  <h1> You are booking appointment with  <%= employee.name %> </h1>
-  <h1> it is a One hour Meering </h1>
-
-</div>
-<div class="secside" style="display: flex; border: 2px solid black; flex-direction: column;padding:1%;">
-
-  <h1>Select Date and Time </h1>
-<div style="display: flex; border: 2px solid black; flex-direction: row;padding:1%;">
-  <% for(var i=0; i< time_slots.length; i++){  %>
-    <div class="mx-2" style="display: flex; flex-direction: row;   padding: 1%; ">
-        
-
-       <% const inputDate = new Date(time_slots[i].from_date);  %>
-
-      
-       <% const day = inputDate.getDate().toString().padStart(2, '0');  %>
-       <% const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');   %>
-       <% const year = inputDate.getFullYear().toString().slice(-2);  %>
-        
-       
-       <% const formattedDate = `${day}/${month}/20${year}`;  %>
-        
-        
-       <h1 style="display: flex; border: 2px solid black ; border-radius: 2rem;"> <%=    day  %> </h1>
-     
-<div class="h1div"> 
-  <h1> <%=time_slots[i].time %></h1>
-</div>
-
-
-
-      <%  const inputTime = time_slots[i].time.toString();     %>
-       <% const [hours, minutes] = inputTime.split(":");   %>
-        
-        
-      <%  const hoursNumber = parseInt(hours, 10);   %>
-      <%  const minutesNumber = parseInt(minutes, 10);   %>
-        
-       <%         const newHours = (hoursNumber + 1 ) % 24;    %>
-      <%  const newMinutes = minutesNumber;   %>
-           
-      <%  const formattedTime = `${newHours.toString().padStart(2, '0')}:${newMinutes.toString().padStart(2, '0')}`;   %>
-        
-       <% var current_time = formattedTime;   %>
-
-
-     
-
-
-
-
-    </div>
- <% } %>
-</div> -->
+<h1 class="my-4" style="font-family: sans-serif; font-weight: bold; font-size: 1.5rem;" >Book 1 Hour meeting with  <%= capitalizeFirstLetter(employee.name); %> </h1> 
 
 
 
 
 
 
-<div class="mainddddd" style="display: flex; flex-direction: row;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;  padding: 1.5%;">
+
+
+<div class="mainddddd" >
 <div id="container">
   <div id="header">
     <div id="monthDisplay"></div>
@@ -304,13 +439,13 @@
   </div>
 
   <div id="weekdays">
-    <div>Sunday</div>
-    <div>Monday</div>
-    <div>Tuesday</div>
-    <div>Wednesday</div>
-    <div>Thursday</div>
-    <div>Friday</div>
-    <div>Saturday</div>
+    <div class="Sunday" >Sunday</div>
+    <div class="Monday" >Monday</div>
+    <div class="Tuesday" >Tuesday</div>
+    <div class="Wednesday" >Wednesday</div>
+    <div class="Thursday" >Thursday</div>
+    <div class="Friday" >Friday</div>
+    <div class="Saturday" >Saturday</div>
   </div>
 
   <div id="calendar"></div>
@@ -339,20 +474,16 @@
 
 
 
-<div class="last_for_display_time" style="width: 25%; padding-top: 6%;"></div>
+<div class="last_for_display_time" style="width:295px; padding-top: 6%;"></div>
 
 </div>
 </div>
 <script >
 
-var timeS = <%- JSON.stringify(dateOccupied) %>;
-var time_slots = <%- JSON.stringify(time_slots) %>;
-
-console.log(time_slots)
 
   let nav = 0;
 let clicked = null;
-// let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+
 
 const calendar = document.getElementById('calendar');
 const newEventModal = document.getElementById('newEventModal');
@@ -410,81 +541,126 @@ if (i > paddingDays) {
  console.log('this is daystring'+ formattedDate)
   
  daySquare.classList.add(`day_${i - paddingDays}`);
- 
- 
- async function theF(){
-  if (i - paddingDays === day && nav === 0) {
-        daySquare.id = 'currentDay';
-      }
- 
- 
-      if (await timeS.includes(formattedDate)) {
-
-        const searchTerm = i - paddingDays ;
-console.log('this is st' + searchTerm)
-  console.log(`${dayString} is present in the array.`);
-
-document.querySelector(`.day_${i - paddingDays}`).style.backgroundColor = "green"
-
-document.querySelector(`.day_${i - paddingDays}`).addEventListener('click',async ()=>{
-console.log(i - paddingDays + 'ddddddd' )
-
-
-
-
-const results = await time_slots.filter(item => item.from_date[8] + item.from_date[9] === searchTerm.toString().padStart(2, '0'));
-var times = [];
-console.log(results )
-
-document.querySelector('.last_for_display_time').innerHTML = ``;
-
-for(var f=0; f<= results.length ; f++){ 
-console.log(results[f])
- document.querySelector('.last_for_display_time').innerHTML += `
-
+ const d = new Date()
+            if(d.getDate() == (i-paddingDays)){
+                console.log(i-paddingDays)
+               daySquare.style.backgroundColor='#89abc9'
+            }
 
  
-      <div class="my-2" style="border-radius: 1rem;justify-content:center; align-items:center; width:100%; display: flex; flex-direction: column; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;  padding: 1.5%;">
-          <h1>${results[f].time}</h1>
+ document.querySelector('.last_for_display_time').innerHTML = ``
+  daySquare.addEventListener('click', () => {
+    
+    // <input type="number" name="hour" id="hour" min="1" max="12" placeholder="HH" required>
+    //         <span>:</span>
+    //         <input type="number" id="minute" name="minute" min="0" max="59" placeholder="MM" required>
+    //         <select id="ampm" name="ampm" >
+    //             <option value="AM">AM</option>
+    //             <option value="PM">PM</option>
+    //         </select>
+    
+    console.log(formattedDate)
+    
+    document.querySelector('.last_for_display_time').innerHTML = `
+    <div id="time-picker">
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
 
-      <form action="/fake_login" method="post" style="display: flex; flex-direction: column;justify-content:center; align-items:center;">
+        
+           <input type="time" name="from_time" value="12:00" style="display:none;" >
+          <button class="fbtn" type="submit">12:00 PM</button>
+          
+    </form>
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
 
-              <input type="text" name = 'slot_id' value="${results[f]._id}" style="display: none;" >
-            
-              <input type="text" name="employee_id" value="<%= employee._id %>" style="display: none;">
+        
+           <input type="time" name="from_time" value="13:00" style="display:none;" >
+          <button class="fbtn" type="submit">01:00 PM</button>
+           
+    </form>
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
 
-                
+        
+           <input type="time" name="from_time" value="14:00" style="display:none;" >
+          <button class="fbtn" type="submit">02:00 PM</button>
+          
+    </form>
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
 
-              <button type="submit" class="btn-primary my-2" style="border-radius: 2rem; padding: 1%;width:100%;"> Book This Slot </button> 
+        
+           <input type="time" name="from_time" value="15:00" style="display:none;" >
+          <button class="fbtn" type="submit">03:00 PM</button>
+          
+    </form>
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+        
+           <input type="time" name="from_time" value="16:00" style="display:none;" >
+          <button class="fbtn" type="submit">04:00 PM</button>
+           
+    </form>
+
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+        
+           <input type="time" name="from_time" value="17:00" style="display:none;" >
+          <button class="fbtn" type="submit">05:00 PM</button>
+          
+    </form>
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+       
+           <input type="time" name="from_time" value="18:00" style="display:none;" >
+          <button class="fbtn" type="submit">06:00 PM</button>
+          
+    </form>
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+       
+           <input type="time" name="from_time" value="19:00" style="display:none;" >
+          <button class="fbtn" type="submit">07:00 PM</button>
+           
+    </form>
+    <form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+        
+           <input type="time" name="from_time" value="20:00" style="display:none;" >
+          <button class="fbtn" type="submit">08:00 PM</button>
+          
+    </form>
+</div>
+    `
 
 
-          </form>
-         
-
-      </div>
-  
- `;
-}
 
 
-})
-
-
-
-
-
-}
-}
-
-
-
-
-
-
-
-
-  theF();
-  // daySquare.addEventListener('click', () => openModal(dayString));
+  });
 } else {
   daySquare.classList.add('padding');
 }
@@ -525,39 +701,33 @@ initButtons();
 load();
 
 
+function changeHeadingText() {
+            var Sunday = document.querySelector('.Sunday');
+            var Monday = document.querySelector('.Monday');
+            var Tuesday = document.querySelector('.Tuesday');
+            var Wednesday = document.querySelector('.Wednesday');
+            var Thursday = document.querySelector('.Thursday');
+            var Friday = document.querySelector('.Friday');
+            var Saturday = document.querySelector('.Saturday');
+           
+            var windowWidth = window.innerWidth;
 
+            if (windowWidth <= 768) {
+                Sunday.textContent = 'Sun';
+                Monday.textContent = 'Mon';
+                Tuesday.textContent = 'Teu';
+                Wednesday.textContent = 'Wed';
+                Thursday.textContent = 'Thu';
+                Friday.textContent = 'Fri';
+                Saturday.textContent = 'Sat';
 
-// function saveEvent() {
-// if (eventTitleInput.value) {
-// eventTitleInput.classList.remove('error');
+            } 
+        }
 
-// events.push({
-//   date: clicked,
-//   title: eventTitleInput.value,
-// });
+        // Run the function on page load and window resize
+        window.addEventListener('load', changeHeadingText);
+        window.addEventListener('resize', changeHeadingText);
 
-// localStorage.setItem('events', JSON.stringify(events));
-// closeModal();
-// } else {
-// eventTitleInput.classList.add('error');
-// }
-// }
-
-// function deleteEvent() {
-// events = events.filter(e => e.date !== clicked);
-// localStorage.setItem('events', JSON.stringify(events));
-// closeModal();
-// }
-
-
-// document.getElementById('saveButton').addEventListener('click', saveEvent);
-// document.getElementById('cancelButton').addEventListener('click', closeModal);
-// document.getElementById('deleteButton').addEventListener('click', deleteEvent);
-// document.getElementById('closeButton').addEventListener('click', closeModal);
-// }
-
-// initButtons();
-// load();
 
 </script>
 
@@ -582,5 +752,8 @@ function parseDate(dateString) {
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
 </body>
 </html>
