@@ -222,28 +222,17 @@ router.post('/fake_login',async(req,res,next)=>{
 
     function parseDateString(dateString) {
         // Split the date string into day, month, and year components
-        // const [day, month, year] = dateString.split('/');
+        const [day, month, year] = dateString.split('/').map(Number);
     
         // Create a new Date object (months are 0-indexed in JavaScript Date)
-
-        const [day, month, year] = dateString.split('/').map(Number);
-
-// Month is zero-indexed in JavaScript, subtract 1
-const jsDate_l = new Date(year, month - 1, day);
-jsDate_l.setDate(jsDate_l.getDate() + 1);
-// If your date includes time information, set it accordingly
-// jsDate_l.setHours(0, 0, 0, 0);
-        
-
-
-        // var jsDate_l = new Date(`${dateString.split('/').reverse().join('-')}T00:00:00`);
-        const jsDate = jsDate_l.toISOString().split('T')[0] + 'T00:00:00.000+00:00';
-         
-        return jsDate;
+        const jsDate = new Date(year, month - 1, day);
+    
+        // Format the date to 'YYYY-MM-DD'
+        const formattedDate = jsDate.toLocaleDateString('en-CA'); // Adjust the locale as needed
+    
+        return formattedDate;
     }
     
-    // Example usage:
-    // const dateString = '31/12/2022';
     const jsDate = parseDateString(date_t);
     // var user_id = req.body.user_id;
     var employee_id = req.body.employee_id
