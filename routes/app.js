@@ -884,15 +884,15 @@ router.post('/book_slot', async (req,res,next)=>{
             var subject1 = "Appointment Booked : You`ve got an appointment"
             var text1 = `Hey ${employee.name} This mail is to inform you that your appointment is booked with ${user.name}  on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
             var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your appointment is booked with ${user.name} <br> 
-            Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Messege for you : ${new_appointment_request.text}. <br> Please login in your employee account to know more .</p>`
+            Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link : ${new_appointment_request.text}. <br> </p>`
 
             sendMail(to1, subject1,text1, html1);
 
             var to2 = user.email
             var subject2 = "Appointment Booked : You`ve got an appointment"
-            var text2 = `Hey ${user.name} This mail is to inform you that your appointment is booked with ${employee.name}  on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
+            var text2 = `Hey ${user.name} This mail is to inform you that your appointment is booked with ${employee.name}  on ${ formattedDate} AT ${TS.time}  Meeting Link : ${new_appointment_request.text} . Please login in your employee account to accept or reject the appointment.`
             var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment is booked with ${employee.name} <br> 
-            Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Please be on time and be petint if employee gets late . <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
+            Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link : ${new_appointment_request.text} <br> Please be on time and be petint if employee gets late . <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
             sendMail(to2, subject2,text2, html2);
 
             if(req.cookies.hr_email){
@@ -1051,7 +1051,7 @@ await time_slot.findOneAndUpdate(
    var subject1 = "Appointment Rescheduled!"
    var text1 = `Hey ${employee.name} This mail is to inform you that your appointment with ${user.name} is resceduled on ${ formattedDate} AT ${TS.time}. Please login in your employee account to accept or reject the appointment.`
    var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your appointment with ${user.name} is rescheduled. <br> 
-   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Messege for you : ${ar.text}. `
+   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link: ${ar.text}. `
    
    sendMail(to1, subject1,text1, html1);
    
@@ -1059,7 +1059,7 @@ await time_slot.findOneAndUpdate(
    var subject2 = "Appointment Rescheduled!"
    var text2 = `Hey ${user.name} This mail is to inform you that your appointment with ${employee.name} is rescheduled on ${ formattedDate} AT ${TS.time}. Please Contact HR departmet if there is any queries.`
    var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment with ${employee.name} is rescheduled. <br> 
-   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Please be on time and be petint if employee gets late. <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
+   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${ar.text}. <br> Please be on time and be petint if employee gets late. <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
    sendMail(to2, subject2,text2, html2);
 
 
@@ -1160,17 +1160,17 @@ getdata()
 
 var to1 = employee.email
 var subject1 = "Appointment Booked : You`ve got an appointment"
-var text1 = `Hey ${employee.name} This mail is to inform you that your appointment is booked with ${user.name}  on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
+var text1 = `Hey ${employee.name} This mail is to inform you that your appointment is booked with ${user.name}  on ${ formattedDate} AT ${TS.time} .`
 var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your appointment is booked with ${user.name} <br> 
-Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Messege for you : ${doc.text}. <br> Please login in your employee account to know more .</p>`
+Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link : ${doc.text}.` 
 
 sendMail(to1, subject1,text1, html1);
 
 var to2 = user.email
-var subject2 = "Appointment Booked : You`ve got an appointment"
+var subject2 = "Appointment Booked : Youve got an appointment"
 var text2 = `Hey ${user.name} This mail is to inform you that your appointment is booked with ${employee.name}  on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
 var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment is booked with ${employee.name} <br> 
-Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Please be on time and be petint if employee gets late . <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
+Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}   <br> Meeting Link :  ${doc.text}. <br> Please be on time and be petint if employee gets late . <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
 sendMail(to2, subject2,text2, html2);
   })
   .catch(error => console.error(error));
