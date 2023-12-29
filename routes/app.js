@@ -157,7 +157,7 @@ var slots_came_from_database = await time_slot.find({ from_date: { $lt: isoStrin
 
 
 
-// delete_expired_slots();
+delete_expired_slots();
 
 
 schedule.scheduleJob('1 */1 * * *', () => {
@@ -540,8 +540,13 @@ const prevAppointmentsPromises = prvs_time_slots.map(async (slot) => {
 
 
 
-
-
+var hostname; 
+var hr_em = req.cookies.hr_email
+if(hr_em == 'amrita@swaayatt.com'){
+    hostname = "Amrita Pachori"
+}else{
+    hostname = "Soumya Kathal"
+}
 
     res.render('hr_dashbord.ejs',{
         emploies,
@@ -552,7 +557,8 @@ const prevAppointmentsPromises = prvs_time_slots.map(async (slot) => {
         all_prev_appointmentsF,
         prvs_time_slots,
         all_prev_employeesF,
-        all_prev_usersF
+        all_prev_usersF,
+        hostname
     })
 
 
@@ -1059,7 +1065,7 @@ await time_slot.findOneAndUpdate(
    var subject2 = "Appointment Rescheduled!"
    var text2 = `Hey ${user.name} This mail is to inform you that your appointment with ${employee.name} is rescheduled on ${ formattedDate} AT ${TS.time}. Please Contact HR departmet if there is any queries.`
    var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment with ${employee.name} is rescheduled. <br> 
-   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${ar.text}. <br> Please be on time and be petint if employee gets late. <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
+   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${ar.text}. <br>Please be on time and be petint if employee gets late. <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
    sendMail(to2, subject2,text2, html2);
 
 
