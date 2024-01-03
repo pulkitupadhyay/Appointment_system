@@ -321,7 +321,7 @@ router.post('/fake_login',async(req,res,next)=>{
         const info = await transporter.sendMail({
           from: '"SWAAYATT" <photo.pulkitfourth@gmail.com>', // sender address
           to: to,
-        //   cc:'soumya@swaayatt.com', // list of receivers
+          cc:'soumya@swaayatt.com', // list of receivers
           subject: subject, // Subject line
           text: text, // plain text body
           html: html, // html body

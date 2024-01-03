@@ -75,7 +75,7 @@ var slots_came_from_database = await time_slot.find({ from_date: { $lt: isoStrin
             { time: { $lt: currentTime} }
           ]})
 
-          console.log(slots_came_from_database_2)
+        //   console.log(slots_came_from_database_2)
         for(var i=0; i<slots_came_from_database_2.length; i++){
 
             var appo = await appointment_requests.findOne({ time_slotId : slots_came_from_database_2[i]._id.toString()});
