@@ -5,7 +5,7 @@ const employee_scheema = require('./../models/employee_module')
 const time_slot = require('./../models/time_slots')
 const appointment_requests = require('./../models/appointment_requests')
 // const appointment_requests = require('./../models/appointment_requests')
-
+const del =require('./del_ex_func')
 const schedule = require('node-schedule');
 const nodemailer = require('nodemailer')
 const previous_appointments = require('./../models/previous_appointments')
@@ -74,95 +74,135 @@ router.post('/hr_login', async(req,res,next)=>{
 
 
 
-async function delete_expired_slots(){
+// async function delete_expired_slots(){
    
    
-    const currentDate = new Date();
-const isoString = currentDate.toISOString().split('T')[0] + 'T00:00:00.000+00:00';
-console.log(isoString);
+//     const currentDate = new Date();
+// const isoString = currentDate.toISOString().split('T')[0] + 'T00:00:00.000+00:00';
+// console.log(isoString);
 
-// const currentDate = new Date();
-const hours = String(currentDate.getHours()).padStart(2, '0');
-const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-const currentTime = `${hours}:${minutes}`;
+// // const currentDate = new Date();
+// const hours = String(currentDate.getHours()).padStart(2, '0');
+// const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+// const currentTime = `${hours}:${minutes}`;
 
 
 
-var slots_came_from_database = await time_slot.find({ from_date: { $lt: isoString} })
+// var slots_came_from_database = await time_slot.find({ from_date: { $lt: isoString} })
     
 
 
 
-        for(var i=0; i<slots_came_from_database.length; i++){
+//         for(var i=0; i< slots_came_from_database.length; i++){
 
-            var appo = await appointment_requests.findOne({ time_slotId : slots_came_from_database[i]._id.toString()});
-
-
-
-            var prev_ts = await time_slot.findOne({ _id: slots_came_from_database[i]._id})
-
-            var p_appo = new previous_appointments({
-
-                _id: appo._id,
-                userID: appo.userID,
-                employeeID: appo.employeeID,
-                text: appo.text,
-                time_slotId: appo.time_slotId,
-                accepted:appo.accepted
-            })
-
-            var p_ts = new prev_time_slots({
-                _id: prev_ts._id,
-                employeeID: prev_ts.employeeID,
-                from_date:prev_ts.from_date,
-                time:prev_ts.time,
-                occupied:prev_ts.occupied
-
-            })
-
-            await p_appo.save();
-            await p_ts.save();
+//             var appo = await appointment_requests.findOne({ time_slotId : slots_came_from_database[i]._id.toString()});
 
 
 
-            await appointment_requests.findOneAndDelete({ time_slotId : slots_came_from_database[i]._id.toString()})
+//             var prev_ts = await time_slot.findOne({ _id: slots_came_from_database[i]._id})
 
-            await time_slot.findOneAndDelete({ _id: slots_came_from_database[i]._id})
+//             console.log(appo,prev_ts)
+
+//             var p_appo = new previous_appointments({
+
+//                 _id: appo._id,
+//                 userID: appo.userID,
+//                 employeeID: appo.employeeID,
+//                 text: appo.text,
+//                 time_slotId: appo.time_slotId,
+//                 accepted:appo.accepted
+//             })
+
+//             var p_ts = new prev_time_slots({
+//                 _id: prev_ts._id,
+//                 employeeID: prev_ts.employeeID,
+//                 from_date:prev_ts.from_date,
+//                 time:prev_ts.time,
+//                 occupied:prev_ts.occupied
+
+//             })
+
+//             await p_appo.save();
+//             await p_ts.save();
+
+
+
+//             await appointment_requests.findOneAndDelete({ time_slotId : slots_came_from_database[i]._id.toString()})
+
+//             await time_slot.findOneAndDelete({ _id: slots_came_from_database[i]._id})
 
 
 
             
-        }
+//         }
 
 
-        var slots_came_from_database_2 = await time_slot.find({  $and: [
-            { from_date : isoString },
-            { time: { $lt: currentTime} }
-          ]})
+//         var slots_came_from_database_2 = await time_slot.find({  $and: [
+//             { from_date : isoString },
+//             { time: { $lt: currentTime} }
+//           ]})
 
           
-        for(var i=0; i<slots_came_from_database_2.length; i++){
-            await appointment_requests.findOneAndDelete({ time_slotId : slots_came_from_database_2[i]._id.toString()})
+//         for(var i=0; i<slots_came_from_database_2.length; i++){
 
-            await time_slot.findOneAndDelete({ _id: slots_came_from_database_2[i]._id})
-
+//             var appo = await appointment_requests.findOne({ time_slotId : slots_came_from_database_2[i]._id.toString()});
 
 
-        }
+
+//             var prev_ts = await time_slot.findOne({ _id: slots_came_from_database_2[i]._id})
+
+//             // console.log(appo,prev_ts)
+
+//             var p_appo = new previous_appointments({
+
+//                 _id: appo._id,
+//                 userID: appo.userID,
+//                 employeeID: appo.employeeID,
+//                 text: appo.text,
+//                 time_slotId: appo.time_slotId,
+//                 accepted:appo.accepted
+//             })
+
+//             var p_ts = new prev_time_slots({
+//                 _id: prev_ts._id,
+//                 employeeID: prev_ts.employeeID,
+//                 from_date:prev_ts.from_date,
+//                 time:prev_ts.time,
+//                 occupied:prev_ts.occupied
+
+//             })
+
+//             await p_appo.save();
+//             await p_ts.save();
+
+
+
+
+
+
+
+
+//             await appointment_requests.findOneAndDelete({ time_slotId : slots_came_from_database_2[i]._id.toString()})
+
+//             await time_slot.findOneAndDelete({ _id: slots_came_from_database_2[i]._id})
+
+
+
+//         }
  
     
-        await  time_slots.deleteMany({ occupied: false });
+//         await  time_slot.deleteMany({ occupied: false });
 
-}
+// }
 
 
 
-delete_expired_slots();
+// del();
 
 
 schedule.scheduleJob('1 */1 * * *', () => {
     console.log("This schaduler will run every 1 hour and one minut ")
-    delete_expired_slots();
+    del();
   });
   
 
@@ -279,8 +319,9 @@ router.post('/fake_login',async(req,res,next)=>{
      async function main1() {
         // send mail with defined transport object
         const info = await transporter.sendMail({
-          from: '"SWAAYATT👻" <photo.pulkitfourth@gmail.com>', // sender address
-          to: to, // list of receivers
+          from: '"SWAAYATT" <photo.pulkitfourth@gmail.com>', // sender address
+          to: to,
+        //   cc:'soumya@swaayatt.com', // list of receivers
           subject: subject, // Subject line
           text: text, // plain text body
           html: html, // html body
@@ -455,7 +496,7 @@ var emploies = await employee_scheema.find();
 
 
 const prvs_time_slots = await prev_time_slots.find();
-const todaysTimeSlots = await time_slot.find({ occupied:true });
+var todaysTimeSlots = await time_slot.find({ occupied:true });
 
 
 
@@ -485,7 +526,7 @@ const prevAppointmentsPromises = prvs_time_slots.map(async (slot) => {
     }
   });
   
-  const all_appointmentsF = await Promise.all(appointmentsPromises);
+  var all_appointmentsF = await Promise.all(appointmentsPromises);
   
   // Fetch users for each appointment
   const usersPromises = all_appointmentsF.map(async (appointment) => {
@@ -498,7 +539,7 @@ const prevAppointmentsPromises = prvs_time_slots.map(async (slot) => {
     }
   });
   
-  const all_usersF = await Promise.all(usersPromises);
+  var all_usersF = await Promise.all(usersPromises);
   
   // Fetch previous users for each previous appointment
   const prevUsersPromises = all_prev_appointmentsF.map(async (appointment) => {
@@ -524,7 +565,7 @@ const prevAppointmentsPromises = prvs_time_slots.map(async (slot) => {
     }
   });
   
-  const all_employeesF = await Promise.all(employeesPromises);
+  var all_employeesF = await Promise.all(employeesPromises);
   
   // Fetch previous employees for each previous appointment
   const prevEmployeeIDs = all_prev_appointmentsF.map((appointment) => appointment.employeeID);
@@ -547,6 +588,11 @@ if(hr_em == 'amrita@swaayatt.com'){
 }else{
     hostname = "Soumya Kathal"
 }
+
+todaysTimeSlots= todaysTimeSlots.reverse()
+all_appointmentsF = all_appointmentsF.reverse();
+        all_usersF =all_usersF.reverse();
+        all_employeesF = all_employeesF.reverse();
 
     res.render('hr_dashbord.ejs',{
         emploies,
@@ -888,17 +934,49 @@ router.post('/book_slot', async (req,res,next)=>{
             // sendign mail of apointment
             var to1 = employee.email
             var subject1 = "Appointment Booked : You`ve got an appointment"
-            var text1 = `Hey ${employee.name} This mail is to inform you that your appointment is booked with ${user.name}  on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
-            var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your appointment is booked with ${user.name} <br> 
-            Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link : ${new_appointment_request.text}. <br> </p>`
+          var   text1= `Dear ${employee.name},\n\nI trust this message finds you well.\n\nWe are pleased to inform you that your upcoming appointment has been scheduled with ${user.name}. Please find the details below:\n\nDate: ${formattedDate}\nTime: ${TS.time}\nLink: ${req.body.text_associated}\n\nIn preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.\n\nWe appreciate your time and cooperation in making this appointment a success.\n\nBest regards,\nSwaayatt Robots PVT LTD\n`
+            var html1= `
+              <p style="font-size: 1rem;">Dear ${employee.name},</p>
+              <p style="font-size: 1rem;">I trust this message finds you well.</p>
+              <p style="font-size: 1rem;">We are pleased to inform you that your upcoming appointment has been scheduled with ${user.name}. Please find the details below:</p>
+              <ul style="list-style-type: none; padding: 0;">
+                <li style="margin-bottom: 10px;"><strong>Date:</strong>${formattedDate}</li>
+                <li style="margin-bottom: 10px;"><strong>Time:</strong> ${TS.time}</li>
+                <li style="margin-bottom: 10px;"><strong>Link:</strong> ${req.body.text_associated}</li>
+              </ul>
+              <p style="font-size: 1rem;">In preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.</p>
+              <p style="font-size: 1rem;">We appreciate your time and cooperation in making this appointment a success.</p>
+              <p style="font-size: 1rem;">Best regards,<br>Swaayatt Robots PVT LTD<br></p>
+            `
+            
 
             sendMail(to1, subject1,text1, html1);
 
             var to2 = user.email
             var subject2 = "Appointment Booked : You`ve got an appointment"
-            var text2 = `Hey ${user.name} This mail is to inform you that your appointment is booked with ${employee.name}  on ${ formattedDate} AT ${TS.time}  Meeting Link : ${new_appointment_request.text} . Please login in your employee account to accept or reject the appointment.`
-            var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment is booked with ${employee.name} <br> 
-            Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link : ${new_appointment_request.text} <br> Please be on time and be petint if employee gets late . <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
+            var   text2= `Dear ${user.name},\n\nI trust this message finds you well.\n\nWe are pleased to inform you that your upcoming appointment has been scheduled with ${user.name}. Please find the details below:\n\nDate: ${formattedDate}\nTime: ${TS.time}\nLink: ${req.body.text_associated}\n\nIn preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.\n\nWe appreciate your time and cooperation in making this appointment a success.\n\nBest regards,\nSwaayatt Robots PVT LTD\n`
+            var html2= `
+              <p style="font-size: 1rem;">Dear ${user.name},</p>
+              <p style="font-size: 1rem;">I trust this message finds you well.</p>
+              <p style="font-size: 1rem;">We are pleased to inform you that your upcoming appointment has been scheduled with ${employee.name}. Please find the details below:</p>
+              <ul style="list-style-type: none; padding: 0;">
+                <li style="margin-bottom: 10px;"><strong>Date:</strong>${formattedDate}</li>
+                <li style="margin-bottom: 10px;"><strong>Time:</strong> ${TS.time}</li>
+                <li style="margin-bottom: 10px;"><strong>Link:</strong> ${req.body.text_associated}</li>
+              </ul>
+              <p style="font-size: 1rem;">In preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.</p>
+              <p style="font-size: 1rem;">We appreciate your time and cooperation in making this appointment a success.</p>
+              <p style="font-size: 1rem;">Best regards,<br>Swaayatt Robots PVT LTD<br></p>
+            `
+            
+            
+            
+            
+            
+            
+            
+            
+            
             sendMail(to2, subject2,text2, html2);
 
             if(req.cookies.hr_email){
@@ -941,13 +1019,17 @@ router.post('/delete_appointment', async (req,res,next)=>{
 
 var to1 = employee.email
 var subject1 = "Appointment Canceled !! "
-var text1 = `Hey ${employee.name} This mail is to inform you that your appointment  with ${user.name} on ${formattedDate} AT ${TS.time} is canceled. Please contact the hr in case of any queries.`
-var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your appointment  with ${user.name} <br> Please contact the hr in case of any queries.
+var text1 = `Hey ${employee.name} This mail is to inform you that your appointment  with ${user.name}
+ on ${formattedDate} AT ${TS.time} is canceled. Please contact the hr in case of any queries.`
+var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your 
+appointment  with ${user.name} <br> Please contact the HR in case of any queries.
 `
 
 var to2 = user.email
 var subject2 = "Appointment Canceled !!"
-var text2 = `Hey ${user.name} This mail is to inform you that your appointment with ${employee.name} on ${ formattedDate} AT ${TS.time} is canceled. Please contact the hr in case of any queries.`
+var text2 = `Hey ${user.name} This mail is to inform you that your appointment with
+ ${employee.name} on ${ formattedDate} AT ${TS.time} is canceled. Please contact the HR
+  in case of any queries.`
 var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment with ${employee.name} is canceled. <br> 
  <br> Please contact the Hr in case of any queries. <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
 sendMail(to2, subject2,text2, html2);
@@ -1055,17 +1137,21 @@ await time_slot.findOneAndUpdate(
 
    var to1 = employee.email
    var subject1 = "Appointment Rescheduled!"
-   var text1 = `Hey ${employee.name} This mail is to inform you that your appointment with ${user.name} is resceduled on ${ formattedDate} AT ${TS.time}. Please login in your employee account to accept or reject the appointment.`
-   var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your appointment with ${user.name} is rescheduled. <br> 
-   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link: ${ar.text}. `
+   var text1 = `Hey ${employee.name} This mail is to inform you that your appointment with
+    ${user.name} is resceduled on ${ formattedDate} AT ${TS.time}.`
+   var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that 
+your appointment with ${user.name} is rescheduled. <br> 
+   Here are the details : <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link: ${ar.text}. `
    
    sendMail(to1, subject1,text1, html1);
    
    var to2 = user.email
    var subject2 = "Appointment Rescheduled!"
-   var text2 = `Hey ${user.name} This mail is to inform you that your appointment with ${employee.name} is rescheduled on ${ formattedDate} AT ${TS.time}. Please Contact HR departmet if there is any queries.`
+   var text2 = `Hey ${user.name} This mail is to inform you that your appointment
+    with ${employee.name} is rescheduled on ${ formattedDate} AT ${TS.time}. Please Contact
+     HR departmet if there are any queries.`
    var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment with ${employee.name} is rescheduled. <br> 
-   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${ar.text}. <br>Please be on time and be petint if employee gets late. <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
+   Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${ar.text}.  <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
    sendMail(to2, subject2,text2, html2);
 
 
@@ -1164,21 +1250,56 @@ getdata()
     // Now you can use the variables outside the function
    
 
-var to1 = employee.email
-var subject1 = "Appointment Booked : You`ve got an appointment"
-var text1 = `Hey ${employee.name} This mail is to inform you that your appointment is booked with ${user.name}  on ${ formattedDate} AT ${TS.time} .`
-var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that  your appointment is booked with ${user.name} <br> 
-Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link : ${doc.text}.` 
+    var to1 = employee.email
+    var subject1 = "Appointment Booked : You`ve got an appointment"
+  var   text1= `Dear ${employee.name},\n\nI trust this message finds you well.\n\nWe are pleased to inform you that your upcoming appointment has been scheduled with ${user.name}. Please find the details below:\n\nDate: ${formattedDate}\nTime: ${TS.time}\nLink: ${req.body.text_associated}\n\nIn preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.\n\nWe appreciate your time and cooperation in making this appointment a success.\n\nBest regards,\nSwaayatt Robots PVT LTD\n`
+    var html1= `
+      <p style="font-size: 1rem;">Dear ${employee.name},</p>
+      <p style="font-size: 1rem;">I trust this message finds you well.</p>
+      <p style="font-size: 1rem;">We are pleased to inform you that your upcoming appointment has been scheduled with ${user.name}. Please find the details below:</p>
+      <ul style="list-style-type: none; padding: 0;">
+        <li style="margin-bottom: 10px;"><strong>Date:</strong>${formattedDate}</li>
+        <li style="margin-bottom: 10px;"><strong>Time:</strong> ${TS.time}</li>
+        <li style="margin-bottom: 10px;"><strong>Link:</strong> ${doc.text}</li>
+      </ul>
+      <p style="font-size: 1rem;">In preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.</p>
+      <p style="font-size: 1rem;">We appreciate your time and cooperation in making this appointment a success.</p>
+      <p style="font-size: 1rem;">Best regards,<br>Swaayatt Robots PVT LTD<br></p>
+    `
+    
 
-sendMail(to1, subject1,text1, html1);
+    sendMail(to1, subject1,text1, html1);
 
-var to2 = user.email
-var subject2 = "Appointment Booked : Youve got an appointment"
-var text2 = `Hey ${user.name} This mail is to inform you that your appointment is booked with ${employee.name}  on ${ formattedDate} AT ${TS.time} . Please login in your employee account to accept or reject the appointment.`
-var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment is booked with ${employee.name} <br> 
-Here are the deteails <br> Date  : ${ formattedDate} <br> Time  :  ${TS.time}   <br> Meeting Link :  ${doc.text}. <br> Please be on time and be petint if employee gets late . <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`
-sendMail(to2, subject2,text2, html2);
-  })
+    var to2 = user.email
+    var subject2 = "Appointment Booked : You`ve got an appointment"
+    var   text2= `Dear ${user.name},\n\nI trust this message finds you well.\n\nWe are pleased to inform you that your upcoming appointment has been scheduled with ${user.name}. Please find the details below:\n\nDate: ${formattedDate}\nTime: ${TS.time}\nLink: ${req.body.text_associated}\n\nIn preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.\n\nWe appreciate your time and cooperation in making this appointment a success.\n\nBest regards,\nSwaayatt Robots PVT LTD\n`
+    var html2= `
+      <p style="font-size: 1rem;">Dear ${user.name},</p>
+      <p style="font-size: 1rem;">I trust this message finds you well.</p>
+      <p style="font-size: 1rem;">We are pleased to inform you that your upcoming appointment has been scheduled with ${employee.name}. Please find the details below:</p>
+      <ul style="list-style-type: none; padding: 0;">
+        <li style="margin-bottom: 10px;"><strong>Date:</strong>${formattedDate}</li>
+        <li style="margin-bottom: 10px;"><strong>Time:</strong> ${TS.time}</li>
+        <li style="margin-bottom: 10px;"><strong>Link:</strong> ${doc.text}</li>
+      </ul>
+      <p style="font-size: 1rem;">In preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.</p>
+      <p style="font-size: 1rem;">We appreciate your time and cooperation in making this appointment a success.</p>
+      <p style="font-size: 1rem;">Best regards,<br>Swaayatt Robots PVT LTD<br></p>
+    `
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    sendMail(to2, subject2,text2, html2);
+
+
+
+})
   .catch(error => console.error(error));
 
 
