@@ -497,6 +497,7 @@ var emploies = await employee_scheema.find();
 
 const prvs_time_slots = await prev_time_slots.find();
 var todaysTimeSlots = await time_slot.find({ occupied:true });
+todaysTimeSlots.sort((a, b) => new Date(b.from_date) - new Date(a.from_date));
 
 
 
