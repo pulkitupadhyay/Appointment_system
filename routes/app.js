@@ -519,7 +519,7 @@ todaysTimeSlots.sort((a, b) => {
 });
 
 
-console.log(todaysTimeSlots)
+// console.log(todaysTimeSlots)
 
 const prevAppointmentsPromises = prvs_time_slots.map(async (slot) => {
     try {
