@@ -497,12 +497,29 @@ var emploies = await employee_scheema.find();
 
 const prvs_time_slots = await prev_time_slots.find();
 var todaysTimeSlots = await time_slot.find({ occupied:true });
-todaysTimeSlots.sort((a, b) => new Date(b.from_date) - new Date(a.from_date));
+// todaysTimeSlots.sort((a, b) => new Date(b.from_date) - new Date(a.from_date));
 
 
+todaysTimeSlots.sort((a, b) => {
+  const dateComparison = new Date(b.from_date) - new Date(a.from_date);
+
+  if (dateComparison !== 0) {
+    return dateComparison; // If dates are different, return based on dates
+  } else {
+    // If dates are the same, compare based on time
+    const timeA = a.time.split(':').map(Number);
+    const timeB = b.time.split(':').map(Number);
+
+    if (timeA[0] !== timeB[0]) {
+      return timeB[0] - timeA[0]; // Compare hours
+    } else {
+      return timeB[1] - timeA[1]; // If hours are the same, compare minutes
+    }
+  }
+});
 
 
-
+console.log(todaysTimeSlots)
 
 const prevAppointmentsPromises = prvs_time_slots.map(async (slot) => {
     try {
