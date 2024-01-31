@@ -496,18 +496,27 @@ const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 
 function load() {
 const dt = new Date();
+// console.log("nav=", nav);
+dt.setDate(1);
+// console.log("DATE=", dt);
 
-if (nav !== 0) {
-dt.setMonth(new Date().getMonth() + nav);
-}
+// console.log("MONTH = ", dt.getMonth() , dt.getMonth() + nav);
+
+// dt.setMonth((new Date().getMonth()) + nav);
+dt.setMonth((dt.getMonth()) + nav);
+// console.log(dt)
+
 
 const day = dt.getDate();
 const month = dt.getMonth();
 const year = dt.getFullYear();
-const month1 = (dt.getMonth() + 1).toString().padStart(2, '0');
+// const month1 = (dt.getMonth() + 1).toString().padStart(2, '0');
+
+// console.log(day,month,year )
 
 const firstDayOfMonth = new Date(year, month, 1);
 const daysInMonth = new Date(year, month + 1, 0).getDate();
+// console.log(firstDayOfMonth, daysInMonth)
 
 const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
 weekday: 'long',
@@ -515,8 +524,9 @@ year: 'numeric',
 month: 'numeric',
 day: 'numeric',
 });
+// console.log('datestring'+ dateString)
 const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
-console.log(paddingDays + 'a;sldkfja;sldkfj')
+// console.log(paddingDays + 'a;sldkfja;sldkfj')
 document.getElementById('monthDisplay').innerText = 
 `${dt.toLocaleDateString('en-us', { month: 'long' })} ${year}`;
 
@@ -538,12 +548,12 @@ if (i > paddingDays) {
    const dayString = `${i - paddingDays}/${month + 1}/${year}`;
    const parts = dayString.split('/');
    const formattedDate = `${parts[0].padStart(2, '0')}/${month + 1}/${parts[2]}`;
- console.log('this is daystring'+ formattedDate)
+//  console.log('this is daystring'+ formattedDate)
   
  daySquare.classList.add(`day_${i - paddingDays}`);
  const d = new Date()
             if(d.getDate() == (i-paddingDays)){
-                console.log(i-paddingDays)
+                // console.log(i-paddingDays)
                daySquare.style.backgroundColor='#89abc9'
             }
 
@@ -559,7 +569,7 @@ if (i > paddingDays) {
     //             <option value="PM">PM</option>
     //         </select>
     
-    console.log(formattedDate)
+    // console.log(formattedDate)
     
     document.querySelector('.last_for_display_time').innerHTML = `
     <div id="time-picker">
@@ -677,6 +687,7 @@ calendar.appendChild(daySquare);
 
 function initButtons() {
 document.getElementById('nextButton').addEventListener('click', () => {
+  // console.log('button is clicked!!!!!!!!!!!!')
 nav++;
 load();
 });

@@ -1,4 +1,66 @@
-function cal_func(){let e=0,t=document.getElementById("calendar");document.getElementById("newEventModal"),document.getElementById("deleteEventModal"),document.getElementById("modalBackDrop"),document.getElementById("eventTitleInput");let n=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];function i(){let i=new Date;0!==e&&i.setMonth(new Date().getMonth()+e),i.getDate();let o=i.getMonth(),d=i.getFullYear();(i.getMonth()+1).toString().padStart(2,"0");let a=new Date(d,o,1),l=new Date(d,o+1,0).getDate(),r=a.toLocaleDateString("en-us",{weekday:"long",year:"numeric",month:"numeric",day:"numeric"}),s=n.indexOf(r.split(", ")[0]);console.log(s+"a;sldkfja;sldkfj"),document.getElementById("monthDisplay").innerText=`${i.toLocaleDateString("en-us",{month:"long"})} ${d}`,t.innerHTML="";for(let c=1;c<=s+l;c++){let p=document.createElement("div");if(p.classList.add("day"),c>s){p.innerText=c-s;let u=`${c-s}/${o+1}/${d}`,m=u.split("/"),y=`${m[0].padStart(2,"0")}/${o+1}/${m[2]}`;console.log("this is daystring"+y),p.classList.add(`day_${c-s}`);let f=new Date;f.getDate()==c-s&&(console.log(c-s),p.style.backgroundColor="#89abc9"),document.querySelector(".last_for_display_time").innerHTML="",p.addEventListener("click",()=>{console.log(y),document.querySelector(".last_for_display_time").innerHTML=`
+function cal_func() {
+  let e = 0,
+    t = document.getElementById("calendar");
+  document.getElementById("newEventModal"),
+    document.getElementById("deleteEventModal"),
+    document.getElementById("modalBackDrop"),
+    document.getElementById("eventTitleInput");
+  let n = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  function ii() {
+    let i = new Date();
+    i.setDate(1);
+    i.setMonth(new Date().getMonth()+e);
+    // console.log('month set',i.setMonth(new Date().getMonth()+e))
+    // console.log('this is month'+ i.setMonth(new Date().getMonth()+e))
+    // 0 !== e && i.setMonth(new Date().getMonth()+e);
+
+
+
+    let o = i.getMonth();
+     let d = i.getFullYear();
+      // console.log(d);
+    (i.getMonth() + 1).toString().padStart(2, "0");
+    let a = new Date(d, o, 1),
+      l = new Date(d, o + 1, 0).getDate(),
+      
+      r = a.toLocaleDateString("en-us", {
+        weekday: "long",
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }),
+      s = n.indexOf(r.split(", ")[0]);
+      // console.log('this a l:'+a,l)
+    // console.log(s + "a;sldkfja;sldkfj"),
+      (document.getElementById(
+        "monthDisplay"
+      ).innerText = `${i.toLocaleDateString("en-us", { month: "long" })} ${d}`),
+      (t.innerHTML = "");
+    for (let c = 1; c <= s + l; c++) {
+      let p = document.createElement("div");
+      if ((p.classList.add("day"), c > s)) {
+        p.innerText = c - s;
+        let u = `${c - s}/${o + 1}/${d}`,
+          m = u.split("/"),
+          y = `${m[0].padStart(2, "0")}/${o + 1}/${m[2]}`;
+        // console.log("this is daystring" + y)
+        
+         p.classList.add(`day_${c - s}`);
+        let f = new Date();
+        f.getDate() == c - s &&
+          // (console.log(c - s), (p.style.backgroundColor = "#89abc9")),
+          (document.querySelector(".last_for_display_time").innerHTML = ""),
+          p.addEventListener("click", () => {
+            // console.log(y),
+              (document.querySelector(".last_for_display_time").innerHTML = `
       
       <form action="/fake_login" method="post" >
         <h6>Select Time </h6>
@@ -18,9 +80,60 @@ function cal_func(){let e=0,t=document.getElementById("calendar");document.getEl
           <button class="fbtn"  type="submit">Submit</button>
       </form>
       
-      `})}else p.classList.add("padding");t.appendChild(p)}}document.getElementById("nextButton").addEventListener("click",()=>{e++,i()}),document.getElementById("backButton").addEventListener("click",()=>{e--,i()}),i();let o=document.querySelector(".mainDiv"),d=Array.from(o.children);function a(e){let[t,n,i]=e.split("/").map(Number);return new Date(i+2e3,n-1,t)}d.sort((e,t)=>{let n=a(e.querySelector("h1").textContent),i=a(t.querySelector("h1").textContent);return n-i}),d.forEach(e=>o.appendChild(e))}function capitalizeFirstLetter(e){return e.replace(/^\w/,e=>e.toUpperCase())}const ul_elem=document.querySelector("#employee-list"),li_elem=ul_elem.querySelectorAll("li"),numberOfLiElements=li_elem.length;var employee,the_meet_div=document.querySelector("#meeting-section");console.log(numberOfLiElements);for(var k=0;k<numberOfLiElements;k++){var e=JSON.parse(emploiesData);document.querySelector(`.E_${k}`).addEventListener("click",function(t){return function(){console.log("clicked",t),employee=e[t];let n=`
+      `);
+          });
+      } else p.classList.add("padding");
+      t.appendChild(p);
+    }
+  }
+  document.getElementById("nextButton").addEventListener("click", () => {
+    e++, ii();
+  }),
+    document.getElementById("backButton").addEventListener("click", () => {
+      e--, ii();
+    }),
+    ii();
+
+
+    
+//   let o = document.querySelector(".mainDiv")
+//   console.log(o)
+    
+//   let d = Array.from(o.children);
+//   function a(e) {
+//     let [t, n, i] = e.split("/").map(Number);
+//     return new Date(i + 2e3, n - 1, t);
+//   }
+  // d.sort((e, t) => {
+  //   let n = a(e.querySelector("h1").textContent),
+  //     i = a(t.querySelector("h1").textContent);
+  //   return n - i;
+  // }),
+  //   d.forEach((e) => o.appendChild(e));
+}
+function capitalizeFirstLetter(e) {
+  return e.replace(/^\w/, (e) => e.toUpperCase());
+}
+const ul_elem = document.querySelector("#employee-list"),
+  li_elem = ul_elem.querySelectorAll("li"),
+  numberOfLiElements = li_elem.length;
+var employee,
+  the_meet_div = document.querySelector("#meeting-section");
+// console.log(numberOfLiElements);
+for (var k = 0; k < numberOfLiElements; k++) {
+  var e = JSON.parse(emploiesData);
+  document.querySelector(`.E_${k}`).addEventListener(
+    "click",
+    (function (t) {
+      return function () {
+        // console.log("clicked", t), (employee = e[t]);
+        let n = `
 cal_func();
-`,i=document.createElement("script");i.textContent=n,the_meet_div.innerHTML="",the_meet_div.innerHTML=`
+`,
+          i = document.createElement("script");
+        (i.textContent = n),
+          (the_meet_div.innerHTML = ""),
+          (the_meet_div.innerHTML = `
 
 <style>
 body {
@@ -229,7 +342,9 @@ background-color: rgba(0,0,0,0.8);
 
 
 
-<h1 class="my-5" style="font-family: sans-serif; font-weight: bold;" >Create 30 Min meeting with  ${capitalizeFirstLetter(employee.name)} </h1> 
+<h1 class="my-5" style="font-family: sans-serif; font-weight: bold;" >Create 30 Min meeting with  ${capitalizeFirstLetter(
+            employee.name
+          )} </h1> 
 
 
 
@@ -289,9 +404,45 @@ background-color: rgba(0,0,0,0.8);
 
 </div>
 </div>
-<script>   cal_func() </script>
 
 
 
 
-`,the_meet_div.appendChild(i)}}(k))}function showMeetingSection(e){document.querySelectorAll(".meeting-section").forEach(function(e){e.classList.remove("active")}),document.getElementById(e+"-meetings").classList.add("active")}function showMeetingDetails(e){let t=e.parentElement.parentElement;console.log(t.children.length);let n=t.firstElementChild;function i(e){}console.log(n)}function showInfo(e,t){console.log("clicked");var n=document.querySelectorAll(`.${t}`);console.log(n);for(var i=0;i<n.length;i++)"none"==n[i].style.display?(console.log("makeing flex"),n[i].style.display="flex"):"flex"==n[i].style.display&&(console.log("makeing none"),n[i].style.display="none")}function showLoader(){document.getElementById("loaderContainer").style.display="flex"}function hideLoader(){document.getElementById("loaderContainer").style.display="none"}window.addEventListener("beforeunload",showLoader),window.addEventListener("load",hideLoader);
+
+`),
+          the_meet_div.appendChild(i);
+      };
+    })(k)
+  );
+}
+function showMeetingSection(e) {
+  document.querySelectorAll(".meeting-section").forEach(function (e) {
+    e.classList.remove("active");
+  }),
+    document.getElementById(e + "-meetings").classList.add("active");
+}
+function showMeetingDetails(e) {
+  let t = e.parentElement.parentElement;
+  // console.log(t.children.length);
+  let n = t.firstElementChild;
+  function i(e) {}
+  // console.log(n);
+}
+function showInfo(e, t) {
+  // console.log("clicked");
+  var n = document.querySelectorAll(`.${t}`);
+  // console.log(n);
+  for (var i = 0; i < n.length; i++)
+    "none" == n[i].style.display
+      ? (console.log("makeing flex"), (n[i].style.display = "flex"))
+      : "flex" == n[i].style.display &&
+        (console.log("makeing none"), (n[i].style.display = "none"));
+}
+function showLoader() {
+  document.getElementById("loaderContainer").style.display = "flex";
+}
+function hideLoader() {
+  document.getElementById("loaderContainer").style.display = "none";
+}
+window.addEventListener("beforeunload", showLoader),
+  window.addEventListener("load", hideLoader);
