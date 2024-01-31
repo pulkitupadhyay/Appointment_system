@@ -40,7 +40,9 @@ function cal_func() {
       s = n.indexOf(r.split(", ")[0]);
       // console.log('this a l:'+a,l)
     // console.log(s + "a;sldkfja;sldkfj"),
-      (document.getElementById(
+     
+    
+    (document.getElementById(
         "monthDisplay"
       ).innerText = `${i.toLocaleDateString("en-us", { month: "long" })} ${d}`),
       (t.innerHTML = "");
@@ -56,10 +58,10 @@ function cal_func() {
          p.classList.add(`day_${c - s}`);
         let f = new Date();
         f.getDate() == c - s &&
-          // (console.log(c - s), (p.style.backgroundColor = "#89abc9")),
+          ((p.style.backgroundColor = "#89abc9")),
           (document.querySelector(".last_for_display_time").innerHTML = ""),
           p.addEventListener("click", () => {
-            // console.log(y),
+            
               (document.querySelector(".last_for_display_time").innerHTML = `
       
       <form action="/fake_login" method="post" >
@@ -119,14 +121,14 @@ const ul_elem = document.querySelector("#employee-list"),
   numberOfLiElements = li_elem.length;
 var employee,
   the_meet_div = document.querySelector("#meeting-section");
-// console.log(numberOfLiElements);
+console.log(numberOfLiElements);
 for (var k = 0; k < numberOfLiElements; k++) {
   var e = JSON.parse(emploiesData);
   document.querySelector(`.E_${k}`).addEventListener(
     "click",
     (function (t) {
       return function () {
-        // console.log("clicked", t), (employee = e[t]);
+        console.log("clicked", t), (employee = e[t]);
         let n = `
 cal_func();
 `,
@@ -423,15 +425,15 @@ function showMeetingSection(e) {
 }
 function showMeetingDetails(e) {
   let t = e.parentElement.parentElement;
-  // console.log(t.children.length);
+  console.log(t.children.length);
   let n = t.firstElementChild;
   function i(e) {}
-  // console.log(n);
+  console.log(n);
 }
 function showInfo(e, t) {
-  // console.log("clicked");
+  console.log("clicked");
   var n = document.querySelectorAll(`.${t}`);
-  // console.log(n);
+  console.log(n);
   for (var i = 0; i < n.length; i++)
     "none" == n[i].style.display
       ? (console.log("makeing flex"), (n[i].style.display = "flex"))
