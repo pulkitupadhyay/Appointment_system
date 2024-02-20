@@ -5,7 +5,7 @@ const Route = require("./routes/app");
 const path = require("path");
 
 var cookieParser = require("cookie-parser");
-const del = require('./routes/del_ex_func')
+const del = require("./routes/other_functions/del_ex_func");
 
 app.set("view engine", "ejs");
 
