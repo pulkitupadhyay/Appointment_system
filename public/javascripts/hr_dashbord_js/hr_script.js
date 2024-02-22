@@ -448,3 +448,4 @@ function hideLoader() {
 }
 window.addEventListener("beforeunload", showLoader),
   window.addEventListener("load", hideLoader);
+  
