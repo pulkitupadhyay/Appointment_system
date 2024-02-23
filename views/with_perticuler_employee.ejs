@@ -595,6 +595,19 @@
 
           </div>
   </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
   <script>
     function changeColor(button) {
       button.classList.add('clicked');
@@ -679,6 +692,31 @@
             daySquare.style.backgroundColor = '#89abc9'
           }
 
+          function isDateTimeInArray(formattedDate, formattedTime, array) { 
+   
+   const dateTimeToCheck = new Date(`${formattedDate} ${formattedTime}`);
+
+ console.log(dateTimeToCheck)
+   for (const obj of array) { 
+     
+     const fromDate = new Date(obj.from_date);
+
+      
+       const timeParts = obj.time.split(':');
+      const timeDate = new Date(fromDate);
+       timeDate.setHours(Number(timeParts[0]));
+      timeDate.setMinutes(Number(timeParts[1]));
+
+      
+      if (fromDate.toDateString() === dateTimeToCheck.toDateString() && timeDate.getTime() === dateTimeToCheck.getTime()) {
+          return true;
+      }
+  }
+
+  
+  return false; 
+}
+
 
           document.querySelector('.last_for_display_time').innerHTML = ``
           daySquare.addEventListener('click', () => {
@@ -693,13 +731,23 @@
 
             // console.log(formattedDate)
 
+
+
+
+
             document.querySelector('.last_for_display_time').innerHTML = `
-    <div id="time-picker">
+   
+  
+   
+   
+   
+            <div id="time-picker">
     <form action="/fake_login" method="post" >
       
       <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
       <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
 
+     
         
            <input type="time" name="from_time" value="12:00" style="display:none;" >
           <button class="fbtn" type="submit" onclick="changeColor(this)">12:00 PM</button>

@@ -10,7 +10,7 @@ const with_perticuler_employee=async (req, res, next) => {
   
     var time_slots = await time_slot.find({
       employeeID: req.params.id,
-      occupied: false,
+      occupied: true,
     });
     var time_slots1 = time_slots;
     time_slots1.sort((a, b) => {
