@@ -222,24 +222,57 @@ form input{
 }
 
 #header {
-padding: 10px;
-color: #d36c6c;
-font-size: 26px;
-font-family: sans-serif;
-display: flex;
-justify-content: space-between;
+  padding: 10px;
+  background-color: #d36c6c;
+  color: white;
+  font-size: 18px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 #header button {
 background-color:#92a1d1;
 }
+#header .icons {
+  display: flex;
+}
+
+#header .icons span {
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #000;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+
+#header .icons span:last-child {
+  margin-right: -10px;
+  
+}
+
+
+#header .icons span:hover {
+  background:  rgb(202, 201, 201);
+  /* color: rgba(247, 241, 241, 0.938);  */
+  color:  #d36c6c;
+}
+
+
 #container {
 width: 964px;
 }
 #weekdays {
-width: 100%;
-display: flex;
-color: #247BA0;
-margin-left:5%;
+  width: 100%;
+  display: flex;
+  color: #247BA0;
+  margin-left: 5%;
+  font-weight: bold;
 }
 #weekdays div {
 width: 100px;
@@ -257,14 +290,22 @@ flex-wrap: wrap;
 width: 100px;
 padding: 10px;
 height: 100px;
-cursor: pointer;
-box-sizing: border-box;
-background-color: white;
 margin: 5px;
-box-shadow: 0px 0px 3px #CBD4C2;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+}
+.day {
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: 0 5px 25px rgb(1 1 1 / 15%);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-bottom: 6px solid #4285F4;
+  border-radius: 8px;
+  justify-content: center;
+  text-align: center;
 }
 .day:hover {
 background-color: #e8faed;
@@ -359,11 +400,13 @@ background-color: rgba(0,0,0,0.8);
 <div class="mainddddd" style="width: 90%; display: flex; flex-direction: row;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;  padding: 1.5%;">
 <div id="container">
 <div id="header">
+<div class="icons">
+<span id="backButton" class="material-symbols-rounded">chevron_left</span></div>
 <div id="monthDisplay"></div>
-<div>
-<button id="backButton">Back</button>
-<button id="nextButton">Next</button>
+<div class="icons">
+<span id="nextButton" class="material-symbols-rounded">chevron_right</span>
 </div>
+
 </div>
 
 <div id="weekdays">
@@ -448,3 +491,14 @@ function hideLoader() {
 }
 window.addEventListener("beforeunload", showLoader),
   window.addEventListener("load", hideLoader);
+
+
+
+ 
+  function changeColor(button) {
+      var buttons = document.querySelectorAll('.navbar a');
+      buttons.forEach(function(btn) {
+          btn.classList.remove('clicked');
+      });
+      button.classList.add('clicked');
+  }

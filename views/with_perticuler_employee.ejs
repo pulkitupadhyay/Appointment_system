@@ -825,7 +825,11 @@ function changeHeadingText() {
 </script>
 <script>
   function changeColor(button) {
-    button.classList.add('clicked');
+      var buttons = document.querySelectorAll('.navbar a');
+      buttons.forEach(function(btn) {
+          btn.classList.remove('clicked');
+      });
+      button.classList.add('clicked');
   }
 </script>
 
