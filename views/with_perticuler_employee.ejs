@@ -731,8 +731,22 @@ if(fromDate == formatDateFromString(dateTimeToCheck) && timeDate == timec){
     return isMatchingDateTime;
 }
 
+
             document.querySelector(".last_for_display_time").innerHTML = ``;
-            daySquare.addEventListener("click", () => {
+
+        var dddd = new Date()
+        dddd.setHours(0, 0, 0, 0);
+        dddd=dddd.getTime();
+        var date_to_compare = new Date(year,(month),(i-paddingDays))
+               date_to_compare.setHours(0, 0, 0, 0);
+               date_to_compare=date_to_compare.getTime()
+      console.log(dddd,date_to_compare,(i-paddingDays))
+
+
+        if(date_to_compare >= dddd){
+
+
+          daySquare.addEventListener("click", () => {
               // <input type="number" name="hour" id="hour" min="1" max="12" placeholder="HH" required>
               //         <span>:</span>
               //         <input type="number" id="minute" name="minute" min="0" max="59" placeholder="MM" required>
@@ -764,7 +778,7 @@ if(fromDate == formatDateFromString(dateTimeToCheck) && timeDate == timec){
 
                       if(!isDateTimeInArray(formattedDate,"12:00")){
 
-                      var new_string =  ` <form action="/fake_login" method="post" >
+                      var new_string =  `${formattedDate} <form action="/fake_login" method="post" >
       
                             <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
                                    <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
@@ -843,6 +857,15 @@ html_to_appent =`${html_to_appent} ${new_string}` ;
 
               document.querySelector(".last_for_display_time").innerHTML = html_to_appent;
             });
+
+
+
+        }
+
+
+
+
+
           } else {
             daySquare.classList.add("padding");
           }
