@@ -26,7 +26,7 @@ function cal_func() {
 
     let o = i.getMonth();
      let d = i.getFullYear();
-      // console.log(d);
+      // console.log('this is o',o);
     (i.getMonth() + 1).toString().padStart(2, "0");
     let a = new Date(d, o, 1),
       l = new Date(d, o + 1, 0).getDate(),
@@ -48,6 +48,7 @@ function cal_func() {
       (t.innerHTML = "");
     for (let c = 1; c <= s + l; c++) {
       let p = document.createElement("div");
+      
       if ((p.classList.add("day"), c > s)) {
         p.innerText = c - s;
         let u = `${c - s}/${o + 1}/${d}`,
@@ -57,7 +58,7 @@ function cal_func() {
         
          p.classList.add(`day_${c - s}`);
         let f = new Date();
-        f.getDate() == c - s &&
+        f.getDate() == c - s && 
           ((p.style.backgroundColor = "#89abc9")),
           (document.querySelector(".last_for_display_time").innerHTML = ""),
           p.addEventListener("click", () => {
@@ -84,7 +85,8 @@ function cal_func() {
       
       `);
           });
-      } else p.classList.add("padding");
+      }
+       else p.classList.add("padding");
       t.appendChild(p);
     }
   }

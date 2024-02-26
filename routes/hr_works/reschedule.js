@@ -2,7 +2,7 @@ const appointment_requests = require("./../../models/appointment_requests");
 
 const employee_scheema = require("./../../models/employee_module");
 const user_scheema = require("./../../models/user_module");
-const time_slot = require("./../../models/user_module");
+const time_slot = require("./../../models/time_slots");
 const sendMail = require("./../other_functions/sendMail");
 const previous_appointments = require("./../../models/previous_appointments");
 
@@ -65,7 +65,16 @@ try {
     );
 
     var employee = await employee_scheema.findOne({ _id: ar.employeeID });
+    
+    
     var user = await user_scheema.findOne({ _id: ar.userID });
+if(!user){
+  console.log('user not found')
+  req.flash('error', 'User not found!!!')
+  res.redirect('/hr_dashbord')
+}
+
+
     var TS = await time_slot.findOne({ _id: ar.time_slotId });
 
     function formatDate(inputDateString) {

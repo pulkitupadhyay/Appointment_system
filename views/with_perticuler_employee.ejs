@@ -651,8 +651,9 @@
 
             daySquare.classList.add(`day_${i - paddingDays}`);
             const d = new Date();
-            if (d.getDate() == i - paddingDays) {
-              // console.log(i-paddingDays)
+            if (d.getDate() == i - paddingDays && d.getMonth() == month) {
+              // console.log(,"month")
+
               daySquare.style.backgroundColor = "#89abc9";
             }
 

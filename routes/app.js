@@ -47,10 +47,19 @@ fs.readFile("public/gifs/timezones.json", "utf8", (err, data) => {
 });
 
 router.get("/hr_login", (req, res, next) => {
-  res.render("hr_login.ejs", {
-    message: req.flash("message"),
-    bad_alert: req.flash("error"),
-  });
+
+
+  if(req.cookies.hr_email){
+    res.redirect('hr_dashbord')
+
+  }else{
+    res.render("hr_login.ejs", {
+      message: req.flash("message"),
+      bad_alert: req.flash("error"),
+    });
+  }
+
+  
 });
 router.get("/", (req, res) => {
   res.redirect("/hr_login");

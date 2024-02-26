@@ -45,9 +45,14 @@ body {
     flex-direction: column
 }
 
+
 #employee-list {
     list-style-type: none;
-    padding: 0
+    padding: 0;
+    height:32rem;
+    overflow-y: scroll;
+    border-bottom: 1px solid white;
+    
 }
 
 .employee-item {
@@ -106,7 +111,7 @@ li button:hover {
     width: 65%;
     padding: 20px;
     height: 85vh;
-    overflow: scroll
+    overflow-y: scroll
 }
 
 .meet-card {

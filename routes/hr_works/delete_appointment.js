@@ -3,7 +3,7 @@ const appointment_requests = require('./../../models/appointment_requests')
 
 const employee_scheema = require('./../../models/employee_module')
 const user_scheema = require('./../../models/user_module')
-const time_slot = require('./../../models/user_module')
+const time_slot = require('./../../models/time_slots')
 const sendMail = require('./../other_functions/sendMail')
 
 
@@ -57,6 +57,7 @@ const delete_apppointment = async (req, res, next) => {
     req.flash('message','Deleted!!')
     res.redirect("/hr_dashbord");
   } catch (error) {
+    console.log(error)
     req.flash('error','Something Went Wrong!!!!')
     res.redirect('/hr_dashbord')
   }

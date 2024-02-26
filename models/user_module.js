@@ -17,7 +17,7 @@ var userSchema=mongoose.Schema({
   },
   timezone:{
     type: String,
-    required: true
+   
   }
 })
 
