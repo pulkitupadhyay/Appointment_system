@@ -197,10 +197,24 @@
                         <div class="meet-card-details" >
                            
                               
-                              <button type="button" onclick="showInfo('<%=i%>', 'dtl_div_<%=i%>')"  id="details-btn" class="dtl_btn_<%=i%>" style=" display: flex;align-items: center;padding:0.5rem 1.5rem; background-color: rgb(0, 119, 255);border-radius: 10px;border:none;color: white;cursor: pointer;" >  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                              </svg> Details</button>
+                          <button type="button" onclick="toggleRotation('<%=i%>', 'dtl_div_<%=i%>')" id="details-btn" class="dtl_btn_<%=i%>" style="display: flex; align-items: center; padding: 0.5rem 1.5rem; background-color: rgb(0, 119, 255); border-radius: 10px; border: none; color: white; cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-caret-right-fill icon" viewBox="0 0 16 16">
+                              <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                            </svg> Details </button>
                         </div>
+                        <style>
+                          .rotate {
+                            transform: rotate(90deg);
+                          }
+                        </style>
+                        <script>
+                          function toggleRotation(index, divId) {
+                            var icon = document.querySelector('.dtl_btn_' + index + ' .icon');
+                            icon.classList.toggle('rotate');
+                            showInfo(index, divId);
+                          }
+                        </script>
+                        
                     </div>
                         <div class="custom-container dtl_div_<%=i%>" style="width: 100%; display: none;" >
                             <div class="custom-side-nav">

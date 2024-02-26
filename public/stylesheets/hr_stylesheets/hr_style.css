@@ -49,11 +49,32 @@ body {
 #employee-list {
     list-style-type: none;
     padding: 0;
-    height:32rem;
+    height: 32rem;
     overflow-y: scroll;
     border-bottom: 1px solid white;
-    
 }
+
+#employee-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+#employee-list::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+#employee-list::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+#employee-list::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}
+
 
 .employee-item {
     margin-bottom: 15px;
