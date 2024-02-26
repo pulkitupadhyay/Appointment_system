@@ -889,15 +889,21 @@ html_to_appent =`${html_to_appent} ${new_string}` ;
         }
       }
 
-      // Run the function on page load and window resize
-      window.addEventListener("load", changeHeadingText);
-      window.addEventListener("resize", changeHeadingText);
-    </script>
-    <script>
-      function changeColor(button) {
-        button.classList.add("clicked");
-      }
-    </script>
+        // Run the function on page load and window resize
+        window.addEventListener('load', changeHeadingText);
+        window.addEventListener('resize', changeHeadingText);
+
+
+</script>
+<script>
+  function changeColor(button) {
+      var buttons = document.querySelectorAll('.navbar a');
+      buttons.forEach(function(btn) {
+          btn.classList.remove('clicked');
+      });
+      button.classList.add('clicked');
+  }
+</script>
 
     <script>
       const mainDiv = document.querySelector(".mainDiv");

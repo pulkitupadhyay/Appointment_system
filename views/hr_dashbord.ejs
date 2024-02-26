@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meeting Dashboard</title>
     <link rel="stylesheet" href="/stylesheets/hr_stylesheets/hr_style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
     
    
     
@@ -120,9 +122,9 @@
 
         <div class="meeting-card">
             <div class="navbar" style="padding-bottom: 1%;" >
-                <a href="#" onclick="showMeetingSection('upcoming')">Upcoming</a>
-                <a href="#" onclick="showMeetingSection('pending')">Pending</a>
-                <a href="#" onclick="showMeetingSection('previous')">Previous</a>
+                <a href="#" onclick="showMeetingSection('upcoming');changeColor(this)" class="clicked">Upcoming</a>
+                <a href="#" onclick="showMeetingSection('pending');changeColor(this)" >Pending</a>
+                <a href="#" onclick="showMeetingSection('previous');changeColor(this)">Previous</a>
             </div>
         
             <div id="upcoming-meetings" class="meeting-section active">
@@ -195,7 +197,7 @@
                         <div class="meet-card-details" >
                            
                               
-                              <button type="button" onclick="showInfo('<%=i%>', 'dtl_div_<%=i%>')"  id="details-btn" class="dtl_btn_<%=i%>" style=" display: flex;align-items: center;padding:0.5rem 1.5rem;background-color: rgb(0, 119, 255);border-radius: 10px;border:none;color: white;cursor: pointer;" >  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                              <button type="button" onclick="showInfo('<%=i%>', 'dtl_div_<%=i%>')"  id="details-btn" class="dtl_btn_<%=i%>" style=" display: flex;align-items: center;padding:0.5rem 1.5rem; background-color: rgb(0, 119, 255);border-radius: 10px;border:none;color: white;cursor: pointer;" >  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                                 <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                               </svg> Details</button>
                         </div>
@@ -443,14 +445,36 @@
 
     
 
-
+            <script>
+              var buttons = document.querySelectorAll('#details-btn');
+              buttons.forEach(function(button) {
+                  button.addEventListener('click', function() {
+                      var currentColor = this.style.backgroundColor;
+                      if (currentColor === 'lightsteelblue') {
+                          this.style.backgroundColor = 'rgb(0, 119, 255)';
+                      } else {
+                          this.style.backgroundColor = 'lightsteelblue';
+                      }
+                  });
+              });
+          </script>
 
 
 
 
 
     
-   
+            <script>
+              function changeColor(button) {
+                  var buttons = document.querySelectorAll('.navbar a');
+                  buttons.forEach(function(btn) {
+                      if (btn !== button) {
+                          btn.classList.remove('clicked');
+                      }
+                  });
+                  button.classList.add('clicked');
+              }
+          </script>
 
 
 
