@@ -44,7 +44,24 @@ body {
     display: flex;
     flex-direction: column
 }
-
+#employee-list::-webkit-scrollbar {
+    width: 8px; /* Adjust the width of the scrollbar */
+  }
+  
+  #employee-list::-webkit-scrollbar-thumb {
+    background-color: #3498db; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded corners for the thumb */
+  }
+  
+  #employee-list::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color of the scrollbar track */
+  }
+  
+  /* Optional: Hover effect for the scrollbar thumb */
+  #employee-list::-webkit-scrollbar-thumb:hover {
+    background-color: #2980b9; /* Change the color on hover */
+  }
+  
 
 #employee-list {
     list-style-type: none;
@@ -52,13 +69,15 @@ body {
     height:32rem;
     overflow-y: scroll;
     border-bottom: 1px solid white;
-    
 }
 
 .employee-item {
     margin-bottom: 15px;
     display: flex;
-    align-items: center
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .custom-side-nav h2,
