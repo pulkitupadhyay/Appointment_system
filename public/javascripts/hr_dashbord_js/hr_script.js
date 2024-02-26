@@ -308,7 +308,7 @@ justify-content: space-between;
   text-align: center;
 }
 .day:hover {
-background-color: #e8faed;
+  background-color: rgba(211, 108, 108, 0.6) !important;
 }
 
 .day + #currentDay {
