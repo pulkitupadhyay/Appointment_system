@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <%- include('./alert_msg.ejs') %>
     <p> ALERT!!@!  Please login after sighnup dont signup again </p>
     <form action="/user_signUp" method="POST">
        name  <input type="text" name="userName">

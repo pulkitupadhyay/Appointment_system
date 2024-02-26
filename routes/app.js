@@ -47,7 +47,10 @@ fs.readFile("public/gifs/timezones.json", "utf8", (err, data) => {
 });
 
 router.get("/hr_login", (req, res, next) => {
-  res.render("hr_login.ejs");
+  res.render("hr_login.ejs", {
+    message: req.flash("message"),
+    bad_alert: req.flash("error"),
+  });
 });
 router.get("/", (req, res) => {
   res.redirect("/hr_login");
@@ -60,26 +63,33 @@ schedule.scheduleJob("1 */1 * * *", () => {
 
 router.get("/book_appointment", async (req, res, next) => {
   var emploies = await employee_scheema.find();
-  res.render("book_appointment", { emploies });
+  res.render("book_appointment", {
+    emploies,
+    message: req.flash("message"),
+    bad_alert: req.flash("error"),
+  });
 });
 
 router.get("/employee_login", (req, res, next) => {
-  res.render("employee_login");
+  res.render("employee_login", {
+    message: req.flash("message"),
+    bad_alert: req.flash("error"),
+  });
 });
 
 
-
+// done
 
 router.post("/fake_login", fake_login);
-
+// done
 router.post("/hr_login", hr_login);
-
+// done
 router.post("/user_signUp", user_signup);
-
+// done
 router.post("/hr_signUp", hr_signUp);
-
+// done
 router.post("/employee_signUp", employee_signUp);
-
+// done
 router.get("/hr_dashbord", hr_dashbord);
 
 router.get("/employee_Dashbord/:id", employee_Dashbord);
@@ -87,15 +97,15 @@ router.get("/employee_Dashbord/:id", employee_Dashbord);
 router.post("/employee_login", employee_login);
 
 router.post("/add_time_slots", add_time_slots);
-
+//done
 router.get("/employee/:id", with_perticuler_employee);
-
+//done
 router.post("/book_slot", book_slot);
-
+//done
 router.post("/delete_appointment", delete_apppointment);
-
+//done
 router.post("/reSchedule_appointment", reschedule);
-
+//done
 router.post("/remove_timeslot", remove_ts);
 
 module.exports = router;

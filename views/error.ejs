@@ -1,11 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERROR</title>
 </head>
+<style>
+  .error {
+    padding: 40px 0;
+    background: #fff;
+    font-family: 'Arvo', serif;
+  }
+
+  .error img {
+    width: 100%;
+  }
+
+  .bg_error {
+    background-image: url(image/error.gif);
+    height: 521px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .box h3 {
+    font-size: 60px;
+    text-align: center;
+    color: #333;
+
+  }
+
+  .error-message {
+    font-size: 28px;
+    text-align: center;
+    color: #666;
+    margin-bottom: 10px;
+    margin-top: -41px;
+  }
+
+  .box {
+    margin-top: -50px;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .contact-list li {
+    margin-bottom: 10px;
+  }
+
+  .contact-list li a {
+    color: #4caf50;
+    text-decoration: none;
+  }
+
+  .contact-list li a:hover {
+    text-decoration: underline;
+  }
+</style>
+
 <body>
-    <h1>sorry there is some error.</h1>
+  <%- include('./alert_msg.ejs') %>
+
+    <section class="error">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-10">
+              <h1 style="margin-top: 2px; font-size: 80px;
+        text-align: center;color: #333;">Oops!</h1>
+
+              <div class="bg_error">
+              </div>
+
+              <div class="box">
+                <h3 class="h2">
+                  Something gone wrong<br>
+                </h3>
+
+                <p class="error-message"> Don't worry, our team is here to help.</p>
+                <ul class="contact-list">
+                  <li><a href="mailto:pulit.upadhyay@deepeigen.com">pulkit.upadhyay@deepeigen.com</a></li>
+                  <li><a href="mailto:vamsikrisna@deepeigen.com">vamsikrisna@deepeigen.com</a></li>
+                  <li><a href="mailto:aakriti@deepeigen.com">aakriti@deepeigen.com</a></li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 </body>
+
 </html>

@@ -76,6 +76,8 @@ const employee_Dashbord = async (req, res, next) => {
       appointment_timeslot,
       accepted_appintments,
       appointment_timeslot_for_accepted_reqests,
+      message: req.flash('message'),
+      bad_alert: req.flash('error'),
     });
   }
 

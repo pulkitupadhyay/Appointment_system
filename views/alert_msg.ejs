@@ -1,0 +1,59 @@
+<% if(message.length > 0){ %>
+    <%console.log(message)%>
+    <div id="messageAlert" class="alert" style="color: white; ">
+        <i class="fas fa-info-circle"></i> <%= message[0] %>
+    </div>
+  <% } %>
+  
+  <% if(bad_alert.length > 0){ %>
+    <%console.log(bad_alert)%>
+    <div id="badAlert" class="alert" style="color: white; ">
+        <i class="fas fa-exclamation-circle"></i> <%= bad_alert[0] %>
+    </div>
+  <% } %>
+  
+  <style>
+    .alert {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 7px;
+        text-align: center;
+        border: 1px solid transparent;
+        animation: fadeOut 3s ease-in-out forwards;
+        z-index: 999;
+        display: inline-block;
+        min-width: 286px;
+    }
+    #messageAlert {
+        background-color: rgb(76,175,80,0.7);
+    }
+  
+    #badAlert {
+        background-color: rgba(255, 0, 0, 0.7);
+    }
+  
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            display: none;
+        }
+    }
+  </style>
+  
+  <script>
+    setTimeout(function() {
+        var messageAlert = document.getElementById('messageAlert');
+        if (messageAlert) {
+            messageAlert.style.display = 'none';
+        }
+        var badAlert = document.getElementById('badAlert');
+        if (badAlert) {
+            badAlert.style.display = 'none';
+        }
+    }, 5000);
+  </script>

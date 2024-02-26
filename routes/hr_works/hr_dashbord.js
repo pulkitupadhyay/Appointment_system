@@ -11,8 +11,12 @@ const prev_time_slots = require("./../../models/prev_time_slots");
 const hr_dashbord = async (req, res, next) => {
   try {
     if (!req.cookies.hr_email) {
+      req.flash("error", "You Are Not LoggedIn!!");
       res.redirect("/hr_login");
     } else if (req.cookies.hr_email) {
+
+
+      
       var emploies = await employee_scheema.find();
 
       const prvs_time_slots = await prev_time_slots.find();
@@ -46,8 +50,10 @@ const hr_dashbord = async (req, res, next) => {
           });
           return appointment;
         } catch (error) {
-          console.error("Error fetching previous appointment:", error);
-          throw error;
+          res.render("error", {
+            message: req.flash("message"),
+            bad_alert: req.flash("error"),
+          });
         }
       });
 
@@ -63,13 +69,14 @@ const hr_dashbord = async (req, res, next) => {
           });
           return appointment;
         } catch (error) {
-          console.error("Error fetching appointment:", error);
-          throw error;
+          res.render("error", {
+            message: req.flash("message"),
+            bad_alert: req.flash("error"),
+          });
         }
       });
 
       var all_appointmentsF = await Promise.all(appointmentsPromises);
-     
 
       // Fetch users for each appointment
       const usersPromises = all_appointmentsF.map(async (appointment) => {
@@ -77,8 +84,10 @@ const hr_dashbord = async (req, res, next) => {
           const user = await user_scheema.findOne({ _id: appointment.userID });
           return user;
         } catch (error) {
-          console.error("Error fetching user:", error);
-          throw error;
+          res.render("error", {
+            message: req.flash("message"),
+            bad_alert: req.flash("error"),
+          });
         }
       });
 
@@ -93,8 +102,10 @@ const hr_dashbord = async (req, res, next) => {
             });
             return user;
           } catch (error) {
-            console.error("Error fetching previous user:", error);
-            throw error;
+            res.render("error", {
+              message: req.flash("message"),
+              bad_alert: req.flash("error"),
+            });
           }
         }
       );
@@ -109,8 +120,10 @@ const hr_dashbord = async (req, res, next) => {
           });
           return employee;
         } catch (error) {
-          console.error("Error fetching employee:", error);
-          throw error;
+          res.render("error", {
+            message: req.flash("message"),
+            bad_alert: req.flash("error"),
+          });
         }
       });
 
@@ -128,8 +141,10 @@ const hr_dashbord = async (req, res, next) => {
             });
             return employee;
           } catch (error) {
-            console.error("Error fetching previous employee:", error);
-            throw error;
+            res.render("error", {
+              message: req.flash("message"),
+              bad_alert: req.flash("error"),
+            });
           }
         })
       );
@@ -147,7 +162,6 @@ const hr_dashbord = async (req, res, next) => {
       all_usersF = all_usersF.reverse();
       all_employeesF = all_employeesF.reverse();
 
-
       res.render("hr_dashbord.ejs", {
         emploies,
         todaysTimeSlots,
@@ -159,11 +173,17 @@ const hr_dashbord = async (req, res, next) => {
         all_prev_employeesF,
         all_prev_usersF,
         hostname,
+        message: req.flash("message"),
+        bad_alert: req.flash("error"),
       });
     }
   } catch (error) {
     console.log(error);
-    res.render("error");
+
+    res.render("error", {
+      message: req.flash("message"),
+      bad_alert: req.flash("error"),
+    });
   }
 };
 

@@ -8,6 +8,9 @@ const sendMail = require('./../other_functions/sendMail')
 
 
 const delete_apppointment = async (req, res, next) => {
+
+  try {
+    
     var appRpf = await appointment_requests.findOne({ _id: req.body.app_id });
     var employee = await employee_scheema.findOne({ _id: appRpf.employeeID });
     var user = await user_scheema.findOne({ _id: appRpf.userID });
@@ -50,8 +53,14 @@ const delete_apppointment = async (req, res, next) => {
     sendMail(to2, subject2, text2, html2);
   
     await appointment_requests.findOneAndDelete({ _id: req.body.app_id });
-  
+
+    req.flash('message','Deleted!!')
     res.redirect("/hr_dashbord");
+  } catch (error) {
+    req.flash('error','Something Went Wrong!!!!')
+    res.redirect('/hr_dashbord')
+  }
+
   }
 
   module.exports = delete_apppointment

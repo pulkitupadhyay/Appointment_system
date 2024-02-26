@@ -9,6 +9,8 @@ const previous_appointments = require("./../../models/previous_appointments");
 const prev_time_slots = require("./../../models/prev_time_slots");
 
 const reschedule = async (req, res, next) => {
+ 
+try {
   const inputDate = req.body.from_date;
 
   // Convert the input date to a Date object
@@ -103,6 +105,8 @@ const reschedule = async (req, res, next) => {
     var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment with ${employee.name} is rescheduled. <br> 
      Here are the deteails <br> Date  : ${formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${ar.text}.  <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`;
     sendMail(to2, subject2, text2, html2);
+
+    req.flash('message', 'The appointment or meeting is rescheduled!!!')
 
     res.redirect("/hr_dashbord");
   } else {
@@ -246,9 +250,16 @@ const reschedule = async (req, res, next) => {
       });
 
     // await p_ts.save();
+    req.flash('message', 'The appointment or meeting is rescheduled!!!')
 
     res.redirect("/hr_dashbord");
   }
+} catch (error) {
+  req.flash('error', 'Sorry something went wrong !!!')
+  res.redirect('/hr_dashbord')
+}
+
+
 };
 
 module.exports = reschedule;
