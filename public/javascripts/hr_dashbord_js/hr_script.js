@@ -61,6 +61,10 @@ function cal_func() {
         f.getDate() == c - s && 
           ((p.style.backgroundColor = "#89abc9")),
           (document.querySelector(".last_for_display_time").innerHTML = ""),
+         
+         
+         
+         
           p.addEventListener("click", () => {
             
               (document.querySelector(".last_for_display_time").innerHTML = `
@@ -85,6 +89,12 @@ function cal_func() {
       
       `);
           });
+
+
+
+
+
+          
       }
        else p.classList.add("padding");
       t.appendChild(p);
