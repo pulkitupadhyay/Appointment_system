@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Swaayatt Appointment System</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   </head>
   <link
     rel="stylesheet"
@@ -19,479 +20,10 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous"
   />
-
-  <style>
-    h1 {
-      text-align: center;
-    }
-    h2 {
-      margin-top: 1%;
-    }
-    .mainDiv h2 {
-      font-size: 1rem !important  ;
-    }
-    form input {
-      font-size: 1rem !important  ;
-    }
-    .main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #header {
-      padding: 10px;
-      color: #d36c6c;
-      font-size: 26px;
-      font-family: "Sora", sans-serif;
-      font-weight: 800;
-      display: flex;
-      justify-content: space-between;
-    }
-    #header button {
-      background-color: #92a1d1;
-    }
-    #container {
-      width: 964px;
-    }
-    #weekdays {
-      width: 100%;
-      display: flex;
-      color: #247ba0;
-      font-weight: bold;
-    }
-    #weekdays div {
-      width: 100px;
-      padding: 50px;
-      padding-bottom: 0px !important;
-    }
-    #calendar {
-      width: 100%;
-      margin: auto;
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .day {
-      width: 100px;
-      padding: 10px;
-      height: 100px;
-      cursor: pointer;
-      box-sizing: border-box;
-      background-color: white;
-      margin: 5px;
-      box-shadow: 0px 0px 3px #cbd4c2;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .day:hover {
-      background-color: rgba(211, 108, 108, 0.6) !important;
-    }
-
-    .day + #currentDay {
-      background-color: #e8f4fa;
-    }
-    .event {
-      font-size: 10px;
-      padding: 3px;
-      background-color: #58bae4;
-      color: white;
-      border-radius: 5px;
-      max-height: 55px;
-      overflow: hidden;
-    }
-    .padding {
-      cursor: default !important;
-      background-color: #fffcff !important;
-      box-shadow: none !important;
-    }
-    #newEventModal,
-    #deleteEventModal {
-      display: none;
-      z-index: 20;
-      padding: 25px;
-      background-color: #e8f4fa;
-      box-shadow: 0px 0px 3px black;
-      border-radius: 5px;
-      width: 350px;
-      top: 100px;
-      left: calc(50% - 175px);
-      position: absolute;
-      font-family: sans-serif;
-    }
-    #eventTitleInput {
-      padding: 10px;
-      width: 100%;
-      box-sizing: border-box;
-      margin-bottom: 25px;
-      border-radius: 3px;
-      outline: none;
-      border: none;
-      box-shadow: 0px 0px 3px gray;
-    }
-    #eventTitleInput.error {
-      border: 2px solid red;
-    }
-    #cancelButton,
-    #deleteButton {
-      background-color: #d36c6c;
-    }
-    #saveButton,
-    #closeButton {
-      background-color: #92a1d1;
-    }
-    #eventText {
-      font-size: 14px;
-    }
-    #modalBackDrop {
-      display: none;
-      top: 0px;
-      left: 0px;
-      z-index: 10;
-      width: 100vw;
-      height: 100vh;
-      position: absolute;
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-    #header .icons {
-      display: flex;
-    }
-
-    #header .icons span {
-      height: 38px;
-      width: 38px;
-      margin: 0 1px;
-      cursor: pointer;
-      color: #000;
-      text-align: center;
-      line-height: 38px;
-      font-size: 1.9rem;
-      user-select: none;
-      border-radius: 50%;
-    }
-
-    #header .icons span:last-child {
-      margin-right: -10px;
-    }
-
-    #header .icons span:hover {
-      background: rgb(202, 201, 201);
-      /* color: rgba(247, 241, 241, 0.938);  */
-      color: #d36c6c;
-    }
-  </style>
-  <style>
-    body {
-      font-family: "Arial", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f5f5f5;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      background-color: #fff;
-      padding: 6px;
-      width: 78%;
-      border-radius: 15px;
-      border: 2px solid rgb(65, 132, 242);
-      /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); */
-    }
-
-    input {
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    #time-picker {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 5px;
-      gap: 8px;
-    }
-
-    #hour,
-    #minute {
-      width: 30%;
-    }
-
-    span {
-      font-size: 18px;
-    }
-
-    #ampm {
-      width: 60px;
-    }
-
-    .fbtn {
-      width: 100%;
-      padding: 8px;
-      background-color: #fff;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .fbtn:hover {
-      background-color: #9dc6ea;
-    }
-
-    .fbtn.clicked {
-      background-color: #3498db;
-      color: #000;
-    }
-
-    /* for responsiveness  */
-    @media only screen and (min-width: 1024px) {
-      .mt-4,
-      .my-4 {
-        margin-top: 10.5rem !important;
-      }
-    }
-    @media only screen and (min-width: 1864px) {
-      .mt-4,
-      .my-4 {
-        margin-top: 1.5rem !important;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      .mainDiv {
-        flex-direction: column;
-        align-items: center;
-        width: 90vw;
-        height: 50vw;
-      }
-
-      .mainddddd {
-        width: 100%;
-        padding-top: 2%;
-        height: 25rem;
-      }
-
-      #container {
-        width: 100%;
-      }
-
-      #header {
-        flex-direction: column;
-      }
-
-      #calendar {
-        flex-direction: column;
-      }
-
-      .day {
-        width: calc(20% - 10px);
-        margin: 5px;
-      }
-
-      #newEventModal,
-      #deleteEventModal {
-        width: 80%;
-        left: 10%;
-      }
-      form {
-        width: 47%;
-      }
-      #time-picker {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: center;
-        justify-content: flex-end;
-        margin-right: 35px;
-      }
-      .last_for_display_time {
-        width: 100%;
-      }
-      #monthDisplay {
-        margin-left: 15px;
-        font-size: 20px;
-        margin-top: 5px;
-      }
-    }
-    /* #nextButton.material-symbols-rounded{
-    margin-top: -35px;
-    margin-left: 180px;
-        } */
-
-    .mainddddd {
-      width: 90%;
-      display: flex;
-      flex-direction: row;
-      box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;
-      padding: 1.5%;
-    }
-  </style>
-
-  <style>
-    body {
-      font-family: "Arial", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f5f5f5;
-    }
-
-    .mainDiv {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vw;
-    }
-
-    #container {
-      width: 90%;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    #header {
-      padding: 10px;
-      background-color: #d36c6c;
-      color: white;
-      font-size: 18px;
-      font-family: sans-serif;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    #header button {
-      background-color: #92a1d1;
-    }
-
-    #weekdays,
-    #calendar {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    #weekdays div,
-    .day {
-      width: calc(14.2857% - 10px);
-      padding: 10px;
-      margin: 5px;
-    }
-
-    .day {
-      cursor: pointer;
-      box-sizing: border-box;
-      background-color: white;
-      box-shadow: 0 5px 25px rgb(1 1 1 / 15%);
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      border-bottom: 6px solid #4285f4;
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .day:hover {
-      background-color: #e8faed;
-    }
-
-    .day + #currentDay {
-      background-color: #e8f4fa;
-    }
-
-    #newEventModal,
-    #deleteEventModal {
-      width: 80%;
-      left: 10%;
-    }
-
-    .mainddddd {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;
-      padding: 1.5%;
-      border: 2px solid #d36c6c;
-    }
-
-    @media screen and (max-width: 768px) {
-      body {
-        font-family: "Arial", sans-serif;
-        /* display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh; */
-        margin: 0;
-        background-color: #f5f5f5;
-        display: block;
-      }
-
-      .mainDiv {
-        flex-direction: column;
-        align-items: center;
-        width: 90vw;
-        height: 50vw;
-      }
-      /* .last_for_display_time{
-  display: none;
-} */
-      .mainddddd {
-        width: 90%;
-        height: 100%;
-        padding-top: 2%;
-        /* height: 87vw; */
-        flex-direction: column;
-      }
-
-      #container {
-        width: 100%;
-      }
-
-      #header {
-        flex-direction: row;
-      }
-
-      #calendar {
-        flex-direction: row;
-        gap: 2px;
-      }
-
-      .day {
-        width: calc(20% - 10px);
-        margin: 5px;
-      }
-
-      #newEventModal,
-      #deleteEventModal {
-        width: 80%;
-        left: 10%;
-      }
-      #weekdays div,
-      .day {
-        width: calc(11% - 9px);
-        margin-left: 4%;
-        height: 8vw;
-        align-items: center;
-        margin-top: 8px;
-      }
-    }
-  </style>
+  <link
+    rel="stylesheet"
+    href="/stylesheets//with_perticuler/with_perticuler.css"
+  />
 
   <body>
     <%- include('./alert_msg.ejs') %>
@@ -525,10 +57,6 @@
                 >chevron_right</span
               >
             </div>
-            <!-- <div>
-      <button id="backButton">Back</button>
-      <button id="nextButton">Next</button>
-    </div> -->
           </div>
 
           <div id="weekdays">
@@ -658,127 +186,134 @@
             }
 
             function parseFormattedDateTime(formattedDate, formattedTime) {
-    const [day, month, year] = formattedDate.split('/');
-    const [hours, minutes] = formattedTime.split(':');
-    return new Date(year, month - 1, day, hours, minutes);
-}
+              const [day, month, year] = formattedDate.split("/");
+              const [hours, minutes] = formattedTime.split(":");
+              return new Date(year, month - 1, day, hours, minutes);
+            }
 
-function parseISODate(isoDateString) {
-    return new Date(isoDateString);
-}
+            function parseISODate(isoDateString) {
+              return new Date(isoDateString);
+            }
 
+            function isDateTimeInArray(formattedDate, formattedTime) {
+              console.log("🚀 ~ isDateTimeInArray ~ formattedTime:", formattedTime)
+              console.log("🚀 ~ isDateTimeInArray ~ formattedDate:", formattedDate)
+              function formatTimeFromJSDate(date) {
+                // Get hours and minutes from the Date object
+                const hours = date.getHours();
+                const minutes = date.getMinutes();
 
+                // Add leading zeros if needed
+                const formattedHours = hours < 10 ? `0${hours}` : hours;
+                const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
-function isDateTimeInArray(formattedDate, formattedTime) {
+                // Combine hours and minutes in "hh:mm" format
+                const formattedTime = `${formattedHours}:${formattedMinutes}`;
 
-  function formatTimeFromJSDate(date) {
-    // Get hours and minutes from the Date object
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
+                return formattedTime;
+              }
+              function formatDateFromString(dateString) {
+                console.log("🚀 ~ formatDateFromString ~ dateString:", dateString)
+                // Create a Date object from the input string
+                const date = new Date(dateString);
+                console.log("🚀 ~ formatDateFromString ~ date:", date)
 
-    // Add leading zeros if needed
-    const formattedHours = hours < 10 ? `0${hours}` : hours;
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+                // Options for formatting the date
+                const options = {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                };
 
-    // Combine hours and minutes in "hh:mm" format
-    const formattedTime = `${formattedHours}:${formattedMinutes}`;
+                // Format the date using local time zone
+                const formattedDateString = date.toLocaleDateString(
+                  undefined,
+                  options
+                );
+                console.log("🚀 ~ formatDateFromString ~ formattedDateString:", formattedDateString)
 
-    return formattedTime;
-}
-function formatDateFromString(dateString) {
-    // Create a Date object from the input string
-    const date = new Date(dateString);
+                return formattedDateString;
+              }
 
-    // Options for formatting the date
-    const options = {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    };
+              const array = JSON.parse(`<%- JSON.stringify(time_slots) %>`);
 
-    // Format the date using local time zone
-    const formattedDateString = date.toLocaleDateString(undefined, options);
+              console.log("🚀 ~ isDateTimeInArray ~ array:", array)
+              const dateTimeToCheck = parseFormattedDateTime(
+                formattedDate,
+                formattedTime
+              );
 
-    return formattedDateString;
-}
+              // console.log(array);
 
+              console.log("🚀 ~ isDateTimeInArray ~ dateTimeToCheck:", dateTimeToCheck)
+              const isMatchingDateTime = array.some((obj) => {
+                // var fromDate = formatDateFromString(obj.from_date);
+                console.log("🚀 ~ isMatchingDateTime ~ obj.from_date:", obj.from_date)
+                var fromDate = moment(obj.from_date).format("DD/MM/YYYY");
+                console.log("🚀 ~ isMatchingDateTime ~ fromDate:", fromDate)
+                var timeDate = obj.time;
+                console.log("🚀 ~ isMatchingDateTime ~ timeDate:", timeDate)
 
-  const array = JSON.parse(`<%- JSON.stringify(time_slots) %>`);
+                var timec = formatTimeFromJSDate(dateTimeToCheck);
+                console.log("🚀 ~ isMatchingDateTime ~ timec:", timec)
+                console.log("time", fromDate);
+                // return isSameDateTime(fromDate, dateTimeToCheck) && isSameDateTime(timeDate, timec);
 
-    const dateTimeToCheck = parseFormattedDateTime(formattedDate, formattedTime);
+                // Parse the input date string using Moment.js
+                var inputDate = moment(`${moment(obj.from_date).format("MM/DD/YYYY")} ${timeDate}`);
+                console.log("🚀 ~ inputDate:", inputDate)
+                              
+                return moment(dateTimeToCheck).isBetween(moment(inputDate).startOf("hour"), moment(inputDate).endOf("hour"), null, []);
 
-    console.log(array);
+                /* if (
+                  fromDate == moment(dateTimeToCheck).format("DD/MM/YYYY") && //formatDateFromString(dateTimeToCheck) &&
+                  timeDate == timec
+                  ) {
+                  console.log("🚀 ~ isMatchingDateTime ~ fromDate == formatDateFromString(dateTimeToCheck):", fromDate == formatDateFromString(dateTimeToCheck))
+                  console.log("🚀 ~ isMatchingDateTime ~ timeDate == timec:", timeDate == timec)
+                  return true;
+                } else {
+                  return false;
+                } */
+              });
 
-    const isMatchingDateTime = array.some(obj => {
-        
-      var fromDate = formatDateFromString(obj.from_date) 
-      var timeDate = obj.time
-      
+              console.log(isMatchingDateTime);
 
-      var timec = formatTimeFromJSDate(dateTimeToCheck)
-      console.log("time",fromDate)
-        // return isSameDateTime(fromDate, dateTimeToCheck) && isSameDateTime(timeDate, timec);
-if(fromDate == formatDateFromString(dateTimeToCheck) && timeDate == timec){
-  return true
-}else{
-  return false
-}
-
-    });
-
-    console.log(isMatchingDateTime);
-
-    return isMatchingDateTime;
-}
-
+              return isMatchingDateTime;
+            }
 
             document.querySelector(".last_for_display_time").innerHTML = ``;
 
-        var dddd = new Date()
-        dddd.setHours(0, 0, 0, 0);
-        dddd=dddd.getTime();
-        var date_to_compare = new Date(year,(month),(i-paddingDays))
-               date_to_compare.setHours(0, 0, 0, 0);
-               date_to_compare=date_to_compare.getTime()
-      console.log(dddd,date_to_compare,(i-paddingDays))
+            var dddd = new Date();
+            dddd.setHours(0, 0, 0, 0);
+            dddd = dddd.getTime();
+            var date_to_compare = new Date(year, month, i - paddingDays);
+            date_to_compare.setHours(0, 0, 0, 0);
+            date_to_compare = date_to_compare.getTime();
+            console.log(dddd, date_to_compare, i - paddingDays);
 
+            if (date_to_compare >= dddd) {
+              daySquare.addEventListener("click", () => {
+                // <input type="number" name="hour" id="hour" min="1" max="12" placeholder="HH" required>
+                //         <span>:</span>
+                //         <input type="number" id="minute" name="minute" min="0" max="59" placeholder="MM" required>
+                //         <select id="ampm" name="ampm" >
+                //             <option value="AM">AM</option>
+                //             <option value="PM">PM</option>
+                //         </select>
 
-        if(date_to_compare >= dddd){
+                // console.log(formattedDate)
 
+                var html_to_appent = ``;
 
-          daySquare.addEventListener("click", () => {
-              // <input type="number" name="hour" id="hour" min="1" max="12" placeholder="HH" required>
-              //         <span>:</span>
-              //         <input type="number" id="minute" name="minute" min="0" max="59" placeholder="MM" required>
-              //         <select id="ampm" name="ampm" >
-              //             <option value="AM">AM</option>
-              //             <option value="PM">PM</option>
-              //         </select>
+                // const dataString = JSON.stringify(formattedData);
 
-              // console.log(formattedDate)
+                console.log(isDateTimeInArray(formattedDate, "13:00"));
 
-
-                  var html_to_appent = ``;
-                  
-
-                  
-
-// const dataString = JSON.stringify(formattedData);
-
-                console.log(isDateTimeInArray(formattedDate,"12:00"))
-
-                
-                
-                
-                
-                
-                for(var k=0; k<=8; k++){
-
-                    if(k==0){
-
-                      if(!isDateTimeInArray(formattedDate,"12:00")){
-
-                      var new_string =  `${formattedDate} <form action="/fake_login" method="post" >
+                for (var k = 0; k <= 8; k++) {
+                  if (k == 0) {
+                    if (!isDateTimeInArray(formattedDate, "12:00")) {
+                      var new_string = `${formattedDate} <form action="/fake_login" method="post" >
       
                             <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
                                    <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
@@ -788,11 +323,11 @@ if(fromDate == formatDateFromString(dateTimeToCheck) && timeDate == timec){
                                  <input type="time" name="from_time" value="12:00" style="display:none;" >
                 <button class="fbtn" type="submit" onclick="changeColor(this)">12:00 PM</button>
           
-                                </form>`
-                                console.log('k=0')
-                      html_to_appent =`${html_to_appent} ${new_string}` ;
-                    }else{
-                      var new_string =  ` <form   style="background-color:red;" >
+                                </form>`;
+                      
+                      html_to_appent = `${html_to_appent} ${new_string}`;
+                    } else {
+                      var new_string = ` <form   style="background-color:red;" >
       
      
 
@@ -802,34 +337,29 @@ if(fromDate == formatDateFromString(dateTimeToCheck) && timeDate == timec){
                         <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
 
 
-          </form>`
-          console.log('k=0')
-html_to_appent =`${html_to_appent} ${new_string}` ;
+          </form>`;
+                      
+                      html_to_appent = `${html_to_appent} ${new_string}`;
                     }
-                   
-                    }else{
-
-
-                      if(!isDateTimeInArray(formattedDate,`${12+k}:00`)){
-                        var new_string = ` <form action="/fake_login" method="post" >
+                  } else {
+                    if (!isDateTimeInArray(formattedDate, `${12 + k}:00`)) {
+                      var new_string = ` <form action="/fake_login" method="post" >
       
       <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
       <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
 
      
         
-           <input type="time" name="from_time" value="${12+k}:00" style="display:none;" >
+           <input type="time" name="from_time" value="${
+             12 + k
+           }:00" style="display:none;" >
           <button class="fbtn" type="submit" onclick="changeColor(this)">0${k}:00 PM</button>
           
-    </form>`
+    </form>`;
 
-                                html_to_appent =`${html_to_appent} ${new_string}` ;
-
-
-                      }
-
-                      else{
-                        var new_string =  ` <form style="background-color:red;" >
+                      html_to_appent = `${html_to_appent} ${new_string}`;
+                    } else {
+                      var new_string = ` <form style="background-color:red;" >
       
      
 
@@ -838,34 +368,18 @@ html_to_appent =`${html_to_appent} ${new_string}` ;
           
       <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
       
-                </form>`
-                console.log('k=0')
-      html_to_appent =`${html_to_appent} ${new_string}` ;
-                      }
-
+                </form>`;
                       
-
-
-
+                      html_to_appent = `${html_to_appent} ${new_string}`;
                     }
-
-
-
                   }
-                  html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`
+                }
+                html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
 
-
-              document.querySelector(".last_for_display_time").innerHTML = html_to_appent;
-            });
-
-
-
-        }
-
-
-
-
-
+                document.querySelector(".last_for_display_time").innerHTML =
+                  html_to_appent;
+              });
+            }
           } else {
             daySquare.classList.add("padding");
           }
@@ -913,21 +427,19 @@ html_to_appent =`${html_to_appent} ${new_string}` ;
         }
       }
 
-        // Run the function on page load and window resize
-        window.addEventListener('load', changeHeadingText);
-        window.addEventListener('resize', changeHeadingText);
-
-
-</script>
-<script>
-  function changeColor(button) {
-      var buttons = document.querySelectorAll('.navbar a');
-      buttons.forEach(function(btn) {
-          btn.classList.remove('clicked');
-      });
-      button.classList.add('clicked');
-  }
-</script>
+      // Run the function on page load and window resize
+      window.addEventListener("load", changeHeadingText);
+      window.addEventListener("resize", changeHeadingText);
+    </script>
+    <script>
+      function changeColor(button) {
+        var buttons = document.querySelectorAll(".navbar a");
+        buttons.forEach(function (btn) {
+          btn.classList.remove("clicked");
+        });
+        button.classList.add("clicked");
+      }
+    </script>
 
     <script>
       const mainDiv = document.querySelector(".mainDiv");

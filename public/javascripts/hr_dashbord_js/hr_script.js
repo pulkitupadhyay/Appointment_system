@@ -60,37 +60,47 @@ function cal_func() {
         let f = new Date();
         f.getDate() == c - s && 
           ((p.style.backgroundColor = "#89abc9")),
-          (document.querySelector(".last_for_display_time").innerHTML = ""),
+          (document.querySelector(".last_for_display_time").innerHTML = "")
          
          
          
-         
+          var dddd = new Date();
+            dddd.setHours(0, 0, 0, 0);
+            var date_to_compare = new Date(m[2], o ,m[0].padStart(2, "0"));
+            console.log(dddd, date_to_compare);
+
+            date_to_compare.setHours(0, 0, 0, 0);
+            date_to_compare = date_to_compare.getTime();
+            dddd = dddd.getTime();
+
+
+            if (date_to_compare >= dddd) {
           p.addEventListener("click", () => {
             
-              (document.querySelector(".last_for_display_time").innerHTML = `
+              document.querySelector(".last_for_display_time").innerHTML = `
       
-      <form action="/fake_login" method="post" >
-        <h6>Select Time </h6>
-        <input type="string" name="date_of_ap" value="${y}" style="display:none;" >
-        <input type="string" name="employee_id" value="${employee._id}" style="display:none;"  >
-  
-          <div id="time-picker">
-              <input type="number" name="hour" id="hour" min="1" max="12" placeholder="HH" required>
-              <span>:</span>
-              <input type="number" id="minute" name="minute" min="0" max="59" placeholder="MM" required>
-              <select id="ampm" name="ampm" >
-                  <option value="AM">AM</option>
-                  <option value="PM">PM</option>
-              </select>
+              <form action="/fake_login" method="post" style="margin-top:5px;">
+              <h6>Select Time </h6>
+              <input type="hidden" name="date_of_ap" value="${y}" style="display:none;" >
+              <input type="hidden" name="employee_id" value="${employee._id}" style="display:none;"  >
+          
+              <div id="time-picker">  
+                  <input type="number" name="hour" id="hour" min="1" max="12" placeholder="HH" required>
+                  <span>:</span>
+                  <input type="number" id="minute" name="minute" min="0" max="59" placeholder="MM" required>
+                  <select id="ampm" name="ampm" >
+                      <option value="AM">AM</option>
+                      <option value="PM">PM</option>
+                  </select>
+              </div>
               
-          </div>
-          <button class="fbtn"  type="submit">Submit</button>
-      </form>
+              <button class="fbtn" type="submit">Submit</button>
+          </form>
       
-      `);
+      `;
           });
 
-
+        }
 
 
 

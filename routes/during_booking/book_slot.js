@@ -6,15 +6,18 @@ var time_slot = require("./../../models/time_slots");
 var sendMail = require("./../other_functions/sendMail");
 
 const book_slot = async (req, res, next) => {
+  // var user = await user_scheema.findOne({ _id: req.body.user_id });
+  // var employee = await employee_scheema.findOne({ _id: req.body.employee_id });
+  // var TS = await time_slot.findOne({ _id: req.body.slot_id.trim() });
 
-
-
-
-
-  
-  var user = await user_scheema.findOne({ _id: req.body.user_id });
-  var employee = await employee_scheema.findOne({ _id: req.body.employee_id });
-  var TS = await time_slot.findOne({ _id: req.body.slot_id.trim() });
+  const promiseResult = await Promise.allSettled([
+    user_scheema.findOne({ _id: req.body.user_id }),
+    employee_scheema.findOne({ _id: req.body.employee_id }),
+    time_slot.findOne({ _id: req.body.slot_id.trim() }),
+  ]);
+  let [user, employee, TS] = promiseResult
+    .filter((data) => data.status === "fulfilled")
+    .map((data) => data.value);
 
   var new_appointment_request = new appointment_requests({
     userID: req.body.user_id,
@@ -89,15 +92,12 @@ const book_slot = async (req, res, next) => {
       sendMail(to2, subject2, text2, html2);
 
       if (req.cookies.hr_email) {
-        req.flash('message','The Meeting Has Been Scheduled!!!')
+        req.flash("message", "The Meeting Has Been Scheduled!!!");
         res.redirect("/hr_dashbord");
-      
       } else {
-        req.flash('message','The Meeting Has Been Scheduled!!!')
+        req.flash("message", "The Meeting Has Been Scheduled!!!");
 
         res.render("after_slot_booked", {
-
-          
           message: req.flash("message"),
           bad_alert: req.flash("error"),
         });

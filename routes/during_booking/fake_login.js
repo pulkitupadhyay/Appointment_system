@@ -53,6 +53,7 @@ var fake_login = async (req, res, next) => {
   }
 
   var date_t = req.body.date_of_ap;
+  console.log(req.body)
 
   function parseDateString(dateString) {
     // Split the date string into day, month, and year components

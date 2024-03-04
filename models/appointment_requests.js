@@ -7,6 +7,10 @@ var appointment_requests = mongoose.Schema({
     type: String,
     required: true
   },
+  userID:{
+    type: String,
+    required: true
+  },
   employeeID:{
     type: String,
     required: true
