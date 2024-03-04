@@ -67,7 +67,7 @@ function cal_func() {
           var dddd = new Date();
             dddd.setHours(0, 0, 0, 0);
             var date_to_compare = new Date(m[2], o ,m[0].padStart(2, "0"));
-            console.log(dddd, date_to_compare);
+            // console.log(dddd, date_to_compare);
 
             date_to_compare.setHours(0, 0, 0, 0);
             date_to_compare = date_to_compare.getTime();
@@ -143,7 +143,7 @@ const ul_elem = document.querySelector("#employee-list"),
   numberOfLiElements = li_elem.length;
 var employee,
   the_meet_div = document.querySelector("#meeting-section");
-console.log(numberOfLiElements);
+// console.log(numberOfLiElements);
 for (var k = 0; k < numberOfLiElements; k++) {
   var e = JSON.parse(emploiesData);
   document.querySelector(`.E_${k}`).addEventListener(
@@ -499,7 +499,7 @@ function showMeetingSection(e) {
 }
 function showMeetingDetails(e) {
   let t = e.parentElement.parentElement;
-  console.log(t.children.length);
+  // console.log(t.children.length);
   let n = t.firstElementChild;
   function i(e) {}
   console.log(n);

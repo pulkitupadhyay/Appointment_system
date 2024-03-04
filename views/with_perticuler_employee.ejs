@@ -196,8 +196,8 @@
             }
 
             function isDateTimeInArray(formattedDate, formattedTime) {
-              console.log("🚀 ~ isDateTimeInArray ~ formattedTime:", formattedTime)
-              console.log("🚀 ~ isDateTimeInArray ~ formattedDate:", formattedDate)
+              // console.log("🚀 ~ isDateTimeInArray ~ formattedTime:", formattedTime)
+              // console.log("🚀 ~ isDateTimeInArray ~ formattedDate:", formattedDate)
               function formatTimeFromJSDate(date) {
                 // Get hours and minutes from the Date object
                 const hours = date.getHours();
@@ -213,10 +213,10 @@
                 return formattedTime;
               }
               function formatDateFromString(dateString) {
-                console.log("🚀 ~ formatDateFromString ~ dateString:", dateString)
+                // console.log("🚀 ~ formatDateFromString ~ dateString:", dateString)
                 // Create a Date object from the input string
                 const date = new Date(dateString);
-                console.log("🚀 ~ formatDateFromString ~ date:", date)
+                // console.log("🚀 ~ formatDateFromString ~ date:", date)
 
                 // Options for formatting the date
                 const options = {
@@ -230,14 +230,14 @@
                   undefined,
                   options
                 );
-                console.log("🚀 ~ formatDateFromString ~ formattedDateString:", formattedDateString)
+                // console.log("🚀 ~ formatDateFromString ~ formattedDateString:", formattedDateString)
 
                 return formattedDateString;
               }
 
               const array = JSON.parse(`<%- JSON.stringify(time_slots) %>`);
 
-              console.log("🚀 ~ isDateTimeInArray ~ array:", array)
+              // console.log("🚀 ~ isDateTimeInArray ~ array:", array)
               const dateTimeToCheck = parseFormattedDateTime(
                 formattedDate,
                 formattedTime
@@ -245,23 +245,23 @@
 
               // console.log(array);
 
-              console.log("🚀 ~ isDateTimeInArray ~ dateTimeToCheck:", dateTimeToCheck)
+              // console.log("🚀 ~ isDateTimeInArray ~ dateTimeToCheck:", dateTimeToCheck)
               const isMatchingDateTime = array.some((obj) => {
                 // var fromDate = formatDateFromString(obj.from_date);
-                console.log("🚀 ~ isMatchingDateTime ~ obj.from_date:", obj.from_date)
+                // console.log("🚀 ~ isMatchingDateTime ~ obj.from_date:", obj.from_date)
                 var fromDate = moment(obj.from_date).format("DD/MM/YYYY");
-                console.log("🚀 ~ isMatchingDateTime ~ fromDate:", fromDate)
+                // console.log("🚀 ~ isMatchingDateTime ~ fromDate:", fromDate)
                 var timeDate = obj.time;
-                console.log("🚀 ~ isMatchingDateTime ~ timeDate:", timeDate)
+                // console.log("🚀 ~ isMatchingDateTime ~ timeDate:", timeDate)
 
                 var timec = formatTimeFromJSDate(dateTimeToCheck);
-                console.log("🚀 ~ isMatchingDateTime ~ timec:", timec)
-                console.log("time", fromDate);
+                // console.log("🚀 ~ isMatchingDateTime ~ timec:", timec)
+                // console.log("time", fromDate);
                 // return isSameDateTime(fromDate, dateTimeToCheck) && isSameDateTime(timeDate, timec);
 
                 // Parse the input date string using Moment.js
                 var inputDate = moment(`${moment(obj.from_date).format("MM/DD/YYYY")} ${timeDate}`);
-                console.log("🚀 ~ inputDate:", inputDate)
+                // console.log("🚀 ~ inputDate:", inputDate)
                               
                 return moment(dateTimeToCheck).isBetween(moment(inputDate).startOf("hour"), moment(inputDate).endOf("hour"), null, []);
 
@@ -277,7 +277,7 @@
                 } */
               });
 
-              console.log(isMatchingDateTime);
+              // console.log(isMatchingDateTime);
 
               return isMatchingDateTime;
             }
@@ -290,7 +290,7 @@
             var date_to_compare = new Date(year, month, i - paddingDays);
             date_to_compare.setHours(0, 0, 0, 0);
             date_to_compare = date_to_compare.getTime();
-            console.log(dddd, date_to_compare, i - paddingDays);
+            // console.log(dddd, date_to_compare, i - paddingDays);
 
             if (date_to_compare >= dddd) {
               daySquare.addEventListener("click", () => {
@@ -308,7 +308,7 @@
 
                 // const dataString = JSON.stringify(formattedData);
 
-                console.log(isDateTimeInArray(formattedDate, "13:00"));
+                // console.log(isDateTimeInArray(formattedDate, "13:00"));
 
                 for (var k = 0; k <= 8; k++) {
                   if (k == 0) {
