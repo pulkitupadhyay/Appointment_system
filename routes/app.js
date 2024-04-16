@@ -29,6 +29,7 @@ const delete_apppointment = require("./hr_works/delete_appointment");
 const reschedule = require("./hr_works/reschedule");
 const hr_dashbord = require("./hr_works/hr_dashbord");
 const remove_ts = require("./hr_works/remove_timeslot");
+const employee_module = require("./../models/employee_module");
 var timezones;
 
 fs.readFile("public/gifs/timezones.json", "utf8", (err, data) => {
@@ -46,23 +47,74 @@ fs.readFile("public/gifs/timezones.json", "utf8", (err, data) => {
   }
 });
 
+router.post("/add-day", async (req, res, next) => {
+  const { daytoadd, emp_id } = req.body;
+  try {
+    const that_employee = await employee_scheema.findOne({
+      _id: emp_id.trim(),
+    });
+
+    if (that_employee) {
+      if (!that_employee.days.includes(daytoadd)) {
+        that_employee.days.push(daytoadd);
+        await that_employee.save();
+        req.flash("message", "Day added successfully.");
+        res.redirect(req.header("referer") || "/");
+      } else {
+        req.flash("error", "Day already exists for this employee.");
+        res.redirect(req.header("referer") || "/");
+      }
+    } else {
+      req.flash("error", "Employee not found.");
+      res.redirect(req.header("referer") || "/");
+    }
+  } catch (error) {
+    console.error("Error adding day:", error);
+    req.flash("error", "Internal Server Error");
+    res.redirect(req.header("referer") || "/");
+  }
+  
+});
+
+router.post("/removeday", async (req, res, next) => {
+  const { emp_id, daytoremove } = req.body;
+  try {
+    const that_employee = await employee_module.findOne({ _id: emp_id.trim() });
+
+    if (that_employee) {
+      const indexToRemove = that_employee.days.indexOf(daytoremove);
+
+      if (indexToRemove !== -1) {
+        that_employee.days.splice(indexToRemove, 1);
+        await that_employee.save();
+        req.flash("message", "Day removed successfully.");
+      } else {
+        req.flash("error", "Day not found for this employee.");
+      }
+    } else {
+      req.flash("error", "Employee not found.");
+    }
+  } catch (error) {
+    console.error("Error removing day:", error);
+    req.flash("error", "Internal Server Error");
+  }
+  res.redirect(req.header("referer") || "/");
+});
+
 router.get("/hr_login", (req, res, next) => {
-
-
-  if(req.cookies.hr_email){
-    res.redirect('hr_dashbord')
-
-  }else{
+  if (req.cookies.hr_email) {
+    res.redirect("hr_dashbord");
+  } else {
     res.render("hr_login.ejs", {
       message: req.flash("message"),
       bad_alert: req.flash("error"),
     });
   }
-
-  
 });
 router.get("/", (req, res) => {
-  res.redirect("/hr_login");
+res.render('initial')
+
+  // res.redirect("/hr_login");
 });
 
 schedule.scheduleJob("1 */1 * * *", () => {
@@ -86,6 +138,63 @@ router.get("/employee_login", (req, res, next) => {
   });
 });
 
+router.post("/add-slot", async (req, res, next) => {
+  const { emp_id, slottoadd } = req.body;
+  try {
+    const that_employee = await employee_scheema.findOne({
+      _id: emp_id.trim(),
+    });
+
+    if (that_employee) {
+      // Check if the slottoadd is not already in the array
+      if (!that_employee.slots.includes(slottoadd)) {
+        // Add slottoadd to the array
+        that_employee.slots.push(slottoadd);
+        // Save the updated document
+        await that_employee.save();
+        // Set flash message for success
+        req.flash("message", "Slot added successfully.");
+      } else {
+        // Set flash message for slot already existing
+        req.flash("error", "Slot already exists for this employee.");
+      }
+    } else {
+      // Set flash message for employee not found
+      req.flash("error", "Employee not found.");
+    }
+  } catch (error) {
+    console.error("Error adding slot:", error);
+    // Set flash message for internal server error
+    req.flash("error", "Internal Server Error");
+  }
+  // Redirect back to the previous URL
+  res.redirect(req.header("referer") || "/");
+});
+
+router.post("/removeslot", async (req, res, next) => {
+  const { slottoremove, emp_id } = req.body;
+  try {
+    const that_employee = await employee_module.findOne({ _id: emp_id.trim() });
+
+    if (that_employee) {
+      const indexToRemove = that_employee.slots.indexOf(slottoremove);
+
+      if (indexToRemove !== -1) {
+        that_employee.slots.splice(indexToRemove, 1);
+        await that_employee.save();
+        req.flash("message", "Slot removed successfully.");
+      } else {
+        req.flash("error", "Slot not found for this employee.");
+      }
+    } else {
+      req.flash("error", "Employee not found.");
+    }
+  } catch (error) {
+    console.error("Error removing slot:", error);
+    req.flash("error", "Internal Server Error");
+  }
+  res.redirect(req.header("referer") || "/");
+});
 
 // done
 

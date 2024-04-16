@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    /* background-image: url(image/IMG_8998.JPG); */
+    background-color: #3E8E41;
+    /* background-size: cover; */
+    /* background-attachment: fixed; */
+    /* background-position: center; */
+    background-repeat: no-repeat;
+  }
+  .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-align: center;
+
+  }
+
+  .card > div {
+    flex: 1;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .card img {
+    opacity: 0.4;
+    filter: brightness(0.9);
+    max-width:450px; 
+    border: 6px solid hsl(122, -3%, -25%);
+
+    height: 100%;
+    border-radius: 10px;
+  }
+  .button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 13px 50px;;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 18px; 
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #45a049;
+  }
+  .upper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: auto;
+  }
+  
+
+  .text-1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: black;
+    white-space: nowrap; 
+    margin-bottom: 10px; 
+  }
+  .text-2 {
+    font-size: 20px;
+    color: #3c0008;
+    white-space: nowrap;
+    position: relative;
+    top: 5px;
+  }
+  .container1 {
+    display: flex;
+    align-items: center; 
+}
+
+.logo {
+    margin-right: 10px; 
+}
+
+.text h3,span {
+    margin: 0; 
+}
+h6{
+    display: block;
+    font-size: 21px;
+    margin-block-start: -2.2em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 49px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    color: black;
+    }
+ 
+</style>
+</head>
+<body>
+    <!-- <div class="container1">
+        <div class="logo">
+            <img src="image/swaayatt_logo.png" style="width: 80px; height: 80px; margin-top: 10px;">
+        </div>
+        <div class="text">
+            <h3>Swaayatt <br>Robot</h3>
+        </div>
+    </div> -->
+    
+<div class="container">
+    <div class="logo"><img src="images/swaayatt_logo.png" style="width: 40px; height: 40px;margin-top: -10px;margin-bottom: 10px;"></div>
+    <h6 style="white-space: nowrap;">Swaayatt Robots</h6>
+    
+  <div class="card">
+    <div style="background-color: white;">
+      <img src="images/admin.webp" alt="Admin Image">
+      <div class="upper">
+        <span class="text-1">Login as HR</span><br>
+        <span class="text-2">Access Admin dashboard</span><br>
+        <a href="/hr_login"><button class="button">Login</button></a>
+      </div>
+    </div>
+    <div style="background-color:white">
+      <img src="images/teamwork.png" style="height: 450px;width: 450px;" alt="Employee Image">
+      <div class="upper">
+        <div class="text-container" style="margin-top: 10px;">
+          <span class="text-1">Login as Employee</span><br>
+        </div>
+        <div class="text-container">
+          <span class="text-2">Access Employee dashboard</span><br>
+        </div>
+        <a href="/employee_login"><button class="button">Login</button></a>
+      </div>      
+      
+    </div>
+  </div>
+</div>
+</body>
+</html>

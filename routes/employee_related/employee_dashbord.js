@@ -5,77 +5,65 @@ const  employee_scheema = require('./../../models/employee_module')
 const user_scheema = require('./../../models/user_module')
 
 const employee_Dashbord = async (req, res, next) => {
-    var new_employee = await employee_scheema.findOne({ _id: req.params.id });
+  var new_employee =    await employee_scheema.findOne({ _id: req.params.id.trim() })
+     
   
-    var time_slots = await time_slot.find({
-      employeeID: new_employee._id,
-      occupied: false,
-    });
+
+    const promiseResult = await Promise.allSettled([
+        appointment_requests.find({employeeID:new_employee._id}),
+        user_scheema.find(),
+        time_slot.find({employeeID:new_employee._id})
+      ]);
+
+
+
+    let [appointments,users,time_slots] = promiseResult
+      .filter((data) => data.status === "fulfilled")
+      .map((data) => data.value);
+
+      let formattedAppointments = [];
+
+      // Iterate over appointments array
+      appointments.forEach((appointment) => {
+        // Find the corresponding user for the appointment
+        const user = users.find((user) => user._id.toString() === appointment.userID.toString());
+        // Find the corresponding time slot for the appointment
+        const time_slot = time_slots.find((slot) => slot._id.toString() === appointment.time_slotId.toString());
   
-    var time_slots1 = time_slots;
-    time_slots1.sort((a, b) => {
-      const dateA = new Date(a.from_date);
-      const dateB = new Date(b.from_date);
-      return dateA - dateB;
-    });
-  
-    var appointment_requests1 = await appointment_requests.find({
-      employeeID: new_employee._id,
-      accepted: false,
-    });
-    var accepted_appintments = await appointment_requests.find({
-      employeeID: new_employee._id,
-      accepted: true,
-    });
-  
-    var appointment_users = [];
-    var accepted_users = [];
-  
-    for (var i = 0; i < appointment_requests1.length; i++) {
-      var user = await user_scheema.findOne({
-        _id: appointment_requests1[i].userID,
+        // Add the formatted appointment details to the array
+        formattedAppointments.push({
+          appointment,
+          user,
+          time_slot
+        });
       });
+  // console.log(formattedAppointments)
+
+  const compareAppointmentsByDateAndTime = (a, b) => {
+    // Get the from_date and time of the time slots of appointments a and b
+    const dateA = new Date(a.time_slot.from_date);
+    const dateB = new Date(b.time_slot.from_date);
+    const timeA = a.time_slot.time;
+    const timeB = b.time_slot.time;
   
-      appointment_users.push(user);
+    // Compare dates
+    if (dateA.getTime() !== dateB.getTime()) {
+      return dateA - dateB; // Sort by date in ascending order (newest first)
     }
   
-    for (var i = 0; i < accepted_appintments.length; i++) {
-      var user = await user_scheema.findOne({
-        _id: accepted_appintments[i].userID,
-      });
-  
-      accepted_users.push(user);
-    }
-  
-    var appointment_timeslot = [];
-    var appointment_timeslot_for_accepted_reqests = [];
-  
-    for (var i = 0; i < appointment_requests1.length; i++) {
-      var app_time_slot = await time_slot.findOne({
-        _id: appointment_requests1[i].time_slotId.trim(),
-      });
-      appointment_timeslot.push(app_time_slot);
-    }
-    for (var i = 0; i < accepted_appintments.length; i++) {
-      var app_time_slot = await time_slot.findOne({
-        _id: accepted_appintments[i].time_slotId.trim(),
-      });
-  
-      if (app_time_slot === null) {
-      } else {
-        appointment_timeslot_for_accepted_reqests.push(app_time_slot);
-      }
-    }
-  
+    // If dates are the same, compare times
+    return timeA.localeCompare(timeB); // Sort by time in ascending order (newest first)
+};
+
+formattedAppointments.sort(compareAppointmentsByDateAndTime);
+
+    
     res.render("employee_home", {
       new_employee,
-      time_slots,
-      appointment_requests1,
-      accepted_users,
-      appointment_users,
-      appointment_timeslot,
-      accepted_appintments,
-      appointment_timeslot_for_accepted_reqests,
+      
+      formattedAppointments,
+      
+     
       message: req.flash('message'),
       bad_alert: req.flash('error'),
     });

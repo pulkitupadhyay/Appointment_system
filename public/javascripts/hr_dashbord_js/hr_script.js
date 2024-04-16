@@ -18,9 +18,6 @@ function cal_func() {
     let i = new Date();
     i.setDate(1);
     i.setMonth(new Date().getMonth()+e);
-    // console.log('month set',i.setMonth(new Date().getMonth()+e))
-    // console.log('this is month'+ i.setMonth(new Date().getMonth()+e))
-    // 0 !== e && i.setMonth(new Date().getMonth()+e);
 
 
 
@@ -38,8 +35,7 @@ function cal_func() {
         day: "numeric",
       }),
       s = n.indexOf(r.split(", ")[0]);
-      // console.log('this a l:'+a,l)
-    // console.log(s + "a;sldkfja;sldkfj"),
+  
      
     
     (document.getElementById(
@@ -119,21 +115,6 @@ function cal_func() {
     ii();
 
 
-    
-//   let o = document.querySelector(".mainDiv")
-//   console.log(o)
-    
-//   let d = Array.from(o.children);
-//   function a(e) {
-//     let [t, n, i] = e.split("/").map(Number);
-//     return new Date(i + 2e3, n - 1, t);
-//   }
-  // d.sort((e, t) => {
-  //   let n = a(e.querySelector("h1").textContent),
-  //     i = a(t.querySelector("h1").textContent);
-  //   return n - i;
-  // }),
-  //   d.forEach((e) => o.appendChild(e));
 }
 function capitalizeFirstLetter(e) {
   return e.replace(/^\w/, (e) => e.toUpperCase());

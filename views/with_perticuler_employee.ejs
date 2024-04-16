@@ -26,6 +26,7 @@
   />
 
   <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <%- include('./alert_msg.ejs') %>
     <div class="main">
       <% function capitalizeFirstLetter(str) { %> <% return str.replace(/^\w/,
@@ -105,6 +106,8 @@
       }
     </script>
     <script>
+
+      const employee = JSON.parse(`<%- JSON.stringify(employee) %>`);
       let nav = 0;
       let clicked = null;
 
@@ -237,6 +240,22 @@
 
               const array = JSON.parse(`<%- JSON.stringify(time_slots) %>`);
 
+
+              const providedDate = formattedDate;
+
+// Convert the provided date to a JavaScript Date object using Moment.js
+// const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
+
+// // Count the number of objects with the provided date
+// const count = array.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
+
+// console.log(count); 
+
+
+
+
+
+
               // console.log("🚀 ~ isDateTimeInArray ~ array:", array)
               const dateTimeToCheck = parseFormattedDateTime(
                 formattedDate,
@@ -252,29 +271,16 @@
                 var fromDate = moment(obj.from_date).format("DD/MM/YYYY");
                 // console.log("🚀 ~ isMatchingDateTime ~ fromDate:", fromDate)
                 var timeDate = obj.time;
-                // console.log("🚀 ~ isMatchingDateTime ~ timeDate:", timeDate)
+                
 
                 var timec = formatTimeFromJSDate(dateTimeToCheck);
-                // console.log("🚀 ~ isMatchingDateTime ~ timec:", timec)
-                // console.log("time", fromDate);
-                // return isSameDateTime(fromDate, dateTimeToCheck) && isSameDateTime(timeDate, timec);
-
-                // Parse the input date string using Moment.js
+               
                 var inputDate = moment(`${moment(obj.from_date).format("MM/DD/YYYY")} ${timeDate}`);
                 // console.log("🚀 ~ inputDate:", inputDate)
                               
                 return moment(dateTimeToCheck).isBetween(moment(inputDate).startOf("hour"), moment(inputDate).endOf("hour"), null, []);
 
-                /* if (
-                  fromDate == moment(dateTimeToCheck).format("DD/MM/YYYY") && //formatDateFromString(dateTimeToCheck) &&
-                  timeDate == timec
-                  ) {
-                  console.log("🚀 ~ isMatchingDateTime ~ fromDate == formatDateFromString(dateTimeToCheck):", fromDate == formatDateFromString(dateTimeToCheck))
-                  console.log("🚀 ~ isMatchingDateTime ~ timeDate == timec:", timeDate == timec)
-                  return true;
-                } else {
-                  return false;
-                } */
+                
               });
 
               // console.log(isMatchingDateTime);
@@ -293,18 +299,29 @@
             // console.log(dddd, date_to_compare, i - paddingDays);
 
             if (date_to_compare >= dddd) {
+            
+              const array = JSON.parse(`<%- JSON.stringify(time_slots) %>`);
+
+
+                const providedDate = formattedDate;
+
+// Convert the provided date to a JavaScript Date object using Moment.js
+const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
+
+// Count the number of objects with the provided date
+const count = array.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
+
+console.log(count)               
+
+
               daySquare.addEventListener("click", () => {
-                // <input type="number" name="hour" id="hour" min="1" max="12" placeholder="HH" required>
-                //         <span>:</span>
-                //         <input type="number" id="minute" name="minute" min="0" max="59" placeholder="MM" required>
-                //         <select id="ampm" name="ampm" >
-                //             <option value="AM">AM</option>
-                //             <option value="PM">PM</option>
-                //         </select>
-
-                // console.log(formattedDate)
-
+                
                 var html_to_appent = ``;
+
+if(count>=2){
+  html_to_appent=`No empty slots on ${formattedDate} please try another date.`
+
+}else{
 
                 // const dataString = JSON.stringify(formattedData);
 
@@ -313,6 +330,15 @@
                 for (var k = 0; k <= 8; k++) {
                   if (k == 0) {
                     if (!isDateTimeInArray(formattedDate, "12:00")) {
+                      
+
+                      var date = moment(formattedDate, 'DD/MM/YYYY');
+
+                        var dayName = date.format('dddd');
+
+                    if(employee.days.indexOf(dayName) !==  -1){
+
+                    if(employee.slots.indexOf(`12-1`) !== -1){    
                       var new_string = `${formattedDate} <form action="/fake_login" method="post" >
       
                             <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
@@ -326,14 +352,16 @@
                                 </form>`;
                       
                       html_to_appent = `${html_to_appent} ${new_string}`;
+                              }else{
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                              }
+                            }else{
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                              }
                     } else {
                       var new_string = ` <form   style="background-color:red;" >
       
      
-
-
-
-          
                         <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
 
 
@@ -343,7 +371,16 @@
                     }
                   } else {
                     if (!isDateTimeInArray(formattedDate, `${12 + k}:00`)) {
-                      var new_string = ` <form action="/fake_login" method="post" >
+
+                      var date = moment(formattedDate, 'DD/MM/YYYY');
+
+                      var dayName = date.format('dddd');
+
+                      if(employee.days.indexOf(dayName) !==  -1){
+                      
+                      if(employee.slots.indexOf(`${k}-${k+1}`) !== -1){ 
+
+                      var new_string = `<form action="/fake_login" method="post" >
       
       <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
       <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
@@ -358,14 +395,20 @@
     </form>`;
 
                       html_to_appent = `${html_to_appent} ${new_string}`;
+                    }else{
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                                html_to_appent = `${html_to_appent} `;
+                              }
+                            
+                            }else{
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                                html_to_appent = `${html_to_appent} `;
+                              }
+
                     } else {
                       var new_string = ` <form style="background-color:red;" >
       
      
-
-
-
-          
       <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
       
                 </form>`;
@@ -374,12 +417,18 @@
                     }
                   }
                 }
-                html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
+            
+              }
+              html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
 
-                document.querySelector(".last_for_display_time").innerHTML =
-                  html_to_appent;
+document.querySelector(".last_for_display_time").innerHTML =
+  html_to_appent;
               });
-            }
+             
+            
+}
+         
+          
           } else {
             daySquare.classList.add("padding");
           }

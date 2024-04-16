@@ -18,6 +18,15 @@ var employeeSchema=mongoose.Schema({
   number:{
     type: Number,
     required: true
+  },
+  link:{
+    type:String,
+  },
+  days:{
+    type: Array,
+  },
+  slots:{
+    type:Array
   }
 })
 
