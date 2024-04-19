@@ -221,6 +221,29 @@ h1,h2,h3,h4,p{
 } */
 /* responsive */
 
+@media (max-width: 575.98px) {
+.my-4{
+  flex-direction: column !important;
+}
+.mainDiv {
+width: 100% !important;
+flex-direction: column !important;
+padding: 3% !important;
+}
+.dayofweek {
+  padding: 3% !important;
+  margin-top: 5px;
+}
+/* .meeting {
+  margin-left: -46px;
+} */
+}
+@media (min-width: 1024px) and (max-width:  1439px) {
+.mainDiv{
+width: 100% !important;
+}
+}
+
 @media(max-width: 991px){
 	.header .menu-overlay.active{
 	visibility: visible;
@@ -385,7 +408,7 @@ dekho dekho bat na puchho
  <form action="/removeday" method="post">
   <input type="hidden" name="emp_id" value="<%=new_employee._id%>" >
   <input type="hidden" name="daytoremove" value="<%=new_employee.days[i]%>">
-  <span><button type="submit"  style="background-color: red; border-radius: 13px; " >X</button> </span>
+  <span><button type="submit"  style="background-color: red; border-radius: 13px; font-size: 12px;" >X</button> </span>
 
  </form>
  </div>
@@ -422,7 +445,7 @@ dekho dekho bat na puchho
    <form action="/removeslot" method="post">
     <input type="hidden" name="emp_id" value="<%=new_employee._id%>" >
     <input type="hidden" name="slottoremove" value="<%=new_employee.slots[i]%>">
-    <span><button type="submit" style="background-color: red; border-radius: 13px;" >X</button> </span>
+    <span><button type="submit" style="background-color: red; border-radius: 13px;font-size: 12px;" >X</button> </span>
   
    </form>
    </div>
@@ -456,6 +479,7 @@ dekho dekho bat na puchho
     color: white;
     font-weight: bold;
     padding: 1%;
+    gap: 15px;
   }
 </style>
 
@@ -492,7 +516,7 @@ dekho dekho bat na puchho
 </div>
 </div>
           
-<h1>All Meetings</h1>
+<h1 style="text-align: center; margin-top: 20px;">All Meetings</h1>
 <div class="mainDiv" style="display: flex; flex-direction: column; justify-content: space-around; width: 100%; padding: 2%; width: 70%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
 
   <% for(var i = 0 ; i< formattedAppointments.length; i++){ %>
@@ -514,14 +538,46 @@ dekho dekho bat na puchho
     
       
 <style>
+  .mainDiv {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 70%;
+      padding: 2%;
+      margin: 0 auto;
+      box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7);
+    }
   .meeting{
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 2px solid red;
+    background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
   }
+  .meeting h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .meeting h2:first-child {
+      font-size: 22px;
+    }
+
+    .meeting h2:nth-child(2),
+    .meeting h2:nth-child(3),
+    .meeting h2:nth-child(4),
+    .meeting h2:nth-child(5) {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .meeting h2:last-child {
+      font-size: 16px;
+      margin-top: 10px;
+      color: #007bff;
+    }
 </style>
 
 
