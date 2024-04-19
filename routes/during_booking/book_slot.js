@@ -15,6 +15,8 @@ const book_slot = async (req, res, next) => {
     employee_scheema.findOne({ _id: req.body.employee_id }),
     time_slot.findOne({ _id: req.body.slot_id.trim() }),
   ]);
+
+  
   let [user, employee, TS] = promiseResult
     .filter((data) => data.status === "fulfilled")
     .map((data) => data.value);

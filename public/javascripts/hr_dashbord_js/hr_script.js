@@ -193,7 +193,7 @@ const formattedDate = y
 var html_to_appent = ``;
 
 if(count>=2){
-  html_to_appent=`No empty slots on ${formattedDate} please try another date.1`
+  html_to_appent=`No empty slots on ${formattedDate} please try another date.`
 
 }else{
 
@@ -227,10 +227,10 @@ if(count>=2){
                       
                       html_to_appent = `${html_to_appent} ${new_string}`;
                               }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}2`;
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
                               }
                             }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}3`;
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
                                 break;
                               }
                     } else {
@@ -265,7 +265,7 @@ if(count>=2){
            <input type="time" name="from_time" value="${
              12 + k 
            }:00" style="display:none;" >
-          <button class="fbtn" type="submit" onclick="changeColor(this)">0${k}:001 PM</button>
+          <button class="fbtn" type="submit" onclick="changeColor(this)">0${k}:00 PM</button>
           
     </form>`;
 
@@ -278,7 +278,7 @@ if(count>=2){
                               }
                             
                             }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}5`;
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
                                 html_to_appent = `${html_to_appent} `;
                               }
 
