@@ -68,32 +68,239 @@ function cal_func() {
             date_to_compare.setHours(0, 0, 0, 0);
             date_to_compare = date_to_compare.getTime();
             dddd = dddd.getTime();
+            function parseFormattedDateTime(formattedDate, formattedTime) {
+              const [day, month, year] = formattedDate.split("/");
+              const [hours, minutes] = formattedTime.split(":");
+              return new Date(year, month - 1, day, hours, minutes);
+            }
 
+            function parseISODate(isoDateString) {
+              return new Date(isoDateString);
+            }
+            function isDateTimeInArray(formattedDate, formattedTime) {
+              // console.log("🚀 ~ isDateTimeInArray ~ formattedTime:", formattedTime)
+              // console.log("🚀 ~ isDateTimeInArray ~ formattedDate:", formattedDate)
+              function formatTimeFromJSDate(date) {
+                // Get hours and minutes from the Date object
+                const hours = date.getHours();
+                const minutes = date.getMinutes();
+
+                // Add leading zeros if needed
+                const formattedHours = hours < 10 ? `0${hours}` : hours;
+                const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+                // Combine hours and minutes in "hh:mm" format
+                const formattedTime = `${formattedHours}:${formattedMinutes}`;
+
+                return formattedTime;
+              }
+              function formatDateFromString(dateString) {
+                // console.log("🚀 ~ formatDateFromString ~ dateString:", dateString)
+                // Create a Date object from the input string
+                const date = new Date(dateString);
+                // console.log("🚀 ~ formatDateFromString ~ date:", date)
+
+                // Options for formatting the date
+                const options = {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                };
+
+                // Format the date using local time zone
+                const formattedDateString = date.toLocaleDateString(
+                  undefined,
+                  options
+                );
+                // console.log("🚀 ~ formatDateFromString ~ formattedDateString:", formattedDateString)
+
+                return formattedDateString;
+              }
+
+              const array = array1;
+
+
+              const providedDate = formattedDate;
+
+// Convert the provided date to a JavaScript Date object using Moment.js
+// const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
+
+// // Count the number of objects with the provided date
+// const count = array.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
+
+// console.log(count); 
+
+
+
+
+
+
+              // console.log("🚀 ~ isDateTimeInArray ~ array:", array)
+              const dateTimeToCheck = parseFormattedDateTime(
+                formattedDate,
+                formattedTime
+              );
+
+              // console.log(array);
+
+              // console.log("🚀 ~ isDateTimeInArray ~ dateTimeToCheck:", dateTimeToCheck)
+              const isMatchingDateTime = array.some((obj) => {
+                // var fromDate = formatDateFromString(obj.from_date);
+                // console.log("🚀 ~ isMatchingDateTime ~ obj.from_date:", obj.from_date)
+                var fromDate = moment(obj.from_date).format("DD/MM/YYYY");
+                // console.log("🚀 ~ isMatchingDateTime ~ fromDate:", fromDate)
+                var timeDate = obj.time;
+                
+
+                var timec = formatTimeFromJSDate(dateTimeToCheck);
+               
+                var inputDate = moment(`${moment(obj.from_date).format("MM/DD/YYYY")} ${timeDate}`);
+                // console.log("🚀 ~ inputDate:", inputDate)
+                              
+                return moment(dateTimeToCheck).isBetween(moment(inputDate).startOf("hour"), moment(inputDate).endOf("hour"), null, []);
+
+                
+              });
+
+              // console.log(isMatchingDateTime);
+
+              return isMatchingDateTime;
+            }
 
             if (date_to_compare >= dddd) {
-          p.addEventListener("click", () => {
-            
-              document.querySelector(".last_for_display_time").innerHTML = `
-      
-              <form action="/fake_login" method="post" style="margin-top:5px;">
-              <h6>Select Time </h6>
-              <input type="hidden" name="date_of_ap" value="${y}" style="display:none;" >
-              <input type="hidden" name="employee_id" value="${employee._id}" style="display:none;"  >
-          
-              <div id="time-picker">  
-                  <input type="number" name="hour" id="hour" min="1" max="12" placeholder="HH" required>
-                  <span>:</span>
-                  <input type="number" id="minute" name="minute" min="0" max="59" placeholder="MM" required>
-                  <select id="ampm" name="ampm" >
-                      <option value="AM">AM</option>
-                      <option value="PM">PM</option>
-                  </select>
-              </div>
+        
+              // var array1 = JSON.parse(`<%- JSON.stringify(todaysTimeSlots) %>`);
+
+                  array1 =  array1.filter(obj => obj.employeeID === employee._id.toString());
+              const providedDate = y;
+
+              const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
+
+              // Count the number of objects with the provided date
+              const count = array1.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
               
-              <button class="fbtn" type="submit">Submit</button>
-          </form>
+        
+        
+        
+              p.addEventListener("click", () => {
+             
+            // console.log(y)
+console.log(count)
+console.log(providedDate)
+console.log(array1)
+const formattedDate = y
+
+var html_to_appent = ``;
+
+if(count>=2){
+  html_to_appent=`No empty slots on ${formattedDate} please try another date.1`
+
+}else{
+
+                // const dataString = JSON.stringify(formattedData);
+
+                // console.log(isDateTimeInArray(formattedDate, "13:00"));
+
+                for (var k = 0; k <= 8; k++) {
+                  if (k == 0) {
+                    if (!isDateTimeInArray(formattedDate, "12:00")) {
+                      
+
+                      var date = moment(formattedDate, 'DD/MM/YYYY');
+
+                        var dayName = date.format('dddd');
+
+                    if(employee.days.indexOf(dayName) !==  -1){
+
+                    if(employee.slots.indexOf(`12-1`) !== -1){    
+                      var new_string = `${formattedDate} <form action="/fake_login" method="post" >
       
-      `;
+                            <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+                                   <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+     
+        
+                                 <input type="time" name="from_time" value="12:00" style="display:none;" >
+                <button class="fbtn" type="submit" onclick="changeColor(this)">12:00 PM</button>
+          
+                                </form>`;
+                      
+                      html_to_appent = `${html_to_appent} ${new_string}`;
+                              }else{
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}2`;
+                              }
+                            }else{
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}3`;
+                                break;
+                              }
+                    } else {
+                      var new_string = ` <form   style="background-color:red;" >
+      
+     
+                        <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
+
+
+          </form>`;
+                      
+                      html_to_appent = `${html_to_appent} ${new_string}`;
+                    }
+                  } else {
+                    if (!isDateTimeInArray(formattedDate, `${12 + k}:00`)) {
+
+                      var date = moment(formattedDate, 'DD/MM/YYYY');
+
+                      var dayName = date.format('dddd');
+
+                      if(employee.days.indexOf(dayName) !==  -1){
+                      
+                      if(employee.slots.indexOf(`${k}-${k+1}`) !== -1){ 
+
+                      var new_string = `<form action="/fake_login" method="post" >
+      
+      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+      <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+     
+        
+           <input type="time" name="from_time" value="${
+             12 + k 
+           }:00" style="display:none;" >
+          <button class="fbtn" type="submit" onclick="changeColor(this)">0${k}:001 PM</button>
+          
+    </form>`;
+
+                      html_to_appent = `${html_to_appent} ${new_string}`;
+                    }
+                    
+                    else{
+                               
+                                html_to_appent = `${html_to_appent} `;
+                              }
+                            
+                            }else{
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}5`;
+                                html_to_appent = `${html_to_appent} `;
+                              }
+
+                    } else {
+                      var new_string = ` <div style="background-color:red !important;" >
+      
+     
+      <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;background-color:red !important;" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
+      
+                </div>`;
+                      
+                      html_to_appent = `${html_to_appent} ${new_string}`;
+
+                    }
+                  }
+                }
+            
+              }
+              html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
+
+document.querySelector(".last_for_display_time").innerHTML =
+  html_to_appent;
           });
 
         }
@@ -172,7 +379,8 @@ body {
       #time-picker {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: center;
+          flex-direction:column;
       }
 
       #hour, #minute {

@@ -52,6 +52,7 @@ const delete_apppointment = async (req, res, next) => {
     sendMail(to1, subject1, text1, html1);
     sendMail(to2, subject2, text2, html2);
   
+  
     await appointment_requests.findOneAndDelete({ _id: req.body.app_id });
 
     req.flash('message','Deleted!!')

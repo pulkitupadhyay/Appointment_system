@@ -13,6 +13,8 @@
       
 </head>
 <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
   <%- include('./alert_msg.ejs') %>
     <div id="left-navigation">
         <h2>Employee List</h2>
@@ -505,7 +507,10 @@
           </script>
 
 
+<script>
+              let array1 = JSON.parse(`<%- JSON.stringify(todaysTimeSlots) %>`);
 
+</script>
 
 <script src="/javascripts/hr_dashbord_js/hr_script.js"></script>
 
