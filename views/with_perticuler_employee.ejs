@@ -317,6 +317,7 @@ console.log(count)
               daySquare.addEventListener("click", () => {
                 
                 var html_to_appent = ``;
+                html_to_appent= `${html_to_appent} ${formattedDate}`
 
 if(count>=2){
   html_to_appent=`No empty slots on ${formattedDate} please try another date.`
@@ -358,7 +359,7 @@ if(count>=2){
                               }
                             }
                             else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}1`;
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
                                 break;
                               }
                     } else {
@@ -404,8 +405,9 @@ if(count>=2){
                               }
                             
                             }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}2`;
+                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
                                 html_to_appent = `${html_to_appent} `;
+                                break;
                                 
 
                               }
