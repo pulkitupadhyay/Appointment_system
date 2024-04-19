@@ -11,7 +11,7 @@ const delete_apppointment = async (req, res, next) => {
 
   try {
     
-    var appRpf = await appointment_requests.findOne({ _id: req.body.app_id });
+    var appRpf = await appointment_requests.findOne({ _id: req.body.app_id.trim() });
     var employee = await employee_scheema.findOne({ _id: appRpf.employeeID });
     var user = await user_scheema.findOne({ _id: appRpf.userID });
     var TS = await time_slot.findOneAndUpdate(
@@ -51,6 +51,7 @@ const delete_apppointment = async (req, res, next) => {
   
     sendMail(to1, subject1, text1, html1);
     sendMail(to2, subject2, text2, html2);
+  
   
     await appointment_requests.findOneAndDelete({ _id: req.body.app_id });
 

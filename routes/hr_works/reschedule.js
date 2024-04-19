@@ -102,7 +102,7 @@ if(!user){
       ${user.name} is resceduled on ${formattedDate} AT ${TS.time}.`;
     var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that 
   your appointment with ${user.name} is rescheduled. <br> 
-     Here are the details : <br> Date  : ${formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link: ${ar.text}. `;
+     Here are the details : <br> Date  : ${formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link: ${employee.link}. `;
 
     sendMail(to1, subject1, text1, html1);
 
@@ -112,7 +112,7 @@ if(!user){
       with ${employee.name} is rescheduled on ${formattedDate} AT ${TS.time}. Please Contact
        HR departmet if there are any queries.`;
     var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment with ${employee.name} is rescheduled. <br> 
-     Here are the deteails <br> Date  : ${formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${ar.text}.  <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`;
+     Here are the deteails <br> Date  : ${formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${employee.link}.  <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`;
     sendMail(to2, subject2, text2, html2);
 
     req.flash('message', 'The appointment or meeting is rescheduled!!!')

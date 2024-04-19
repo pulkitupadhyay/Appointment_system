@@ -292,40 +292,6 @@ const hr_dashbord = async (req, res, next) => {
     all_employeesF = all_employeesF.flat(Infinity);
 
 
-
-
-      // const empId = all_appointmentsF.map((data) => data.employeeID);
-      // // console.log("🚀 ~ consthr_dashbord= ~ timeSlotId:", timeSlotId)
-
-      // const empPromises = empId.map((id) =>
-      //   employee_scheema.findOne({
-      //     _id: id,
-      //   })
-      // );
-      // const empPromisesResult = await Promise.allSettled(empPromises);
-      // // console.log("🚀 ~ consthr_dashbord= ~ prevAppointmentsPromisesResult:", prevAppointmentsPromisesResult)
-      // let all_employeesF = empPromisesResult
-      //   .filter((data) => data.status === "fulfilled")
-      //   .map((data) => data.value);
-
-      // const employeesPromises = all_appointmentsF.map(async (appointment) => {
-      //   try {
-      //     const employee = await employee_scheema.findOne({
-      //       _id: appointment.employeeID,
-      //     });
-      //     return employee;
-      //   } catch (error) {
-      //     res.render("error", {
-      //       message: req.flash("message"),
-      //       bad_alert: req.flash("error"),
-      //     });
-      //   }
-      // });
-
-      // var all_employeesF = await Promise.all(employeesPromises);
-
-      // Fetch previous employees for each previous appointment
-
       var hostname;
       var hr_em = req.cookies.hr_email;
       if (hr_em == "amrita@swaayatt.com") {
@@ -338,7 +304,7 @@ const hr_dashbord = async (req, res, next) => {
       all_appointmentsF = all_appointmentsF.reverse();
       all_usersF = all_usersF.reverse();
       all_employeesF = all_employeesF.reverse();
-
+// console.log(todaysTimeSlots)
       res.render("hr_dashbord.ejs", {
         emploies,
         todaysTimeSlots,

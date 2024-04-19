@@ -15,6 +15,8 @@ const book_slot = async (req, res, next) => {
     employee_scheema.findOne({ _id: req.body.employee_id }),
     time_slot.findOne({ _id: req.body.slot_id.trim() }),
   ]);
+
+  
   let [user, employee, TS] = promiseResult
     .filter((data) => data.status === "fulfilled")
     .map((data) => data.value);
@@ -63,7 +65,7 @@ const book_slot = async (req, res, next) => {
                 <ul style="list-style-type: none; padding: 0;">
                   <li style="margin-bottom: 10px;"><strong>Date:</strong>${formattedDate}</li>
                   <li style="margin-bottom: 10px;"><strong>Time:</strong> ${TS.time}</li>
-                  <li style="margin-bottom: 10px;"><strong>Link:</strong> ${req.body.text_associated}</li>
+                  <li style="margin-bottom: 10px;"><strong>Link:</strong> ${employee.link}</li>
                 </ul>
                 <p style="font-size: 1rem;">In preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.</p>
                 <p style="font-size: 1rem;">We appreciate your time and cooperation in making this appointment a success.</p>
@@ -82,7 +84,7 @@ const book_slot = async (req, res, next) => {
                 <ul style="list-style-type: none; padding: 0;">
                   <li style="margin-bottom: 10px;"><strong>Date:</strong>${formattedDate}</li>
                   <li style="margin-bottom: 10px;"><strong>Time:</strong> ${TS.time}</li>
-                  <li style="margin-bottom: 10px;"><strong>Link:</strong> ${req.body.text_associated}</li>
+                  <li style="margin-bottom: 10px;"><strong>Link:</strong> ${employee.link}</li>
                 </ul>
                 <p style="font-size: 1rem;">In preparation for the appointment, kindly take a moment to review any relevant information or requirements. If there are specific topics you would like to discuss during the meeting, feel free to inform us.</p>
                 <p style="font-size: 1rem;">We appreciate your time and cooperation in making this appointment a success.</p>

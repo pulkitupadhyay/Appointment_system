@@ -34,10 +34,8 @@ req.flash('message','Sucess!!')
         res.redirect('/hr_dashbord')
       }else{
         res.redirect(`/employee/${req.body.employee_id}`)
-
       }
-      
-      
+
     }
   } else {
     let new_user = new user_scheema({
