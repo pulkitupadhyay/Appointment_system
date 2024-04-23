@@ -545,7 +545,7 @@ dekho dekho bat na puchho
     font-size: 14px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
-    position: relative;
+    /* position: relative; */
     /* z-index: -1; */
   }
 
@@ -590,8 +590,8 @@ dekho dekho bat na puchho
 <h1>Create Event / Invite People  </h1>
 
         
-<div class="my-4" style="display: flex; padding: 2%; width:80% ; flex-direction: row; justify-content: space-around; margin-top: 2rem;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
-<div style="display: flex; flex-direction: column; border: 1px solid black;padding: 1%; ">
+<div class="my-4" style="display: flex; padding: 2%; width:80% ; flex-direction: row; justify-content: space-around; margin-top: 2rem;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; border-radius: 10px;">
+<div style="display: flex; flex-direction: column;border-radius: 10px; border: 1px solid black;padding: 1%; ">
 <h1> Create an 1 Hour Event</h1>
 <input style="visibility: hidden;" type="text" id="linkInput" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
 <p> <strong>Duration : </strong> One Hour</p>
@@ -599,7 +599,7 @@ dekho dekho bat na puchho
 <button id="copyButton" class="btn-primary my-3" style="padding: 1%; border-radius: 2rem;margin: 4px 96px;" > Copy Link</button>
 
 </div>
-<div style="display: flex; flex-direction: column; border: 1px solid black;padding: 1%; ">
+<div style="display: flex; flex-direction: column;border-radius: 10px; border: 1px solid black;padding: 1%; ">
 <h1> Create an 30 Min Meeting </h1>
 <input style="visibility: hidden;" type="text" id="linkInput1" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
 <p> <strong>Duration : </strong> 30 Min</p>
