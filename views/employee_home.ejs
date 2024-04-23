@@ -8,12 +8,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
 
-body{
-	line-height: 1.5;
-	font-family: 'Raleway', sans-serif;
-	font-weight: 400;
+body {
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
 }
 body.hidden-scrolling{
 	overflow-y: hidden;
@@ -252,6 +252,13 @@ padding: 3% !important;
 .meeting{
   box-shadow: 0 2px 4px rgba(0, 0, 0,1.1) !important;
 }
+.custom-button {
+    
+    margin: 4px 57px !important;
+}
+#copyButton, #copyButton1{
+  margin: 4px 62px !important;
+}
 }
 @media (min-width: 1024px) and (max-width:  1439px) {
 .mainDiv{
@@ -408,7 +415,7 @@ width: 100% !important;
 
   <div class="main">
     <h1> Select Days To Meet </h1>
-    <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; padding: 2%; width: 70%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
+    <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around;  padding: 2%; width: 80%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
     
 
 <!-- o yaar hai mera are o dekh niharo dekha na ho gar tumne khuda dekh lo yaro 
@@ -423,7 +430,7 @@ dekho dekho bat na puchho
  <form action="/removeday" method="post">
   <input type="hidden" name="emp_id" value="<%=new_employee._id%>" >
   <input type="hidden" name="daytoremove" value="<%=new_employee.days[i]%>">
-  <span><button type="submit"  style="background-color: red; border-radius: 13px; font-size: 12px;" >X</button> </span>
+  <span><button type="submit"  >X</button> </span>
 
  </form>
  </div>
@@ -450,7 +457,7 @@ dekho dekho bat na puchho
   </div>
 
 <h1>Add Slots of the day</h1>
-  <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; padding: 2%; width: 70%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
+  <div class="mainDiv" style="display: flex; flex-direction: row; justify-content: space-around; padding: 2%; width: 80%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
 
 <%if(new_employee.slots){%>
 
@@ -460,7 +467,7 @@ dekho dekho bat na puchho
    <form action="/removeslot" method="post">
     <input type="hidden" name="emp_id" value="<%=new_employee._id%>" >
     <input type="hidden" name="slottoremove" value="<%=new_employee.slots[i]%>">
-    <span><button type="submit" style="background-color: red; border-radius: 13px;font-size: 12px;" >X</button> </span>
+    <span><button type="submit" >X</button> </span>
   
    </form>
    </div>
@@ -471,7 +478,7 @@ dekho dekho bat na puchho
     <form action="/add-slot" method="post">
       <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
       <select name="slottoadd" id="">
-        <% const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8','8-9']; %>
+        <% const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8']; %>
         <% allSlots.forEach(slot => { %>
           <% if (!new_employee.slots.includes(slot)) { %>
             <option value="<%= slot %>"><%= slot %></option>
@@ -484,7 +491,7 @@ dekho dekho bat na puchho
 
 </div>
   
-<style>
+<!-- <style>
   .dayofweek{
     /* border: 2px solid red; */
     display: flex ;
@@ -496,7 +503,7 @@ dekho dekho bat na puchho
     padding: 1%;
     gap: 15px;
   }
-</style>
+</style> -->
 
 
 
@@ -506,33 +513,107 @@ dekho dekho bat na puchho
   .btbt{
     display: none; 
   }
+  .dayofweek {
+            /* border: 2px solid red; */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 10px;
+            /* background-color: #333; */
+            /* backdrop-filter: blur(10px);  */
+            /* background-color: rgba(173, 216, 230, 0.4); */
+            color: #333;
+            font-weight: bold;
+            font-weight: bold;
+            padding: 1%;
+            gap: 10px;
+            box-shadow: 0 10px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+          }
+
+          .dayofweek:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            background-color: #5a85ff;
+            color: #fff;
+          }
+          .dayofweek button[type="submit"] {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-weight: bolder;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    /* position: relative; */
+    /* z-index: -1; */
+  }
+
+  .dayofweek button[type="submit"]:hover {
+    transform: scale(1.2);
+  }
+
+  .dayofweek button[type="submit"]:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-top: 1px;
+    border: 2px solid rgba(255, 0, 0, 0.5);
+    /* background-color: rgba(129, 124, 124, 0.8); */
+  }
+  .custom-button {
+  background-color: #007bff; 
+  border: none;
+  color: white;
+  padding: 8px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 95px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.custom-button:hover {
+  background-color: #0056b3; 
+}
+
+
+
 </style>
 
-<h1>Create Evant / Invite People  </h1>
+<h1>Create Event / Invite People  </h1>
 
         
-<div class="my-4" style="display: flex; padding: 2%; width: 70% ; flex-direction: row; justify-content: space-around; margin-top: 2rem;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
-<div style="display: flex; flex-direction: column; border: 1px solid black;padding: 1%; ">
+<div class="my-4" style="display: flex; padding: 2%; width:80% ; flex-direction: row; justify-content: space-around; margin-top: 2rem;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; border-radius: 10px;">
+<div style="display: flex; flex-direction: column;border-radius: 10px; border: 1px solid black;padding: 1%; ">
 <h1> Create an 1 Hour Event</h1>
 <input style="visibility: hidden;" type="text" id="linkInput" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
 <p> <strong>Duration : </strong> One Hour</p>
 <p> <strong>Type : </strong> Meeting /Interview</p>
-<button id="copyButton" class="btn-primary my-3" style="padding: 1%; border-radius: 2rem;" > Copy Link</button>
+<button id="copyButton" class="btn-primary my-3" style="padding: 1%; border-radius: 2rem;margin: 4px 96px;" > Copy Link</button>
 
 </div>
-<div style="display: flex; flex-direction: column; border: 1px solid black;padding: 1%; ">
+<div style="display: flex; flex-direction: column;border-radius: 10px; border: 1px solid black;padding: 1%; ">
 <h1> Create an 30 Min Meeting </h1>
 <input style="visibility: hidden;" type="text" id="linkInput1" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
 <p> <strong>Duration : </strong> 30 Min</p>
 <p> <strong>Type : </strong>(coming soon)</p>
-<button id="copyButton1" class="btn-primary my-3" style="padding: 1%; border-radius: 2rem;" > Copy Link</button>
+<button id="copyButton1" class="btn-primary my-3" style="padding: 1%; border-radius: 2rem;margin: 4px 96px;" > Copy Link</button>
 
 
 </div>
 </div>
+
+
           
 <h1 style="text-align: center; margin-top: 20px;">All Meetings</h1>
-<div class="mainDiv" style="display: flex; flex-direction: column; justify-content: space-around; width: 100%; padding: 2%; width: 70%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
+<div class="mainDiv" style="display: flex; flex-direction: column; justify-content: space-around;  padding: 2%; width: 80%; flex-wrap: wrap;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;">
 
   <% for(var i = 0 ; i< formattedAppointments.length; i++){ %>
 
@@ -554,14 +635,15 @@ dekho dekho bat na puchho
       
 <style>
   .mainDiv {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 70%;
-      padding: 2%;
-      margin: 0 auto;
-      box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7);
-    }
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          width: 80%;
+          padding: 2%;
+          margin: 0 auto;
+          box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7);
+          border-radius: 10px;
+        }
   .meeting{
     background-color: #fff;
       border-radius: 10px;
