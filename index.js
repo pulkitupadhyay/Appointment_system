@@ -65,7 +65,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 mongoose
   .connect(
-    "mongodb+srv://pulkit_ji:shraddhap@cluster0.xbds8cy.mongodb.net/appointment_systems_database?retryWrites=true&w=majority",
+    "mongodb+srv://pulkit_ji:EkJTiZhfUWss7Qk1@cluster0.xbds8cy.mongodb.net/appointment_systems_database?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(function () {
