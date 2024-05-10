@@ -27,6 +27,28 @@
 
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script>
+      let inactivityTimer;
+
+function resetInactivityTimer() {
+  // console.log('timer started')
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(reloadPage, 1 * 60 * 1000); // 1 minute
+}
+
+function reloadPage() {
+    // Reload the page
+    window.location.reload();
+}
+
+// Event listeners for user interactions
+document.addEventListener('click', resetInactivityTimer);
+document.addEventListener('scroll', resetInactivityTimer);
+document.addEventListener('mousemove', resetInactivityTimer);
+
+// Start the inactivity timer when the page loads
+resetInactivityTimer();
+    </script>
     <%- include('./alert_msg.ejs') %>
     <div class="main">
       <% function capitalizeFirstLetter(str) { %> <% return str.replace(/^\w/,
@@ -516,6 +538,7 @@ document.querySelector(".last_for_display_time").innerHTML =
         return new Date(year + 2000, month - 1, day); // Converting to comparable format
       }
     </script>
+   
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

@@ -380,7 +380,28 @@ width: 100% !important;
   return `${day}-${month}-${year}`; } 
   %>
 
+  <script>
+    let inactivityTimer;
 
+function resetInactivityTimer() {
+// console.log('timer started')
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(reloadPage, 1 * 60 * 1000); // 1 minute
+}
+
+function reloadPage() {
+  // Reload the page
+  window.location.reload();
+}
+
+// Event listeners for user interactions
+document.addEventListener('click', resetInactivityTimer);
+document.addEventListener('scroll', resetInactivityTimer);
+document.addEventListener('mousemove', resetInactivityTimer);
+
+// Start the inactivity timer when the page loads
+resetInactivityTimer();
+  </script>
   <header class="header bg-primary" >
     <div class="container bg-primary">
        <div class="header-main bg-primary">

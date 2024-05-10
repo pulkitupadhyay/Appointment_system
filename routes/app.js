@@ -14,6 +14,8 @@ const hrs = require("./../models/hrs");
 const sendMail = require("./other_functions/sendMail");
 const fs = require("fs");
 const { parse } = require("date-fns");
+const sendMailcc =require('./other_functions/send_mail_cc')
+const moment = require('moment-timezone')
 
 const hr_login = require("./login&authentication/hr_login");
 const fake_login = require("./during_booking/fake_login");
@@ -121,6 +123,105 @@ schedule.scheduleJob("1 */1 * * *", () => {
   console.log("This schaduler will run every 1 hour and one minut ");
   del();
 });
+
+const cronExpression = '0 * * * *'; // This cron expression runs every hour at minute 0
+
+// Create a job using the cron expression
+const job = schedule.scheduleJob(cronExpression, async function() {
+
+  var today = new Date();
+  var date = today
+  var DStirng = today.toISOString();
+  const formattedDateString = DStirng.slice(0, 10) + 'T00:00:00.000+00:00';
+    
+// console.log(formattedDateString)
+const todaySTasks = await time_slot.find({ from_date : formattedDateString})
+const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits, padding with '0' if necessary
+const minutes = String(date.getMinutes()).padStart(2, '0'); // Ensure two digits, padding with '0' if necessary
+const timeString = `${hours}:${minutes}`;
+ 
+const filteredTasks = todaySTasks.filter(task => {
+const taskHour = parseInt(task.time.split(':')[0]); // Extract hour part from task's time
+const comparetimeHour = parseInt(timeString.split(':')[0]); // Extract hour part from comparetime
+return taskHour == comparetimeHour + 1;
+});
+const timeSlotIds = filteredTasks.map(task => task._id);
+
+// Find all appointment requests where timeSlotId matches any of the _id values in the filteredTasks array
+const appointmentRequests = await appointment_requests.find({ time_slotId: { $in: timeSlotIds } });
+const userIds = appointmentRequests.map(appointment => appointment.userID);
+const employeeIds = appointmentRequests.map(appointment => appointment.employeeID);
+
+// Fetch user documents
+const user1 = await user_scheema.find({ _id: { $in: userIds } });
+// console.log(user1)
+// Fetch employee documents
+const employee1 = await employee_scheema.find({ _id: { $in: employeeIds } });
+// console.log(employee1)
+// Populate appointment objects with user and employee details
+const populatedAppointments = appointmentRequests.map(appointment => {
+const user = user1.find(user => user._id == appointment.userID);
+const employee = employee1.find(employee => employee._id == appointment.employeeID);
+const timeslot = filteredTasks.find(slot=>slot._id == appointment.time_slotId)
+return {
+  ...appointment,
+  user,
+  employee,
+  timeslot
+};
+});
+
+// console.log(populatedAppointments);
+
+populatedAppointments.forEach(appointment => {
+
+
+
+// Assuming you have a JavaScript Date object and a time string
+const date = new Date(); // Your JavaScript Date object
+const timeString = appointment.timeslot.time; // Your time string in 24-hour format
+
+// Combine the date and time
+const combinedDateTime = moment(date).format('YYYY-MM-DD') + ' ' + timeString;
+
+// Convert to Indian Standard Time
+const indianStandardTime = moment.tz(combinedDateTime, 'Asia/Kolkata').format();
+
+// console.log(indianStandardTime);
+
+
+ let employee_email = appointment.employee.email;
+ let user_email = appointment.user.email;
+ let subject = 'Meeting Reminder !!'
+ let text = `
+ Dear ${appointment.user.name},
+ 
+ Just a quick reminder about your meeting today with ${appointment.employee.name}:
+ 
+ - Date: ${moment(appointment.timeslot.from_date).format('DD/MM/YYYY')}
+ - Time: ${appointment.timeslot.time} (Indian Standard Time)
+ - Meeting Link: ${appointment.employee.link}
+ 
+ Please ensure being on time.
+ 
+ Best Regards,
+ Swaayatt Robots Pvt Ltd
+ `
+
+ 
+ sendMailcc(user_email, subject, text, employee_email)
+// console.log(text)
+  
+});
+
+console.log('Reminder Mail Sent');
+});
+
+// const schedule = require('node-schedule');
+
+// Define the cron expression for running every one hour
+
+
 
 router.get("/book_appointment", async (req, res, next) => {
   var emploies = await employee_scheema.find();

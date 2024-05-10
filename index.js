@@ -3,9 +3,11 @@ const express = require("express");
 const app = express();
 const Route = require("./routes/app");
 const path = require("path");
-
-
-
+const appointment_requests = require('./models/appointment_requests')
+const users = require('./models/user_module')
+const employees = require('./models/employee_module')
+const schedule = require("node-schedule");
+const time_slot= require('./models/time_slots')
 // var logger = require('morgan');
 const session = require('express-session')
 const flush = require('connect-flash')
@@ -56,6 +58,7 @@ app.use(function(err, req, res, next) {
 
 
 const mongoose = require("mongoose");
+const sendMailcc = require("./routes/other_functions/send_mail_cc");
 // mongoose.set('strictQuery',true);
 
 app.use("/", Route);
@@ -73,5 +76,10 @@ mongoose
     del();
     app.listen(process.env.port || 4000, "0.0.0.0", () => {
       console.log("Listening on port");
+
+     
+      // job.invoke()
+
+
     });
   });
