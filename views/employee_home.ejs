@@ -8,7 +8,7 @@
 </head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <!-- <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
@@ -593,215 +593,260 @@ h1,h2,h3,h4,p{
           </div>
         </div>
       </header>
-<style>
-  .custom-checkbox {
-    margin-left: 60px;
-    transform: scale(1.5);
-}
+      <style>
+        .custom-checkbox {
+          margin-left: -150px;
+          transform: scale(1.5);
+        }
 
-.custom-day{
-  margin-left: 20px;
-  color: #333;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-}
-h1{
-  font-weight: 700;
-    font-size: 36px;
-    line-height: 1.4;
-    color: var(--text-color, rgb(26, 26, 26));
-    font-family: proxima nova, sans-serif;
-}
-.col{
-  padding: unset;
-    padding-top: 20px;
-    margin-left: -520px;
-}
-.unavailableText{
-margin-left: 20px;
-}
-.dayofweek {
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
-    width: 35%;
-    min-height: 46px;
-    padding: 10px 14px;
-    border: 1px solid var(--color-grey-2, #B2B2B2);
-    border-radius: 8px;
-    background: var(--color-bg-white-l-1, rgba(255, 255, 255, 1));
-    color: #1a1a1a;
-    font-size: 16px;
-    line-height: 1.5;
-    overflow-wrap: normal;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-.dayofweek button[type="submit"] {
-    background-color: transparent;
-    border: none;
-    font-weight: bolder;
-    font-size: 14px;
-    cursor: pointer;
-    /* transition: transform 0.3s ease-in-out; */
-    width: 44px;
-    height: 44px;
-    padding: 4px;
-    border-radius: 4px;
-    color: var(--text-color, rgb(61, 61, 61));
-    transition: all .3s;
-}
-.dayofweek button:hover{
-background-color: var(--color-grey-4, #F2F2F2);
-}
-.container_1 {
-    display: flex;
-    flex-direction: row;
-    border: 4px solid #333;
-    display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 20px;
-}
+        .custom-day {
+          margin-left: 20px;
+          color: #333;
+          font-weight: 700;
+          font-size: 14px;
+          text-transform: uppercase;
+        }
 
-.meetings, .slots {
-    margin-right: 20px; 
-}
-</style>
+        h1 {
+          font-weight: 700;
+          font-size: 36px;
+          line-height: 1.4;
+          color: var(--text-color, rgb(26, 26, 26));
+          font-family: proxima nova, sans-serif;
+        }
+
+        .col {
+          padding: unset;
+          padding-top: 20px;
+          /* margin-left: -400px; */
+        }
+
+        .unavailableText {
+          margin-left: -70px;
+        }
+
+        .dayofweek {
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-radius: 10px;
+          transition: transform 0.3s, box-shadow 0.3s;
+          box-sizing: border-box;
+          width: 30%;
+          min-height: 46px;
+          padding: 10px 14px;
+          border: 1px solid var(--color-grey-2, #B2B2B2);
+          border-radius: 8px;
+          background: var(--color-bg-white-l-1, rgba(255, 255, 255, 1));
+          color: #1a1a1a;
+          font-size: 16px;
+          line-height: 1.5;
+          overflow-wrap: normal;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          margin-left: 248px;
+        }
+
+        .dayofweek button[type="submit"] {
+          background-color: transparent;
+          border: none;
+          font-weight: bolder;
+          font-size: 14px;
+          cursor: pointer;
+          /* transition: transform 0.3s ease-in-out; */
+          width: 44px;
+          height: 44px;
+          padding: 4px;
+          border-radius: 4px;
+          color: var(--text-color, rgb(61, 61, 61));
+          transition: all .3s;
+        }
+
+        .dayofweek button:hover {
+          background-color: var(--color-grey-4, #F2F2F2);
+        }
+
+        .container_1 {
+          display: flex;
+          flex-direction: row;
+          border: 1px solid var(--color-grey-3, #CCCCCC);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          padding: 20px;
+          border-radius: 16px;
+          margin-top: 20px;
+          margin-bottom: 50px;
+          margin-left: 220px;
+          margin-right: 220px;
+        }
+
+        .meetings,
+        .slots {
+          margin-right: -128px;
+        }
+
+        .meetings {
+          border-right: 1px solid var(--color-grey-3, #CCCCCC);
+          margin-top: -20px;
+          margin-bottom: -20px;
+        }
+      </style>
 
       <div class="main">
+        <h1 style="font-weight: 700;
+        font-size: 36px;
+        line-height: 1.4;
+        text-align: center;
+        color: var(--text-color, rgb(26, 26, 26));
+    font-family: proxima nova, sans-serif;">Availability
+        </h1>
         <div class="container_1">
           <div class="meetings">
-        <h1> Select Days To Meet </h1>
-        <div class="mainDiv">
-          <% const daysOfWeek=['Sunday', 'Monday' , 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' ]; %>
-          <% for(let i=0; i<7; i++ ){%>
-              <div class="row">
-                  <div class="col">
-                    <input type="checkbox" id="day_<%= i %>" name="day_<%= i %>" class="custom-checkbox" <% if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %> checked <% } %> onclick="toggleAvailability(<%= i %>)">
-                    <label class="custom-day" for="day_<%= i %>"><%= daysOfWeek[i] %></label>
-                  </div>
-                  <div class="col unavailableText" id="availability_<%= i %>">
+            <h1 style="margin-left: -180px;font-size: 26px;    margin-top: 15px; font-weight: 700;color: #333;"> Select Days To Meet </h1>
+            <hr style="margin-left: -470px;">
+            <div class="mainDiv">
+              <% const daysOfWeek=['Sunday', 'Monday' , 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' ];
+                %>
+                <% for(let i=0; i<7; i++ ){%>
+                  <div class="row">
+                    <div class="col">
+                      <input type="checkbox" id="day_<%= i %>" name="day_<%= i %>" class="custom-checkbox" <%
+                        if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %> checked <% } %>
+                        onclick="toggleAvailability(<%= i %>)">
+                          <label class="custom-day" for="day_<%= i %>">
+                            <%= daysOfWeek[i] %>
+                          </label>
+                    </div>
+                    <div class="col unavailableText" id="availability_<%= i %>">
                       <% if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %>
-                          Available
-                      <% } else { %>
+                        Available
+                        <% } else { %>
                           Unavailable
-                      <% } %>
-                  </div>
-              </div>
-          <% } %>
-          
-          <div class="addDay dayofweek">
-              <form action="/add-day" method="post">
-                  <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
-                  <select name="daytoadd" id="" required>
-                      <% daysOfWeek.forEach(day=> { %>
-                          <% if (!new_employee.days || !new_employee.days.includes(day)) { %>
-                              <option value="<%= day %>">
-                                  <%= day %>
-                              </option>
                           <% } %>
-                      <% }); %>
-                  </select>
-                  <button type="submit">Add</button>
-              </form>
+                    </div>
+                  </div>
+                  <% } %>
+
+                    <div class="addDay dayofweek">
+                      <form action="/add-day" method="post">
+                        <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
+                        <select name="daytoadd" id="" required>
+                          <% daysOfWeek.forEach(day=> { %>
+                            <% if (!new_employee.days || !new_employee.days.includes(day)) { %>
+                              <option value="<%= day %>">
+                                <%= day %>
+                              </option>
+                              <% } %>
+                                <% }); %>
+                        </select>
+                        <button type="submit">Add</button>
+                      </form>
+                    </div>
+            </div>
           </div>
-      </div>
-</div>
 
-<div class="slots">
-        <h1>Add Slots of the day</h1>
-        <div class="mainDiv">
+          <div class="slots">
+            <h1 style="margin-left: 386px; color: #333;font-size: 26px;margin-bottom: 23px;">Add Slots of the day</h1>
+            <hr style="margin-top: -12px;
+            margin-left: 126px;
+            margin-right: -341px;">
+            <div class="mainDiv" style="   margin-left: 193px;">
 
-          <%if(new_employee.slots){%>
+              <%if(new_employee.slots){%>
 
-            <% for(let i=0; i< new_employee.slots.length;i++ ){%>
+                <% for(let i=0; i< new_employee.slots.length;i++ ){%>
 
-              <div class="<%=new_employee.slots[i]%>  dayofweek">
-                <%=new_employee.slots[i]%>
-                  <form action="/removeslot" method="post">
-                    <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
-                    <input type="hidden" name="slottoremove" value="<%=new_employee.slots[i]%>">
-                    <span><button type="submit">X</button> </span>
+                  <div class="<%=new_employee.slots[i]%>  dayofweek">
+                    <%=new_employee.slots[i]%>
+                      <form action="/removeslot" method="post">
+                        <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
+                        <input type="hidden" name="slottoremove" value="<%=new_employee.slots[i]%>">
+                        <span><button type="submit">X</button> </span>
 
-                  </form>
-              </div>
+                      </form>
+                  </div>
 
 
-              <%}}%>
-                <div class="addDay dayofweek">
-                  <form action="/add-slot" method="post">
-                    <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-                    <select name="slottoadd" id="" required>
-                      <% const allSlots=['12-1', '1-2' , '2-3' , '3-4' , '4-5' , '5-6' , '6-7' , '7-8' ]; %>
-                        <% allSlots.forEach(slot=> { %>
-                          <% if (!new_employee.slots.includes(slot)) { %>
-                            <option value="<%= slot %>">
-                              <%= slot %>
-                            </option>
-                            <% } %>
-                              <% }); %>
-                    </select>
-                    <button type="submit">Add</button>
-                  </form>
-                </div>
+                  <%}}%>
+                    <div class="addDay dayofweek">
+                      <form action="/add-slot" method="post">
+                        <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+                        <select name="slottoadd" id="" required>
+                          <% const allSlots=['12-1', '1-2' , '2-3' , '3-4' , '4-5' , '5-6' , '6-7' , '7-8' ]; %>
+                            <% allSlots.forEach(slot=> { %>
+                              <% if (!new_employee.slots.includes(slot)) { %>
+                                <option value="<%= slot %>">
+                                  <%= slot %>
+                                </option>
+                                <% } %>
+                                  <% }); %>
+                        </select>
+                        <button type="submit">Add</button>
+                      </form>
+                    </div>
 
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
-       
 
 
 
 
- <style>
-        .container {
+
+        <style>
+          .container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px; 
+            gap: 20px;
             padding: 20px;
-        }
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          }
+
+          .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             transition: 0.3s;
-            width: calc(50% - 20px); 
+            width: calc(50% - 20px);
             padding: 20px;
             border-radius: 5px;
             background: #f9f9f9;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-        }
-        .card h3, .card h1 {
+          }
+
+          .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          }
+
+          .card h3,
+          .card h1 {
             font-size: 24px;
             color: #333;
             font-weight: bold;
             margin-top: 30px;
-        }
-        .card p {
+          }
+
+          .card p {
             margin: 10px 0;
             color: #666;
-        }
-        .card a {
+          }
+
+          .card a {
             color: #007BFF;
             text-decoration: none;
-        }
-        .card a:hover {
+          }
+
+          .card a:hover {
             text-decoration: underline;
-        }
-        .btn-copy {
-            color: #007BFF; 
-            background-color: transparent; 
+          }
+
+          .btn-copy {
+            color: #007BFF;
+            background-color: transparent;
             border: none;
             padding: 10px 20px;
             text-align: center;
@@ -811,40 +856,45 @@ background-color: var(--color-grey-4, #F2F2F2);
             cursor: pointer;
             border-radius: 5px;
             /* margin-top: 10px;  */
-            transition: color 0.3s ease; 
+            transition: color 0.3s ease;
             margin-left: -333px;
-        }
-        .btn-copy:hover {
-    text-decoration: underline;
-  }
-        .copy-icon {
-            margin-left: 5px;
-        }
-        input[type="text"] {
-            visibility: hidden;
-        }
-        @media (max-width: 800px) {
-            .card {
-                width: 100%; 
-            }
-        }
+          }
 
-        .cap {
-          height: 7px;
-    margin-top: -20px;
-    margin-right: -20px;
-    margin-left: -20px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-h3{
-  font-family: proxima nova, sans-serif;
-  color: var(--text-color, rgb(26, 26, 26));
-  font-weight: 400;
-    font-size: 20px;
-    line-height: 1.4;
-}
-    </style>
+          .btn-copy:hover {
+            text-decoration: underline;
+          }
+
+          .copy-icon {
+            margin-left: 5px;
+          }
+
+          input[type="text"] {
+            visibility: hidden;
+          }
+
+          @media (max-width: 800px) {
+            .card {
+              width: 100%;
+            }
+          }
+
+          .cap {
+            height: 7px;
+            margin-top: -20px;
+            margin-right: -20px;
+            margin-left: -20px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+          }
+
+          h3 {
+            font-family: proxima nova, sans-serif;
+            color: var(--text-color, rgb(26, 26, 26));
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 1.4;
+          }
+        </style>
 
 
         <h1>Create Event / Invite People </h1>
@@ -852,31 +902,31 @@ h3{
         <div class="container">
           <div class="card">
             <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
-              <h3>1 Hour Event</h3>
-              <input type="text" id="linkInput" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
-              <p> One Hour</p>
-              <p><strong>Type:</strong> Meeting / Interview</p>
-              <hr> 
-              <button id="copyButton" class="btn-copy" onclick="copyLink('linkInput')">
-                <i class="fa fa-copy"></i> Copy Link 
-              </button>
+            <h3>1 Hour Event</h3>
+            <input type="text" id="linkInput" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
+            <p> One Hour</p>
+            <p><strong>Type:</strong> Meeting / Interview</p>
+            <hr>
+            <button id="copyButton" class="btn-copy" onclick="copyLink('linkInput')">
+              <i class="fa fa-copy"></i> Copy Link
+            </button>
           </div>
-      
+
           <div class="card">
             <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
-              <h3>30 Min Meeting</h3>
-              <input type="text" id="linkInput1" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
-              <p><strong>Duration:</strong> 30 Min</p>
-              <p><strong>Type:</strong> (coming soon)</p>
-              <hr> 
-              <button id="copyButton1" class="btn-copy" onclick="copyLink('linkInput1')">
-                <i class="fa fa-copy"></i> Copy Link 
-              </button>
+            <h3>30 Min Meeting</h3>
+            <input type="text" id="linkInput1" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
+            <p><strong>Duration:</strong> 30 Min</p>
+            <p><strong>Type:</strong> (coming soon)</p>
+            <hr>
+            <button id="copyButton1" class="btn-copy" onclick="copyLink('linkInput1')">
+              <i class="fa fa-copy"></i> Copy Link
+            </button>
           </div>
-      </div>
+        </div>
 
-      
-      
+
+
 
         <h1>All Meetings</h1>
 
@@ -928,16 +978,16 @@ h3{
 
       <script>
         function toggleAvailability(index) {
-            var availabilityDiv = document.getElementById("availability_" + index);
-            var checkbox = document.getElementById("day_" + index);
-            if (checkbox.checked) {
-                availabilityDiv.textContent = "Available";
-            } else {
-                availabilityDiv.textContent = "Unavailable";
-            }
+          var availabilityDiv = document.getElementById("availability_" + index);
+          var checkbox = document.getElementById("day_" + index);
+          if (checkbox.checked) {
+            availabilityDiv.textContent = "Available";
+          } else {
+            availabilityDiv.textContent = "Unavailable";
+          }
         }
-    </script>
-    
+      </script>
+
 
 
 
@@ -962,22 +1012,22 @@ h3{
       </script>
 
 
-<script>
-  const copyButton = document.getElementById("copyButton");
-  const linkInput = document.getElementById("linkInput");
+      <script>
+        const copyButton = document.getElementById("copyButton");
+        const linkInput = document.getElementById("linkInput");
 
-  copyButton.addEventListener("click", () => {
-    navigator.clipboard.writeText(linkInput.value).then(() => {
-      copyButton.innerHTML = "<i class='fas fa-check' style='color: #007BFF;'></i> Copied ";
-      setTimeout(() => {
-        copyButton.innerHTML = "<i class='fa fa-copy'></i> Copy Link";
-      }, 2000); 
-      console.log("Link copied to clipboard");
-    }).catch((error) => {
-      console.error("Failed to copy link: ", error);
-    });
-  });
-</script>
+        copyButton.addEventListener("click", () => {
+          navigator.clipboard.writeText(linkInput.value).then(() => {
+            copyButton.innerHTML = "<i class='fas fa-check' style='color: #007BFF;'></i> Copied ";
+            setTimeout(() => {
+              copyButton.innerHTML = "<i class='fa fa-copy'></i> Copy Link";
+            }, 2000);
+            console.log("Link copied to clipboard");
+          }).catch((error) => {
+            console.error("Failed to copy link: ", error);
+          });
+        });
+      </script>
 
 
       <!-- <script>
