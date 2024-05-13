@@ -714,9 +714,16 @@ h1,h2,h3,h4,p{
                 <% for(let i=0; i<7; i++ ){%>
                   <div class="row">
                     <div class="col">
-                      <input type="checkbox" id="day_<%= i %>" name="day_<%= i %>" class="custom-checkbox" <%
-                        if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %> checked <% } %>
-                        onclick="toggleAvailability(<%= i %>)">
+                    <form action="/dayChange" method="post">
+                      <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
+                      <input type="hidden" name="dayToChange" value="<%=daysOfWeek[i]%>">
+
+                      <input type="checkbox" id="day_<%= i %>" name="day_<%= i %>" class="custom-checkbox" <% if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %> checked <% } %>onclick="toggleAvailability(<%= i %>)">
+
+
+
+                    </form>
+
                           <label class="custom-day" for="day_<%= i %>">
                             <%= daysOfWeek[i] %>
                           </label>
