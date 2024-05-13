@@ -697,13 +697,14 @@ h1,h2,h3,h4,p{
       </style>
 
       <div class="main">
-        <h1 style="font-weight: 700;
-        font-size: 36px;
-        line-height: 1.4;
-        text-align: center;
-        color: var(--text-color, rgb(26, 26, 26));
-    font-family: proxima nova, sans-serif;">Availability
-        </h1>
+        <div style="padding: 20px; border-radius: 10px;">
+          <h1 style="font-size: 34px; margin-bottom: 20px; color: #333333;">Availability</h1>
+          <div style="display: flex; align-items: center;">
+              <div style="width: 8px; height: 40px; background-color: #007bff; margin-right: 15px; border-radius: 4px;"></div>
+              <h2 style="font-size: 24px; margin: 0; color: #007bff;">Schedule</h2>
+          </div>
+        </div>
+
         <div class="container_1">
           <div class="meetings">
             <h1 style="margin-left: -180px;font-size: 26px;    margin-top: 15px; font-weight: 700;color: #333;"> Select Days To Meet </h1>
@@ -903,8 +904,14 @@ h1,h2,h3,h4,p{
           }
         </style>
 
-
-        <h1>Create Event / Invite People </h1>
+<div style="padding: 20px; border-radius: 10px;">
+  <h1 style="font-size: 34px; margin-bottom: 20px; color: #333333;">Events Types</h1>
+  <div style="display: flex; align-items: center;">
+      <div style="width: 8px; height: 40px; background-color: #007bff; margin-right: 15px; border-radius: 4px;"></div>
+      <h2 style="font-size: 24px; margin: 0; color: #007bff;">Create Event / Invite People</h2>
+  </div>
+</div>
+       
 
         <div class="container">
           <div class="card">
@@ -934,84 +941,110 @@ h1,h2,h3,h4,p{
 
         <style>       
           .mainDiv_meeting {
-            position: relative;
-            width: 100%;
-            max-width: 1330px;
-            margin: 50px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-          }
-          
-          .meeting {
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            position: relative;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            width: 48%;
-            align-self: flex-start;
-          }
-          
-          .meeting:nth-child(even) {
-            align-self: flex-end;
-            transform: translateX(20px);
-          }
-          
-          .meeting.active {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          .meeting h2 {
-    font-size: 24px; 
+    position: relative;
+    width: 100%;
+    max-width: 1330px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .meeting {
+    position: relative;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    width: 48%;
+    align-self: flex-start;
+  }
+
+  .meeting:nth-child(even) {
+    align-self: flex-end;
+    transform: translateX(20px);
+  }
+
+  .meeting.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .meeting h2 {
+    font-size: 24px;
     margin-bottom: 10px;
     color: #333333;
   }
+
   .meeting p {
     margin-bottom: 8px;
-    color: #666666; 
+    color: #666666;
   }
+
   .meeting a {
-  color: #007BFF;
-  text-decoration: none;
-  transition: color 0.2s ease, font-weight 0.3s ease;
-}
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s ease, font-weight 0.3s ease;
+  }
 
-.meeting a:hover {
-  color: #1E90FF; 
-  font-weight: bold;
-}
+  .meeting a:hover {
+    color: #1e90ff;
+    font-weight: bold;
+  }
 
-        
-          .timeline {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background-color: #ccc;
-            transform: translateX(-50%);
-            z-index: -1;
-          }
-        </style>
+  .timeline {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #ccc;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+
+  
+  .meeting::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #007bff;
+    border-radius: 50%;
+    left: -32px; 
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1; 
+  }
+  .meeting:nth-child(odd)::before {
+    left: 660px;
+  }
+</style>
+<div style=" padding: 20px; border-radius: 10px; ">
+  <h1 style="font-size: 34px; margin-bottom: 20px; color: #333333;">Scheduled Events</h1>
+  <div style="display: flex; align-items: center;">
+      <div style="width: 8px; height: 40px; background-color: #007bff; margin-right: 15px; border-radius: 4px;"></div>
+      <h2 style="font-size: 24px; margin: 0; color: #007bff;">All Meetings</h2>
+  </div>
+</div>
 
 
-        <h1>All Meetings</h1>
 
         <div class="mainDiv_meeting">
           <div class="timeline"></div>
           <% for(var i=0 ; i< formattedAppointments.length; i++){ %>
-            <div class="meeting">
-              <h2><%=new_employee.name%> and <%=formattedAppointments[i].user.name%></h2>
-              <p><strong>Date:</strong> <%= formatDateToDDMMYYYY(formattedAppointments[i].time_slot.from_date)%></p>
-              <p><strong>Time:</strong> <%= formattedAppointments[i].time_slot.time%></p>
-              <p><strong>Interviewee Email:</strong> <%=formattedAppointments[i].user.email%></p>
-              <p><strong>Link:</strong> <a href="<%=new_employee.link%>" target="_blank"><%=new_employee.link%></a></p>            </div>
-          <%}%>
+          <div class="meeting">
+            <h2><%= new_employee.name %> and <%= formattedAppointments[i].user.name %></h2>
+            <p><strong>Date:</strong> <%= formatDateToDDMMYYYY(formattedAppointments[i].time_slot.from_date) %></p>
+            <p><strong>Time:</strong> <%= formattedAppointments[i].time_slot.time %></p>
+            <p><strong>Interviewee Email:</strong> <%= formattedAppointments[i].user.email %></p>
+            <p><strong>Link:</strong> <a href="<%= new_employee.link %>" target="_blank"><%= new_employee.link %></a></p>
+          </div>
+          <% } %>
         </div>
         
 
