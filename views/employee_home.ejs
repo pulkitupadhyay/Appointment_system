@@ -43,8 +43,231 @@
     text-decoration: none;
   }
 
-  /*header*/
-  .header {
+ 
+
+  /*home section*/
+  .home-section {
+    width: 100%;
+    display: block;
+    min-height: 100vh;
+    background-image: url('../img/home.jpg');
+    background-position: center top;
+    background-size: cover;
+  }
+
+  /* body{
+  background-color: #000000;
+}
+h1,h2,h3,h4,p{
+  color: white  ;
+} */
+  /* responsive */
+
+  @media (max-width: 575.98px) {
+    .my-4 {
+      flex-direction: column !important;
+    }
+
+    .mainDiv {
+      width: 100% !important;
+      flex-direction: column !important;
+      padding: 3% !important;
+    }
+
+    .dayofweek {
+      padding: 3% !important;
+      margin-top: 5px;
+    }
+
+   
+    .meeting {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 1.1) !important;
+    }
+
+    .custom-button {
+
+      margin: 4px 57px !important;
+    }
+
+    #copyButton,
+    #copyButton1 {
+      margin: 4px 62px !important;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .mainDiv {
+      width: 100% !important;
+    }
+  }
+
+</style>
+<style>
+  h1,
+  p {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 1%;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+  }
+
+  p,
+  h4 {
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+
+  }
+
+
+  .main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  label {
+    font-weight: bold;
+
+  }
+</style>
+
+
+<style>
+  .mainDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+    padding: 2%;
+    margin: 0 auto;
+    box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7);
+    border-radius: 10px;
+  }
+
+  .meeting {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .meeting h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 800;
+  }
+
+  .meeting h2:first-child {
+    font-size: 22px;
+  }
+
+  .meeting h2:nth-child(2),
+  .meeting h2:nth-child(3),
+  .meeting h2:nth-child(4),
+  .meeting h2:nth-child(5) {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .meeting h2:last-child {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #007bff;
+  }
+
+
+    .btbt {
+            display: none;
+          }
+
+          .dayofweek {
+            /* border: 2px solid red; */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 10px;
+            /* background-color: #333; */
+            /* backdrop-filter: blur(10px);  */
+            /* background-color: rgba(173, 216, 230, 0.4); */
+            color: #333;
+            font-weight: bold;
+            font-weight: bold;
+            padding: 1%;
+            gap: 10px;
+            box-shadow: 0 10px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+          }
+
+          .dayofweek:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            background-color: #5a85ff;
+            color: #fff;
+          }
+
+          .dayofweek button[type="submit"] {
+            background-color: transparent;
+            border: none;
+            color: red;
+            font-weight: bolder;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            /* position: relative; */
+            /* z-index: -1; */
+          }
+
+          .dayofweek button[type="submit"]:hover {
+            transform: scale(1.2);
+          }
+
+          .dayofweek button[type="submit"]:hover::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 80%;
+            border-radius: 50%;
+            margin-left: -5px;
+            margin-top: 1px;
+            border: 2px solid rgba(255, 0, 0, 0.5);
+            /* background-color: rgba(129, 124, 124, 0.8); */
+          }
+
+          .custom-button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 8px 0px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 95px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 8px;
+          }
+
+          .custom-button:hover {
+            background-color: #0056b3;
+          }
+</style> -->
+
+<style>
+   /*header*/
+   .header {
     position: sticky;
     width: 100%;
     left: 0;
@@ -235,42 +458,7 @@
     opacity: 0;
     transition: all 0.3s ease;
   }
-
-  /*home section*/
-  .home-section {
-    width: 100%;
-    display: block;
-    min-height: 100vh;
-    background-image: url('../img/home.jpg');
-    background-position: center top;
-    background-size: cover;
-  }
-
-  /* body{
-  background-color: #000000;
-}
-h1,h2,h3,h4,p{
-  color: white  ;
-} */
-  /* responsive */
-
-  @media (max-width: 575.98px) {
-    .my-4 {
-      flex-direction: column !important;
-    }
-
-    .mainDiv {
-      width: 100% !important;
-      flex-direction: column !important;
-      padding: 3% !important;
-    }
-
-    .dayofweek {
-      padding: 3% !important;
-      margin-top: 5px;
-    }
-
-    .header .logo a {
+   .header .logo a {
       font-size: 26px !important;
       /* .meeting {
   margin-left: -46px;
@@ -288,27 +476,6 @@ h1,h2,h3,h4,p{
     .header-main {
       padding: 0px 0px !important;
     }
-
-    .meeting {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 1.1) !important;
-    }
-
-    .custom-button {
-
-      margin: 4px 57px !important;
-    }
-
-    #copyButton,
-    #copyButton1 {
-      margin: 4px 62px !important;
-    }
-  }
-
-  @media (min-width: 1024px) and (max-width: 1439px) {
-    .mainDiv {
-      width: 100% !important;
-    }
-  }
 
   @media(max-width: 991px) {
     .header .menu-overlay.active {
@@ -393,174 +560,12 @@ h1,h2,h3,h4,p{
     }
   }
 </style>
-<style>
-  h1,
-  p {
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    padding: 1%;
-  }
-
-  h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 2rem;
-  }
-
-  p,
-  h4 {
-    font-size: 1rem;
-  }
-
-  h2 {
-    font-size: 1rem;
-
-  }
-
-
-  .main {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  label {
-    font-weight: bold;
-
-  }
-</style>
-
-
-<style>
-  .mainDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 80%;
-    padding: 2%;
-    margin: 0 auto;
-    box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7);
-    border-radius: 10px;
-  }
-
-  .meeting {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .meeting h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
-    font-weight: 800;
-  }
-
-  .meeting h2:first-child {
-    font-size: 22px;
-  }
-
-  .meeting h2:nth-child(2),
-  .meeting h2:nth-child(3),
-  .meeting h2:nth-child(4),
-  .meeting h2:nth-child(5) {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-
-  .meeting h2:last-child {
-    font-size: 16px;
-    margin-top: 10px;
-    color: #007bff;
-  }
-
-
-    .btbt {
-            display: none;
-          }
-
-          .dayofweek {
-            /* border: 2px solid red; */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-radius: 10px;
-            /* background-color: #333; */
-            /* backdrop-filter: blur(10px);  */
-            /* background-color: rgba(173, 216, 230, 0.4); */
-            color: #333;
-            font-weight: bold;
-            font-weight: bold;
-            padding: 1%;
-            gap: 10px;
-            box-shadow: 0 10px 4px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-          }
-
-          .dayofweek:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-            background-color: #5a85ff;
-            color: #fff;
-          }
-
-          .dayofweek button[type="submit"] {
-            background-color: transparent;
-            border: none;
-            color: red;
-            font-weight: bolder;
-            font-size: 14px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            /* position: relative; */
-            /* z-index: -1; */
-          }
-
-          .dayofweek button[type="submit"]:hover {
-            transform: scale(1.2);
-          }
-
-          .dayofweek button[type="submit"]:hover::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 80%;
-            border-radius: 50%;
-            margin-left: -5px;
-            margin-top: 1px;
-            border: 2px solid rgba(255, 0, 0, 0.5);
-            /* background-color: rgba(129, 124, 124, 0.8); */
-          }
-
-          .custom-button {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            padding: 8px 0px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 95px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border-radius: 8px;
-          }
-
-          .custom-button:hover {
-            background-color: #0056b3;
-          }
-</style> -->
 
 <body>
   <%- include('./alert_msg.ejs') %>
-    <% function formatDateToDDMMYYYY(date) { const day=String(date.getDate()).padStart(2, '0' );
-     const month=String(date.getMonth() + 1).padStart(2, '0' ); const year=date.getFullYear();
-      return `${day}-${month}-${year}`; } %>
+    <% function formatDateToDDMMYYYY(date) { const day=String(date.getDate()).padStart(2, '0' ); const
+      month=String(date.getMonth() + 1).padStart(2, '0' ); const year=date.getFullYear(); return
+      `${day}-${month}-${year}`; } %>
 
 
       <header class="header bg-primary">
@@ -593,6 +598,7 @@ h1,h2,h3,h4,p{
           </div>
         </div>
       </header>
+
       <style>
         .custom-checkbox {
           margin-left: -150px;
@@ -696,18 +702,25 @@ h1,h2,h3,h4,p{
         }
       </style>
 
+<!-- Availability -->
+
       <div class="main">
         <div style="padding: 20px; border-radius: 10px;">
           <h1 style="font-size: 34px; margin-bottom: 20px; color: #333333;">Availability</h1>
           <div style="display: flex; align-items: center;">
-              <div style="width: 8px; height: 40px; background-color: #007bff; margin-right: 15px; border-radius: 4px;"></div>
-              <h2 style="font-size: 24px; margin: 0; color: #007bff;">Schedule</h2>
+            <div style="width: 8px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
+            </div>
+            <h2 style="font-size: 24px; margin: 0; color: #1E90FF;">Schedule</h2>
           </div>
+          <p style="margin-top: 10px; color: #666666; font-size: 18px;">Check your availability and manage your schedule
+            easily.</p>
         </div>
+
 
         <div class="container_1">
           <div class="meetings">
-            <h1 style="margin-left: -180px;font-size: 26px;    margin-top: 15px; font-weight: 700;color: #333;"> Select Days To Meet </h1>
+            <h1 style="margin-left: -180px;font-size: 26px;    margin-top: 15px; font-weight: 700;color: #333;"> Select
+              Days To Meet </h1>
             <hr style="margin-left: -470px;">
             <div class="mainDiv">
               <% const daysOfWeek=['Sunday', 'Monday' , 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' ];
@@ -715,19 +728,21 @@ h1,h2,h3,h4,p{
                 <% for(let i=0; i<7; i++ ){%>
                   <div class="row">
                     <div class="col">
-                    <form action="/dayChange" method="post">
-                      <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
-                      <input type="hidden" name="dayToChange" value="<%=daysOfWeek[i]%>">
+                      <form action="/dayChange" method="post">
+                        <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
+                        <input type="hidden" name="dayToChange" value="<%=daysOfWeek[i]%>">
 
-                      <input type="checkbox" id="day_<%= i %>" name="day_<%= i %>" class="custom-checkbox" <% if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %> checked <% } %>onclick="toggleAvailability(<%= i %>)">
+                        <input type="checkbox" id="day_<%= i %>" name="day_<%= i %>" class="custom-checkbox" <%
+                          if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %> checked <% } %>
+                          onclick="toggleAvailability(<%= i %>)">
 
 
 
-                    </form>
+                      </form>
 
-                          <label class="custom-day" for="day_<%= i %>">
-                            <%= daysOfWeek[i] %>
-                          </label>
+                      <label class="custom-day" for="day_<%= i %>">
+                        <%= daysOfWeek[i] %>
+                      </label>
                     </div>
                     <div class="col unavailableText" id="availability_<%= i %>">
                       <% if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %>
@@ -824,6 +839,7 @@ h1,h2,h3,h4,p{
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            z-index: -1;
           }
 
           .card:hover {
@@ -881,38 +897,44 @@ h1,h2,h3,h4,p{
           }
 
           @media (max-width: 800px) {
-            .card {
-              width: 100%;
-            }
-          }
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
 
-          .cap {
-            height: 7px;
-            margin-top: -20px;
-            margin-right: -20px;
-            margin-left: -20px;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-          }
+    .card {
+      width: 100%;
+    }
 
-          h3 {
-            font-family: proxima nova, sans-serif;
-            color: var(--text-color, rgb(26, 26, 26));
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 1.4;
-          }
+    .mainDiv_meeting {
+      max-width: 100%;
+    }
+
+    .meeting {
+      width: 100%;
+      align-self: center;
+    }
+
+    .meeting:nth-child(odd)::before,
+    .meeting:nth-child(even)::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
         </style>
 
-<div style="padding: 20px; border-radius: 10px;">
-  <h1 style="font-size: 34px; margin-bottom: 20px; color: #333333;">Events Types</h1>
-  <div style="display: flex; align-items: center;">
-      <div style="width: 8px; height: 40px; background-color: #007bff; margin-right: 15px; border-radius: 4px;"></div>
-      <h2 style="font-size: 24px; margin: 0; color: #007bff;">Create Event / Invite People</h2>
-  </div>
-</div>
-       
+<!-- Events Types -->
 
+        <div style="padding: 20px; border-radius: 10px;">
+          <h1 style="font-size: 34px; margin-bottom: 20px; color: #333333;">Events Types</h1>
+          <div style="display: flex; align-items: center;">
+            <div style="width: 8px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
+            </div>
+            <h2 style="font-size: 24px; margin: 0; color: #1E90FF;">Create Event / Invite People</h2>
+          </div>
+          <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore different types of events and create or
+            invite people to them.</p>
+        </div>
         <div class="container">
           <div class="card">
             <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
@@ -939,114 +961,128 @@ h1,h2,h3,h4,p{
           </div>
         </div>
 
-        <style>       
+        <style>
           .mainDiv_meeting {
-    position: relative;
-    width: 100%;
-    max-width: 1330px;
-    margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+            position: relative;
+            width: 100%;
+            max-width: 1330px;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+          }
 
-  .meeting {
-    position: relative;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    width: 48%;
-    align-self: flex-start;
-  }
+          .meeting {
+            position: relative;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            width: 48%;
+            align-self: flex-start;
+            z-index: -1;
+          }
 
-  .meeting:nth-child(even) {
-    align-self: flex-end;
-    transform: translateX(20px);
-  }
+          .meeting:nth-child(even) {
+            align-self: flex-end;
+            transform: translateX(20px);
+          }
 
-  .meeting.active {
-    opacity: 1;
-    transform: translateX(0);
-  }
+          .meeting.active {
+            opacity: 1;
+            transform: translateX(0);
+          }
 
-  .meeting h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333333;
-  }
+          .meeting h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333333;
+          }
 
-  .meeting p {
-    margin-bottom: 8px;
-    color: #666666;
-  }
+          .meeting p {
+            margin-bottom: 8px;
+            color: #666666;
+          }
 
-  .meeting a {
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.2s ease, font-weight 0.3s ease;
-  }
+          .meeting a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.2s ease, font-weight 0.3s ease;
+          }
 
-  .meeting a:hover {
-    color: #1e90ff;
-    font-weight: bold;
-  }
+          .meeting a:hover {
+            color: #1e90ff;
+            font-weight: bold;
+          }
 
-  .timeline {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background-color: #ccc;
-    transform: translateX(-50%);
-    z-index: -1;
-  }
-
-  
-  .meeting::before {
-    content: '';
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background-color: #007bff;
-    border-radius: 50%;
-    left: -32px; 
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1; 
-  }
-  .meeting:nth-child(odd)::before {
-    left: 660px;
-  }
-</style>
-<div style=" padding: 20px; border-radius: 10px; ">
-  <h1 style="font-size: 34px; margin-bottom: 20px; color: #333333;">Scheduled Events</h1>
-  <div style="display: flex; align-items: center;">
-      <div style="width: 8px; height: 40px; background-color: #007bff; margin-right: 15px; border-radius: 4px;"></div>
-      <h2 style="font-size: 24px; margin: 0; color: #007bff;">All Meetings</h2>
-  </div>
-</div>
+          .timeline {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #ccc;
+            transform: translateX(-50%);
+            z-index: -1;
+          }
 
 
+          .meeting::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #007bff;
+            border-radius: 50%;
+            left: -32px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+          }
 
+          .meeting:nth-child(odd)::before {
+            left: 660px;
+          }
+        </style>
+
+<!-- Schedule Events -->
+
+        <div style="padding: 20px; border-radius: 10px;">
+          <h1 style="font-size: 34px; margin-bottom: 20px; color: #333333;">Scheduled Events</h1>
+          <div style="display: flex; align-items: center;">
+            <div style="width: 8px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
+            </div>
+            <h2 style="font-size: 24px; margin: 0; color: #1E90FF; font-weight: normal;">All Meetings</h2>
+          </div>
+          <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore all scheduled meetings at a glance.</p>
+        </div>
         <div class="mainDiv_meeting">
           <div class="timeline"></div>
           <% for(var i=0 ; i< formattedAppointments.length; i++){ %>
-          <div class="meeting">
-            <h2><%= new_employee.name %> and <%= formattedAppointments[i].user.name %></h2>
-            <p><strong>Date:</strong> <%= formatDateToDDMMYYYY(formattedAppointments[i].time_slot.from_date) %></p>
-            <p><strong>Time:</strong> <%= formattedAppointments[i].time_slot.time %></p>
-            <p><strong>Interviewee Email:</strong> <%= formattedAppointments[i].user.email %></p>
-            <p><strong>Link:</strong> <a href="<%= new_employee.link %>" target="_blank"><%= new_employee.link %></a></p>
-          </div>
-          <% } %>
+            <div class="meeting">
+              <h2>
+                <%= new_employee.name %> and <%= formattedAppointments[i].user.name %>
+              </h2>
+              <p><strong>Date:</strong>
+                <%= formatDateToDDMMYYYY(formattedAppointments[i].time_slot.from_date) %>
+              </p>
+              <p><strong>Time:</strong>
+                <%= formattedAppointments[i].time_slot.time %>
+              </p>
+              <p><strong>Interviewee Email:</strong>
+                <%= formattedAppointments[i].user.email %>
+              </p>
+              <p><strong>Link:</strong> <a href="<%= new_employee.link %>" target="_blank">
+                  <%= new_employee.link %>
+                </a></p>
+            </div>
+            <% } %>
         </div>
-        
+
 
 
       </div>
@@ -1069,7 +1105,7 @@ h1,h2,h3,h4,p{
             }
           });
         });
-      
+
         function isElementInViewport(el) {
           const rect = el.getBoundingClientRect();
           return (
@@ -1080,8 +1116,8 @@ h1,h2,h3,h4,p{
           );
         }
       </script>
-      
-      
+
+
 
 
 
@@ -1244,7 +1280,7 @@ h1,h2,h3,h4,p{
 
       </script>
 
-      
+
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
