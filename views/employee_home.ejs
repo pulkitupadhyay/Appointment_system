@@ -558,9 +558,9 @@ h1,h2,h3,h4,p{
 
 <body>
   <%- include('./alert_msg.ejs') %>
-    <% function formatDateToDDMMYYYY(date) { const day=String(date.getDate()).padStart(2, '0' ); const
-      month=String(date.getMonth() + 1).padStart(2, '0' ); const year=date.getFullYear(); return
-      `${day}-${month}-${year}`; } %>
+    <% function formatDateToDDMMYYYY(date) { const day=String(date.getDate()).padStart(2, '0' );
+     const month=String(date.getMonth() + 1).padStart(2, '0' ); const year=date.getFullYear();
+      return `${day}-${month}-${year}`; } %>
 
 
       <header class="header bg-primary">
@@ -932,32 +932,88 @@ h1,h2,h3,h4,p{
           </div>
         </div>
 
+        <style>       
+          .mainDiv_meeting {
+            position: relative;
+            width: 100%;
+            max-width: 1630px;
+            margin: 50px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          
+          .meeting {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            width: 48%;
+            align-self: flex-start;
+          }
+          
+          .meeting:nth-child(even) {
+            align-self: flex-end;
+            transform: translateX(20px);
+          }
+          
+          .meeting.active {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          .meeting h2 {
+    font-size: 24px; 
+    margin-bottom: 10px;
+    color: #333333;
+  }
+  .meeting p {
+    margin-bottom: 8px;
+    color: #666666; 
+  }
+  .meeting a {
+  color: #007BFF;
+  text-decoration: none;
+  transition: color 0.2s ease, font-weight 0.3s ease;
+}
 
+.meeting a:hover {
+  color: #1E90FF; 
+  font-weight: bold;
+}
+
+        
+          .timeline {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #ccc;
+            transform: translateX(-50%);
+            z-index: -1;
+          }
+        </style>
 
 
         <h1>All Meetings</h1>
 
-        <div class="mainDiv">
-
+        <div class="mainDiv_meeting">
+          <div class="timeline"></div>
           <% for(var i=0 ; i< formattedAppointments.length; i++){ %>
-
             <div class="meeting">
-              <h2>
-                <%=new_employee.name%> And <%=formattedAppointments[i].user.name%>
-              </h2>
-              <h2>Date : <%= formatDateToDDMMYYYY(formattedAppointments[i].time_slot.from_date)%>
-              </h2>
-              <h2>Time : <%= formattedAppointments[i].time_slot.time%>
-              </h2>
-              <h2>Interviewee Email : <%=formattedAppointments[i].user.email%>
-              </h2>
-              <h2>Link : <%=new_employee.link%>
-              </h2>
-            </div>
-
-
-            <%}%>
+              <h2><%=new_employee.name%> and <%=formattedAppointments[i].user.name%></h2>
+              <p><strong>Date:</strong> <%= formatDateToDDMMYYYY(formattedAppointments[i].time_slot.from_date)%></p>
+              <p><strong>Time:</strong> <%= formattedAppointments[i].time_slot.time%></p>
+              <p><strong>Interviewee Email:</strong> <%=formattedAppointments[i].user.email%></p>
+              <p><strong>Link:</strong> <a href="<%=new_employee.link%>" target="_blank"><%=new_employee.link%></a></p>            </div>
+          <%}%>
         </div>
+        
 
 
       </div>
@@ -969,7 +1025,30 @@ h1,h2,h3,h4,p{
 
 
 
-
+      <script>
+        window.addEventListener('scroll', () => {
+          const meetings = document.querySelectorAll('.meeting');
+          meetings.forEach((meeting, index) => {
+            if (index === 0 || isElementInViewport(meeting)) {
+              meeting.classList.add('active');
+            } else {
+              meeting.classList.remove('active');
+            }
+          });
+        });
+      
+        function isElementInViewport(el) {
+          const rect = el.getBoundingClientRect();
+          return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+          );
+        }
+      </script>
+      
+      
 
 
 
@@ -1131,6 +1210,8 @@ h1,h2,h3,h4,p{
 
 
       </script>
+
+      
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
