@@ -694,9 +694,65 @@ h1,h2,h3,h4,p{
           margin-top: -20px;
           margin-bottom: -20px;
         }
+        .loader-container {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.8);
+                z-index: 1000;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .loader {
+                border: 8px solid #3498db;
+                border-top: 8px solid #f5f5f5;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+            }
+    
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
       </style>
 
+<<<<<<< HEAD
+<!-- Availability -->
+<div class="loader-container" id="loaderContainer">
+  <div class="loader"></div>
+</div>
+
+
+<script>
+  function showLoader() {
+  document.getElementById('loaderContainer').style.display = 'flex';
+}
+
+// Hide loader when a process ends
+function hideLoader() {
+  document.getElementById('loaderContainer').style.display = 'none';
+}
+
+// Attach the showLoader function to the 'beforeunload' event
+window.addEventListener('beforeunload', showLoader);
+
+// Attach the hideLoader function to the 'load' event
+window.addEventListener('load', hideLoader);
+
+
+
+
+
+</script>
+=======
       <!-- Availability -->
+>>>>>>> 03478046d406a986a9c92d6dfde543e8a98bdc61
 
       <div class="main">
         <div style="padding: 20px; border-radius: 10px;">
@@ -719,11 +775,21 @@ h1,h2,h3,h4,p{
                 <% for(let i=0; i<7; i++ ){%>
                   <div class="row">
                     <div class="col">
+<<<<<<< HEAD
+                      <form action="/dayChange" id="DC_<%=i%>" method="post">
+                        <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
+                        <input type="hidden" name="dayToChange" value="<%=daysOfWeek[i]%>">
+
+                        <input onchange="document.getElementById('DC_<%=i%>').submit()"  type="checkbox" id="day_<%= i %>" name="day_<%= i %>" class="custom-checkbox" <%
+                          if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %> checked <% } %>
+                          onclick="toggleAvailability(<%= i %>)">
+=======
                     <form action="/dayChange" method="post">
                       <input type="hidden" name="emp_id" value="<%=new_employee._id%>">
                       <input type="hidden" name="dayToChange" value="<%=daysOfWeek[i]%>">
 
                       <input type="checkbox" id="day_<%= i %>" name="day_<%= i %>" class="custom-checkbox" <% if(new_employee.days && new_employee.days.includes(daysOfWeek[i])) { %> checked <% } %>onclick="toggleAvailability(<%= i %>)">
+>>>>>>> 03478046d406a986a9c92d6dfde543e8a98bdc61
 
 
 
