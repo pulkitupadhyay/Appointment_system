@@ -140,12 +140,8 @@
                     <input class="my-3" type="text" name="userEmail">
                 </div>
                 <div>
-                    <label for="Text">Timezone:</label>
-                    <select id="selectOption" name="Timezone">
-                        <% for(var k = 0 ; k < timezones.timezones.length; k++){ %>
-                            <option value="<%= timezones.timezones[k] %>"><%= timezones.timezones[k] %></option>
-                        <% } %>
-                    </select>
+                    
+                   
                 </div>
                 <input type="text" name="userPassword" value="1234" style="display: none;">
                 <input type="text" name="slot_id" value="<%=slot_id%>" style="display: none;">

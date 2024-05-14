@@ -3,7 +3,7 @@ var user_scheema = require("./../../models/user_module");
 var user_signup = async (req, res, next) => {
   var user_name = req.body.userName;
   var user_email = req.body.userEmail;
-  var user_timezone = req.body.Timezone;
+  // var user_timezone = req.body.Timezone;
   var user_password = req.body.userPassword;
 
   var userexist = await user_scheema.findOne({ email: user_email });
@@ -42,7 +42,7 @@ req.flash('message','Sucess!!')
       name: user_name,
       email: user_email,
       password: user_password,
-      timezone: user_timezone,
+      // timezone: user_timezone,
     });
 
     var user;

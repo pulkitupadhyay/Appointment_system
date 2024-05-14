@@ -32,25 +32,27 @@ async function delete_expired_slots() {
 
     console.log(appo, prev_ts);
 
-    var p_appo = new previous_appointments({
-      _id: appo._id,
-      userID: appo.userID,
-      employeeID: appo.employeeID,
-      text: appo.text,
-      time_slotId: appo.time_slotId,
-      accepted: appo.accepted,
-    });
-
     var p_ts = new prev_time_slots({
-      _id: prev_ts._id,
+     
       employeeID: prev_ts.employeeID,
       from_date: prev_ts.from_date,
       time: prev_ts.time,
       occupied: prev_ts.occupied,
     });
 
-    await p_appo.save();
     await p_ts.save();
+
+    var p_appo = new previous_appointments({
+     
+      userID: appo.userID,
+      employeeID: appo.employeeID,
+      text: appo.text,
+      time_slotId: p_ts._id,
+      accepted: appo.accepted,
+    });
+    
+
+    await p_appo.save();
 
     await appointment_requests.findOneAndDelete({
       time_slotId: slots_came_from_database[i]._id.toString(),
