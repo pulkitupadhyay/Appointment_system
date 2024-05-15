@@ -16,7 +16,7 @@ const fs = require("fs");
 const { parse } = require("date-fns");
 const sendMailcc =require('./other_functions/send_mail_cc')
 const moment = require('moment-timezone')
-
+var cron = require('node-cron');
 const hr_login = require("./login&authentication/hr_login");
 const fake_login = require("./during_booking/fake_login");
 const with_perticuler_employee = require("./employee_related/perticuler_employee_page");
@@ -128,7 +128,7 @@ schedule.scheduleJob("1 */1 * * *", () => {
 const cronExpression = '0 * * * *'; // This cron expression runs every hour at minute 0
 
 // Create a job using the cron expression
-schedule.scheduleJob(cronExpression, async function() {
+var cron1 = cron.schedule(cronExpression, async function() {
 
   var today = new Date();
   var date = today
@@ -203,7 +203,9 @@ if(populatedAppointments.length == 0){
 }
 }
 console.log('Reminder Mail Sent');
-});
+},{scheduled: true,timezone:'Asia/Calcutta'})
+
+cron1.start();
 // job.invoke(); 
 
 // const schedule = require('node-schedule');
@@ -315,5 +317,46 @@ router.post("/delete_appointment", delete_apppointment);
 router.post("/reSchedule_appointment", reschedule);
 //done
 router.post("/remove_timeslot", remove_ts);
+
+
+
+
+router.post('/dayChange',async ( req,res,next)=>{
+
+
+  const {emp_id,dayToChange} = req.body;
+
+  const that_employee = await employee_module.findOne({_id:emp_id.trim()})
+  if(that_employee){
+
+    var dayindex = that_employee.days.indexOf(dayToChange)
+    // console.log(dayindex)
+   if(dayindex === -1){
+    that_employee.days.push(dayToChange)
+    await that_employee.save();
+
+    req.flash('message', 'Day Added')
+    res.redirect(`/employee_Dashbord/${emp_id}`)
+
+   }else{
+
+    that_employee.days.remove(dayToChange)
+    
+    await that_employee.save();
+    req.flash('message', 'Day Removed')
+
+    res.redirect(`/employee_Dashbord/${emp_id}`)
+
+   }
+
+   
+    
+
+  }else {
+    req.flash('error','employee not found')
+    res.redirect('/')
+  }
+
+})
 
 module.exports = router;

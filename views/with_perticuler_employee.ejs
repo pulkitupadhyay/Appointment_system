@@ -55,17 +55,31 @@ resetInactivityTimer();
       (c) => c.toUpperCase()); %> <%}%>
 
       <h1
-        class="my-4"
-        style="
-          font-family: sans-serif;
-          font-weight: bold;
-          font-size: 1.5rem;
-          text-shadow: 0rem 0.5rem 1.5rem #92a1d1;
-        "
-      >
-        Book 1 Hour meeting with <%= capitalizeFirstLetter(employee.name); %>
-      </h1>
+      class="my-4"
+      style="
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 1.5rem;
+        text-shadow: 0rem 0.5rem 1.5rem #92a1d1;
+      "
+    >
+      Book 1 Hour meeting with <%= capitalizeFirstLetter(employee.name); %>
+    </h1>
+    <div style="
+      margin-top: -10px;
+      padding: 10px;
+      background-color: #ffcccc;
+      border-left: 4px solid #ff0000;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      color: #333;
+    ">
+  <p style="margin: 0;">
+    <strong>Note:</strong> All timings are in Indian Standard Time (IST). Please select accordingly.
+  </p>
+</div>
 
+  
       <div class="mainddddd">
         <div id="container">
           <div id="header">
