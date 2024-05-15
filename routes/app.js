@@ -131,7 +131,7 @@ const cronExpression = '0 * * * *'; // This cron expression runs every hour at m
 var cron1 = cron.schedule(cronExpression, async function() {
 
   var today = new Date();
-  var date = today
+  // var date = today
   var options = {
     timeZone: 'Asia/Kolkata', // Indian Standard Time (IST)
     hour12: false, // Use 24-hour format
@@ -141,10 +141,11 @@ var cron1 = cron.schedule(cronExpression, async function() {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit'
+
 };
 
 var locals = today.toLocaleString('en-US',options)
-
+var date = new Date(locals)
   var DStirng = new Date(locals).toISOString();
   const formattedDateString = DStirng.slice(0, 10) + 'T00:00:00.000+00:00';
     console.log(formattedDateString)
