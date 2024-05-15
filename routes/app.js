@@ -132,9 +132,22 @@ var cron1 = cron.schedule(cronExpression, async function() {
 
   var today = new Date();
   var date = today
-  var DStirng = today.toISOString();
+  var options = {
+    timeZone: 'Asia/Kolkata', // Indian Standard Time (IST)
+    hour12: false, // Use 24-hour format
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+};
+
+var locals = today.toLocaleString('en-US',options)
+
+  var DStirng = new Date(locals).toISOString();
   const formattedDateString = DStirng.slice(0, 10) + 'T00:00:00.000+00:00';
-    
+    console.log(formattedDateString)
 // console.log(formattedDateString)
 const todaySTasks = await time_slot.find({ from_date : formattedDateString})
 const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits, padding with '0' if necessary
