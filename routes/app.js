@@ -203,7 +203,7 @@ if(populatedAppointments.length == 0){
 }
 }
 console.log('Reminder Mail Sent');
-}).invoke();
+});
 // job.invoke(); 
 
 // const schedule = require('node-schedule');
