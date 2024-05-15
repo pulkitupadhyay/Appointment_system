@@ -128,7 +128,7 @@ schedule.scheduleJob("1 */1 * * *", () => {
 const cronExpression = '0 * * * *'; // This cron expression runs every hour at minute 0
 
 // Create a job using the cron expression
-const job = schedule.scheduleJob(cronExpression, async function() {
+schedule.scheduleJob(cronExpression, async function() {
 
   var today = new Date();
   var date = today
@@ -203,7 +203,7 @@ if(populatedAppointments.length == 0){
 }
 }
 console.log('Reminder Mail Sent');
-});
+}).invoke();
 // job.invoke(); 
 
 // const schedule = require('node-schedule');
