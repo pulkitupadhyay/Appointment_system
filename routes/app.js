@@ -12,11 +12,13 @@ const prev_time_slots = require("./../models/prev_time_slots");
 const hr = require("./../models/hrs");
 const hrs = require("./../models/hrs");
 const sendMail = require("./other_functions/sendMail");
+const downloadResume = require("./other_functions/download_resume");
+
 const fs = require("fs");
 const { parse } = require("date-fns");
-const sendMailcc =require('./other_functions/send_mail_cc')
-const moment = require('moment-timezone')
-var cron = require('node-cron');
+const sendMailcc = require("./other_functions/send_mail_cc");
+const moment = require("moment-timezone");
+var cron = require("node-cron");
 const hr_login = require("./login&authentication/hr_login");
 const fake_login = require("./during_booking/fake_login");
 const with_perticuler_employee = require("./employee_related/perticuler_employee_page");
@@ -33,7 +35,48 @@ const hr_dashbord = require("./hr_works/hr_dashbord");
 const remove_ts = require("./hr_works/remove_timeslot");
 const employee_module = require("./../models/employee_module");
 const { el } = require("date-fns/locale");
-var timezones;
+const multer = require("multer");
+const dayChange = require("./other_functions/dayChange");
+const removeSlot = require("./other_functions/removeSlot");
+const addSlot = require("./other_functions/addSlot");
+const reminderFunc = require("./other_functions/reminderFunc");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+router.post("/add-slot", addSlot);
+
+router.post("/removeslot", removeSlot);
+
+router.post("/fake_login", fake_login);
+
+router.post("/hr_login", hr_login);
+
+router.post("/user_signUp", user_signup);
+
+router.post("/hr_signUp", hr_signUp);
+
+router.post("/employee_signUp", employee_signUp);
+
+router.get("/hr_dashbord", hr_dashbord);
+
+router.get("/employee_Dashbord/:id", employee_Dashbord);
+
+router.post("/employee_login", employee_login);
+
+router.post("/add_time_slots", add_time_slots);
+
+router.get("/employee/:id", with_perticuler_employee);
+
+router.post("/book_slot", upload.single("resume"), book_slot);
+
+router.post("/delete_appointment", delete_apppointment);
+
+router.post("/reSchedule_appointment", reschedule);
+
+router.post("/remove_timeslot", remove_ts);
+
+router.post("/dayChange", dayChange);
+
+router.get("/res-dow/:id", downloadResume);
 
 fs.readFile("public/gifs/timezones.json", "utf8", (err, data) => {
   if (err) {
@@ -50,60 +93,6 @@ fs.readFile("public/gifs/timezones.json", "utf8", (err, data) => {
   }
 });
 
-router.post("/add-day", async (req, res, next) => {
-  const { daytoadd, emp_id } = req.body;
-  try {
-    const that_employee = await employee_scheema.findOne({
-      _id: emp_id.trim(),
-    });
-
-    if (that_employee) {
-      if (!that_employee.days.includes(daytoadd)) {
-        that_employee.days.push(daytoadd);
-        await that_employee.save();
-        req.flash("message", "Day added successfully.");
-        res.redirect(req.header("referer") || "/");
-      } else {
-        req.flash("error", "Day already exists for this employee.");
-        res.redirect(req.header("referer") || "/");
-      }
-    } else {
-      req.flash("error", "Employee not found.");
-      res.redirect(req.header("referer") || "/");
-    }
-  } catch (error) {
-    console.error("Error adding day:", error);
-    req.flash("error", "Internal Server Error");
-    res.redirect(req.header("referer") || "/");
-  }
-  
-});
-
-router.post("/removeday", async (req, res, next) => {
-  const { emp_id, daytoremove } = req.body;
-  try {
-    const that_employee = await employee_module.findOne({ _id: emp_id.trim() });
-
-    if (that_employee) {
-      const indexToRemove = that_employee.days.indexOf(daytoremove);
-
-      if (indexToRemove !== -1) {
-        that_employee.days.splice(indexToRemove, 1);
-        await that_employee.save();
-        req.flash("message", "Day removed successfully.");
-      } else {
-        req.flash("error", "Day not found for this employee.");
-      }
-    } else {
-      req.flash("error", "Employee not found.");
-    }
-  } catch (error) {
-    console.error("Error removing day:", error);
-    req.flash("error", "Internal Server Error");
-  }
-  res.redirect(req.header("referer") || "/");
-});
-
 router.get("/hr_login", (req, res, next) => {
   if (req.cookies.hr_email) {
     res.redirect("hr_dashbord");
@@ -115,7 +104,7 @@ router.get("/hr_login", (req, res, next) => {
   }
 });
 router.get("/", (req, res) => {
-res.render('initial')
+  res.render("initial");
 
   // res.redirect("/hr_login");
 });
@@ -125,108 +114,15 @@ schedule.scheduleJob("1 */1 * * *", () => {
   del();
 });
 
-const cronExpression = '0 * * * *'; // This cron expression runs every hour at minute 0
+const cronExpression = "0 * * * *"; // This cron expression runs every hour at minute 0
 
 // Create a job using the cron expression
-var cron1 = cron.schedule(cronExpression, async function() {
-
-  var today = new Date();
-  // var date = today
-  var options = {
-    timeZone: 'Asia/Kolkata', // Indian Standard Time (IST)
-    hour12: false, // Use 24-hour format
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-
-};
-
-var locals = today.toLocaleString('en-US',options)
-var date = new Date(locals)
-  var DStirng = new Date(locals).toISOString();
-  const formattedDateString = DStirng.slice(0, 10) + 'T00:00:00.000+00:00';
-    console.log(formattedDateString)
-// console.log(formattedDateString)
-const todaySTasks = await time_slot.find({ from_date : formattedDateString})
-const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits, padding with '0' if necessary
-const minutes = String(date.getMinutes()).padStart(2, '0'); // Ensure two digits, padding with '0' if necessary
-const timeString = `${hours}:${minutes}`;
- 
-const filteredTasks = todaySTasks.filter(task => {
-const taskHour = parseInt(task.time.split(':')[0]); // Extract hour part from task's time
-const comparetimeHour = parseInt(timeString.split(':')[0]); // Extract hour part from comparetime
-return taskHour == comparetimeHour + 1;
+var cron1 = cron.schedule(cronExpression, reminderFunc, {
+  scheduled: true,
+  timezone: "Asia/Calcutta",
 });
-const timeSlotIds = filteredTasks.map(task => task._id);
-
-// Find all appointment requests where timeSlotId matches any of the _id values in the filteredTasks array
-const appointmentRequests = await appointment_requests.find({ time_slotId: { $in: timeSlotIds } });
-const userIds = appointmentRequests.map(appointment => appointment.userID);
-const employeeIds = appointmentRequests.map(appointment => appointment.employeeID);
-
-// Fetch user documents
-const user1 = await user_scheema.find({ _id: { $in: userIds } });
-// console.log(user1)
-// Fetch employee documents
-const employee1 = await employee_scheema.find({ _id: { $in: employeeIds } });
-// console.log(employee1)
-// Populate appointment objects with user and employee details
-const populatedAppointments = appointmentRequests.map(appointment => {
-const user = user1.find(user => user._id == appointment.userID);
-const employee = employee1.find(employee => employee._id == appointment.employeeID);
-const timeslot = filteredTasks.find(slot=>slot._id == appointment.time_slotId)
-return {
-  ...appointment,
-  user,
-  employee,
-  timeslot
-};
-});
-
-console.log(populatedAppointments);
-if(populatedAppointments.length == 0){
-
-  console.log('no appointments')
-}else{
-  for (const appointment of populatedAppointments) {
-    const date = new Date();
-    const timeString = appointment.timeslot.time;
-
-    const employee_email = appointment.employee.email;
-    const user_email = appointment.user.email;
-    const subject = 'Meeting Reminder !!';
-    const text = `
-        Dear ${appointment.user.name},
-        
-        Just a quick reminder about your meeting today with ${appointment.employee.name}:
-        
-        - Date: ${moment(appointment.timeslot.from_date).format('DD/MM/YYYY')}
-        - Time: ${appointment.timeslot.time} (Indian Standard Time)
-        - Meeting Link: ${appointment.employee.link}
-        
-        Please ensure being on time.
-        
-        Best Regards,
-        Swaayatt Robots Pvt Ltd
-    `;
-
-    await sendMailcc(user_email, subject, text, employee_email);
-}
-}
-console.log('Reminder Mail Sent');
-},{scheduled: true,timezone:'Asia/Calcutta'})
 
 cron1.start();
-// job.invoke(); 
-
-// const schedule = require('node-schedule');
-
-// Define the cron expression for running every one hour
-
-
 
 router.get("/book_appointment", async (req, res, next) => {
   var emploies = await employee_scheema.find();
@@ -244,133 +140,16 @@ router.get("/employee_login", (req, res, next) => {
   });
 });
 
-router.post("/add-slot", async (req, res, next) => {
-  const { emp_id, slottoadd } = req.body;
-  try {
-    const that_employee = await employee_scheema.findOne({
-      _id: emp_id.trim(),
-    });
-
-    if (that_employee) {
-      // Check if the slottoadd is not already in the array
-      if (!that_employee.slots.includes(slottoadd)) {
-        // Add slottoadd to the array
-        that_employee.slots.push(slottoadd);
-        // Save the updated document
-        await that_employee.save();
-        // Set flash message for success
-        req.flash("message", "Slot added successfully.");
-      } else {
-        // Set flash message for slot already existing
-        req.flash("error", "Slot already exists for this employee.");
-      }
-    } else {
-      // Set flash message for employee not found
-      req.flash("error", "Employee not found.");
-    }
-  } catch (error) {
-    console.error("Error adding slot:", error);
-    // Set flash message for internal server error
-    req.flash("error", "Internal Server Error");
-  }
-  // Redirect back to the previous URL
-  res.redirect(req.header("referer") || "/");
-});
-
-router.post("/removeslot", async (req, res, next) => {
-  const { slottoremove, emp_id } = req.body;
-  try {
-    const that_employee = await employee_module.findOne({ _id: emp_id.trim() });
-
-    if (that_employee) {
-      const indexToRemove = that_employee.slots.indexOf(slottoremove);
-
-      if (indexToRemove !== -1) {
-        that_employee.slots.splice(indexToRemove, 1);
-        await that_employee.save();
-        req.flash("message", "Slot removed successfully.");
-      } else {
-        req.flash("error", "Slot not found for this employee.");
-      }
-    } else {
-      req.flash("error", "Employee not found.");
-    }
-  } catch (error) {
-    console.error("Error removing slot:", error);
-    req.flash("error", "Internal Server Error");
-  }
-  res.redirect(req.header("referer") || "/");
-});
-
-// done
-
-router.post("/fake_login", fake_login);
-// done
-router.post("/hr_login", hr_login);
-// done
-router.post("/user_signUp", user_signup);
-// done
-router.post("/hr_signUp", hr_signUp);
-// done
-router.post("/employee_signUp", employee_signUp);
-// done
-router.get("/hr_dashbord", hr_dashbord);
-
-router.get("/employee_Dashbord/:id", employee_Dashbord);
-
-router.post("/employee_login", employee_login);
-
-router.post("/add_time_slots", add_time_slots);
-//done
-router.get("/employee/:id", with_perticuler_employee);
-//done
-router.post("/book_slot", book_slot);
-//done
-router.post("/delete_appointment", delete_apppointment);
-//done
-router.post("/reSchedule_appointment", reschedule);
-//done
-router.post("/remove_timeslot", remove_ts);
-
-
-
-
-router.post('/dayChange',async ( req,res,next)=>{
-
-
-  const {emp_id,dayToChange} = req.body;
-
-  const that_employee = await employee_module.findOne({_id:emp_id.trim()})
-  if(that_employee){
-
-    var dayindex = that_employee.days.indexOf(dayToChange)
-    // console.log(dayindex)
-   if(dayindex === -1){
-    that_employee.days.push(dayToChange)
-    await that_employee.save();
-
-    req.flash('message', 'Day Added')
-    res.redirect(`/employee_Dashbord/${emp_id}`)
-
-   }else{
-
-    that_employee.days.remove(dayToChange)
-    
-    await that_employee.save();
-    req.flash('message', 'Day Removed')
-
-    res.redirect(`/employee_Dashbord/${emp_id}`)
-
-   }
-
-   
-    
-
-  }else {
-    req.flash('error','employee not found')
-    res.redirect('/')
-  }
-
-})
+// router.get('/api-dow', async (req, res, next) => {
+//   try {
+//     const url =
+//     const response = await axios.get(url, { responseType: 'stream' });
+//     res.setHeader('Content-Disposition', 'attachment; filename="image.jpg"');
+//     response.data.pipe(res);
+//   } catch (error) {
+//     console.error("Error downloading file:", error);
+//     res.status(500).send("Error downloading file.");
+//   }
+// });
 
 module.exports = router;

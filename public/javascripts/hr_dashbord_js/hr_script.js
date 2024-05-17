@@ -201,7 +201,8 @@ if(count>=2){
 
                 // console.log(isDateTimeInArray(formattedDate, "13:00"));
 
-                for (var k = 0; k <= 8; k++) {
+                for (var k = 0; k <= 11; k++) {
+                  console.log('kkkkk',k)
                   if (k == 0) {
                     if (!isDateTimeInArray(formattedDate, "12:00")) {
                       

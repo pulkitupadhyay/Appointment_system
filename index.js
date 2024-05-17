@@ -1,4 +1,5 @@
 // const express = require('express'
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const Route = require("./routes/app");
@@ -68,7 +69,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 mongoose
   .connect(
-    "mongodb+srv://pulkit_ji:EkJTiZhfUWss7Qk1@cluster0.xbds8cy.mongodb.net/appointment_systems_database?retryWrites=true&w=majority",
+    process.env.MONGO_URI,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(function () {
@@ -78,7 +79,7 @@ mongoose
       console.log("Listening on port");
 
      
-      // job.invoke()
+      
 
 
     });

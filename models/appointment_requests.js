@@ -17,7 +17,7 @@ var appointment_requests = mongoose.Schema({
   },
   text:{
     type: String,
-    required: true
+    
   },
   time_slotId : {
     type:String ,

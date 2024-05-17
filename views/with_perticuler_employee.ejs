@@ -252,12 +252,9 @@ resetInactivityTimer();
                 return formattedTime;
               }
               function formatDateFromString(dateString) {
-                // console.log("🚀 ~ formatDateFromString ~ dateString:", dateString)
-                // Create a Date object from the input string
+              
                 const date = new Date(dateString);
-                // console.log("🚀 ~ formatDateFromString ~ date:", date)
-
-                // Options for formatting the date
+               
                 const options = {
                   day: "2-digit",
                   month: "2-digit",
@@ -278,14 +275,6 @@ resetInactivityTimer();
 
 
               const providedDate = formattedDate;
-
-// Convert the provided date to a JavaScript Date object using Moment.js
-// const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
-
-// // Count the number of objects with the provided date
-// const count = array.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
-
-// console.log(count); 
 
 
 
@@ -364,7 +353,7 @@ if(count>=2){
 
                 // console.log(isDateTimeInArray(formattedDate, "13:00"));
 
-                for (var k = 0; k <= 8; k++) {
+                for (var k = 0; k <= 11; k++) {
                   if (k == 0) {
                     if (!isDateTimeInArray(formattedDate, "12:00")) {
                       

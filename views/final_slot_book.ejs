@@ -75,16 +75,16 @@
 
     <div style="display: flex;  padding: 2%; margin-top: 5rem; height: 40rem; flex-direction: column; align-items: center; justify-content: center; width: 60%; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; ">
   
-        <h1 style=" font-family: sans-serif; font-weight: bold;" >Please Enter Meeting Link </h1>
-        <p>Write NA if not applicable or you are a candidate</p>
+        <h1 style=" font-family: sans-serif; font-weight: bold;" >Please Submit Resume </h1>
+        <p>If you are not a candidate, just hit Book Appointment button directly.</p>
   
   <div style="margin-top: 2rem; display: flex;  padding: 2%; flex-direction: column; align-items: center; justify-content: center; width: 60%; box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important; " >
         
-   <form action="/book_slot" method="post" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+   <form action="/book_slot" method="post" style="display: flex; flex-direction: column; align-items: center; justify-content: center;" enctype="multipart/form-data">
     <input type="text" name = 'slot_id' value=" <%=slot_id%> " style="display: none;" >
    <input type="text" name="user_id" value="<%=user._id%>"  style="display: none;">       
     <input type="text" name="employee_id" value="<%=employee_id%>" style="display: none;">
-    <textarea type="text" name="text_associated"  placeholder="please write some text for employee" rows="4" cols="50"> </textarea>
+    <input type="file" name="resume" id="resume" accept="application/pdf">
     <button class="btn-primary mt-4" style="padding: 4%; width: 80%; border-radius: 2rem;" type="submit">Book Appointment</button>
 
 

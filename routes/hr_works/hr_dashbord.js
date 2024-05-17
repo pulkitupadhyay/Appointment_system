@@ -69,44 +69,7 @@ const hr_dashbord = async (req, res, next) => {
       // console.log(all_appointmentsF.flat(Infinity))
       all_prev_appointmentsF = all_prev_appointmentsF.flat(Infinity);
 
-      // console.log("🚀 ~ consthr_dashbord= ~ result:", all_prev_appointmentsF)
-
-      // console.log("🚀 ~ consthr_dashbord= ~ timeSlotId:", timeSlotId)
-
-      // const prevAppointmentsPromises =timeSlotId.map((id) => previous_appointments.find({
-      //   time_slotId: timeSlotId,
-      // }))
-      // const prevAppointmentsPromisesResult = await Promise.allSettled(prevAppointmentsPromises);
-      // // console.log("🚀 ~ consthr_dashbord= ~ prevAppointmentsPromisesResult:", prevAppointmentsPromisesResult)
-      // const all_prev_appointmentsF = prevAppointmentsPromisesResult
-      // .filter((data) => data.status === "fulfilled")
-      // .map((data) => data.value);
-      // console.log("🚀 ~ consthr_dashbord= ~ all_prev_appointmentsF:", all_prev_appointmentsF)
-      // const prevAppointmentsPromises = prvs_time_slots.map(async (slot) => {
-      //   try {
-      //     console.log("🚀 ~ prevAppointmentsPromises ~ slot:", slot)
-      //     const appointment = await previous_appointments.findOne({
-      //       time_slotId: slot._id,
-      //     });
-      //     console.log("🚀 ~ prevAppointmentsPromises ~ appointment:", appointment)
-      //     return appointment;
-      //   } catch (error) {
-      //     res.render("error", {
-      //       message: req.flash("message"),
-      //       bad_alert: req.flash("error"),
-      //     });
-      //   }
-      // });
-
-      // const all_prev_appointmentsF = await Promise.all(
-      //   prevAppointmentsPromises
-      // );
-      // console.log("🚀 ~ consthr_dashbord= ~ all_prev_appointmentsF:", all_prev_appointmentsF)
-
-      // Fetch appointments for each today's time slot
-
-      // const timeSlotIdcur = to.map((data)=> data._id);
-      // const all_appointmentsF = await appointment_requests.find({ time_slotId: { $in: timeSlotIdcur } });
+      
 
       const timeSlotIdCur = todaysTimeSlots.map((data) => data._id);
       // console.log("🚀 ~ consthr_dashbord= ~ timeSlotId:", timeSlotIdCur);

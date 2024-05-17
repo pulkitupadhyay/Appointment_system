@@ -20,7 +20,7 @@ async function sendMail(to, subject, text, html) {
       const info = await transporter.sendMail({
         from: '"SWAAYATT" <swaayatt.interviews@gmail.com>', // sender address
         to: to,
-        cc: "soumya@swaayatt.com,pulkit.upadhyay@deepeigen.com", // list of receivers
+        cc: "pulkit.upadhyay@deepeigen.com", // list of receivers
         subject: subject, // Subject line
         text: text, // plain text body
         html: html, // html body
