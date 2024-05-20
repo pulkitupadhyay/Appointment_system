@@ -142,7 +142,7 @@ router.get("/employee_login", (req, res, next) => {
 });
 
 // const reminderFunc=require('./../routes/other_functions/reminderFunc')
-reminderFunc();
+// reminderFunc();
 // router.get('/api-dow', async (req, res, next) => {
 //   try {
 //     const url =
