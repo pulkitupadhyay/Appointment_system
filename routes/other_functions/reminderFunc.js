@@ -3,8 +3,11 @@ const appointment_requests = require('./../../models/appointment_requests')
 const user_scheema = require('./../../models/user_module')
 const employee_scheema = require('./../../models/employee_module')
 const moment = require('moment')
+const sendMailcc = require('./send_mail_cc')
 
 const reminderFunc = async function () {
+   
+  try {
     var today = new Date();
     // var date = today
     var options = {
@@ -107,6 +110,11 @@ const reminderFunc = async function () {
       }
     }
     console.log("Reminder Mail Sent");
+  } catch (error) {
+    console.log(error)
+    console.log('some error in sending the email')
+  }
+  
   }
 
 

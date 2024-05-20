@@ -11,10 +11,7 @@ var previous_appointments = mongoose.Schema({
     type: String,
     required: true
   },
-  text:{
-    type: String,
-    required: true
-  },
+ 
   time_slotId : {
     type:String ,
     required: true

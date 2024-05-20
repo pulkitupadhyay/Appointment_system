@@ -78,6 +78,7 @@ router.post("/dayChange", dayChange);
 
 router.get("/res-dow/:id", downloadResume);
 
+
 fs.readFile("public/gifs/timezones.json", "utf8", (err, data) => {
   if (err) {
     console.error("Error reading JSON file:", err);
@@ -140,6 +141,8 @@ router.get("/employee_login", (req, res, next) => {
   });
 });
 
+// const reminderFunc=require('./../routes/other_functions/reminderFunc')
+reminderFunc();
 // router.get('/api-dow', async (req, res, next) => {
 //   try {
 //     const url =
