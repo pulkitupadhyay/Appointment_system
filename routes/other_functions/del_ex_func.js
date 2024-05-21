@@ -7,7 +7,10 @@ const prev_time_slots = require("../../models/prev_time_slots");
 
 async function delete_expired_slots() {
   await time_slot.deleteMany({ occupied: false });
-  const currentDate = new Date();
+  var currentDate = new Date();
+const utcDate = new Date(currentDate.getTime() + currentDate.getTimezoneOffset() * 60000);
+const istOffset = 5.5 * 60 * 60000; // IST offset in milliseconds
+ currentDate = new Date(utcDate.getTime() + istOffset);
   const isoString =
     currentDate.toISOString().split("T")[0] + "T00:00:00.000+00:00";
   console.log('isos',isoString);
