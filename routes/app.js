@@ -110,20 +110,25 @@ router.get("/", (req, res) => {
   // res.redirect("/hr_login");
 });
 
-schedule.scheduleJob("1 */1 * * *", () => {
+var cron2 = cron.schedule("1 * * * *", () => {
   console.log("This schaduler will run every 1 hour and one minut ");
   del();
-});
-
-const cronExpression = "0 * * * *"; // This cron expression runs every hour at minute 0
-
-// Create a job using the cron expression
-var cron1 = cron.schedule(cronExpression, reminderFunc, {
+}, {
   scheduled: true,
   timezone: "Asia/Calcutta",
 });
 
-cron1.start();
+cron2.start();
+
+const cronExpression = "0 * * * *"; // This cron expression runs every hour at minute 0
+
+// Create a job using the cron expression
+  var cron1 = cron.schedule(cronExpression, reminderFunc, {
+    scheduled: true,
+    timezone: "Asia/Calcutta",
+  });
+
+  cron1.start();
 
 router.get("/book_appointment", async (req, res, next) => {
   var emploies = await employee_scheema.find();
