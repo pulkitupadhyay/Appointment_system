@@ -72,6 +72,16 @@ var fake_login = async (req, res, next) => {
   // var user_id = req.body.user_id;
   var employee_id = req.body.employee_id;
 
+  var checktimeslot = await time_slot.find({employeeID:employee_id.trim(),from_date:jsDate, time:from_time})
+  // console.log(checktimeslot.length)
+
+if(checktimeslot.length != 0){
+      // console.log(checktimeslot)
+      req.flash('error',"TimeSlot is preoccupied please try another one!")
+      res.redirect(`/employee/${req.body.employee_id}`)
+
+}else{
+
   var slot = new time_slot({
     employeeID: employee_id,
     from_date: jsDate,
@@ -101,6 +111,8 @@ var fake_login = async (req, res, next) => {
         res.redirect(`/employee/${req.body.employee_id}`)
       }
     });
+  }
+
 };
 
 module.exports = fake_login;

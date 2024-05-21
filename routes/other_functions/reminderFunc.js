@@ -89,7 +89,7 @@ const reminderFunc = async function () {
         const user_email = appointment.user.email;
         const subject = "Meeting Reminder !!";
         const text = `
-        Dear ${appointment.user.name},
+        Dear ${appointment.user.name}, 
         
         Just a quick reminder about your meeting today with ${
           appointment.employee.name

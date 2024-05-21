@@ -46,7 +46,7 @@ async function delete_expired_slots() {
      
       userID: appo.userID,
       employeeID: appo.employeeID,
-      text: appo.text,
+      // text: appo.text,
       time_slotId: p_ts._id,
       accepted: appo.accepted,
     });
@@ -89,7 +89,7 @@ async function delete_expired_slots() {
    
       userID: appo.userID,
       employeeID: appo.employeeID,
-      text: appo.text,
+      // text: appo.text,
       time_slotId: p_ts._id,
       accepted: appo.accepted,
     });
