@@ -80,9 +80,19 @@ form input {
 }
 .padding {
   cursor: default !important;
-  background-color: #fffcff !important;
+  /* background-color: #FFFCFF !important; */
+  background-color: transparent !important;
   box-shadow: none !important;
-}
+  border-bottom: none !important;
+  }
+  
+  
+  .padding:hover {
+    cursor: default !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+    background-color: transparent !important;
+  }
 #newEventModal,
 #deleteEventModal {
   display: none;
@@ -149,7 +159,7 @@ form input {
 }
 
 #header .icons span:last-child {
-  margin-right: -10px;
+  margin-right: -5px;
 }
 
 #header .icons span:hover {

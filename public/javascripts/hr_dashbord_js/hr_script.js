@@ -362,8 +362,8 @@ body {
           display: flex;
           flex-direction: column;
           background-color: #fff;
-          padding: 20px;
-          border-radius: 15px;
+          padding: 5px;
+          border-radius: 5px;
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
       }
 
@@ -381,6 +381,7 @@ body {
           align-items: center;
           justify-content: center;
           flex-direction:column;
+          gap: 10px;
       }
 
       #hour, #minute {
@@ -397,7 +398,7 @@ body {
 
       .fbtn {
           width: 100%;
-          padding: 15px;
+          padding: 20px;
           background-color: #3498db;
           color: #fff;
           border: none;
@@ -434,7 +435,7 @@ form input{
 
 #header {
   padding: 10px;
-  background-color: #d36c6c;
+  background-color: #1E90FF;;
   color: white;
   font-size: 18px;
   font-family: sans-serif;
@@ -454,7 +455,7 @@ background-color:#92a1d1;
   width: 38px;
   margin: 0 1px;
   cursor: pointer;
-  color: #000;
+  color: white;
   text-align: center;
   line-height: 38px;
   font-size: 1.9rem;
@@ -463,15 +464,15 @@ background-color:#92a1d1;
 }
 
 #header .icons span:last-child {
-  margin-right: -10px;
+  margin-right: -5px;
   
 }
 
 
 #header .icons span:hover {
-  background:  rgb(202, 201, 201);
+  background: white;
   /* color: rgba(247, 241, 241, 0.938);  */
-  color:  #d36c6c;
+  color:  #1E90FF;
 }
 
 
@@ -482,7 +483,7 @@ width: 964px;
   width: 100%;
   display: flex;
   color: #247BA0;
-  margin-left: 5%;
+  margin-left: 6%;
   font-weight: bold;
 }
 #weekdays div {
@@ -513,13 +514,13 @@ justify-content: space-between;
   box-shadow: 0 5px 25px rgb(1 1 1 / 15%);
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
-  border-bottom: 6px solid #4285F4;
+  border-bottom: 6px solid #1E90FF;;
   border-radius: 8px;
   justify-content: center;
   text-align: center;
 }
 .day:hover {
-  background-color: rgba(211, 108, 108, 0.6) !important;
+  background-color: #73ACDC !important;
 }
 
 .day + #currentDay {
@@ -536,9 +537,20 @@ overflow: hidden;
 }
 .padding {
 cursor: default !important;
-background-color: #FFFCFF !important;
+// background-color: #FFFCFF !important;
+background-color: transparent !important;
 box-shadow: none !important;
+border-bottom: none;
 }
+
+
+.padding:hover {
+  cursor: default !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+  background-color: transparent !important;
+}
+
 #newEventModal, #deleteEventModal {
 display: none;
 z-index: 20;
