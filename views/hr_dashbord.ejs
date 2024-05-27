@@ -1,305 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Dashboard</title>
-    <link rel="stylesheet" href="/stylesheets/hr_stylesheets/hr_style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 
-    
-   
-    
-      
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Dashboard</title>
+  <link rel="stylesheet" href="/stylesheets/hr_stylesheets/hr_style.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
 </head>
+
+  <style>
+    .w3-bar .w3-button {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .w3-bar .w3-button {
+    display: block;
+    text-wrap: nowrap;
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+  }
+
+  #left-navigation {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    overflow-y: auto;
+    z-index: 999;
+    padding: 20px;
+  }
+
+  #left-navigation.show {
+    display: block;
+  }
+
+  #left-navigation h2,
+  #left-navigation ul li h4 a {
+    color: #fff;
+  }
+
+  #left-navigation button {
+    color: #000;
+  }
+
+  .employee-item {
+    width: 80%;
+  }
+
+  .w3-button-container {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  #employee-list {
+  height: 50rem;
+  }
+}
+
+  </style>
 <body>
+  <script>
+ function toggleMenu() {
+  const navigation = document.getElementById('left-navigation');
+  const menuButton = document.querySelector('.w3-bar .w3-button');
+  navigation.classList.toggle('show');
+
+
+    menuButton.innerHTML = '<i class="fa fa-bars"></i> Employee List';
+  }
+
+
+
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
   <%- include('./alert_msg.ejs') %>
-    <div id="left-navigation">
-        <h2>Employee List</h2>
-        <ul id="employee-list">
-           
-            <% for(var i=0; i< emploies.length; i++){ %>
-                <input style="display: none;" type="text" class="inp_emp_<%=i%>" value="https://swaayatt.com/employee/<%=emploies[i]._id%>" readonly>
+  <div class="w3-bar w3-white">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hide-medium" onclick="toggleMenu()">
+      <i class="fa fa-bars"></i> Employee List
+    </button>
+  </div>
+  
+  <div id="left-navigation" class="w3-bar-block w3-hide">
+    <div class="w3-button-container">
+      <button class="w3-bar-item w3-button" style="position: relative;
+      left: -370px;
+      top: -20px;" onclick="toggleMenu()">
+        <i class="fa fa-times"></i> Close
+      </button>
+    </div>
+    <h2>Employee List</h2>
+    <ul id="employee-list">
 
-                <li class="employee-item"> 
-                   
-                  <img src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg" alt="John Doe">
-                  <h4><a style="color: white; text-decoration: none;" href="/employee_Dashbord/<%=emploies[i]._id%>">  <%=emploies[i].name.split(' ')[0]%>  </a>
-                    </h4> 
-                  
-                    <button class="E_<%=i%>" >Create</button>
-                     <button type="button" class="cp_btn_<%=i%>" onclick="copyLink('inp_emp_<%=i%>','cp_btn_<%=i%>')"  style="padding: 4px; border-radius:0.1px;" ><svg xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></svg></button> </li> 
-                    
+      <% for(var i=0; i< emploies.length; i++){ %>
+        <input style="display: none;" type="text" class="inp_emp_<%=i%>"
+          value="https://swaayatt.com/employee/<%=emploies[i]._id%>" readonly>
+
+        <li class="employee-item">
+
+          <img src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+            alt="John Doe">
+          <h4><a style="color: white; text-decoration: none;" href="/employee_Dashbord/<%=emploies[i]._id%>">
+              <%=emploies[i].name.split(' ')[0]%>  </a>
+                  </h4> 
                 
-            <%}%>
-            
+                  <button class="E_<%=i%>" >Create</button>
+                   <button type="button" class="cp_btn_<%=i%>" onclick="copyLink(' inp_emp_<%=i%>','cp_btn_<%=i%>')"
+                  style="padding: 4px; border-radius:0.1px;" ><svg xmlns="http://www.w3.org/2000/svg" height="16"
+                    width="20"
+                    viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                    <path
+                      d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
+                  </svg></button>
+        </li>
+        <%}%>
+    </ul>
 
+    <div class="loader-container" id="loaderContainer">
+      <div class="loader"></div>
+    </div>
 
-                <script>
-     
-     function copyLink(link_input,btn){
-     const copyButton = document.querySelector(`.${btn}`);
-  const linkInput = document.querySelector(`.${link_input}`);
-
-  
-    navigator.clipboard.writeText(linkInput.value).then(() => {
-    //   copyButton.textContent = "Copied 👻";
-    copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM337 209L209 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L303 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>`
-      console.log("Link copied to clipboard");
-    }).catch((error) => {
-      console.error("Failed to copy link: ", error);
-    });
-  
-
-}
-                </script>
-
-
-
-
-
-
-
-            <script>
-                // Convert the 'emploies' variable to a JSON string and embed it in the script
-                var emploiesData = '<%- JSON.stringify(emploies) %>';
-              
-                // Now you can use 'emploiesData' in your client-side JavaScript
-                // console.log(emploiesData);
-              </script>
-            <!-- <li class="employee-item">Jane Smith <img src="jane.jpg" alt="Jane Smith"></li> -->
-            <!-- Add more employees as needed -->
-        </ul>
-
-
-
-
-
-
-
-<div class="loader-container" id="loaderContainer">
-    <div class="loader"></div>
-</div>
-
-
-
-
-
-
-
-<div class="for_form_add_emp" style="display: none;" >
-    <form action="/employee_signUp" method="POST">
+    <div class="for_form_add_emp" style="display: none;">
+      <form action="/employee_signUp" method="POST">
         <div class="form-group">
-            <label for="employeeName"><strong>Name:</strong></label>
-            <input type="text" class="form-control" name="employeeName" required>
+          <label for="employeeName"><strong>Name:</strong></label>
+          <input type="text" class="form-control" name="employeeName" required>
         </div>
         <div class="form-group">
-            <label for="employeeEmail"><strong>Email:</strong></label>
-            <input type="text" class="form-control" name="employeeEmail" required>
+          <label for="employeeEmail"><strong>Email:</strong></label>
+          <input type="text" class="form-control" name="employeeEmail" required>
         </div>
         <div class="form-group" style="display: none;">
-            <label for="employeeNumber"><strong>Phone:</strong></label>
-            <input type="text" class="form-control" name="employeeNumber" value="1234">
+          <label for="employeeNumber"><strong>Phone:</strong></label>
+          <input type="text" class="form-control" name="employeeNumber" value="1234">
         </div>
         <div class="form-group" style="display: none;">
-            <label for="employeePassword"><strong>Password:</strong></label>
-            <input type="text" class="form-control" name="employeePassword" value="1234">
+          <label for="employeePassword"><strong>Password:</strong></label>
+          <input type="text" class="form-control" name="employeePassword" value="1234">
         </div>
         <button class="btn btn-primary" type="submit">Add Employee</button>
-    </form>
-</div>
-
-
-<div class="for_add_empl" onclick="showInfo('i','for_form_add_emp')" >
-    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
-</div>
-
-
+      </form>
     </div>
+
+
+
+    <div class="for_add_empl" onclick="showInfo('i','for_form_add_emp')">
+      <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+        <path
+          d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+      </svg>
+    </div>
+
+
+  </div>
 
     <div id="meeting-section">
-        <h2 class="left-aligned" style="width: 50%;" ><svg style="fill: #3498db; padding-right:1%; "  xmlns="http://www.w3.org/2000/svg" height="21" width="25" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M335.5 4l288 160c15.4 8.6 21 28.1 12.4 43.5s-28.1 21-43.5 12.4L320 68.6 47.5 220c-15.4 8.6-34.9 3-43.5-12.4s-3-34.9 12.4-43.5L304.5 4c9.7-5.4 21.4-5.4 31.1 0zM320 160a40 40 0 1 1 0 80 40 40 0 1 1 0-80zM144 256a40 40 0 1 1 0 80 40 40 0 1 1 0-80zm312 40a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zM226.9 491.4L200 441.5V480c0 17.7-14.3 32-32 32H120c-17.7 0-32-14.3-32-32V441.5L61.1 491.4c-6.3 11.7-20.8 16-32.5 9.8s-16-20.8-9.8-32.5l37.9-70.3c15.3-28.5 45.1-46.3 77.5-46.3h19.5c16.3 0 31.9 4.5 45.4 12.6l33.6-62.3c15.3-28.5 45.1-46.3 77.5-46.3h19.5c32.4 0 62.1 17.8 77.5 46.3l33.6 62.3c13.5-8.1 29.1-12.6 45.4-12.6h19.5c32.4 0 62.1 17.8 77.5 46.3l37.9 70.3c6.3 11.7 1.9 26.2-9.8 32.5s-26.2 1.9-32.5-9.8L552 441.5V480c0 17.7-14.3 32-32 32H472c-17.7 0-32-14.3-32-32V441.5l-26.9 49.9c-6.3 11.7-20.8 16-32.5 9.8s-16-20.8-9.8-32.5l36.3-67.5c-1.7-1.7-3.2-3.6-4.3-5.8L376 345.5V400c0 17.7-14.3 32-32 32H296c-17.7 0-32-14.3-32-32V345.5l-26.9 49.9c-1.2 2.2-2.6 4.1-4.3 5.8l36.3 67.5c6.3 11.7 1.9 26.2-9.8 32.5s-26.2 1.9-32.5-9.8z"/></svg>All Meetings</h2>
+      <h2 class="left-aligned" style="width: 50%;"><svg style="fill: #3498db; padding-right:1%; "
+          xmlns="http://www.w3.org/2000/svg" height="21" width="25"
+          viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+          <path
+            d="M335.5 4l288 160c15.4 8.6 21 28.1 12.4 43.5s-28.1 21-43.5 12.4L320 68.6 47.5 220c-15.4 8.6-34.9 3-43.5-12.4s-3-34.9 12.4-43.5L304.5 4c9.7-5.4 21.4-5.4 31.1 0zM320 160a40 40 0 1 1 0 80 40 40 0 1 1 0-80zM144 256a40 40 0 1 1 0 80 40 40 0 1 1 0-80zm312 40a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zM226.9 491.4L200 441.5V480c0 17.7-14.3 32-32 32H120c-17.7 0-32-14.3-32-32V441.5L61.1 491.4c-6.3 11.7-20.8 16-32.5 9.8s-16-20.8-9.8-32.5l37.9-70.3c15.3-28.5 45.1-46.3 77.5-46.3h19.5c16.3 0 31.9 4.5 45.4 12.6l33.6-62.3c15.3-28.5 45.1-46.3 77.5-46.3h19.5c32.4 0 62.1 17.8 77.5 46.3l33.6 62.3c13.5-8.1 29.1-12.6 45.4-12.6h19.5c32.4 0 62.1 17.8 77.5 46.3l37.9 70.3c6.3 11.7 1.9 26.2-9.8 32.5s-26.2 1.9-32.5-9.8L552 441.5V480c0 17.7-14.3 32-32 32H472c-17.7 0-32-14.3-32-32V441.5l-26.9 49.9c-6.3 11.7-20.8 16-32.5 9.8s-16-20.8-9.8-32.5l36.3-67.5c-1.7-1.7-3.2-3.6-4.3-5.8L376 345.5V400c0 17.7-14.3 32-32 32H296c-17.7 0-32-14.3-32-32V345.5l-26.9 49.9c-1.2 2.2-2.6 4.1-4.3 5.8l36.3 67.5c6.3 11.7 1.9 26.2-9.8 32.5s-26.2 1.9-32.5-9.8z" />
+        </svg>All Meetings</h2>
 
-        
 
 
-        <div class="meeting-card">
-            <div class="navbar" style="padding-bottom: 1%;" >
-                <a href="#" onclick="showMeetingSection('upcoming');changeColor(this)" class="clicked">Upcoming</a>
-                <a href="#" onclick="showMeetingSection('pending');changeColor(this)" >Pending</a>
-                <a href="#" onclick="showMeetingSection('previous');changeColor(this)">Previous</a>
-            </div>
-        
-            <div id="upcoming-meetings" class="meeting-section active">
-                <!-- Content for upcoming meetings -->
-                <h3>Upcomming Meetings</h3>
-            
-                 <% for(var i=0; i< all_appointmentsF.length; i++){ %>
-                   
-                   
-                   
-                    <% const dateObject = new Date(todaysTimeSlots[i].from_date) %>
 
-                        <%
-                        const options = {
-                          weekday: 'long',
-                          day: 'numeric',
-                          month: 'long',
-                          year: 'numeric',
+      <div class="meeting-card">
+        <div class="navbar" style="padding-bottom: 1%;">
+          <a href="#" onclick="showMeetingSection('upcoming');changeColor(this)" class="clicked">Upcoming</a>
+          <a href="#" onclick="showMeetingSection('pending');changeColor(this)">Pending</a>
+          <a href="#" onclick="showMeetingSection('previous');changeColor(this)">Previous</a>
+        </div>
+
+        <div id="upcoming-meetings" class="meeting-section active">
+          <!-- Content for upcoming meetings -->
+          <h3>Upcomming Meetings</h3>
+
+          <% for(var i=0; i< all_appointmentsF.length; i++){ %>
+
+
+
+            <% const dateObject=new Date(todaysTimeSlots[i].from_date) %>
+
+              <% const options={ weekday: 'long' , day: 'numeric' , month: 'long' , year: 'numeric' , } %>
+
+                <% const formattedDate=new Intl.DateTimeFormat('en-US', options).format(dateObject) %>
+
+                  <p style="margin-top: 4%;">
+                    <%= formattedDate %>
+                  </p>
+
+
+
+
+
+                  <div class="meet-card"
+                    style=" display: flex; flex-direction: column !important;justify-content: space-around;align-items: center;">
+
+                    <div
+                      style="width: 100%; display: flex; flex-direction: row !important;justify-content: space-around;align-items: center;">
+                      <div class="meet-card-details">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                          class="bi bi-clock-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                        </svg>
+                        <% const militaryTime=todaysTimeSlots[i].time ; const [hours, minutes]=militaryTime.split(':');
+                          dateObject.setHours(hours); dateObject.setMinutes(minutes); const
+                          formattedTime=dateObject.toLocaleTimeString('en-US', { hour: 'numeric' , minute: 'numeric' ,
+                          hour12: true }); dateObject.setMinutes(dateObject.getMinutes() + 30); const
+                          newFormattedTime=dateObject.toLocaleTimeString('en-US', { hour: 'numeric' , minute: 'numeric'
+                          , hour12: true }); %>
+
+
+
+
+                          <h4>
+                            <%=formattedTime %> - <%=newFormattedTime %>
+                          </h4>
+                      </div>
+                      <div class="meet-card-details">
+                        <h3 style=" font-size: 1.36em; font-weight: bold;   margin:0px 0px 7px 0px;">
+                          <%= all_employeesF[i].name %> And <%= all_usersF[i].name %>
+                        </h3>
+
+                        <h4 style="margin: 0px !important; padding: 0px !important;">Event Type : 30 Minute Meeting</h4>
+
+                      </div>
+                      <div class="meet-card-details">
+
+
+                        <button type="button" onclick="toggleRotation('<%=i%>', 'dtl_div_<%=i%>')" id="details-btn"
+                          class="dtl_btn_<%=i%>"
+                          style="display: flex; align-items: center; padding: 0.5rem 1.5rem; background-color: rgb(0, 119, 255); border-radius: 10px; border: none; color: white; cursor: pointer;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                            class="bi bi-caret-right-fill icon" viewBox="0 0 16 16">
+                            <path
+                              d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                          </svg> Details </button>
+                      </div>
+                      <style>
+                        .rotate {
+                          transform: rotate(90deg);
                         }
-                        %>
+                      </style>
+                      <script>
+                        function toggleRotation(index, divId) {
+                          var icon = document.querySelector('.dtl_btn_' + index + ' .icon');
+                          icon.classList.toggle('rotate');
+                          showInfo(index, divId);
+                        }
+                      </script>
 
-                                                        <%
-                        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject)
-                        %>
-
-                        <p style="margin-top: 4%;" ><%= formattedDate %></p>
-
-       
-       
-       
-       
-                    <div class="meet-card" style=" display: flex; flex-direction: column !important;justify-content: space-around;align-items: center;" >
-                      
-                       <div  style="width: 100%; display: flex; flex-direction: row !important;justify-content: space-around;align-items: center;"  >
-                        <div class="meet-card-details">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
-                              </svg>
-                             <% const militaryTime = todaysTimeSlots[i].time ;
-
-                              
-                              const [hours, minutes] = militaryTime.split(':');
-                              
-                              
-                             
-                              dateObject.setHours(hours);
-                              dateObject.setMinutes(minutes);
-                              
-                              
-                              const formattedTime = dateObject.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-                              
-                              dateObject.setMinutes(dateObject.getMinutes() + 30);
-
-                              const newFormattedTime = dateObject.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-
-                            
-                              %>
-
-
-
-
-                            <h4><%=formattedTime %> - <%=newFormattedTime %> </h4>
-                        </div>
-                        <div class="meet-card-details">
-                            <h3 style=" font-size: 1.36em; font-weight: bold;   margin:0px 0px 7px 0px;" > <%= all_employeesF[i].name %> And <%= all_usersF[i].name %> </h3>
-                            
-                                <h4 style="margin: 0px !important; padding: 0px !important;" >Event Type : 30 Minute Meeting</h4>
-                            
-                        </div>
-                        <div class="meet-card-details" >
-                           
-                              
-                          <button type="button" onclick="toggleRotation('<%=i%>', 'dtl_div_<%=i%>')" id="details-btn" class="dtl_btn_<%=i%>" style="display: flex; align-items: center; padding: 0.5rem 1.5rem; background-color: rgb(0, 119, 255); border-radius: 10px; border: none; color: white; cursor: pointer;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-caret-right-fill icon" viewBox="0 0 16 16">
-                              <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                            </svg> Details </button>
-                        </div>
-                        <style>
-                          .rotate {
-                            transform: rotate(90deg);
-                          }
-                        </style>
-                        <script>
-                          function toggleRotation(index, divId) {
-                            var icon = document.querySelector('.dtl_btn_' + index + ' .icon');
-                            icon.classList.toggle('rotate');
-                            showInfo(index, divId);
-                          }
-                        </script>
-                        
                     </div>
-                        <div class="custom-container dtl_div_<%=i%>" style="width: 100%; display: none;" >
-                            <div class="custom-side-nav">
-                              <h2>Side Navigation</h2>
-                              <a href="#" class="custom-option"><svg style="fill:white; padding-right:4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448v32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2v32l96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z"/></svg>Reschedule Again</a>
-                              <a href="#" class="custom-option"><svg   style="fill:white; padding-right:4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M288 32H213.2c-27.1 0-51.3 17.1-60.3 42.6L35.1 407.2c-2.1 5.9-3.1 12-3.1 18.2C32 455.5 56.5 480 86.6 480H288V416c0-17.7 14.3-32 32-32s32 14.3 32 32v64h32V352c0-23.7 12.9-44.4 32-55.4V272c0-58.3 44.6-106.2 101.5-111.5L487.1 74.6C478 49.1 453.9 32 426.8 32H352V96c0 17.7-14.3 32-32 32s-32-14.3-32-32V32zm64 192v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zm176 16c17.7 0 32 14.3 32 32v48H496V272c0-17.7 14.3-32 32-32zm-80 32v48c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32V272c0-44.2-35.8-80-80-80s-80 35.8-80 80z"/></svg>Report This Event</a>
-                              
-                             
-                            <button class="custom-btn" onclick="showInfo('<%=i%>','show_reschedule_form_<%=i%>')" ><svg style="padding-right: 4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg>  Reschedule  </button>
-                            
-                            <div class="show_reschedule_form_<%=i%>" style="display: none;" >
-                               
-<form action="/reSchedule_appointment" method="post" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  ">
+                    <div class="custom-container dtl_div_<%=i%>" style="width: 100%; display: none;">
+                      <div class="custom-side-nav">
+                        <h2>Side Navigation</h2>
+                        <a href="#" class="custom-option"><svg style="fill:white; padding-right:4%;"
+                            xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                            viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                            <path
+                              d="M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448v32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2v32l96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z" />
+                          </svg>Reschedule Again</a>
+                        <a href="#" class="custom-option"><svg style="fill:white; padding-right:4%;"
+                            xmlns="http://www.w3.org/2000/svg" height="16" width="20"
+                            viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                            <path
+                              d="M288 32H213.2c-27.1 0-51.3 17.1-60.3 42.6L35.1 407.2c-2.1 5.9-3.1 12-3.1 18.2C32 455.5 56.5 480 86.6 480H288V416c0-17.7 14.3-32 32-32s32 14.3 32 32v64h32V352c0-23.7 12.9-44.4 32-55.4V272c0-58.3 44.6-106.2 101.5-111.5L487.1 74.6C478 49.1 453.9 32 426.8 32H352V96c0 17.7-14.3 32-32 32s-32-14.3-32-32V32zm64 192v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zm176 16c17.7 0 32 14.3 32 32v48H496V272c0-17.7 14.3-32 32-32zm-80 32v48c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32V272c0-44.2-35.8-80-80-80s-80 35.8-80 80z" />
+                          </svg>Report This Event</a>
 
-    <div>
-      <label for="from_date" style="display: block; margin-bottom: 5px; font-weight: bold;">Date:</label>
-      <input type="date" id="from_date" name="from_date" required style="width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box;">
-    </div>
-  
-    <div>
-        <input type="time" name="from_time" style="padding-bottom: 2%;" >
-    </div>
-  
-    <div>
-      <input type="text" name="appointment_id_to_reschedule" value="<%=all_appointmentsF[i]._id%>" style="display:none;">
-    </div>
-  
-    <div>
-      <input type="submit" value="Submit" style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 3%;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">
-    </div>
-  </form>
+
+                        <button class="custom-btn" onclick="showInfo('<%=i%>','show_reschedule_form_<%=i%>')"><svg
+                            style="padding-right: 4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                            <path
+                              d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" />
+                          </svg> Reschedule </button>
+
+                        <div class="show_reschedule_form_<%=i%>" style="display: none;">
+
+                          <form action="/reSchedule_appointment" method="post"
+                            style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  ">
+
+                            <div>
+                              <label for="from_date"
+                                style="display: block; margin-bottom: 5px; font-weight: bold;">Date:</label>
+                              <input type="date" id="from_date" name="from_date" required
+                                style="width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box;">
                             </div>
 
-
-                            <form action="/delete_appointment" method="post" style="width: 100%;" >
-                                <input type="text" name="app_id" value="<%=all_appointmentsF[i]._id%>" style="display: none;" >
-                                <button class="custom-btn custom-cancel-btn"><svg  style="padding-right: 4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg> Cancel Meeting</button>
-                              
-                              </form>
+                            <div>
+                              <input type="time" name="from_time" style="padding-bottom: 2%;">
                             </div>
-                          
-                            <div class="custom-main-content">
-                              <div class="custom-info-section">
-                                <h2>Information</h2>
-                                <p class="custom-bold"><svg style="padding-right: 1%; " xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> Email: <%= all_usersF[i].email %></p>
-                                <p><svg style="padding-right: 1%;" xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 352h8.2c32.3-39.1 81.1-64 135.8-64c5.4 0 10.7 .2 16 .7V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM320 352H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H360.2C335.1 449.6 320 410.5 320 368c0-5.4 .2-10.7 .7-16l-.7 0zm320 16a144 144 0 1 0 -288 0 144 144 0 1 0 288 0zM496 288c8.8 0 16 7.2 16 16v48h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H496c-8.8 0-16-7.2-16-16V304c0-8.8 7.2-16 16-16z"/></svg>Invitee Timezone: <%= all_usersF[i].timezone %></p>
-                                <p><svg style="padding-right: 1%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7H162.5c0 0 0 0 .1 0H168 280h5.5c0 0 0 0 .1 0H417.3c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2H224 204.3c-12.4 0-20.1 13.6-13.7 24.2z"/></svg>Meeting Host: <%= hostname %></p>
-                                <p>Created On: <%= formattedDate %></p>
-                                <p class="custom-bold">Meeting Link :</p>
-                                <a href="<%= all_employeesF[i].link %>" ><%= all_employeesF[i].link %></a>
-                              </div>
-                          
-                              <!-- Rest of your main content goes here -->
-                            </div>
-                          </div>
 
+                            <div>
+                              <input type="text" name="appointment_id_to_reschedule"
+                                value="<%=all_appointmentsF[i]._id%>" style="display:none;">
+                            </div>
+
+                            <div>
+                              <input type="submit" value="Submit"
+                                style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 3%;"
+                                onmouseover="this.style.backgroundColor='#0056b3'"
+                                onmouseout="this.style.backgroundColor='#007bff'">
+                            </div>
+                          </form>
                         </div>
 
 
-            
-                        
-                        
-<%}%>                
-                        
-       
-</div>
-       
-       
-       
-       
-               
+                        <form action="/delete_appointment" method="post" style="width: 100%;">
+                          <input type="text" name="app_id" value="<%=all_appointmentsF[i]._id%>" style="display: none;">
+                          <button class="custom-btn custom-cancel-btn"><svg style="padding-right: 4%;"
+                              xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                              viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                              <path
+                                d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                            </svg> Cancel Meeting</button>
+
+                        </form>
+                      </div>
+
+                      <div class="custom-main-content">
+                        <div class="custom-info-section">
+                          <h2>Information</h2>
+                          <p class="custom-bold"><svg style="padding-right: 1%; " xmlns="http://www.w3.org/2000/svg"
+                              height="16" width="16" viewBox="0 0 512 512">
+                              <path
+                                d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+                            </svg> Email: <%= all_usersF[i].email %>
+                          </p>
+                          <p><svg style="padding-right: 1%;" xmlns="http://www.w3.org/2000/svg" height="16" width="20"
+                              viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                              <path
+                                d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 352h8.2c32.3-39.1 81.1-64 135.8-64c5.4 0 10.7 .2 16 .7V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM320 352H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H360.2C335.1 449.6 320 410.5 320 368c0-5.4 .2-10.7 .7-16l-.7 0zm320 16a144 144 0 1 0 -288 0 144 144 0 1 0 288 0zM496 288c8.8 0 16 7.2 16 16v48h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H496c-8.8 0-16-7.2-16-16V304c0-8.8 7.2-16 16-16z" />
+                            </svg>Invitee Timezone: <%= all_usersF[i].timezone %>
+                          </p>
+                          <p><svg style="padding-right: 1%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                              viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                              <path
+                                d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7H162.5c0 0 0 0 .1 0H168 280h5.5c0 0 0 0 .1 0H417.3c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2H224 204.3c-12.4 0-20.1 13.6-13.7 24.2z" />
+                            </svg>Meeting Host: <%= hostname %>
+                          </p>
+                          <p>Created On: <%= formattedDate %>
+                          </p>
+                          <p class="custom-bold">Meeting Link :</p>
+                          <a href="<%= all_employeesF[i].link %>">
+                            <%= all_employeesF[i].link %>
+                          </a>
+                        </div>
+
+                        <!-- Rest of your main content goes here -->
+                      </div>
+                    </div>
+
+                  </div>
+
+
+
+
+
+                  <%}%>
+
+
+        </div>
+
+
+
+
+
 
 
 
 
         <div id="pending-meetings" class="meeting-section">
-            <!-- Content for pending meetings -->
-            Pending Meeting Details...
+          <!-- Content for pending meetings -->
+          Pending Meeting Details...
         </div>
-    
+
 
 
 
@@ -307,223 +397,297 @@
 
 
         <div id="previous-meetings" class="meeting-section">
-            <!-- Content for previous meetings -->
-                <h3>Previous Meetings </h3>
-                    <% for(var i=0; i< all_prev_appointmentsF.length; i++){ %>
-               
-               
-               
-                <% const dateObject = new Date(prvs_time_slots[i].from_date) %>
+          <!-- Content for previous meetings -->
+          <h3>Previous Meetings </h3>
+          <% for(var i=0; i< all_prev_appointmentsF.length; i++){ %>
 
-                        <%
-                            const options = {
-                             weekday: 'long',
-                                        day: 'numeric',
-                                    month: 'long',
-                                                    year: 'numeric',
-                                        }
-                                    %>
 
-                                    <%
-                            const formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject)
-                                                %>
 
-                                                <p><%= formattedDate %></p>
+            <% const dateObject=new Date(prvs_time_slots[i].from_date) %>
 
-   
-   
-   
-   
-                <div class="meet-card" style=" display: flex; flex-direction: column !important;align-items: center;  " >
-                  
-                   <div  style=" width: 100%; display: flex; flex-direction: row !important;justify-content: space-around;align-items: center;"  >
-                  
-                    <div class="meet-card-details">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
-                          </svg>
-                         <% const militaryTime = prvs_time_slots[i].time ;
+              <% const options={ weekday: 'long' , day: 'numeric' , month: 'long' , year: 'numeric' , } %>
 
-                          
-                          const [hours, minutes] = militaryTime.split(':');
-                          
-                          
-                         
-                          dateObject.setHours(hours);
-                          dateObject.setMinutes(minutes);
-                          
-                          
-                          const formattedTime = dateObject.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-                          
-                          dateObject.setMinutes(dateObject.getMinutes() + 30);
+                <% const formattedDate=new Intl.DateTimeFormat('en-US', options).format(dateObject) %>
 
-                          const newFormattedTime = dateObject.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-
-                        
-                          %>
+                  <p>
+                    <%= formattedDate %>
+                  </p>
 
 
 
 
-                        <h4><%=formattedTime %> - <%=newFormattedTime %> </h4>
-                    </div>
 
-                    <div class="meet-card-details">
-                        <h3 style=" font-size: 1.36em; font-weight: bold;   margin:0px 0px 7px 0px;" > <%= all_prev_employeesF[i].name %> And <%= all_prev_usersF[i].name %> </h3>
-                        
-                            <h4 style="margin: 0px !important; padding: 0px !important;" >Event Type : 30 Minute Meeting</h4>
-                        
-                    </div>
+                  <div class="meet-card"
+                    style=" display: flex; flex-direction: column !important;align-items: center;  ">
 
-                    <div class="meet-card-details" >
-                       
-                          
-                          <button type="button" onclick="showInfo('<%=i%>','dtl_div_<%=i%>')" id="details-btn" class="dtl_btn_<%=i%>" style=" display: flex;align-items: center;padding:0.5rem 1.5rem;background-color: rgb(0, 119, 255);border-radius: 10px;border:none;color: white;cursor: pointer;" >  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    <div
+                      style=" width: 100%; display: flex; flex-direction: row !important;justify-content: space-around;align-items: center;">
+
+                      <div class="meet-card-details">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                          class="bi bi-clock-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                        </svg>
+                        <% const militaryTime=prvs_time_slots[i].time ; const [hours, minutes]=militaryTime.split(':');
+                          dateObject.setHours(hours); dateObject.setMinutes(minutes); const
+                          formattedTime=dateObject.toLocaleTimeString('en-US', { hour: 'numeric' , minute: 'numeric' ,
+                          hour12: true }); dateObject.setMinutes(dateObject.getMinutes() + 30); const
+                          newFormattedTime=dateObject.toLocaleTimeString('en-US', { hour: 'numeric' , minute: 'numeric'
+                          , hour12: true }); %>
+
+
+
+
+                          <h4>
+                            <%=formattedTime %> - <%=newFormattedTime %>
+                          </h4>
+                      </div>
+
+                      <div class="meet-card-details">
+                        <h3 style=" font-size: 1.36em; font-weight: bold;   margin:0px 0px 7px 0px;">
+                          <%= all_prev_employeesF[i].name %> And <%= all_prev_usersF[i].name %>
+                        </h3>
+
+                        <h4 style="margin: 0px !important; padding: 0px !important;">Event Type : 30 Minute Meeting</h4>
+
+                      </div>
+
+                      <div class="meet-card-details">
+
+
+                        <button type="button" onclick="showInfo('<%=i%>','dtl_div_<%=i%>')" id="details-btn"
+                          class="dtl_btn_<%=i%>"
+                          style=" display: flex;align-items: center;padding:0.5rem 1.5rem;background-color: rgb(0, 119, 255);border-radius: 10px;border:none;color: white;cursor: pointer;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                            class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                            <path
+                              d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                           </svg> Details</button>
+                      </div>
+
                     </div>
 
-                 </div>
-                    
 
 
 
 
 
-                 <div class="custom-container dtl_div_<%=i%>" style="width: 100%;  display: none;" >
-                    <div class="custom-side-nav">
-                      <h2>Take Actions</h2>
-                      <!-- <a href="#" class="custom-option"><svg style="fill:white; padding-right:4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.<path d="M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448v32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2v32l96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z"/></svg>Reschedule Again</a> -->
-                      <a href="#" class="custom-option"><svg   style="fill:white; padding-right:4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M288 32H213.2c-27.1 0-51.3 17.1-60.3 42.6L35.1 407.2c-2.1 5.9-3.1 12-3.1 18.2C32 455.5 56.5 480 86.6 480H288V416c0-17.7 14.3-32 32-32s32 14.3 32 32v64h32V352c0-23.7 12.9-44.4 32-55.4V272c0-58.3 44.6-106.2 101.5-111.5L487.1 74.6C478 49.1 453.9 32 426.8 32H352V96c0 17.7-14.3 32-32 32s-32-14.3-32-32V32zm64 192v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zm176 16c17.7 0 32 14.3 32 32v48H496V272c0-17.7 14.3-32 32-32zm-80 32v48c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32V272c0-44.2-35.8-80-80-80s-80 35.8-80 80z"/></svg>Report This Event</a>
-                      <button class="custom-btn" onclick="showInfo('<%=i%>','show_reschedule_form_<%=i%>')" ><svg style="padding-right: 4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/></svg>  Reschedule Invitee Again </button>
-                      <div class="show_reschedule_form_<%=i%>" style="display: none;" >
-                               
-                        <form action="/reSchedule_appointment" method="post" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  ">
-                        
+                    <div class="custom-container dtl_div_<%=i%>" style="width: 100%;  display: none;">
+                      <div class="custom-side-nav">
+                        <h2>Take Actions</h2>
+                        <!-- <a href="#" class="custom-option"><svg style="fill:white; padding-right:4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.<path d="M174.7 45.1C192.2 17 223 0 256 0s63.8 17 81.3 45.1l38.6 61.7 27-15.6c8.4-4.9 18.9-4.2 26.6 1.7s11.1 15.9 8.6 25.3l-23.4 87.4c-3.4 12.8-16.6 20.4-29.4 17l-87.4-23.4c-9.4-2.5-16.3-10.4-17.6-20s3.4-19.1 11.8-23.9l28.4-16.4L283 79c-5.8-9.3-16-15-27-15s-21.2 5.7-27 15l-17.5 28c-9.2 14.8-28.6 19.5-43.6 10.5c-15.3-9.2-20.2-29.2-10.7-44.4l17.5-28zM429.5 251.9c15-9 34.4-4.3 43.6 10.5l24.4 39.1c9.4 15.1 14.4 32.4 14.6 50.2c.3 53.1-42.7 96.4-95.8 96.4L320 448v32c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-64-64c-9.4-9.4-9.4-24.6 0-33.9l64-64c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2v32l96.2 0c17.6 0 31.9-14.4 31.8-32c0-5.9-1.7-11.7-4.8-16.7l-24.4-39.1c-9.5-15.2-4.7-35.2 10.7-44.4zm-364.6-31L36 204.2c-8.4-4.9-13.1-14.3-11.8-23.9s8.2-17.5 17.6-20l87.4-23.4c12.8-3.4 26 4.2 29.4 17L182 241.2c2.5 9.4-.9 19.3-8.6 25.3s-18.2 6.6-26.6 1.7l-26.5-15.3L68.8 335.3c-3.1 5-4.8 10.8-4.8 16.7c-.1 17.6 14.2 32 31.8 32l32.2 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32.2 0C42.7 448-.3 404.8 0 351.6c.1-17.8 5.1-35.1 14.6-50.2l50.3-80.5z"/></svg>Reschedule Again</a> -->
+                        <a href="#" class="custom-option"><svg style="fill:white; padding-right:4%;"
+                            xmlns="http://www.w3.org/2000/svg" height="16" width="20"
+                            viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                            <path
+                              d="M288 32H213.2c-27.1 0-51.3 17.1-60.3 42.6L35.1 407.2c-2.1 5.9-3.1 12-3.1 18.2C32 455.5 56.5 480 86.6 480H288V416c0-17.7 14.3-32 32-32s32 14.3 32 32v64h32V352c0-23.7 12.9-44.4 32-55.4V272c0-58.3 44.6-106.2 101.5-111.5L487.1 74.6C478 49.1 453.9 32 426.8 32H352V96c0 17.7-14.3 32-32 32s-32-14.3-32-32V32zm64 192v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zm176 16c17.7 0 32 14.3 32 32v48H496V272c0-17.7 14.3-32 32-32zm-80 32v48c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32V272c0-44.2-35.8-80-80-80s-80 35.8-80 80z" />
+                          </svg>Report This Event</a>
+                        <button class="custom-btn" onclick="showInfo('<%=i%>','show_reschedule_form_<%=i%>')"><svg
+                            style="padding-right: 4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                            <path
+                              d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" />
+                          </svg> Reschedule Invitee Again </button>
+                        <div class="show_reschedule_form_<%=i%>" style="display: none;">
+
+                          <form action="/reSchedule_appointment" method="post"
+                            style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  ">
+
                             <div>
-                              <label for="from_date" style="display: block; margin-bottom: 5px; font-weight: bold;">Date:</label>
-                              <input type="date" id="from_date" name="from_date" required style="width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box;">
+                              <label for="from_date"
+                                style="display: block; margin-bottom: 5px; font-weight: bold;">Date:</label>
+                              <input type="date" id="from_date" name="from_date" required
+                                style="width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box;">
                             </div>
-                          
+
                             <div>
-                                <input type="time" name="from_time" style="padding-bottom: 2%;" >
+                              <input type="time" name="from_time" style="padding-bottom: 2%;">
                             </div>
-                          
+
                             <div>
-                              <input type="text" name="appointment_id_to_reschedule" value="<%=all_prev_appointmentsF[i]._id%>" style="display:none;">
+                              <input type="text" name="appointment_id_to_reschedule"
+                                value="<%=all_prev_appointmentsF[i]._id%>" style="display:none;">
                             </div>
-                          
+
                             <div>
-                              <input type="submit" value="Submit" style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 3%;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">
+                              <input type="submit" value="Submit"
+                                style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 3%;"
+                                onmouseover="this.style.backgroundColor='#0056b3'"
+                                onmouseout="this.style.backgroundColor='#007bff'">
                             </div>
                           </form>
-                                                    </div>
-                        
-                      
-                      
-                      
-                      
-                      <!-- <button class="custom-btn custom-cancel-btn"><svg  style="padding-right: 4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.<path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg> Cancel Meeting</button> -->
-                   
-                   
-                   
-                    </div>
-                  
-                    <div class="custom-main-content">
-                      <div class="custom-info-section">
-                        <h2>Meeting Information</h2>
-                        <p class="custom-bold"><svg style="padding-right: 1%; " xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> Email: user@example.com</p>
-                        <p><svg style="padding-right: 1%;" xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 352h8.2c32.3-39.1 81.1-64 135.8-64c5.4 0 10.7 .2 16 .7V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM320 352H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H360.2C335.1 449.6 320 410.5 320 368c0-5.4 .2-10.7 .7-16l-.7 0zm320 16a144 144 0 1 0 -288 0 144 144 0 1 0 288 0zM496 288c8.8 0 16 7.2 16 16v48h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H496c-8.8 0-16-7.2-16-16V304c0-8.8 7.2-16 16-16z"/></svg>Invitee Timezone: UTC+2</p>
-                        <p><svg style="padding-right: 1%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7H162.5c0 0 0 0 .1 0H168 280h5.5c0 0 0 0 .1 0H417.3c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2H224 204.3c-12.4 0-20.1 13.6-13.7 24.2z"/></svg>Meeting Host: Soumya Kathal</p>
-                        <p>Created On: December 15, 2023</p>
-                        <p class="custom-bold">Meeting Link :</p>
-                        <p>Some random text about the employee.</p>
+                        </div>
+
+
+
+
+
+                        <!-- <button class="custom-btn custom-cancel-btn"><svg  style="padding-right: 4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.<path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg> Cancel Meeting</button> -->
+
+
+
                       </div>
-                  
-                      <!-- Rest of your main content goes here -->
+
+                      <div class="custom-main-content">
+                        <div class="custom-info-section">
+                          <h2>Meeting Information</h2>
+                          <p class="custom-bold"><svg style="padding-right: 1%; " xmlns="http://www.w3.org/2000/svg"
+                              height="16" width="16" viewBox="0 0 512 512">
+                              <path
+                                d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+                            </svg> Email: user@example.com</p>
+                          <p><svg style="padding-right: 1%;" xmlns="http://www.w3.org/2000/svg" height="16" width="20"
+                              viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                              <path
+                                d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 352h8.2c32.3-39.1 81.1-64 135.8-64c5.4 0 10.7 .2 16 .7V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM320 352H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H360.2C335.1 449.6 320 410.5 320 368c0-5.4 .2-10.7 .7-16l-.7 0zm320 16a144 144 0 1 0 -288 0 144 144 0 1 0 288 0zM496 288c8.8 0 16 7.2 16 16v48h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H496c-8.8 0-16-7.2-16-16V304c0-8.8 7.2-16 16-16z" />
+                            </svg>Invitee Timezone: UTC+2</p>
+                          <p><svg style="padding-right: 1%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                              viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                              <path
+                                d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7H162.5c0 0 0 0 .1 0H168 280h5.5c0 0 0 0 .1 0H417.3c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2H224 204.3c-12.4 0-20.1 13.6-13.7 24.2z" />
+                            </svg>Meeting Host: Soumya Kathal</p>
+                          <p>Created On: December 15, 2023</p>
+                          <p class="custom-bold">Meeting Link :</p>
+                          <p>Some random text about the employee.</p>
+                        </div>
+
+                        <!-- Rest of your main content goes here -->
+                      </div>
                     </div>
+
                   </div>
 
-                    </div>
 
-        
-                    <%}%>
+                  <%}%>
+        </div>
+
+
+      </div>
+
+
+
+
     </div>
 
 
-            </div>
-        
-           
-      
-
-            </div>
-       
-
-            <style>
-              .rotate {
-                transform: rotate(90deg);
-              }
-            </style>
-            <script>
-              function toggleRotation(index, divId) {
-                var icon = document.querySelector('.dtl_btn_' + index + ' .icon');
-                icon.classList.toggle('rotate');
-                showInfo(index, divId);
-              }
-            </script>
+    <style>
+      .rotate {
+        transform: rotate(90deg);
+      }
+    </style>
 
 
-    
+    <script>
 
-            <script>
-              var buttons = document.querySelectorAll('#details-btn');
-              buttons.forEach(function(button) {
-                  button.addEventListener('click', function() {
-                      var currentColor = this.style.backgroundColor;
-                      if (currentColor === 'lightsteelblue') {
-                          this.style.backgroundColor = 'rgb(0, 119, 255)';
-                      } else {
-                          this.style.backgroundColor = 'lightsteelblue';
-                      }
-                  });
-              });
-          </script>
+      function copyLink(link_input, btn) {
+        const copyButton = document.querySelector(`.${btn}`);
+        const linkInput = document.querySelector(`.${link_input}`);
+
+
+        navigator.clipboard.writeText(linkInput.value).then(() => {
+          //   copyButton.textContent = "Copied 👻";
+          copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM337 209L209 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L303 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>`
+          console.log("Link copied to clipboard");
+        }).catch((error) => {
+          console.error("Failed to copy link: ", error);
+        });
+
+
+      }
+    </script>
 
 
 
 
 
-    
-            <script>
-              function changeColor(button) {
-                  var buttons = document.querySelectorAll('.navbar a');
-                  buttons.forEach(function(btn) {
-                      if (btn !== button) {
-                          btn.classList.remove('clicked');
-                      }
-                  });
-                  button.classList.add('clicked');
-              }
-          </script>
 
 
-<script>
-              let array1 = JSON.parse(`<%- JSON.stringify(todaysTimeSlots) %>`);
+    <script>
+      // Convert the 'emploies' variable to a JSON string and embed it in the script
+      var emploiesData = '<%- JSON.stringify(emploies) %>';
 
-</script>
-
-<script src="/javascripts/hr_dashbord_js/hr_script.js"></script>
+      // Now you can use 'emploiesData' in your client-side JavaScript
+      // console.log(emploiesData);
+    </script>
+    <!-- <li class="employee-item">Jane Smith <img src="jane.jpg" alt="Jane Smith"></li> -->
+    <!-- Add more employees as needed -->
 
 
 
+    <script>
+      function toggleRotation(index, divId) {
+        var icon = document.querySelector('.dtl_btn_' + index + ' .icon');
+        icon.classList.toggle('rotate');
+        showInfo(index, divId);
+      }
+    </script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+    <script>
+      var buttons = document.querySelectorAll('#details-btn');
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var currentColor = this.style.backgroundColor;
+          if (currentColor === 'lightsteelblue') {
+            this.style.backgroundColor = 'rgb(0, 119, 255)';
+          } else {
+            this.style.backgroundColor = 'lightsteelblue';
+          }
+        });
+      });
+    </script>
+
+
+
+
+
+
+    <script>
+      function changeColor(button) {
+        var buttons = document.querySelectorAll('.navbar a');
+        buttons.forEach(function (btn) {
+          if (btn !== button) {
+            btn.classList.remove('clicked');
+          }
+        });
+        button.classList.add('clicked');
+      }
+    </script>
+
+
+    <script>
+      let array1 = JSON.parse(`<%- JSON.stringify(todaysTimeSlots) %>`);
+
+    </script>
+
+    <script src="/javascripts/hr_dashbord_js/hr_script.js"></script>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
 
 
 </body>
+
 </html>

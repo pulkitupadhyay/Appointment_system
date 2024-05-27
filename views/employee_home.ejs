@@ -1282,14 +1282,14 @@ function formatHour(hour) {
         
         
         <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
-          <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Scheduled Events</h1>
+          <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;"id="mainDiv_meeting">Scheduled Events</h1>
           <div style="display: flex; align-items: center;">
             <div style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;"></div>
             <h2 style="font-size: 24px; margin: 0; color: #1E90FF; font-weight: normal;">All Meetings</h2>
           </div>
           <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore all scheduled meetings at a glance.</p>
         </div>
-        <div class="mainDiv_meeting" id="mainDiv_meeting">
+        <div class="mainDiv_meeting" >
           <div class="timeline"></div>
           <% for(var i=0 ; i< formattedAppointments.length; i++){ %>
           <div class="meeting">
