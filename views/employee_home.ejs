@@ -1181,7 +1181,6 @@ function formatHour(hour) {
             transition: opacity 0.5s ease, transform 0.5s ease;
             width: 48%;
             align-self: flex-start;
-            /* z-index: -1; */
           }
         
           .meeting:nth-child(even) {
@@ -1208,7 +1207,6 @@ function formatHour(hour) {
           .meeting a {
             color: #007bff;
             text-decoration: none;
-            /* font-weight: bold; */
             transition: color 0.3s ease, font-weight 0.3s ease;
           }
         
@@ -1225,7 +1223,6 @@ function formatHour(hour) {
             width: 3px;
             background-color: #ccc;
             transform: translateX(-50%);
-            /* z-index: -1; */
           }
         
           .meeting::before {
@@ -1244,7 +1241,33 @@ function formatHour(hour) {
           .meeting:nth-child(odd)::before {
             left: 660px;
           }
+        
+          
+          @media (max-width: 768px) {
+            .mainDiv_meeting {
+              margin: 20px auto;
+              padding: 0 10px;
+            }
+        
+            .meeting, .meeting:nth-child(even) {
+              width: 100%;
+              align-self: center;
+              transform: translateX(0);
+            }
+        
+            .timeline {
+              display: none;
+            }
+        
+            .meeting::before {
+              display: none;
+            }
+            .btn-copy {
+              margin-left: -125px;
+            }
+          }
         </style>
+        
         
         <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
           <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Scheduled Events</h1>
