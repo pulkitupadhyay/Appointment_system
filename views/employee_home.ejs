@@ -901,13 +901,22 @@ function formatHour(hour) {
       }
 
       .day-row {
-        flex-direction: column;
+        /* flex-direction: column; */
         align-items: flex-start;
+      }
+      input[type=checkbox]{
+        position: relative;
+    top: 23px;
       }
 
       .availability {
         margin-top: 10px;
+        right: -7px;
+        top: 12px;
       }
+      .remove-slot {
+        margin-left: -50px;
+}
     }
     hr {
   margin-left: -20px;
@@ -973,7 +982,7 @@ function formatHour(hour) {
                 </div>
               <% }); %>
             <% } %>
-            <form action="/add-slot" method="post" style="margin-left: 140px;">
+            <form action="/add-slot" method="post" style="margin-left: 54px;">
               <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
               <select name="slottoadd" required>
                 <% const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8']; %>
@@ -1264,6 +1273,9 @@ function formatHour(hour) {
             }
             .btn-copy {
               margin-left: -125px;
+            }
+            .availability {
+              right: -7px;
             }
           }
         </style>
