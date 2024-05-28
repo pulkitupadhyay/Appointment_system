@@ -17,17 +17,17 @@ function cal_func() {
   function ii() {
     let i = new Date();
     i.setDate(1);
-    i.setMonth(new Date().getMonth()+e);
+    i.setMonth(new Date().getMonth() + e);
 
 
 
     let o = i.getMonth();
-     let d = i.getFullYear();
-      // console.log('this is o',o);
+    let d = i.getFullYear();
+    // console.log('this is o',o);
     (i.getMonth() + 1).toString().padStart(2, "0");
     let a = new Date(d, o, 1),
       l = new Date(d, o + 1, 0).getDate(),
-      
+
       r = a.toLocaleDateString("en-us", {
         weekday: "long",
         year: "numeric",
@@ -35,185 +35,185 @@ function cal_func() {
         day: "numeric",
       }),
       s = n.indexOf(r.split(", ")[0]);
-  
-     
-    
+
+
+
     (document.getElementById(
-        "monthDisplay"
-      ).innerText = `${i.toLocaleDateString("en-us", { month: "long" })} ${d}`),
+      "monthDisplay"
+    ).innerText = `${i.toLocaleDateString("en-us", { month: "long" })} ${d}`),
       (t.innerHTML = "");
     for (let c = 1; c <= s + l; c++) {
       let p = document.createElement("div");
-      
+
       if ((p.classList.add("day"), c > s)) {
         p.innerText = c - s;
         let u = `${c - s}/${o + 1}/${d}`,
           m = u.split("/"),
           y = `${m[0].padStart(2, "0")}/${o + 1}/${m[2]}`;
         // console.log("this is daystring" + y)
-        
-         p.classList.add(`day_${c - s}`);
+
+        p.classList.add(`day_${c - s}`);
         let f = new Date();
-        f.getDate() == c - s && 
+        f.getDate() == c - s &&
           ((p.style.backgroundColor = "#89abc9")),
           (document.querySelector(".last_for_display_time").innerHTML = "")
-         
-         
-         
-          var dddd = new Date();
-            dddd.setHours(0, 0, 0, 0);
-            var date_to_compare = new Date(m[2], o ,m[0].padStart(2, "0"));
-            // console.log(dddd, date_to_compare);
-
-            date_to_compare.setHours(0, 0, 0, 0);
-            date_to_compare = date_to_compare.getTime();
-            dddd = dddd.getTime();
-            function parseFormattedDateTime(formattedDate, formattedTime) {
-              const [day, month, year] = formattedDate.split("/");
-              const [hours, minutes] = formattedTime.split(":");
-              return new Date(year, month - 1, day, hours, minutes);
-            }
-
-            function parseISODate(isoDateString) {
-              return new Date(isoDateString);
-            }
-            function isDateTimeInArray(formattedDate, formattedTime) {
-              // console.log("🚀 ~ isDateTimeInArray ~ formattedTime:", formattedTime)
-              // console.log("🚀 ~ isDateTimeInArray ~ formattedDate:", formattedDate)
-              function formatTimeFromJSDate(date) {
-                // Get hours and minutes from the Date object
-                const hours = date.getHours();
-                const minutes = date.getMinutes();
-
-                // Add leading zeros if needed
-                const formattedHours = hours < 10 ? `0${hours}` : hours;
-                const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-
-                // Combine hours and minutes in "hh:mm" format
-                const formattedTime = `${formattedHours}:${formattedMinutes}`;
-
-                return formattedTime;
-              }
-              function formatDateFromString(dateString) {
-                // console.log("🚀 ~ formatDateFromString ~ dateString:", dateString)
-                // Create a Date object from the input string
-                const date = new Date(dateString);
-                // console.log("🚀 ~ formatDateFromString ~ date:", date)
-
-                // Options for formatting the date
-                const options = {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                };
-
-                // Format the date using local time zone
-                const formattedDateString = date.toLocaleDateString(
-                  undefined,
-                  options
-                );
-                // console.log("🚀 ~ formatDateFromString ~ formattedDateString:", formattedDateString)
-
-                return formattedDateString;
-              }
-
-              const array = array1;
 
 
-              const providedDate = formattedDate;
 
-// Convert the provided date to a JavaScript Date object using Moment.js
-// const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
+        var dddd = new Date();
+        dddd.setHours(0, 0, 0, 0);
+        var date_to_compare = new Date(m[2], o, m[0].padStart(2, "0"));
+        // console.log(dddd, date_to_compare);
 
-// // Count the number of objects with the provided date
-// const count = array.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
+        date_to_compare.setHours(0, 0, 0, 0);
+        date_to_compare = date_to_compare.getTime();
+        dddd = dddd.getTime();
+        function parseFormattedDateTime(formattedDate, formattedTime) {
+          const [day, month, year] = formattedDate.split("/");
+          const [hours, minutes] = formattedTime.split(":");
+          return new Date(year, month - 1, day, hours, minutes);
+        }
 
-// console.log(count); 
+        function parseISODate(isoDateString) {
+          return new Date(isoDateString);
+        }
+        function isDateTimeInArray(formattedDate, formattedTime) {
+          // console.log("🚀 ~ isDateTimeInArray ~ formattedTime:", formattedTime)
+          // console.log("🚀 ~ isDateTimeInArray ~ formattedDate:", formattedDate)
+          function formatTimeFromJSDate(date) {
+            // Get hours and minutes from the Date object
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+
+            // Add leading zeros if needed
+            const formattedHours = hours < 10 ? `0${hours}` : hours;
+            const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+            // Combine hours and minutes in "hh:mm" format
+            const formattedTime = `${formattedHours}:${formattedMinutes}`;
+
+            return formattedTime;
+          }
+          function formatDateFromString(dateString) {
+            // console.log("🚀 ~ formatDateFromString ~ dateString:", dateString)
+            // Create a Date object from the input string
+            const date = new Date(dateString);
+            // console.log("🚀 ~ formatDateFromString ~ date:", date)
+
+            // Options for formatting the date
+            const options = {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            };
+
+            // Format the date using local time zone
+            const formattedDateString = date.toLocaleDateString(
+              undefined,
+              options
+            );
+            // console.log("🚀 ~ formatDateFromString ~ formattedDateString:", formattedDateString)
+
+            return formattedDateString;
+          }
+
+          const array = array1;
 
 
+          const providedDate = formattedDate;
+
+          // Convert the provided date to a JavaScript Date object using Moment.js
+          // const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
+
+          // // Count the number of objects with the provided date
+          // const count = array.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
+
+          // console.log(count); 
 
 
 
 
-              // console.log("🚀 ~ isDateTimeInArray ~ array:", array)
-              const dateTimeToCheck = parseFormattedDateTime(
-                formattedDate,
-                formattedTime
-              );
 
-              // console.log(array);
 
-              // console.log("🚀 ~ isDateTimeInArray ~ dateTimeToCheck:", dateTimeToCheck)
-              const isMatchingDateTime = array.some((obj) => {
-                // var fromDate = formatDateFromString(obj.from_date);
-                // console.log("🚀 ~ isMatchingDateTime ~ obj.from_date:", obj.from_date)
-                var fromDate = moment(obj.from_date).format("DD/MM/YYYY");
-                // console.log("🚀 ~ isMatchingDateTime ~ fromDate:", fromDate)
-                var timeDate = obj.time;
-                
+          // console.log("🚀 ~ isDateTimeInArray ~ array:", array)
+          const dateTimeToCheck = parseFormattedDateTime(
+            formattedDate,
+            formattedTime
+          );
 
-                var timec = formatTimeFromJSDate(dateTimeToCheck);
-               
-                var inputDate = moment(`${moment(obj.from_date).format("MM/DD/YYYY")} ${timeDate}`);
-                // console.log("🚀 ~ inputDate:", inputDate)
-                              
-                return moment(dateTimeToCheck).isBetween(moment(inputDate).startOf("hour"), moment(inputDate).endOf("hour"), null, []);
+          // console.log(array);
 
-                
-              });
+          // console.log("🚀 ~ isDateTimeInArray ~ dateTimeToCheck:", dateTimeToCheck)
+          const isMatchingDateTime = array.some((obj) => {
+            // var fromDate = formatDateFromString(obj.from_date);
+            // console.log("🚀 ~ isMatchingDateTime ~ obj.from_date:", obj.from_date)
+            var fromDate = moment(obj.from_date).format("DD/MM/YYYY");
+            // console.log("🚀 ~ isMatchingDateTime ~ fromDate:", fromDate)
+            var timeDate = obj.time;
 
-              // console.log(isMatchingDateTime);
 
-              return isMatchingDateTime;
-            }
+            var timec = formatTimeFromJSDate(dateTimeToCheck);
 
-            if (date_to_compare >= dddd) {
-        
-              // var array1 = JSON.parse(`<%- JSON.stringify(todaysTimeSlots) %>`);
+            var inputDate = moment(`${moment(obj.from_date).format("MM/DD/YYYY")} ${timeDate}`);
+            // console.log("🚀 ~ inputDate:", inputDate)
 
-                  array1 =  array1.filter(obj => obj.employeeID === employee._id.toString());
-              const providedDate = y;
+            return moment(dateTimeToCheck).isBetween(moment(inputDate).startOf("hour"), moment(inputDate).endOf("hour"), null, []);
 
-              const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
 
-              // Count the number of objects with the provided date
-              const count = array1.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
-              
-        
-        
-        
-              p.addEventListener("click", () => {
-             
+          });
+
+          // console.log(isMatchingDateTime);
+
+          return isMatchingDateTime;
+        }
+
+        if (date_to_compare >= dddd) {
+
+          // var array1 = JSON.parse(`<%- JSON.stringify(todaysTimeSlots) %>`);
+
+          array1 = array1.filter(obj => obj.employeeID === employee._id.toString());
+          const providedDate = y;
+
+          const providedDateObj = moment(providedDate, 'DD/MM/YYYY').toDate();
+
+          // Count the number of objects with the provided date
+          const count = array1.filter(obj => moment(obj.from_date).isSame(providedDateObj, 'day')).length;
+
+
+
+
+          p.addEventListener("click", () => {
+
             // console.log(y)
-console.log(count)
-console.log(providedDate)
-console.log(array1)
-const formattedDate = y
+            console.log(count)
+            console.log(providedDate)
+            console.log(array1)
+            const formattedDate = y
 
-var html_to_appent = ``;
+            var html_to_appent = ``;
 
-if(count>=2){
-  html_to_appent=`No empty slots on ${formattedDate} please try another date.`
+            if (count >= 2) {
+              html_to_appent = `No empty slots on ${formattedDate} please try another date.`
 
-}else{
+            } else {
 
-                // const dataString = JSON.stringify(formattedData);
+              // const dataString = JSON.stringify(formattedData);
 
-                // console.log(isDateTimeInArray(formattedDate, "13:00"));
+              // console.log(isDateTimeInArray(formattedDate, "13:00"));
 
-                for (var k = 0; k <= 8; k++) {
-                  if (k == 0) {
-                    if (!isDateTimeInArray(formattedDate, "12:00")) {
-                      
+              for (var k = 0; k <= 8; k++) {
+                if (k == 0) {
+                  if (!isDateTimeInArray(formattedDate, "12:00")) {
 
-                      var date = moment(formattedDate, 'DD/MM/YYYY');
 
-                        var dayName = date.format('dddd');
+                    var date = moment(formattedDate, 'DD/MM/YYYY');
 
-                    if(employee.days.indexOf(dayName) !==  -1){
+                    var dayName = date.format('dddd');
 
-                    if(employee.slots.indexOf(`12-1`) !== -1){    
-                      var new_string = `${formattedDate} <form action="/fake_login" method="post" >
+                    if (employee.days.indexOf(dayName) !== -1) {
+
+                      if (employee.slots.indexOf(`12-1`) !== -1) {
+                        var new_string = `${formattedDate} <form action="/fake_login" method="post" >
       
                             <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
                                    <input type="string" name="employee_id" value="${employee._id}" style="display:none;"  >
@@ -224,92 +224,91 @@ if(count>=2){
                 <button class="fbtn" type="submit" onclick="changeColor(this)">12:00 PM</button>
           
                                 </form>`;
-                      
-                      html_to_appent = `${html_to_appent} ${new_string}`;
-                              }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
-                              }
-                            }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
-                                break;
-                              }
+
+                        html_to_appent = `${html_to_appent} ${new_string}`;
+                      } else {
+                        html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                      }
                     } else {
-                      var new_string = ` <form   style="background-color:red;" >
+                      html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                      break;
+                    }
+                  } else {
+                    var new_string = ` <form   style="background-color:red;" >
       
      
                         <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
 
 
           </form>`;
-                      
-                      html_to_appent = `${html_to_appent} ${new_string}`;
-                    }
-                  } else {
-                    if (!isDateTimeInArray(formattedDate, `${12 + k}:00`)) {
 
-                      var date = moment(formattedDate, 'DD/MM/YYYY');
+                    html_to_appent = `${html_to_appent} ${new_string}`;
+                  }
+                } else {
+                  if (!isDateTimeInArray(formattedDate, `${12 + k}:00`)) {
 
-                      var dayName = date.format('dddd');
+                    var date = moment(formattedDate, 'DD/MM/YYYY');
 
-                      if(employee.days.indexOf(dayName) !==  -1){
-                      
-                      if(employee.slots.indexOf(`${k}-${k+1}`) !== -1){ 
+                    var dayName = date.format('dddd');
 
-                      var new_string = `<form action="/fake_login" method="post" >
+                    if (employee.days.indexOf(dayName) !== -1) {
+
+                      if (employee.slots.indexOf(`${k}-${k + 1}`) !== -1) {
+
+                        var new_string = `<form action="/fake_login" method="post" >
       
       <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
       <input type="string" name="employee_id" value="${employee._id}" style="display:none;"  >
 
      
         
-           <input type="time" name="from_time" value="${
-             12 + k 
-           }:00" style="display:none;" >
+           <input type="time" name="from_time" value="${12 + k
+                          }:00" style="display:none;" >
           <button class="fbtn" type="submit" onclick="changeColor(this)">0${k}:00 PM</button>
           
     </form>`;
 
-                      html_to_appent = `${html_to_appent} ${new_string}`;
-                    }
-                    
-                    else{
-                               
-                                html_to_appent = `${html_to_appent} `;
-                              }
-                            
-                            }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
-                                html_to_appent = `${html_to_appent} `;
-                              }
+                        html_to_appent = `${html_to_appent} ${new_string}`;
+                      }
+
+                      else {
+
+                        html_to_appent = `${html_to_appent} `;
+                      }
 
                     } else {
-                      var new_string = ` <div style="background-color:red !important;" >
+                      html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                      html_to_appent = `${html_to_appent} `;
+                    }
+
+                  } else {
+                    var new_string = ` <div style="background-color:red !important;" >
       
      
       <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;background-color:red !important;" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
       
                 </div>`;
-                      
-                      html_to_appent = `${html_to_appent} ${new_string}`;
 
-                    }
+                    html_to_appent = `${html_to_appent} ${new_string}`;
+
                   }
                 }
-            
               }
-              html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
 
-document.querySelector(".last_for_display_time").innerHTML =
-  html_to_appent;
+            }
+            html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
+
+            document.querySelector(".last_for_display_time").innerHTML =
+              html_to_appent;
           });
 
         }
 
 
 
-          
+
       }
-       else p.classList.add("padding");
+      else p.classList.add("padding");
       t.appendChild(p);
     }
   }
@@ -411,6 +410,18 @@ body {
       .fbtn:hover {
           background-color: #2980b9;
       }
+
+
+      @media screen and (max-width: 768px) {
+        .main {
+      position: relative;
+      box-sizing: border-box;
+      right: -520px;
+      width: 100%;
+      top: 170px;
+        }
+      }
+
 </style>
 <style>
 h1{
@@ -431,6 +442,8 @@ form input{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 100%; 
+  padding: 0 10px;
 }
 
 #header {
@@ -702,7 +715,7 @@ function showMeetingDetails(e) {
   let t = e.parentElement.parentElement;
   // console.log(t.children.length);
   let n = t.firstElementChild;
-  function i(e) {}
+  function i(e) { }
   console.log(n);
 }
 function showInfo(e, t) {
@@ -713,7 +726,7 @@ function showInfo(e, t) {
     "none" == n[i].style.display
       ? (console.log("makeing flex"), (n[i].style.display = "flex"))
       : "flex" == n[i].style.display &&
-        (console.log("makeing none"), (n[i].style.display = "none"));
+      (console.log("makeing none"), (n[i].style.display = "none"));
 }
 function showLoader() {
   document.getElementById("loaderContainer").style.display = "flex";
@@ -726,11 +739,11 @@ window.addEventListener("beforeunload", showLoader),
 
 
 
- 
-  function changeColor(button) {
-      var buttons = document.querySelectorAll('.navbar a');
-      buttons.forEach(function(btn) {
-          btn.classList.remove('clicked');
-      });
-      button.classList.add('clicked');
-  }
+
+function changeColor(button) {
+  var buttons = document.querySelectorAll('.navbar a');
+  buttons.forEach(function (btn) {
+    btn.classList.remove('clicked');
+  });
+  button.classList.add('clicked');
+}
