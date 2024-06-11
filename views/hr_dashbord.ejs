@@ -298,31 +298,36 @@
                         <div class="show_reschedule_form_<%=i%>" style="display: none;">
 
                           <form action="/reSchedule_appointment" method="post"
-                            style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  ">
-
-                            <div>
-                              <label for="from_date"
-                                style="display: block; margin-bottom: 5px; font-weight: bold;">Date:</label>
+                          style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                      
+                          <div>
+                              <label for="from_date" style="display: block; margin-bottom: 5px; font-weight: bold;">Date:</label>
                               <input type="date" id="from_date" name="from_date" required
-                                style="width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box;">
-                            </div>
-
-                            <div>
+                                  style="width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box;">
+                          </div>
+                      
+                          <div>
                               <input type="time" name="from_time" style="padding-bottom: 2%;">
-                            </div>
-
-                            <div>
+                          </div>
+                      
+                          <div>
                               <input type="text" name="appointment_id_to_reschedule"
-                                value="<%=all_appointmentsF[i]._id%>" style="display:none;">
-                            </div>
-
-                            <div>
+                                  value="<%=all_appointmentsF[i]._id%>" style="display:none;">
+                          </div>
+                      
+                          <div>
+                              <label for="feedback" style="display: block; margin-bottom: 5px; font-weight: bold;">Feedback:</label>
+                              <textarea id="feedback" name="feedback" rows="2" placeholder="Reasons for rescheduling"
+                                  style="width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box;"></textarea>
+                          </div>
+                      
+                          <div>
                               <input type="submit" value="Submit"
-                                style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 3%;"
-                                onmouseover="this.style.backgroundColor='#0056b3'"
-                                onmouseout="this.style.backgroundColor='#007bff'">
-                            </div>
-                          </form>
+                                  style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 3%;"
+                                  onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">
+                          </div>
+                      </form>
+                      
                         </div>
 
 
@@ -515,6 +520,12 @@
                                 value="<%=all_prev_appointmentsF[i]._id%>" style="display:none;">
                             </div>
 
+                            <div>
+                              <label for="feedback" style="display: block; margin-bottom: 5px; font-weight: bold;">Feedback:</label>
+                              <textarea id="feedback" name="feedback" rows="2" placeholder="Reasons for rescheduling"
+                                  style="width: 100%; padding: 10px; margin-bottom: 15px; box-sizing: border-box;"></textarea>
+                          </div>
+                          
                             <div>
                               <input type="submit" value="Submit"
                                 style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 3%;"

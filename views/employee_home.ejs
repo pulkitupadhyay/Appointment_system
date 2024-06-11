@@ -6,580 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meetings Slots</title>
 </head>
-<link rel="stylesheet" href=
-"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<!-- <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
 
   body {
-    line-height: 1.5;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-  }
-
-  body.hidden-scrolling {
-    overflow-y: hidden;
-  }
-
-  * {
-    margin: 0;
-    box-sizing: border-box;
-  }
-
-  .container {
-    max-width: 1170px;
-    margin: auto;
-  }
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-
-  /*home section*/
-  .home-section {
-    width: 100%;
-    display: block;
-    min-height: 100vh;
-    background-image: url('../img/home.jpg');
-    background-position: center top;
-    background-size: cover;
-  }
-
-  /* body{
-  background-color: #000000;
-}
-h1,h2,h3,h4,p{
-  color: white  ;
-} */
-  /* responsive */
-
-  @media (max-width: 575.98px) {
-    .my-4 {
-      flex-direction: column !important;
-    }
-
-    .mainDiv {
-      width: 100% !important;
-      flex-direction: column !important;
-      padding: 3% !important;
-    }
-
-    .dayofweek {
-      padding: 3% !important;
-      margin-top: 5px;
-    }
-
-    .header .logo a {
-      font-size: 26px !important;
-      /* .meeting {
-  margin-left: -46px;
-} */
-    }
-
-    .header {
-      padding: 0px !important;
-    }
-
-    .header .logo {
-      padding: 0 15px !important;
-    }
-
-    .header-main {
-      padding: 0px 0px !important;
-    }
-
-    .meeting {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 1.1) !important;
-    }
-
-    .custom-button {
-
-      margin: 4px 57px !important;
-    }
-
-    #copyButton,
-    #copyButton1 {
-      margin: 4px 62px !important;
-    }
-  }
-
-  @media (min-width: 1024px) and (max-width: 1439px) {
-    .mainDiv {
-      width: 100% !important;
-    }
-  }
-
- 
-</style>
-<style>
-  h1,
-  p {
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    padding: 1%;
-  }
-
-  h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 2rem;
-  }
-
-  p,
-  h4 {
-    font-size: 1rem;
-  }
-
-  h2 {
-    font-size: 1rem;
-
-  }
-
-
-  .main {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  label {
-    font-weight: bold;
-
-  }
-</style>
-
-
-<style>
-  .mainDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 80%;
-    padding: 2%;
-    margin: 0 auto;
-    box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7);
-    border-radius: 10px;
-  }
-
-  .meeting {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .meeting h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
-    font-weight: 800;
-  }
-
-  .meeting h2:first-child {
-    font-size: 22px;
-  }
-
-  .meeting h2:nth-child(2),
-  .meeting h2:nth-child(3),
-  .meeting h2:nth-child(4),
-  .meeting h2:nth-child(5) {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-
-  .meeting h2:last-child {
-    font-size: 16px;
-    margin-top: 10px;
-    color: #007bff;
-  }
-
-
-    .btbt {
-            display: none;
-          }
-
-          .dayofweek {
-            /* border: 2px solid red; */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-radius: 10px;
-            /* background-color: #333; */
-            /* backdrop-filter: blur(10px);  */
-            /* background-color: rgba(173, 216, 230, 0.4); */
-            color: #333;
-            font-weight: bold;
-            font-weight: bold;
-            padding: 1%;
-            gap: 10px;
-            box-shadow: 0 10px 4px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-          }
-
-          .dayofweek:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-            background-color: #5a85ff;
-            color: #fff;
-          }
-
-          .dayofweek button[type="submit"] {
-            background-color: transparent;
-            border: none;
-            color: red;
-            font-weight: bolder;
-            font-size: 14px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            /* position: relative; */
-            /* z-index: -1; */
-          }
-
-          .dayofweek button[type="submit"]:hover {
-            transform: scale(1.2);
-          }
-
-          .dayofweek button[type="submit"]:hover::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 80%;
-            border-radius: 50%;
-            margin-left: -5px;
-            margin-top: 1px;
-            border: 2px solid rgba(255, 0, 0, 0.5);
-            /* background-color: rgba(129, 124, 124, 0.8); */
-          }
-
-          .custom-button {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            padding: 8px 0px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 95px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border-radius: 8px;
-          }
-
-          .custom-button:hover {
-            background-color: #0056b3;
-          }
-</style> -->
-
-
-
-
-
-<!-- <style>
-  
-  /*header*/
-  .header {
-    position: sticky;
-    width: 100%;
-    left: 0;
-    top: 0;
-    z-index: 99;
-    padding: 15px;
-  }
-
-  .header-main {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-radius: 4px;
-  }
-
-  .header .logo {
-    padding: 0 15px;
-  }
-
-  .header .logo a {
-    font-size: 30px;
-    text-transform: capitalize;
-    color: #fffefe;
-    font-weight: 600;
-  }
-
-  .header .nav-menu {
-    padding: 0 15px;
-  }
-
-  .header .menu>.menu-item {
-    display: inline-block;
-    margin-left: 30px;
-    position: relative;
-  }
-
-  .header .menu>.menu-item>a {
-    display: block;
-    padding: 12px 0;
-    font-size: 16px;
-    color: #f1eeee;
-    text-transform: capitalize;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .header .menu>.menu-item>a .plus {
-    display: inline-block;
-    height: 12px;
-    width: 12px;
-    position: relative;
-    margin-left: 5px;
-    pointer-events: none;
-  }
-
-  .header .menu>.menu-item>a .plus:before,
-  .header .menu>.menu-item>a .plus:after {
-    content: '';
-    position: absolute;
-    box-sizing: border-box;
-    left: 50%;
-    top: 50%;
-    background-color: #000000;
-    height: 2px;
-    width: 100%;
-    transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
-  }
-
-  .header .menu>.menu-item:hover>a .plus:before,
-  .header .menu>.menu-item:hover>a .plus:after {
-    background-color: #e91e63;
-  }
-
-  .header .menu>.menu-item>a .plus:after {
-    transform: translate(-50%, -50%) rotate(-90deg);
-  }
-
-  .header .menu>.menu-item>.sub-menu>.menu-item>a:hover,
-  .header .menu>.menu-item:hover>a {
-    color: #e91e63;
-  }
-
-  .header .menu>.menu-item>.sub-menu {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 220px;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    background-color: #ffffff;
-    padding: 10px 0;
-    border-top: 3px solid #e91e63;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  @media(max-width: 991px) {
-    .header .menu-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .header .nav-menu {
-      position: fixed;
-      right: -280px;
-      visibility: hidden;
-      width: 280px;
-      height: 100%;
-      top: 0;
-      overflow-y: auto;
-      background-color: #222222;
-      z-index: 1000;
-      padding: 15px 0;
-      transition: all 0.5s ease;
-    }
-
-    .header .nav-menu.open {
-      visibility: visible;
-      right: 0px;
-    }
-
-    .header .menu>.menu-item {
-      display: block;
-      margin: 0;
-    }
-
-    .header .menu>.menu-item-has-children>a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header .menu>.menu-item>a {
-      color: #ffffff;
-      padding: 12px 15px;
-      border-bottom: 1px solid #333333;
-    }
-
-    .header .menu>.menu-item:first-child>a {
-      border-top: 1px solid #333333;
-    }
-
-    .header .menu>.menu-item>a .plus:before,
-    .header .menu>.menu-item>a .plus:after {
-      background-color: #ffffff;
-    }
-
-    .header .menu>.menu-item-has-children.active>a .plus:after {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    .header .menu>.menu-item>.sub-menu {
-      width: 100%;
-      position: relative;
-      opacity: 1;
-      visibility: visible;
-      border: none;
-      background-color: transparent;
-      box-shadow: none;
-      transform: translateY(0px);
-      padding: 0px;
-      left: auto;
-      top: auto;
-      max-height: 0;
-      overflow: hidden;
-    }
-
-    .header .menu>.menu-item>.sub-menu>.menu-item>a {
-      padding: 12px 45px;
-      color: #ffffff;
-      border-bottom: 1px solid #333333;
-    }
-
-    .header .close-nav-menu,
-    .header .open-nav-menu {
-      display: flex;
-    }
-  }
-  @media(min-width: 992px) {
-    .header .menu>.menu-item-has-children:hover>.sub-menu {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .header .menu>.menu-item-has-children:hover>a .plus:after {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-  }
-
-  .header .menu>.menu-item>.sub-menu>.menu-item {
-    display: block;
-  }
-
-  .header .menu>.menu-item>.sub-menu>.menu-item>a {
-    display: block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #f7f3f3;
-    transition: all 0.3s ease;
-    text-transform: capitalize;
-  }
-
-  .header .open-nav-menu {
-    height: 34px;
-    width: 40px;
-    margin-right: 15px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .header .open-nav-menu span {
-    display: block;
-    height: 3px;
-    width: 24px;
-    background-color: #000000;
-    position: relative;
-  }
-
-  .header .open-nav-menu span:before,
-  .header .open-nav-menu span:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000000;
-    box-sizing: border-box;
-  }
-
-  .header .open-nav-menu span:before {
-    top: -7px;
-  }
-
-  .header .open-nav-menu span:after {
-    top: 7px;
-  }
-
-  .header .close-nav-menu {
-    height: 40px;
-    width: 40px;
-    background-color: #ffffff;
-    margin: 0 0 15px 15px;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .header .close-nav-menu img {
-    width: 16px;
-  }
-
-  .header .menu-overlay {
-    position: fixed;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.5);
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-</style> -->
-
-
-
-<style>
-html {
-  scroll-behavior: smooth;
-}
-
-body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
   }
-  
+
   nav {
     background-color: #1E90FF;
     color: white;
@@ -588,55 +31,57 @@ body {
     align-items: center;
     padding: 10px 20px;
   }
-  
+
   .logo {
     font-size: 1.5rem;
   }
-  
+
   ul {
     display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  
+
   ul li {
     margin-right: 20px;
   }
-  
+
   ul li a {
     color: white;
     text-decoration: none;
     transition: color 0.3s;
   }
-/*   
+
+  /*   
   ul li a:hover {
     color: lightgreen;
   } */
-  
+
   .checkbtn_nav {
     font-size: 30px;
     color: white;
     cursor: pointer;
     display: none;
   }
-  
+
   #check {
     display: none;
   }
+
   a {
     color: white;
     text-decoration: none;
     background-color: transparent;
   }
-  
+
   @media (max-width: 768px) {
     .checkbtn_nav {
       display: block;
       order: 1;
       margin-right: 20px;
     }
-  
+
     ul {
       position: fixed;
       top: 80px;
@@ -649,866 +94,803 @@ body {
       align-items: center;
       transition: all 0.3s;
     }
-  
+
     ul li {
       margin: 20px 0;
     }
-  
+
     ul li a {
       font-size: 20px;
     }
-  
-    #check:checked ~ ul {
+
+    #check:checked~ul {
       right: 0;
     }
   }
 </style>
 
-<body>
-  <%- include('./alert_msg.ejs') %>
-    <% function formatDateToDDMMYYYY(date) { const day=String(date.getDate()).padStart(2, '0' );
-     const month=String(date.getMonth() + 1).padStart(2, '0' ); const year=date.getFullYear();
-      return `${day}-${month}-${year}`; } %>
-
-
-
-      <% function formatTime(slot) { %>
-        <% const times = slot.split('-'); %>
-        <% const startTime = formatHour(times[0]); %>
-        <% const endTime = formatHour(times[1]); %>
-        <%= startTime %> - <%= endTime %>
-    <% } %>
-    
-    <% function formatHour(hour) { %>
-        <% return (hour < 10 ? "0" : "") + hour + ":00 PM"; %>
-    <% } %>
-    
-    <nav>
-      <input type="checkbox" id="check">
-      <label for="check" class="checkbtn_nav">
-          <i class="fas fa-bars"></i>
-      </label>
-      <label class="logo">Swaayatt Robots Meetings (<%=new_employee.name%>)</label>
-      <ul>
-          <li><a class="active" href="#">Home</a></li>
-          <li><a href="#mainDiv_meeting">Meetings</a></li>
-      </ul>
-  </nav>
-  
-
-<!--       
-      <header class="header bg-primary">
-        <div class="container bg-primary">
-          <div class="header-main bg-primary">
-            <div class="logo">
-              <a href="#">Swaayatt Robots Meetings (<%=new_employee.name%>)</a>
-            </div>
-            <div class="open-nav-menu">
-              <span></span>
-            </div>
-            <div class="menu-overlay">
-            </div>
-
-            <nav class="nav-menu">
-              <div class="close-nav-menu">
-                <img src="img/close.svg" alt="close">
-              </div>
-              <ul class="menu" style="color: white;">
-                <li class="menu-item menu-item-has-children">
-                  Home
-                </li>
-                <li class="menu-item">
-                  Meetings
-                </li>
-
-              </ul>
-            </nav>
-
-          </div>
-        </div>
-      </header> -->
-     
-
-
 
 <!-- Availability -->
-<div class="loader-container" id="loaderContainer">
-  <div class="loader"></div>
-</div>
-
-
-<script>
-  function showLoader() {
-  document.getElementById('loaderContainer').style.display = 'flex';
-}
-
-// Hide loader when a process ends
-function hideLoader() {
-  document.getElementById('loaderContainer').style.display = 'none';
-}
-
-// Attach the showLoader function to the 'beforeunload' event
-window.addEventListener('beforeunload', showLoader);
-
-// Attach the hideLoader function to the 'load' event
-window.addEventListener('load', hideLoader);
-
-
-
-
-
-</script>
-
-
-
-<script>
-  // Function to format time from '12-1' to '12:00 PM - 1:00 PM'
-function formatTime(slot) {
-    const times = slot.split('-');
-    const startTime = formatHour(times[0]);
-    const endTime = formatHour(times[1]);
-    return `${startTime} - ${endTime}`;
-}
-
-// Function to format hour from '12' to '12:00 PM'
-function formatHour(hour) {
-    if (hour >= 12) {
-        return (hour == 12 ? 12 : hour - 12) + ":00 PM";
-    } else {
-        return hour + ":00 AM";
-    }
-}
-
-</script>
-
 <style>
- 
- .container_1 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      max-width: 1200px;
-      margin: auto;
-      margin-top: -30px;
-      /* position: relative;
-      z-index: -1; */
+  .container_1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: -30px;
+    /* position: relative;
+       z-index: -1; */
 
-      /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  }
+
+  h1 {
+    font-size: 24px;
+    color: #333;
+    /* text-align: center; */
+    margin-bottom: 20px;
+  }
+
+  .section {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+  }
+
+  label {
+    font-weight: 600;
+    margin-right: 75px;
+  }
+
+  .checkbox {
+    transform: scale(1.2);
+    margin-right: 10px;
+    margin-left: 156px;
+  }
+
+  .day-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .availability {
+    /* font-weight: 700; */
+    position: relative;
+    right: 160px;
+    top: -4px;
+  }
+
+  .remove-slot {
+    width: 44px;
+    height: 44px;
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+    background-color: transparent;
+    color: rgb(26, 26, 26);
+    transition: all 0.3s;
+    margin-left: -170px;
+  }
+
+  .remove-slot:hover {
+    background-color: #f2f2f2;
+  }
+
+  select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .time-slot {
+    display: flex;
+    align-items: center;
+    margin-left: 140px;
+  }
+
+  .time-slot div {
+    padding: 10px 14px;
+    border: 1px solid #b2b2b2;
+    border-radius: 8px;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 16px;
+    margin-right: 5px;
+  }
+
+  .add-slot-button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+
+  .add-slot-button:hover {
+    background-color: #0056b3;
+  }
+
+  @media screen and (max-width: 768px) {
+    .container_1 {
+      grid-template-columns: 1fr;
     }
 
-    h1 {
-      font-size: 24px;
-      color: #333;
-      /* text-align: center; */
-      margin-bottom: 20px;
-    }
-
-    .section {
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      border: 2px solid #ccc;
-    }
-
-    label {
-      font-weight: 600;
-      margin-right: 75px;
-    }
-
-    .checkbox {
-      transform: scale(1.2);
-      margin-right: 10px;
-      margin-left: 156px;
+    .time-slot,
+    form {
+      margin-left: 0;
     }
 
     .day-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      /* flex-direction: column; */
+      align-items: flex-start;
+    }
+
+    input[type=checkbox] {
+      position: relative;
+      top: 23px;
     }
 
     .availability {
-      /* font-weight: 700; */
-      position: relative;
-    right: 160px;
-    top: -4px;
+      margin-top: 10px;
+      right: -7px;
+      top: 12px;
     }
 
     .remove-slot {
-      width: 44px;
-      height: 44px;
-      padding: 4px;
-      border-radius: 4px;
-      border: none;
-      background-color: transparent;
-      color: rgb(26, 26, 26);
-      transition: all 0.3s;
-      margin-left: -170px;
+      margin-left: -50px;
     }
+  }
 
-    .remove-slot:hover {
-      background-color: #f2f2f2;
-    }
-
-    select {
-      padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-
-    .time-slot {
-      display: flex;
-      align-items: center;
-      margin-left: 140px;
-    }
-
-    .time-slot div {
-      padding: 10px 14px;
-      border: 1px solid #b2b2b2;
-      border-radius: 8px;
-      background: #fff;
-      color: #1a1a1a;
-      font-size: 16px;
-      margin-right: 5px;
-    }
-
-    .add-slot-button {
-      padding: 10px 20px;
-      border-radius: 4px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
-    }
-
-    .add-slot-button:hover {
-      background-color: #0056b3;
-    }
-
-    @media screen and (max-width: 768px) {
-      .container_1 {
-        grid-template-columns: 1fr;
-      }
-
-      .time-slot, form {
-        margin-left: 0;
-      }
-
-      .day-row {
-        /* flex-direction: column; */
-        align-items: flex-start;
-      }
-      input[type=checkbox]{
-        position: relative;
-    top: 23px;
-      }
-
-      .availability {
-        margin-top: 10px;
-        right: -7px;
-        top: 12px;
-      }
-      .remove-slot {
-        margin-left: -50px;
-}
-    }
-    hr {
-  margin-left: -20px;
-  margin-right: -20px;
-  /* border: none; 
-  border-top: 1px solid var(--color-grey-3, #CCCCCC);  */
-}
-
-  </style>
-
-
-
-      <div class="main">
-        <div style="padding: 20px; border-radius: 10px;
-        margin-left: 10%;">
-          <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Availability</h1>
-          <div style="display: flex; align-items: center;">
-            <div style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
-            </div>
-            <h2 style="font-size: 24px; margin: 0; color: #1E90FF;">Schedule</h2>
-          </div>
-          <p style="margin-top: 10px; color: #666666; font-size: 18px;">Check your availability and manage your schedule
-            easily.</p>
-        </div>
-        <div class="container_1">
-          <div class="meetings section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
-            <h1 style="text-align: center;">Select Days To Meet</h1>
-            <hr>
-            <% const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
-            <% daysOfWeek.forEach((day, index) => { %>
-              <div class="day-row">
-                <form action="/dayChange" id="DC_<%= index %>" method="post">
-                  <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-                  <input type="hidden" name="dayToChange" value="<%= day %>">
-                  <input type="checkbox" id="day_<%= index %>" class="checkbox" name="day_<%= index %>"
-                    <% if(new_employee.days && new_employee.days.includes(day)) { %> checked <% } %>
-                    onchange="document.getElementById('DC_<%= index %>').submit()"
-                  >
-                  <label for="day_<%= index %>"><%= day %></label>
-                </form>
-                <span class="availability">
-                  <% if(new_employee.days && new_employee.days.includes(day)) { %>Available<% } else { %>Unavailable<% } %>
-                </span>
-              </div>
-            <% }); %>
-          </div>
-          <div class="slots section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
-            <h1 style="text-align: center;">Add Slots of the Day</h1>
-            <hr>
-            <% if(new_employee.slots) { %>
-              <% new_employee.slots.forEach(slot => { %>
-                <div class="day-row">
-                  <div class="time-slot">
-                    <div><%= formatHour(slot.split('-')[0]) %></div>
-                    <span>-</span>
-                    <div><%= formatHour(slot.split('-')[1]) %></div>
-                  </div>
-                  <form action="/removeslot" method="post">
-                    <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-                    <input type="hidden" name="slottoremove" value="<%= slot %>">
-                    <button class="remove-slot" type="submit">X</button>
-                  </form>
-                </div>
-              <% }); %>
-            <% } %>
-            <form action="/add-slot" method="post" style="margin-left: 54px;">
-              <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-              <select name="slottoadd" required>
-                <% const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8']; %>
-                <% allSlots.forEach(slot => { %>
-                  <% if (!new_employee.slots.includes(slot)) { %>
-                    <option value="<%= slot %>"><%= formatTime(slot) %></option>
-                  <% } %>
-                <% }); %>
-              </select>
-              <button class="add-slot-button" type="submit">Add Slot</button>
-            </form>
-          </div>
-        </div>
-        
-        
-      
-
-
-
-
-
-
+  hr {
+    margin-left: -20px;
+    margin-right: -20px;
+    /* border: none; 
+   border-top: 1px solid var(--color-grey-3, #CCCCCC);  */
+  }
+</style>
 
 
 <!-- Events Types -->
 
-        <style>
-          .container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-            position: relative; 
-            margin-top: -30px;
-            /* z-index: -1; */
-          }
-
-          .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            width: calc(50% - 20px);
-            padding: 20px;
-            border-radius: 5px;
-            background: #f9f9f9;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            /* z-index: -1; */
-
-            
-          }
-
-          .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-          }
-
-          .card h3,
-          .card h1 {
-            font-size: 24px;
-            color: #333;
-            font-weight: bold;
-            margin-top: 30px;
-          }
-
-          .card p {
-            margin: 10px 0;
-            color: #666;
-          }
-
-          .card a {
-            color: #007BFF;
-            text-decoration: none;
-          }
-
-          .card a:hover {
-            text-decoration: underline;
-          }
-
-          .btn-copy {
-            color: #007BFF;
-            background-color: transparent;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            /* margin-top: 10px;  */
-            transition: color 0.3s ease;
-            margin-left: -333px;
-          }
-
-          .btn-copy:hover {
-            text-decoration: underline;
-          }
-
-          button:focus {
-            outline: none !important;
-          }
-
-          .copy-icon {
-            margin-left: 5px;
-          }
-
-          input[type="text"] {
-            visibility: hidden;
-          }
-
-          @media (max-width: 800px) {
-            .card {
-              width: 100%;
-            }
-          }
-
-          .cap {
-            height: 7px;
-            margin-top: -20px;
-            margin-right: -20px;
-            margin-left: -20px;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-          }
-
-          h3 {
-            font-family: proxima nova, sans-serif;
-            color: var(--text-color, rgb(26, 26, 26));
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 1.4;
-          }
-        </style>
-
-
-
-<div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
-  <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Events Types</h1>
-  <div style="display: flex; align-items: center;">
-    <div style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
-    </div>
-    <h2 style="font-size: 24px; margin: 0; color: #1E90FF;">Create Event / Invite People</h2>
-  </div>
-  <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore different types of events and create or
-    invite people to them.</p>
-</div>
-
-        <div class="container">
-          <div class="card">
-            <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
-            <h3>1 Hour Event</h3>
-            <input type="text" id="linkInput" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
-            <p> One Hour</p>
-            <p><strong>Type:</strong> Meeting / Interview</p>
-            <hr>
-            <button id="copyButton" class="btn-copy" onclick="copyLink('linkInput')">
-              <i class="fa fa-copy"></i> Copy Link
-            </button>
-          </div>
-
-          <div class="card">
-            <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
-            <h3>30 Min Meeting</h3>
-            <input type="text" id="linkInput1" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
-            <p><strong>Duration:</strong> 30 Min</p>
-            <p><strong>Type:</strong> (coming soon)</p>
-            <hr>
-            <button id="copyButton1" class="btn-copy" onclick="copyLink('linkInput1')">
-              <i class="fa fa-copy"></i> Copy Link
-            </button>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
-        <!-- Schedule Events -->
-        <style>
-          .mainDiv_meeting {
-            position: relative;
-            width: 100%;
-            max-width: 1330px;
-            margin: 50px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-top: -30px;
-          }
-        
-          .meeting {
-            position: relative;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            width: 48%;
-            align-self: flex-start;
-          }
-        
-          .meeting:nth-child(even) {
-            align-self: flex-end;
-            transform: translateX(20px);
-          }
-        
-          .meeting.active {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        
-          .meeting h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #333333;
-          }
-        
-          .meeting p {
-            margin-bottom: 8px;
-            color: #666666;
-          }
-        
-          .meeting a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s ease, font-weight 0.3s ease;
-          }
-        
-          .meeting a:hover {
-            color: #1e90ff;
-            font-weight: bold;
-          }
-        
-          .timeline {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background-color: #ccc;
-            transform: translateX(-50%);
-          }
-        
-          .meeting::before {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: #007bff;
-            border-radius: 50%;
-            left: -32px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: -1;
-          }
-        
-          .meeting:nth-child(odd)::before {
-            left: 660px;
-          }
-        
-          
-          @media (max-width: 768px) {
-            .mainDiv_meeting {
-              margin: 20px auto;
-              padding: 0 10px;
-            }
-        
-            .meeting, .meeting:nth-child(even) {
-              width: 100%;
-              align-self: center;
-              transform: translateX(0);
-            }
-        
-            .timeline {
-              display: none;
-            }
-        
-            .meeting::before {
-              display: none;
-            }
-            .btn-copy {
-              margin-left: -125px;
-            }
-            .availability {
-              right: -7px;
-            }
-          }
-        </style>
-        
-        
-        <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
-          <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;"id="mainDiv_meeting">Scheduled Events</h1>
-          <div style="display: flex; align-items: center;">
-            <div style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;"></div>
-            <h2 style="font-size: 24px; margin: 0; color: #1E90FF; font-weight: normal;">All Meetings</h2>
-          </div>
-          <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore all scheduled meetings at a glance.</p>
-        </div>
-        <div class="mainDiv_meeting" >
-          <div class="timeline"></div>
-          <% for(var i=0 ; i< formattedAppointments.length; i++){ %>
-          <div class="meeting">
-            <h2>
-              <%= new_employee.name %> and <%= formattedAppointments[i].user.name %>
-            </h2>
-            <p><strong>Date:</strong> <%= formatDateToDDMMYYYY(formattedAppointments[i].time_slot.from_date) %></p>
-            <p><strong>Time:</strong> <%= formattedAppointments[i].time_slot.time %></p>
-            <p><strong>Interviewee Email:</strong> <%= formattedAppointments[i].user.email %></p>
-            <p><strong>Link:</strong> <a href="<%= new_employee.link %>" target="_blank"><%= new_employee.link %></a></p>
-          </div>
-          <% } %>
-        </div>
-        
-        
-
-
-      </div>
-
-
-
-
-
-
-
-
-
-      <script>
-        window.addEventListener('scroll', () => {
-          const meetings = document.querySelectorAll('.meeting');
-          meetings.forEach((meeting, index) => {
-            if (index === 0 || isElementInViewport(meeting)) {
-              meeting.classList.add('active');
-            } else {
-              meeting.classList.remove('active');
-            }
-          });
-        });
-
-        function isElementInViewport(el) {
-          const rect = el.getBoundingClientRect();
-          return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-          );
-        }
-      </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <script>
-        function toggleAvailability(index) {
-          var availabilityDiv = document.getElementById("availability_" + index);
-          var checkbox = document.getElementById("day_" + index);
-          if (checkbox.checked) {
-            availabilityDiv.textContent = "Available";
-          } else {
-            availabilityDiv.textContent = "Unavailable";
-          }
-        }
-      </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <script>
-        document.querySelector('.show_reSchedule').addEventListener('click', () => {
-          console.log('clisdf;lkajsdfkl')
-          document.querySelector('.show_reSchedule1').style.display = 'none'
-          document.querySelector('.btbt').style.display = 'flex'
-          document.querySelector('.show_reSchedule').style.visibility = 'hidden'
-
-        })
-      </script>
-
-
-      <script>
-        const copyButton = document.getElementById("copyButton");
-        const linkInput = document.getElementById("linkInput");
-
-        copyButton.addEventListener("click", () => {
-          navigator.clipboard.writeText(linkInput.value).then(() => {
-            copyButton.innerHTML = "<i class='fas fa-check' style='color: #007BFF;'></i> Copied ";
-            setTimeout(() => {
-              copyButton.innerHTML = "<i class='fa fa-copy'></i> Copy Link";
-            }, 2000);
-            console.log("Link copied to clipboard");
-          }).catch((error) => {
-            console.error("Failed to copy link: ", error);
-          });
-        });
-      </script>
-
-
-      <!-- <script>
-        const mainDiv = document.querySelector('.mainDiv');
-        const childDivs = Array.from(mainDiv.children);
-
-        childDivs.sort((a, b) => {
-          const dateA = parseDate(a.querySelector('h1').textContent);
-          const dateB = parseDate(b.querySelector('h1').textContent);
-          return dateA - dateB;
-        });
-
-        childDivs.forEach(div => mainDiv.appendChild(div));
-
-        function parseDate(dateString) {
-          const [day, month, year] = dateString.split('/').map(Number);
-          return new Date(year + 2000, month - 1, day); // Converting to comparable format
-        }
-
-
-
-
-      </script> -->
-
-
-      <script>
-
-
-        (() => {
-
-          const openNavMenu = document.querySelector(".open-nav-menu"),
-            closeNavMenu = document.querySelector(".close-nav-menu"),
-            navMenu = document.querySelector(".nav-menu"),
-            menuOverlay = document.querySelector(".menu-overlay"),
-            mediaSize = 991;
-
-          openNavMenu.addEventListener("click", toggleNav);
-          closeNavMenu.addEventListener("click", toggleNav);
-          // close the navMenu by clicking outside
-          menuOverlay.addEventListener("click", toggleNav);
-
-          function toggleNav() {
-            navMenu.classList.toggle("open");
-            menuOverlay.classList.toggle("active");
-            document.body.classList.toggle("hidden-scrolling");
-          }
-
-          navMenu.addEventListener("click", (event) => {
-            if (event.target.hasAttribute("data-toggle") &&
-              window.innerWidth <= mediaSize) {
-              // prevent default anchor click behavior
-              event.preventDefault();
-              const menuItemHasChildren = event.target.parentElement;
-              // if menuItemHasChildren is already expanded, collapse it
-              if (menuItemHasChildren.classList.contains("active")) {
-                collapseSubMenu();
-              }
-              else {
-                // collapse existing expanded menuItemHasChildren
-                if (navMenu.querySelector(".menu-item-has-children.active")) {
-                  collapseSubMenu();
-                }
-                // expand new menuItemHasChildren
-                menuItemHasChildren.classList.add("active");
-                const subMenu = menuItemHasChildren.querySelector(".sub-menu");
-                subMenu.style.maxHeight = subMenu.scrollHeight + "px";
-              }
-            }
-          });
-          function collapseSubMenu() {
-            navMenu.querySelector(".menu-item-has-children.active .sub-menu")
-              .removeAttribute("style");
-            navMenu.querySelector(".menu-item-has-children.active")
-              .classList.remove("active");
-          }
-          function resizeFix() {
-            // if navMenu is open ,close it
-            if (navMenu.classList.contains("open")) {
-              toggleNav();
-            }
-            // if menuItemHasChildren is expanded , collapse it
-            if (navMenu.querySelector(".menu-item-has-children.active")) {
-              collapseSubMenu();
-            }
-          }
-
-          window.addEventListener("resize", function () {
-            if (this.innerWidth > mediaSize) {
-              resizeFix();
-            }
-          });
-
-        })();
-
-
-      </script>
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+    margin-top: -30px;
+    /* z-index: -1; */
+  }
+
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: calc(50% - 20px);
+    padding: 20px;
+    border-radius: 5px;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* z-index: -1; */
+
+
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .card h3,
+  .card h1 {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+
+  .card p {
+    margin: 10px 0;
+    color: #666;
+  }
+
+  .card a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+
+  .card a:hover {
+    text-decoration: underline;
+  }
+
+  .btn-copy {
+    color: #007BFF;
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    /* margin-top: 10px;  */
+    transition: color 0.3s ease;
+    margin-left: -333px;
+  }
+
+  .btn-copy:hover {
+    text-decoration: underline;
+  }
+
+  button:focus {
+    outline: none !important;
+  }
+
+  .copy-icon {
+    margin-left: 5px;
+  }
+
+  input[type="text"] {
+    visibility: hidden;
+  }
+
+  @media (max-width: 800px) {
+    .card {
+      width: 100%;
+    }
+  }
+
+  .cap {
+    height: 7px;
+    margin-top: -20px;
+    margin-right: -20px;
+    margin-left: -20px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  h3 {
+    font-family: proxima nova, sans-serif;
+    color: var(--text-color, rgb(26, 26, 26));
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.4;
+  }
+</style>
+
+<!-- Schedule Events -->
+<style>
+  .mainDiv_meeting {
+    position: relative;
+    width: 100%;
+    max-width: 1330px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -30px;
+  }
+
+  .meeting {
+    position: relative;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    width: 48%;
+    align-self: flex-start;
+  }
+
+  .meeting:nth-child(even) {
+    align-self: flex-end;
+    transform: translateX(20px);
+  }
+
+  .meeting.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .meeting h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333333;
+  }
+
+  .meeting p {
+    margin-bottom: 8px;
+    color: #666666;
+  }
+
+  .meeting a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+  }
+
+  .meeting a:hover {
+    color: #1e90ff;
+    font-weight: bold;
+  }
+
+  .timeline {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #ccc;
+    transform: translateX(-50%);
+  }
+
+  .meeting::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #007bff;
+    border-radius: 50%;
+    left: -32px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
+  }
+
+  .meeting:nth-child(odd)::before {
+    left: 660px;
+  }
+
+
+  @media (max-width: 768px) {
+    .mainDiv_meeting {
+      margin: 20px auto;
+      padding: 0 10px;
+    }
+
+    .meeting,
+    .meeting:nth-child(even) {
+      width: 100%;
+      align-self: center;
+      transform: translateX(0);
+    }
+
+    .timeline {
+      display: none;
+    }
+
+    .meeting::before {
+      display: none;
+    }
+
+    .btn-copy {
+      margin-left: -125px;
+    }
+
+    .availability {
+      right: -7px;
+    }
+  }
+</style>
+
+
+<body>
+  <%- include('./alert_msg.ejs') %>
+    <% function formatDateToDDMMYYYY(date) { const day=String(date.getDate()).padStart(2, '0' ); const
+      month=String(date.getMonth() + 1).padStart(2, '0' ); const year=date.getFullYear(); return
+      `${day}-${month}-${year}`; } %>
+
+
+
+      <% function formatTime(slot) { %>
+        <% const times=slot.split('-'); %>
+          <% const startTime=formatHour(times[0]); %>
+            <% const endTime=formatHour(times[1]); %>
+              <%= startTime %> - <%= endTime %>
+                  <% } %>
+
+                    <% function formatHour(hour) { %>
+                      <% return (hour < 10 ? "0" : "" ) + hour + ":00 PM" ; %>
+                        <% } %>
+
+                          <nav>
+                            <input type="checkbox" id="check">
+                            <label for="check" class="checkbtn_nav">
+                              <i class="fas fa-bars"></i>
+                            </label>
+                            <label class="logo">Swaayatt Robots Meetings (<%=new_employee.name%>)</label>
+                            <ul>
+                              <li><a class="active" href="#">Home</a></li>
+                              <li><a href="#mainDiv_meeting">Meetings</a></li>
+                            </ul>
+                          </nav>
+
+
+
+                          <!-- Availability -->
+                          <div class="loader-container" id="loaderContainer">
+                            <div class="loader"></div>
+                          </div>
+
+
+                          
+
+
+
+                          <div class="main">
+                            <div style="padding: 20px; border-radius: 10px;
+        margin-left: 10%;">
+                              <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Availability</h1>
+                              <div style="display: flex; align-items: center;">
+                                <div
+                                  style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
+                                </div>
+                                <h2 style="font-size: 24px; margin: 0; color: #1E90FF;">Schedule</h2>
+                              </div>
+                              <p style="margin-top: 10px; color: #666666; font-size: 18px;">Check your availability and
+                                manage your schedule
+                                easily.</p>
+                            </div>
+                            <div class="container_1">
+                              <div class="meetings section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
+                                <h1 style="text-align: center;">Select Days To Meet</h1>
+                                <hr>
+                                <% const daysOfWeek=['Sunday', 'Monday' , 'Tuesday' , 'Wednesday' , 'Thursday'
+                                  , 'Friday' , 'Saturday' ]; %>
+                                  <% daysOfWeek.forEach((day, index)=> { %>
+                                    <div class="day-row">
+                                      <form action="/dayChange" id="DC_<%= index %>" method="post">
+                                        <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+                                        <input type="hidden" name="dayToChange" value="<%= day %>">
+                                        <input type="checkbox" id="day_<%= index %>" class="checkbox"
+                                          name="day_<%= index %>" <% if(new_employee.days &&
+                                          new_employee.days.includes(day)) { %> checked <% } %>
+                                          onchange="document.getElementById('DC_<%= index %>').submit()"
+                                            >
+                                            <label for="day_<%= index %>">
+                                              <%= day %>
+                                            </label>
+                                      </form>
+                                      <span class="availability">
+                                        <% if(new_employee.days && new_employee.days.includes(day)) { %>Available<% }
+                                            else { %>Unavailable<% } %>
+                                      </span>
+                                    </div>
+                                    <% }); %>
+                              </div>
+                              <div class="slots section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
+                                <h1 style="text-align: center;">Add Slots of the Day</h1>
+                                <hr>
+                                <% if(new_employee.slots) { %>
+                                  <% new_employee.slots.forEach(slot=> { %>
+                                    <div class="day-row">
+                                      <div class="time-slot">
+                                        <div>
+                                          <%= formatHour(slot.split('-')[0]) %>
+                                        </div>
+                                        <span>-</span>
+                                        <div>
+                                          <%= formatHour(slot.split('-')[1]) %>
+                                        </div>
+                                      </div>
+                                      <form action="/removeslot" method="post">
+                                        <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+                                        <input type="hidden" name="slottoremove" value="<%= slot %>">
+                                        <button class="remove-slot" type="submit">X</button>
+                                      </form>
+                                    </div>
+                                    <% }); %>
+                                      <% } %>
+                                        <form action="/add-slot" method="post" style="margin-left: 54px;">
+                                          <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+                                          <select name="slottoadd" required>
+                                            <% const allSlots=['12-1', '1-2' , '2-3' , '3-4' , '4-5' , '5-6' , '6-7'
+                                              , '7-8' ]; %>
+                                              <% allSlots.forEach(slot=> { %>
+                                                <% if (!new_employee.slots.includes(slot)) { %>
+                                                  <option value="<%= slot %>">
+                                                    <%= formatTime(slot) %>
+                                                  </option>
+                                                  <% } %>
+                                                    <% }); %>
+                                          </select>
+                                          <button class="add-slot-button" type="submit">Add Slot</button>
+                                        </form>
+                              </div>
+                            </div>
+
+
+                            <!-- Events Types -->
+
+                            <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
+                              <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Events Types</h1>
+                              <div style="display: flex; align-items: center;">
+                                <div
+                                  style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
+                                </div>
+                                <h2 style="font-size: 24px; margin: 0; color: #1E90FF;">Create Event / Invite People
+                                </h2>
+                              </div>
+                              <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore different types of
+                                events and create or
+                                invite people to them.</p>
+                            </div>
+
+                            <div class="container">
+                              <div class="card">
+                                <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
+                                <h3>1 Hour Event</h3>
+                                <input type="text" id="linkInput"
+                                  value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
+                                <p> One Hour</p>
+                                <p><strong>Type:</strong> Meeting / Interview</p>
+                                <hr>
+                                <button id="copyButton" class="btn-copy" onclick="copyLink('linkInput')">
+                                  <i class="fa fa-copy"></i> Copy Link
+                                </button>
+                              </div>
+
+                              <div class="card">
+                                <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
+                                <h3>30 Min Meeting</h3>
+                                <input type="text" id="linkInput1"
+                                  value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
+                                <p><strong>Duration:</strong> 30 Min</p>
+                                <p><strong>Type:</strong> (coming soon)</p>
+                                <hr>
+                                <button id="copyButton1" class="btn-copy" onclick="copyLink('linkInput1')">
+                                  <i class="fa fa-copy"></i> Copy Link
+                                </button>
+                              </div>
+                            </div>
+
+
+                            <!-- Schedule Events -->
+
+                            <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
+                              <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;" id="mainDiv_meeting">
+                                Scheduled Events</h1>
+                              <div style="display: flex; align-items: center;">
+                                <div
+                                  style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
+                                </div>
+                                <h2 style="font-size: 24px; margin: 0; color: #1E90FF; font-weight: normal;">All
+                                  Meetings</h2>
+                              </div>
+                              <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore all scheduled
+                                meetings at a glance.</p>
+                            </div>
+                            <div class="mainDiv_meeting">
+                              <div class="timeline"></div>
+                              <% for(var i=0 ; i< formattedAppointments.length; i++){ %>
+                                <div class="meeting">
+                                  <h2>
+                                    <%= new_employee.name %> and <%= formattedAppointments[i].user.name %>
+                                  </h2>
+                                  <p><strong>Date:</strong>
+                                    <%= formatDateToDDMMYYYY(formattedAppointments[i].time_slot.from_date) %>
+                                  </p>
+                                  <p><strong>Time:</strong>
+                                    <%= formattedAppointments[i].time_slot.time %>
+                                  </p>
+                                  <p><strong>Interviewee Email:</strong>
+                                    <%= formattedAppointments[i].user.email %>
+                                  </p>
+                                  <p><strong>Link:</strong> <a href="<%= new_employee.link %>" target="_blank">
+                                      <%= new_employee.link %>
+                                    </a></p>
+                                </div>
+                                <% } %>
+                            </div>
+
+                          </div>
+
+
+
+
+                          <script>
+                            function showLoader() {
+                              document.getElementById('loaderContainer').style.display = 'flex';
+                            }
+
+                            // Hide loader when a process ends
+                            function hideLoader() {
+                              document.getElementById('loaderContainer').style.display = 'none';
+                            }
+
+                            // Attach the showLoader function to the 'beforeunload' event
+                            window.addEventListener('beforeunload', showLoader);
+
+                            // Attach the hideLoader function to the 'load' event
+                            window.addEventListener('load', hideLoader);
+
+
+
+
+
+                          </script>
+
+                          <script>
+                            // Function to format time from '12-1' to '12:00 PM - 1:00 PM'
+                            function formatTime(slot) {
+                              const times = slot.split('-');
+                              const startTime = formatHour(times[0]);
+                              const endTime = formatHour(times[1]);
+                              return `${startTime} - ${endTime}`;
+                            }
+
+                            // Function to format hour from '12' to '12:00 PM'
+                            function formatHour(hour) {
+                              if (hour >= 12) {
+                                return (hour == 12 ? 12 : hour - 12) + ":00 PM";
+                              } else {
+                                return hour + ":00 AM";
+                              }
+                            }
+
+                          </script>
+
+
+                          <script>
+                            window.addEventListener('scroll', () => {
+                              const meetings = document.querySelectorAll('.meeting');
+                              meetings.forEach((meeting, index) => {
+                                if (index === 0 || isElementInViewport(meeting)) {
+                                  meeting.classList.add('active');
+                                } else {
+                                  meeting.classList.remove('active');
+                                }
+                              });
+                            });
+
+                            function isElementInViewport(el) {
+                              const rect = el.getBoundingClientRect();
+                              return (
+                                rect.top >= 0 &&
+                                rect.left >= 0 &&
+                                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                              );
+                            }
+                          </script>
+
+                          <script>
+                            function toggleAvailability(index) {
+                              var availabilityDiv = document.getElementById("availability_" + index);
+                              var checkbox = document.getElementById("day_" + index);
+                              if (checkbox.checked) {
+                                availabilityDiv.textContent = "Available";
+                              } else {
+                                availabilityDiv.textContent = "Unavailable";
+                              }
+                            }
+                          </script>
+
+                          <script>
+                            document.querySelector('.show_reSchedule').addEventListener('click', () => {
+                              console.log('clisdf;lkajsdfkl')
+                              document.querySelector('.show_reSchedule1').style.display = 'none'
+                              document.querySelector('.btbt').style.display = 'flex'
+                              document.querySelector('.show_reSchedule').style.visibility = 'hidden'
+
+                            })
+                          </script>
+
+                          <script>
+                            const copyButton = document.getElementById("copyButton");
+                            const linkInput = document.getElementById("linkInput");
+
+                            copyButton.addEventListener("click", () => {
+                              navigator.clipboard.writeText(linkInput.value).then(() => {
+                                copyButton.innerHTML = "<i class='fas fa-check' style='color: #007BFF;'></i> Copied ";
+                                setTimeout(() => {
+                                  copyButton.innerHTML = "<i class='fa fa-copy'></i> Copy Link";
+                                }, 2000);
+                                console.log("Link copied to clipboard");
+                              }).catch((error) => {
+                                console.error("Failed to copy link: ", error);
+                              });
+                            });
+                          </script>
+
+                          <script>
+
+
+                            (() => {
+
+                              const openNavMenu = document.querySelector(".open-nav-menu"),
+                                closeNavMenu = document.querySelector(".close-nav-menu"),
+                                navMenu = document.querySelector(".nav-menu"),
+                                menuOverlay = document.querySelector(".menu-overlay"),
+                                mediaSize = 991;
+
+                              openNavMenu.addEventListener("click", toggleNav);
+                              closeNavMenu.addEventListener("click", toggleNav);
+                              // close the navMenu by clicking outside
+                              menuOverlay.addEventListener("click", toggleNav);
+
+                              function toggleNav() {
+                                navMenu.classList.toggle("open");
+                                menuOverlay.classList.toggle("active");
+                                document.body.classList.toggle("hidden-scrolling");
+                              }
+
+                              navMenu.addEventListener("click", (event) => {
+                                if (event.target.hasAttribute("data-toggle") &&
+                                  window.innerWidth <= mediaSize) {
+                                  // prevent default anchor click behavior
+                                  event.preventDefault();
+                                  const menuItemHasChildren = event.target.parentElement;
+                                  // if menuItemHasChildren is already expanded, collapse it
+                                  if (menuItemHasChildren.classList.contains("active")) {
+                                    collapseSubMenu();
+                                  }
+                                  else {
+                                    // collapse existing expanded menuItemHasChildren
+                                    if (navMenu.querySelector(".menu-item-has-children.active")) {
+                                      collapseSubMenu();
+                                    }
+                                    // expand new menuItemHasChildren
+                                    menuItemHasChildren.classList.add("active");
+                                    const subMenu = menuItemHasChildren.querySelector(".sub-menu");
+                                    subMenu.style.maxHeight = subMenu.scrollHeight + "px";
+                                  }
+                                }
+                              });
+                              function collapseSubMenu() {
+                                navMenu.querySelector(".menu-item-has-children.active .sub-menu")
+                                  .removeAttribute("style");
+                                navMenu.querySelector(".menu-item-has-children.active")
+                                  .classList.remove("active");
+                              }
+                              function resizeFix() {
+                                // if navMenu is open ,close it
+                                if (navMenu.classList.contains("open")) {
+                                  toggleNav();
+                                }
+                                // if menuItemHasChildren is expanded , collapse it
+                                if (navMenu.querySelector(".menu-item-has-children.active")) {
+                                  collapseSubMenu();
+                                }
+                              }
+
+                              window.addEventListener("resize", function () {
+                                if (this.innerWidth > mediaSize) {
+                                  resizeFix();
+                                }
+                              });
+
+                            })();
+
+
+                          </script>
+
+
+                          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                            crossorigin="anonymous"></script>
+                          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                            crossorigin="anonymous"></script>
+                          <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+                            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                            crossorigin="anonymous"></script>
 
 </body>
 
