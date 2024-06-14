@@ -111,7 +111,7 @@
 
 
 <!-- Availability -->
-<style>
+<!-- <style>
   .container_1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -257,7 +257,7 @@
     /* border: none; 
    border-top: 1px solid var(--color-grey-3, #CCCCCC);  */
   }
-</style>
+</style> -->
 
 
 <!-- Events Types -->
@@ -373,6 +373,186 @@
 
 <!-- Schedule Events -->
 <style>
+.outer-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    
+}
+
+.container_1 {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    /* border-radius: 10px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.container_5 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.day {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease, height 0.3s ease;
+    overflow: hidden;
+}
+
+.day:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.day-header {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.status {
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.status.available {
+    /* background-color: #d4edda; */
+    color: #155724;
+    margin-left: 20px;
+    margin-top: -8px;
+}
+
+.status.unavailable {
+    /* background-color: #f8d7da; */
+    color: #721c24;
+    margin-left: 20px;
+    margin-top: -8px;
+}
+
+.slots {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: max-height 0.3s ease;
+}
+
+.slot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="time"] {
+  width: 28%;
+    min-height: 46px;
+    padding: 10px 14px;
+    border: 1px solid var(--color-grey-2, #B2B2B2);
+    border-radius: 8px;
+    background: var(--color-bg-white-l-1, rgba(255, 255, 255, 1));
+    color: #1a1a1a;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-wrap: normal;
+}
+input[type=checkbox]{
+  height: 25px;
+}
+
+button.remove {
+  background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+    /* background-color: transparent; */
+    color: rgb(26, 26, 26);
+    transition: all 0.3s;
+}
+
+button.remove:hover {
+  background-color: #f2f2f2;
+}
+
+button.add-slot {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+    align-self: flex-start;
+}
+
+button.add-slot:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.day-name {
+    font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    .container_1 {
+        padding: 10px;
+    }
+
+    .slot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    input[type="time"] {
+        width: 100%;
+    }
+
+    .status {
+        font-size: 12px;
+    }
+}
+
   .mainDiv_meeting {
     position: relative;
     width: 100%;
@@ -529,7 +709,7 @@
                           </div>
 
 
-                          
+
 
 
 
@@ -547,73 +727,86 @@
                                 manage your schedule
                                 easily.</p>
                             </div>
-                            <div class="container_1">
-                              <div class="meetings section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
-                                <h1 style="text-align: center;">Select Days To Meet</h1>
-                                <hr>
-                                <% const daysOfWeek=['Sunday', 'Monday' , 'Tuesday' , 'Wednesday' , 'Thursday'
-                                  , 'Friday' , 'Saturday' ]; %>
-                                  <% daysOfWeek.forEach((day, index)=> { %>
-                                    <div class="day-row">
-                                      <form action="/dayChange" id="DC_<%= index %>" method="post">
-                                        <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-                                        <input type="hidden" name="dayToChange" value="<%= day %>">
-                                        <input type="checkbox" id="day_<%= index %>" class="checkbox"
-                                          name="day_<%= index %>" <% if(new_employee.days &&
-                                          new_employee.days.includes(day)) { %> checked <% } %>
-                                          onchange="document.getElementById('DC_<%= index %>').submit()"
-                                            >
-                                            <label for="day_<%= index %>">
-                                              <%= day %>
-                                            </label>
-                                      </form>
-                                      <span class="availability">
-                                        <% if(new_employee.days && new_employee.days.includes(day)) { %>Available<% }
-                                            else { %>Unavailable<% } %>
-                                      </span>
-                                    </div>
-                                    <% }); %>
-                              </div>
-                              <div class="slots section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
-                                <h1 style="text-align: center;">Add Slots of the Day</h1>
-                                <hr>
-                                <% if(new_employee.slots) { %>
-                                  <% new_employee.slots.forEach(slot=> { %>
-                                    <div class="day-row">
-                                      <div class="time-slot">
-                                        <div>
-                                          <%= formatHour(slot.split('-')[0]) %>
-                                        </div>
-                                        <span>-</span>
-                                        <div>
-                                          <%= formatHour(slot.split('-')[1]) %>
-                                        </div>
+
+
+                            <div class="outer-container">
+                              <div class="container_1">
+                                  <div class="container_5">
+                                      <div class="day">
+                                          <div class="day-header">
+                                              <label>
+                                                  <input type="checkbox" checked>
+                                                  <span class="day-name">SUN</span>
+                                              </label>
+                                              <div class="status available">Available</div>
+                                          </div>
+                                          <div class="slots">
+                                              <div class="slot">
+                                                  <input type="time" value="00:00">
+                                                  <span>-</span>
+                                                  <input type="time" value="01:00">
+                                                  <button class="remove">×</button>
+                                              </div>
+                                              <div class="slot">
+                                                  <input type="time" value="02:00">
+                                                  <span>-</span>
+                                                  <input type="time" value="03:00">
+                                                  <button class="remove">×</button>
+                                              </div>
+                                              <div class="slot">
+                                                  <input type="time" value="18:00">
+                                                  <span>-</span>
+                                                  <input type="time" value="19:00">
+                                                  <button class="remove">×</button>
+                                              </div>
+                                              <div class="slot">
+                                                  <input type="time" value="22:00">
+                                                  <span>-</span>
+                                                  <input type="time" value="23:00">
+                                                  <button class="remove">×</button>
+                                              </div>
+                                          </div>
+                                          <button class="add-slot">Add Slot</button>
                                       </div>
-                                      <form action="/removeslot" method="post">
-                                        <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-                                        <input type="hidden" name="slottoremove" value="<%= slot %>">
-                                        <button class="remove-slot" type="submit">X</button>
-                                      </form>
-                                    </div>
-                                    <% }); %>
-                                      <% } %>
-                                        <form action="/add-slot" method="post" style="margin-left: 54px;">
-                                          <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-                                          <select name="slottoadd" required>
-                                            <% const allSlots=['12-1', '1-2' , '2-3' , '3-4' , '4-5' , '5-6' , '6-7'
-                                              , '7-8' ]; %>
-                                              <% allSlots.forEach(slot=> { %>
-                                                <% if (!new_employee.slots.includes(slot)) { %>
-                                                  <option value="<%= slot %>">
-                                                    <%= formatTime(slot) %>
-                                                  </option>
-                                                  <% } %>
-                                                    <% }); %>
-                                          </select>
-                                          <button class="add-slot-button" type="submit">Add Slot</button>
-                                        </form>
+                                      <div class="day">
+                                          <div class="day-header">
+                                              <label>
+                                                  <input type="checkbox">
+                                                  <span class="day-name">MON</span>
+                                              </label>
+                                              <div class="status unavailable">Unavailable</div>
+                                          </div>
+                                          <div class="slots" style="display: none;">
+                                              <div class="slot">
+                                                  <input type="time">
+                                                  <span>-</span>
+                                                  <input type="time">
+                                                  <button class="remove">×</button>
+                                              </div>
+                                          </div>
+                                          <button class="add-slot" style="display: none;">Add Slot</button>
+                                      </div>
+                                      <div class="day">
+                                          <div class="day-header">
+                                              <label>
+                                                  <input type="checkbox">
+                                                  <span class="day-name">TUE</span>
+                                              </label>
+                                              <div class="status unavailable">Unavailable</div>
+                                          </div>
+                                          <div class="slots" style="display: none;">
+                                              <div class="slot">
+                                                  <input type="time">
+                                                  <span>-</span>
+                                                  <input type="time">
+                                                  <button class="remove">×</button>
+                                              </div>
+                                          </div>
+                                          <button class="add-slot" style="display: none;">Add Slot</button>
+                                      </div>
+                                  </div>
                               </div>
-                            </div>
+                          </div>
 
 
                             <!-- Events Types -->
@@ -770,7 +963,7 @@
                             }
                           </script>
 
-                          <script>
+                          <!-- <script>
                             function toggleAvailability(index) {
                               var availabilityDiv = document.getElementById("availability_" + index);
                               var checkbox = document.getElementById("day_" + index);
@@ -780,7 +973,81 @@
                                 availabilityDiv.textContent = "Unavailable";
                               }
                             }
+                          </script> -->
+
+
+
+                          <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.add-slot').forEach(button => {
+        button.addEventListener('click', addSlot);
+    });
+
+    document.querySelectorAll('.remove').forEach(button => {
+        button.addEventListener('click', removeSlot);
+    });
+
+    document.querySelectorAll('.day input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', toggleAvailability);
+    });
+});
+
+function addSlot(event) {
+    const slotsContainer = event.target.previousElementSibling;
+    const newSlot = document.createElement('div');
+    newSlot.classList.add('slot');
+    newSlot.innerHTML = `
+        <input type="time">
+        <span>-</span>
+        <input type="time">
+        <button class="remove">×</button>
+    `;
+    slotsContainer.appendChild(newSlot);
+
+    newSlot.querySelector('.remove').addEventListener('click', removeSlot);
+}
+
+function removeSlot(event) {
+    const slot = event.target.closest('.slot');
+    slot.remove();
+}
+
+function toggleAvailability(event) {
+    const dayContainer = event.target.closest('.day');
+    const status = dayContainer.querySelector('.status');
+    const slots = dayContainer.querySelector('.slots');
+    const addSlotButton = dayContainer.querySelector('.add-slot');
+
+    if (event.target.checked) {
+        status.textContent = 'Available';
+        status.classList.remove('unavailable');
+        status.classList.add('available');
+        slots.style.display = 'flex';
+        addSlotButton.style.display = 'block';
+    } else {
+        status.textContent = 'Unavailable';
+        status.classList.remove('available');
+        status.classList.add('unavailable');
+        slots.style.display = 'none';
+        addSlotButton.style.display = 'none';
+    }
+}
+
+// Initialize the styles on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const statuses = document.querySelectorAll('.status');
+    statuses.forEach(status => {
+        if (status.textContent.trim() === 'Available') {
+            status.classList.add('available');
+        } else {
+            status.classList.add('unavailable');
+        }
+    });
+});
+
+
                           </script>
+
 
                           <script>
                             document.querySelector('.show_reSchedule').addEventListener('click', () => {
