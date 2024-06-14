@@ -260,6 +260,154 @@
 </style> -->
 
 
+<style>
+  .outer-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+  }
+  
+  .container_1 {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+  }
+  
+  .header {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+  
+  .header h2 {
+      font-size: 1.2em;
+      color: #333;
+  }
+  
+  .container_5 {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+  
+  .day {
+      border: 1px solid #e0e0e0;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #fff;
+      transition: box-shadow 0.3s ease, height 0.3s ease;
+      overflow: hidden;
+  }
+  
+  .day:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .day-header {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+  }
+  
+  label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 16px;
+  }
+  
+  .status {
+      font-size: 14px;
+      padding: 5px 10px;
+      border-radius: 12px;
+      text-align: center;
+  }
+  
+  .status.available {
+      color: #155724;
+      margin-left: 20px;
+      margin-top: -8px;
+  }
+  
+  .status.unavailable {
+      color: #721c24;
+      margin-left: 20px;
+      margin-top: -8px;
+  }
+  
+  .slots {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: max-height 0.3s ease;
+  }
+  
+  .slot {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+  
+  input[type="time"] {
+      width: 28%;
+      min-height: 46px;
+      padding: 10px 14px;
+      border: 1px solid var(--color-grey-2, #B2B2B2);
+      border-radius: 8px;
+      background: var(--color-bg-white-l-1, rgba(255, 255, 255, 1));
+      color: #1a1a1a;
+      font-size: 16px;
+      line-height: 1.5;
+  }
+  
+  input[type=checkbox]{
+      height: 25px;
+  }
+  
+  button.remove, button.new {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      padding: 4px;
+      border-radius: 4px;
+      color: rgb(26, 26, 26);
+      transition: all 0.3s;
+  }
+  
+  button.remove:hover, button.new:hover {
+      background-color: #f2f2f2;
+  }
+  
+  button.add-slot {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+  
+  button.add-slot:hover {
+      background-color: #0056b3;
+  }
+  </style>
+
 <!-- Events Types -->
 
 <style>
@@ -373,186 +521,6 @@
 
 <!-- Schedule Events -->
 <style>
-.outer-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 20px;
-    
-}
-
-.container_1 {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    /* border-radius: 10px; */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.header h2 {
-    font-size: 1.2em;
-    color: #333;
-}
-
-.container_5 {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.day {
-    border: 1px solid #e0e0e0;
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #fff;
-    transition: box-shadow 0.3s ease, height 0.3s ease;
-    overflow: hidden;
-}
-
-.day:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.day-header {
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.status {
-    font-size: 14px;
-    padding: 5px 10px;
-    border-radius: 12px;
-    text-align: center;
-}
-
-.status.available {
-    /* background-color: #d4edda; */
-    color: #155724;
-    margin-left: 20px;
-    margin-top: -8px;
-}
-
-.status.unavailable {
-    /* background-color: #f8d7da; */
-    color: #721c24;
-    margin-left: 20px;
-    margin-top: -8px;
-}
-
-.slots {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: max-height 0.3s ease;
-}
-
-.slot {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-input[type="time"] {
-  width: 28%;
-    min-height: 46px;
-    padding: 10px 14px;
-    border: 1px solid var(--color-grey-2, #B2B2B2);
-    border-radius: 8px;
-    background: var(--color-bg-white-l-1, rgba(255, 255, 255, 1));
-    color: #1a1a1a;
-    font-size: 16px;
-    line-height: 1.5;
-    overflow-wrap: normal;
-}
-input[type=checkbox]{
-  height: 25px;
-}
-
-button.remove {
-  background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    width: 44px;
-    height: 44px;
-    padding: 4px;
-    border-radius: 4px;
-    border: none;
-    /* background-color: transparent; */
-    color: rgb(26, 26, 26);
-    transition: all 0.3s;
-}
-
-button.remove:hover {
-  background-color: #f2f2f2;
-}
-
-button.add-slot {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    transition: background-color 0.3s, transform 0.3s;
-    align-self: flex-start;
-}
-
-button.add-slot:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-.day-name {
-    font-size: 15px;
-}
-
-@media (max-width: 600px) {
-    .container_1 {
-        padding: 10px;
-    }
-
-    .slot {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
-
-    input[type="time"] {
-        width: 100%;
-    }
-
-    .status {
-        font-size: 12px;
-    }
-}
-
   .mainDiv_meeting {
     position: relative;
     width: 100%;
@@ -737,8 +705,8 @@ button.add-slot:hover {
                                               <label>
                                                   <input type="checkbox" checked>
                                                   <span class="day-name">SUN</span>
+                                                  <div class="status available">Available</div>
                                               </label>
-                                              <div class="status available">Available</div>
                                           </div>
                                           <div class="slots">
                                               <div class="slot">
@@ -746,6 +714,7 @@ button.add-slot:hover {
                                                   <span>-</span>
                                                   <input type="time" value="01:00">
                                                   <button class="remove">×</button>
+                                                  <button class="new">+</button>
                                               </div>
                                               <div class="slot">
                                                   <input type="time" value="02:00">
@@ -766,15 +735,15 @@ button.add-slot:hover {
                                                   <button class="remove">×</button>
                                               </div>
                                           </div>
-                                          <button class="add-slot">Add Slot</button>
+                                          <!-- <button class="add-slot">Add Slot</button> -->
                                       </div>
                                       <div class="day">
                                           <div class="day-header">
                                               <label>
                                                   <input type="checkbox">
                                                   <span class="day-name">MON</span>
+                                                  <div class="status unavailable">Unavailable</div>
                                               </label>
-                                              <div class="status unavailable">Unavailable</div>
                                           </div>
                                           <div class="slots" style="display: none;">
                                               <div class="slot">
@@ -782,17 +751,18 @@ button.add-slot:hover {
                                                   <span>-</span>
                                                   <input type="time">
                                                   <button class="remove">×</button>
+                                                  <button class="new">+</button>
                                               </div>
                                           </div>
-                                          <button class="add-slot" style="display: none;">Add Slot</button>
+                                          <!-- <button class="add-slot" style="display: none;">Add Slot</button> -->
                                       </div>
                                       <div class="day">
                                           <div class="day-header">
                                               <label>
                                                   <input type="checkbox">
                                                   <span class="day-name">TUE</span>
+                                                  <div class="status unavailable">Unavailable</div>
                                               </label>
-                                              <div class="status unavailable">Unavailable</div>
                                           </div>
                                           <div class="slots" style="display: none;">
                                               <div class="slot">
@@ -800,9 +770,10 @@ button.add-slot:hover {
                                                   <span>-</span>
                                                   <input type="time">
                                                   <button class="remove">×</button>
+                                                  <button class="new">+</button>
                                               </div>
                                           </div>
-                                          <button class="add-slot" style="display: none;">Add Slot</button>
+                                          <!-- <button class="add-slot new" style="display: none;">Add Slot</button> -->
                                       </div>
                                   </div>
                               </div>
@@ -979,74 +950,98 @@ button.add-slot:hover {
 
                           <script>
                             document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.add-slot').forEach(button => {
-        button.addEventListener('click', addSlot);
-    });
-
-    document.querySelectorAll('.remove').forEach(button => {
-        button.addEventListener('click', removeSlot);
-    });
-
-    document.querySelectorAll('.day input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', toggleAvailability);
-    });
-});
-
-function addSlot(event) {
-    const slotsContainer = event.target.previousElementSibling;
-    const newSlot = document.createElement('div');
-    newSlot.classList.add('slot');
-    newSlot.innerHTML = `
-        <input type="time">
-        <span>-</span>
-        <input type="time">
-        <button class="remove">×</button>
-    `;
-    slotsContainer.appendChild(newSlot);
-
-    newSlot.querySelector('.remove').addEventListener('click', removeSlot);
-}
-
-function removeSlot(event) {
-    const slot = event.target.closest('.slot');
-    slot.remove();
-}
-
-function toggleAvailability(event) {
-    const dayContainer = event.target.closest('.day');
-    const status = dayContainer.querySelector('.status');
-    const slots = dayContainer.querySelector('.slots');
-    const addSlotButton = dayContainer.querySelector('.add-slot');
-
-    if (event.target.checked) {
-        status.textContent = 'Available';
-        status.classList.remove('unavailable');
-        status.classList.add('available');
-        slots.style.display = 'flex';
-        addSlotButton.style.display = 'block';
-    } else {
-        status.textContent = 'Unavailable';
-        status.classList.remove('available');
-        status.classList.add('unavailable');
-        slots.style.display = 'none';
-        addSlotButton.style.display = 'none';
-    }
-}
-
-// Initialize the styles on page load
-document.addEventListener('DOMContentLoaded', () => {
-    const statuses = document.querySelectorAll('.status');
-    statuses.forEach(status => {
-        if (status.textContent.trim() === 'Available') {
-            status.classList.add('available');
-        } else {
-            status.classList.add('unavailable');
-        }
-    });
-});
-
-
-                          </script>
+                                document.querySelectorAll('.add-slot').forEach(button => {
+                                    button.addEventListener('click', addSlot);
+                                });
+                            
+                                document.querySelectorAll('.new').forEach(button => {
+                                    button.addEventListener('click', addSlot);
+                                });
+                            
+                                document.querySelectorAll('.remove').forEach(button => {
+                                    button.addEventListener('click', removeSlot);
+                                });
+                            
+                                document.querySelectorAll('.day input[type="checkbox"]').forEach(checkbox => {
+                                    checkbox.addEventListener('change', toggleAvailability);
+                                });
+                            
+                                // Initialize the status classes based on their text content
+                                document.querySelectorAll('.status').forEach(status => {
+                                    if (status.textContent.trim() === 'Available') {
+                                        status.classList.add('available');
+                                    } else {
+                                        status.classList.add('unavailable');
+                                    }
+                                });
+                            });
+                            
+                            function addSlot(event) {
+                                const slotsContainer = event.target.closest('.slots');
+                                const newSlot = document.createElement('div');
+                                newSlot.classList.add('slot');
+                                newSlot.innerHTML = `
+                                    <input type="time">
+                                    <span>-</span>
+                                    <input type="time">
+                                    <button class="remove">×</button>
+                                `;
+                            
+                                // Append the new slot
+                                slotsContainer.appendChild(newSlot);
+                            
+                                // Reattach the event listener for the remove button
+                                newSlot.querySelector('.remove').addEventListener('click', removeSlot);
+                            
+                                // If this is the first slot, add the "new" button
+                                if (slotsContainer.children.length === 1) {
+                                    const newButton = document.createElement('button');
+                                    newButton.classList.add('new');
+                                    newButton.innerHTML = '+';
+                                    newButton.addEventListener('click', addSlot);
+                                    newSlot.appendChild(newButton);
+                                }
+                            }
+                            
+                            function removeSlot(event) {
+                                const slot = event.target.closest('.slot');
+                                slot.remove();
+                            
+                                // Ensure the "new" button is with the first slot if there are slots left
+                                const slotsContainer = event.target.closest('.slots');
+                                if (slotsContainer.children.length > 0) {
+                                    const firstSlot = slotsContainer.children[0];
+                                    if (!firstSlot.querySelector('.new')) {
+                                        const newButton = document.createElement('button');
+                                        newButton.classList.add('new');
+                                        newButton.innerHTML = '+';
+                                        newButton.addEventListener('click', addSlot);
+                                        firstSlot.appendChild(newButton);
+                                    }
+                                }
+                            }
+                            
+                            function toggleAvailability(event) {
+                                const dayContainer = event.target.closest('.day');
+                                const status = dayContainer.querySelector('.status');
+                                const slots = dayContainer.querySelector('.slots');
+                                const addSlotButton = dayContainer.querySelector('.add-slot');
+                            
+                                if (event.target.checked) {
+                                    status.textContent = 'Available';
+                                    status.classList.remove('unavailable');
+                                    status.classList.add('available');
+                                    slots.style.display = 'flex';
+                                    addSlotButton.style.display = 'block';
+                                } else {
+                                    status.textContent = 'Unavailable';
+                                    status.classList.remove('available');
+                                    status.classList.add('unavailable');
+                                    slots.style.display = 'none';
+                                    addSlotButton.style.display = 'none';
+                                }
+                            }
+                            </script>
 
 
                           <script>
