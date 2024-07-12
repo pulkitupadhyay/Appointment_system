@@ -1,34 +1,31 @@
-const mongoose=require("mongoose");
-// mongoose.set('strictQuery',true);
+const mongoose = require("mongoose");
 
-
-var employeeSchema=mongoose.Schema({
-  name:{
+var employeeSchema = mongoose.Schema({
+  name: {
     type: String,
-    required: true
+    required: true,
   },
-  email:{
+  email: {
     type: String,
-    required: true
+    required: true,
   },
-  password:{
+  password: {
     type: String,
-    required: true
+    required: true,
   },
-  number:{
+  number: {
     type: Number,
-    required: true
+    required: true,
   },
-  link:{
-    type:String,
+  link: {
+    type: String,
   },
-  days:{
-    type: Array,
-  },
-  slots:{
-    type:Array
-  }
-})
+  days: [
+    {
+      day: String,
+      slots: [String],
+    },
+  ],
+});
 
-
-module.exports = mongoose.model("employee",employeeSchema)
+module.exports = mongoose.model("employee", employeeSchema);

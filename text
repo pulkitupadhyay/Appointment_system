@@ -1,0 +1,61 @@
+ <div class="container_1">
+
+          <div class="meetings section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
+            <h1 style="text-align: center;">Select Days To Meet</h1>
+            <hr>
+            <% const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
+            <% daysOfWeek.forEach((day, index) => { %>
+              <div class="day-row">
+                <form action="/dayChange" id="DC_<%= index %>" method="post">
+                  <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+                  <input type="hidden" name="dayToChange" value="<%= day %>">
+                  <input type="checkbox" id="day_<%= index %>" class="checkbox" name="day_<%= index %>"
+                    <% if(new_employee.days && new_employee.days.includes(day)) { %> checked <% } %>
+                    onchange="document.getElementById('DC_<%= index %>').submit()"
+                    >
+                  <label for="day_<%= index %>"><%= day %></label>
+                </form>
+                <span class="availability">
+                  <% if(new_employee.days && new_employee.days.includes(day)) { %>Available<% } else { %>Unavailable<% } %>
+                </span>
+                <span> link</span>
+              </div>
+            <% }); %> 
+          </div>
+
+          <div class="slots section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
+            <h1 style="text-align: center;">Add Slots of the Day</h1>
+            <hr>
+            <% if(new_employee.slots) { %>
+              <% new_employee.slots.forEach(slot => { %>
+                <div class="day-row">
+                  <div class="time-slot">
+                    <div><%= formatHour(slot.split('-')[0]) %></div>
+                    <span>-</span>
+                    <div><%= formatHour(slot.split('-')[1]) %></div>
+                  </div>
+                  <form action="/removeslot" method="post">
+                    <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+                    <input type="hidden" name="slottoremove" value="<%= slot %>">
+                    <button class="remove-slot" type="submit">X</button>
+                  </form>
+                </div>
+              <% }); %>
+            <% } %>
+            <form action="/add-slot" method="post" style="margin-left: 140px;">
+              <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+              <select name="slottoadd" required>
+                <% const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8','8-9','9-10','10-11']; %>
+                <% allSlots.forEach(slot => { %>
+                  <% if (!new_employee.slots.includes(slot)) { %>
+                    <option value="<%= slot %>"><%= formatTime(slot) %></option>
+                  <% } %>
+                <% }); %>
+              </select>
+              <button class="add-slot-button" type="submit">Add Slot</button>
+            </form>
+          </div>
+
+        </div>
+        
+
