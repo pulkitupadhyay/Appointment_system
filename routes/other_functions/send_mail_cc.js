@@ -19,8 +19,13 @@ async function sendMailcc(to, subject, text, cc,) {
       // send mail with defined transport object
       const info = await transporter.sendMail({
         from: '"SWAAYATT" <swaayatt.interviews@gmail.com>', // sender address
+      //   for deployment purpous
         to: to,
-        cc: `pulkit.upadhyay@deepeigen.com, ${cc}`, // list of receivers
+        // to: 'khileshnature28@gmail.com', //this is for testing pupous 
+        // list of receivers for deployment 
+        cc: `pulkit.upadhyay@deepeigen.com, ${cc}`, 
+        // cc: `pulkit.upadhyay@deepeigen.com`, // list of receivers for testing 
+
         subject: subject, // Subject line
         text: text, // plain text body
         // html body

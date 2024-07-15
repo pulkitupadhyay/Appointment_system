@@ -347,13 +347,16 @@ console.log(count)
 if(count>=2){
   html_to_appent=`No empty slots on ${formattedDate} please try another date.`
 
-}else{
+}
+else{
 
                 // const dataString = JSON.stringify(formattedData);
 
-                // console.log(isDateTimeInArray(formattedDate, "13:00"));
+               // console.log(employee)
 
-                for (var k = 0; k <= 11; k++) {
+                 for (var k = 0; k <= 11; k++) {
+                 
+                 
                   if (k == 0) {
                     if (!isDateTimeInArray(formattedDate, "12:00")) {
                       
@@ -361,10 +364,16 @@ if(count>=2){
                       var date = moment(formattedDate, 'DD/MM/YYYY');
 
                         var dayName = date.format('dddd');
+                        var indexOfTheObjectWhichContainsDayname = employee.days.findIndex(d => d.day === dayName);
 
-                    if(employee.days.indexOf(dayName) !==  -1){
+                    if(employee.days.some(d => d.day === dayName)){
+                      
 
-                    if(employee.slots.indexOf(`12-1`) !== -1){    
+
+                      //have to put the days loop in here 
+
+
+                    if(employee.days[indexOfTheObjectWhichContainsDayname].slots.indexOf(`12-1`) !== -1){    
                       var new_string = `${formattedDate} <form action="/fake_login" method="post" >
       
                             <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
@@ -404,10 +413,15 @@ if(count>=2){
                       var date = moment(formattedDate, 'DD/MM/YYYY');
 
                       var dayName = date.format('dddd');
+                      //console.log(dayName);
 
-                      if(employee.days.indexOf(dayName) !==  -1){
+                      if(employee.days.some(d => d.day === dayName)){
+                        var indexOfTheObjectWhichContainsDayname = employee.days.findIndex(d => d.day === dayName);
+
+                        console.log("==",indexOfTheObjectWhichContainsDayname)
+
                       
-                      if(employee.slots.indexOf(`${k}-${k+1}`) !== -1){ 
+                      if(employee.days[indexOfTheObjectWhichContainsDayname].slots.indexOf(`${k}-${k+1}`) !== -1){ 
 
                       var new_string = `<form action="/fake_login" method="post" >
       
@@ -451,8 +465,14 @@ if(count>=2){
                     }
                   }
                 }
+
+
             
-              }
+ }  //count's else is ending here 
+
+
+
+
               html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
 
 document.querySelector(".last_for_display_time").innerHTML =

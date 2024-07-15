@@ -195,109 +195,132 @@ var html_to_appent = ``;
 if(count>=2){
   html_to_appent=`No empty slots on ${formattedDate} please try another date.`
 
-}else{
+}
+else{
 
+   
                 // const dataString = JSON.stringify(formattedData);
 
-                // console.log(isDateTimeInArray(formattedDate, "13:00"));
+               // console.log(employee)
 
-                for (var k = 0; k <= 11; k++) {
-                  console.log('kkkkk',k)
-                  if (k == 0) {
-                    if (!isDateTimeInArray(formattedDate, "12:00")) {
-                      
+               for (var k = 0; k <= 11; k++) {
+                 
+                 
+                if (k == 0) {
+                  if (!isDateTimeInArray(formattedDate, "12:00")) {
+                    
 
-                      var date = moment(formattedDate, 'DD/MM/YYYY');
-
-                        var dayName = date.format('dddd');
-
-                    if(employee.days.indexOf(dayName) !==  -1){
-
-                    if(employee.slots.indexOf(`12-1`) !== -1){    
-                      var new_string = `${formattedDate} <form action="/fake_login" method="post" >
-      
-                            <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
-                                   <input type="string" name="employee_id" value="${employee._id}" style="display:none;"  >
-
-     
-        
-                                 <input type="time" name="from_time" value="12:00" style="display:none;" >
-                <button class="fbtn" type="submit" onclick="changeColor(this)">12:00 PM</button>
-          
-                                </form>`;
-                      
-                      html_to_appent = `${html_to_appent} ${new_string}`;
-                              }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
-                              }
-                            }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
-                                break;
-                              }
-                    } else {
-                      var new_string = ` <form   style="background-color:red;" >
-      
-     
-                        <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
-
-
-          </form>`;
-                      
-                      html_to_appent = `${html_to_appent} ${new_string}`;
-                    }
-                  } else {
-                    if (!isDateTimeInArray(formattedDate, `${12 + k}:00`)) {
-
-                      var date = moment(formattedDate, 'DD/MM/YYYY');
+                    var date = moment(formattedDate, 'DD/MM/YYYY');
 
                       var dayName = date.format('dddd');
+                      var indexOfTheObjectWhichContainsDayname = employee.days.findIndex(d => d.day === dayName);
 
-                      if(employee.days.indexOf(dayName) !==  -1){
-                      
-                      if(employee.slots.indexOf(`${k}-${k+1}`) !== -1){ 
-
-                      var new_string = `<form action="/fake_login" method="post" >
-      
-      <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
-      <input type="string" name="employee_id" value="${employee._id}" style="display:none;"  >
-
-     
-        
-           <input type="time" name="from_time" value="${
-             12 + k 
-           }:00" style="display:none;" >
-          <button class="fbtn" type="submit" onclick="changeColor(this)">0${k}:00 PM</button>
-          
-    </form>`;
-
-                      html_to_appent = `${html_to_appent} ${new_string}`;
-                    }
+                  if(employee.days.some(d => d.day === dayName)){
                     
-                    else{
-                               
-                                html_to_appent = `${html_to_appent} `;
-                              }
-                            
+
+
+                    //have to put the days loop in here 
+
+
+                  if(employee.days[indexOfTheObjectWhichContainsDayname].slots.indexOf(`12-1`) !== -1){    
+                    var new_string = `${formattedDate} <form action="/fake_login" method="post" >
+    
+                          <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+                                 <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+   
+      
+                               <input type="time" name="from_time" value="12:00" style="display:none;" >
+              <button class="fbtn" type="submit" onclick="changeColor(this)">12:00 PM</button>
+        
+                              </form>`;
+                    
+                    html_to_appent = `${html_to_appent} ${new_string}`;
                             }else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
-                                html_to_appent = `${html_to_appent} `;
-                              }
+                              html_to_appent = `${html_to_appent} `;
+                            
+                            }
+                          }
+                          else{
+                              html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                              break;
+                            }
+                  } else {
+                    var new_string = ` <form   style="background-color:red;" >
+    
+   
+                      <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
 
-                    } else {
-                      var new_string = ` <div style="background-color:red !important;" >
-      
-     
-      <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;background-color:red !important;" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
-      
-                </div>`;
-                      
-                      html_to_appent = `${html_to_appent} ${new_string}`;
 
-                    }
+        </form>`;
+                    
+                    html_to_appent = `${html_to_appent} ${new_string}`;
+                  }
+                } else {
+                  if (!isDateTimeInArray(formattedDate, `${12 + k}:00`)) {
+
+                    var date = moment(formattedDate, 'DD/MM/YYYY');
+
+                    var dayName = date.format('dddd');
+                    //console.log(dayName);
+
+                    if(employee.days.some(d => d.day === dayName)){
+                      var indexOfTheObjectWhichContainsDayname = employee.days.findIndex(d => d.day === dayName);
+
+                      console.log("==",indexOfTheObjectWhichContainsDayname)
+
+                    
+                    if(employee.days[indexOfTheObjectWhichContainsDayname].slots.indexOf(`${k}-${k+1}`) !== -1){ 
+
+                    var new_string = `<form action="/fake_login" method="post" >
+    
+    <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
+    <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+
+   
+      
+         <input type="time" name="from_time" value="${
+           12 + k
+         }:00" style="display:none;" >
+        <button class="fbtn" type="submit" onclick="changeColor(this)">0${k}:00 PM</button>
+        
+  </form>`;
+
+                    html_to_appent = `${html_to_appent} ${new_string}`;
+                  }else{
+                             
+                              html_to_appent = `${html_to_appent} `;
+                            }
+                          
+                          }else{
+                              html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                              html_to_appent = `${html_to_appent} `;
+                              break;
+                              
+
+                            }
+
+                  }
+                   else {
+                    
+                  var new_string = ` <div style="background-color:red;" >
+    
+   
+    <button type="button" style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
+    
+              </div>`;
+                    
+                    html_to_appent = `${html_to_appent} ${new_string}`;
                   }
                 }
-            
               }
+
+
+          
+}  //count's else is ending here 
+
+
+
               html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
 
 document.querySelector(".last_for_display_time").innerHTML =

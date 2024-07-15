@@ -777,9 +777,6 @@ body {
 
 
 
-
-
-
 <script>
   // Function to format time from '12-1' to '12:00 PM - 1:00 PM'
 function formatTime(slot) {
@@ -840,7 +837,7 @@ function formatHour(hour) {
     .checkbox {
       transform: scale(1.2);
       margin-right: 10px;
-      margin-left: 156px;
+      margin-left: 20px;
     }
 
     .day-row {
@@ -853,7 +850,7 @@ function formatHour(hour) {
     .availability {
       /* font-weight: 700; */
       position: relative;
-    right: 160px;
+    right: 60px;
     top: -4px;
     }
 
@@ -874,7 +871,7 @@ function formatHour(hour) {
     }
 
     select {
-      padding: 8px;
+      padding: 3px;
       border-radius: 4px;
       border: 1px solid #ccc;
     }
@@ -883,6 +880,8 @@ function formatHour(hour) {
       display: flex;
       align-items: center;
       margin-left: 140px;
+      font-size: 1vw;
+      color: red;
     }
 
     .time-slot div {
@@ -896,18 +895,22 @@ function formatHour(hour) {
     }
 
     .add-slot-button {
-      padding: 10px 20px;
+      padding: 5px 14px;
       border-radius: 4px;
-      background-color: #007bff;
+      background-color: #0c82ff;
       color: white;
       border: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 13px;
+      font-weight: bold;
       transition: background-color 0.3s;
     }
 
     .add-slot-button:hover {
       background-color: #0056b3;
+    }
+    .day-link{
+      cursor: pointer;
     }
 
     @media screen and (max-width: 768px) {
@@ -935,7 +938,7 @@ function formatHour(hour) {
   border-top: 1px solid var(--color-grey-3, #CCCCCC);  */
 }
 
-  </style>
+</style>
 
 
 
@@ -951,66 +954,134 @@ function formatHour(hour) {
           <p style="margin-top: 10px; color: #666666; font-size: 18px;">Check your availability and manage your schedule
             easily.</p>
         </div>
-        <div class="container_1">
-          <div class="meetings section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
-            <h1 style="text-align: center;">Select Days To Meet</h1>
-            <hr>
-            <% const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
-            <% daysOfWeek.forEach((day, index) => { %>
-              <div class="day-row">
-                <form action="/dayChange" id="DC_<%= index %>" method="post">
-                  <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-                  <input type="hidden" name="dayToChange" value="<%= day %>">
-                  <input type="checkbox" id="day_<%= index %>" class="checkbox" name="day_<%= index %>"
-                    <% if(new_employee.days && new_employee.days.includes(day)) { %> checked <% } %>
-                    onchange="document.getElementById('DC_<%= index %>').submit()"
-                  >
-                  <label for="day_<%= index %>"><%= day %></label>
-                </form>
-                <span class="availability">
-                  <% if(new_employee.days && new_employee.days.includes(day)) { %>Available<% } else { %>Unavailable<% } %>
-                </span>
-              </div>
-            <% }); %>
+
+
+
+
+
+<!------------------------------------------------------ This code is under construction for khilesh side -------------------------------------------------------------->
+
+<div class="container_1">
+
+  <div class="meetings section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
+    <h1 style="text-align: center;">Select Days To Meet</h1>
+    <hr>
+    <% const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
+    <% daysOfWeek.forEach((day, index) => { %>
+      <div class="day-row">
+        <form action="/dayChange" id="DC_<%= index %>" method="post">
+          <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+          <input type="hidden" name="dayToChange" value="<%= day %>">
+          <input type="checkbox" id="day_<%= index %>" class="checkbox" name="day_<%= index %>"
+            <% if(new_employee.days && new_employee.days.some(d => d.day === day)) { %> checked <% } %>
+            onchange="document.getElementById('DC_<%= index %>').submit()"
+            >
+          <label for="day_<%= index %>" class="day-label" data-day="<%= day %>"><%= day %></label>
+        </form>
+        <span class="availability">
+          <% if(new_employee.days && new_employee.days.some(d => d.day === day)) { %>Available<% } else { %>Unavailable<% } %>
+        </span>
+        <button class="day-link add-slot-button" data-day="<%= day %>" onclick="showSlots('<%= day %>')">Manage Slots</button>
+      </div>
+    <% }); %> 
+  </div>
+
+  <div class="slots section" id="slotsSection" style="border: 2px solid var(--color-grey-3, #CCCCCC); display: none;">
+    <h1 style="text-align: center;">Add Slots for <span id="selectedDay"></span></h1>
+    <hr>
+    <div id="slotsContainer">
+      <!-- Slots will be dynamically inserted here -->
+    </div>
+    <form action="/add-slot" method="post" style="margin-left: 140px;">
+      <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+      <input type="hidden" name="dayToAddSlot" id="dayToAddSlot">
+      <select name="slottoadd" id="slotToAdd" required>
+        <% const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8','8-9','9-10','10-11']; %>
+        <% allSlots.forEach(slot => { %>
+          <option value="<%= slot %>"><%= formatTime(slot) %></option>
+        <% }); %>
+      </select>
+      <button class="add-slot-button" type="submit" onclick="saveLastSelectedDay()">Add Slot</button>
+    </form>
+  </div>
+
+</div>
+
+<!-- This is onclick function for change slote accordingly days -->
+<script>
+  function showSlots(day) {
+    // Update the selected day in the slots section
+    document.getElementById('selectedDay').innerText = day;
+    document.getElementById('dayToAddSlot').value = day;
+
+    // Fetch slots for the selected day
+    const slotsContainer = document.getElementById('slotsContainer');
+    slotsContainer.innerHTML = ''; // Clear previous slots
+
+    const employeeDays = <%- JSON.stringify(new_employee.days) %>;
+    const dayObj = employeeDays.find(d => d.day === day);
+
+    if (dayObj && dayObj.slots.length > 0) {
+      dayObj.slots.forEach(slot => {
+        const slotDiv = document.createElement('div');
+        slotDiv.className = 'day-row';
+        const [start, end] = slot.split('-');
+        slotDiv.innerHTML = `
+          <div class="time-slot">
+            <div>${formatHour(start)}</div>
+            <span>-</span>
+            <div>${formatHour(end)}</div>
           </div>
-          <div class="slots section" style="border: 2px solid var(--color-grey-3, #CCCCCC);">
-            <h1 style="text-align: center;">Add Slots of the Day</h1>
-            <hr>
-            <% if(new_employee.slots) { %>
-              <% new_employee.slots.forEach(slot => { %>
-                <div class="day-row">
-                  <div class="time-slot">
-                    <div><%= formatHour(slot.split('-')[0]) %></div>
-                    <span>-</span>
-                    <div><%= formatHour(slot.split('-')[1]) %></div>
-                  </div>
-                  <form action="/removeslot" method="post">
-                    <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-                    <input type="hidden" name="slottoremove" value="<%= slot %>">
-                    <button class="remove-slot" type="submit">X</button>
-                  </form>
-                </div>
-              <% }); %>
-            <% } %>
-            <form action="/add-slot" method="post" style="margin-left: 140px;">
-              <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-              <select name="slottoadd" required>
-                <% const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8','8-9','9-10','10-11']; %>
-                <% allSlots.forEach(slot => { %>
-                  <% if (!new_employee.slots.includes(slot)) { %>
-                    <option value="<%= slot %>"><%= formatTime(slot) %></option>
-                  <% } %>
-                <% }); %>
-              </select>
-              <button class="add-slot-button" type="submit">Add Slot</button>
-            </form>
-          </div>
-        </div>
-        
-       
+          <form action="/removeslot" method="post">
+            <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+            <input type="hidden" name="dayToRemoveSlot" value="${day}">
+            <input type="hidden" name="slotToRemove" value="${slot}">
+            <button class="remove-slot" type="submit"><i class="fa-solid fa-trash"></i></button>
+          </form>
+        `;
+        slotsContainer.appendChild(slotDiv);
+      });
+    }else{
+      const emptyDiv = document.createElement('div');
+      emptyDiv.className = 'day-row';
+      emptyDiv.innerHTML = `<div class="time-slot">No slots available for ${day}</div>`;
+      slotsContainer.appendChild(emptyDiv);
+    }
+
+    // Show the slots section
+    document.getElementById('slotsSection').style.display = 'block';
+
+    // Save the selected day to localStorage
+    localStorage.setItem('lastSelectedDay', day);
+  }
+
+  function formatHour(hour) {
+    const h = parseInt(hour);
+    const period = h > 12 ? 'AM' : 'PM';
+    const formattedHour = `${h % 12 || 12} ${period}`;
+    return formattedHour;
+  }
+
+  function saveLastSelectedDay() {
+    const selectedDay = document.getElementById('selectedDay').innerText;
+    localStorage.setItem('lastSelectedDay', selectedDay);
+  }
+
+  // Automatically show slots for the last selected day (or Sunday if no previous selection) on page load
+  window.onload = function() {
+    const lastSelectedDay = localStorage.getItem('lastSelectedDay') || 'Sunday';
+    showSlots(lastSelectedDay);
+  };
+</script>
+
+
+
+
+<!-- This code is under construction for khilesh side -->
+
+
 
 <!-- Events Types -->
-
         <style>
           .container {
             display: flex;
@@ -1121,7 +1192,6 @@ function formatHour(hour) {
         </style>
 
 
-
 <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
   <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Events Types</h1>
   <div style="display: flex; align-items: center;">
@@ -1158,14 +1228,6 @@ function formatHour(hour) {
             </button>
           </div>
         </div>
-
-
-
-
-
-
-
-
 
         <!-- Schedule Events -->
         <style>
@@ -1281,19 +1343,7 @@ function formatHour(hour) {
           </div>
           <% } %>
         </div>
-        
-        
-
-
       </div>
-
-
-
-
-
-
-
-
 
       <script>
         window.addEventListener('scroll', () => {
@@ -1318,18 +1368,6 @@ function formatHour(hour) {
         }
       </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
       <script>
         function toggleAvailability(index) {
           var availabilityDiv = document.getElementById("availability_" + index);
@@ -1341,19 +1379,6 @@ function formatHour(hour) {
           }
         }
       </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       <script>
         document.querySelector('.show_reSchedule').addEventListener('click', () => {
@@ -1478,6 +1503,7 @@ function formatHour(hour) {
 
 
       </script>
+
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -1509,6 +1535,7 @@ function formatHour(hour) {
       // Start the inactivity timer when the page loads
       resetInactivityTimer();
         </script>
+
       <script>
         function showLoader() {
         document.getElementById('loaderContainer').style.display = 'flex';
@@ -1524,11 +1551,6 @@ function formatHour(hour) {
       
       // Attach the hideLoader function to the 'load' event
       window.addEventListener('load', hideLoader);
-      
-      
-      
-      
-      
       </script>
 
 </body>
