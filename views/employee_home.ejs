@@ -992,15 +992,18 @@ function formatHour(hour) {
     <div id="slotsContainer">
       <!-- Slots will be dynamically inserted here -->
     </div>
+
     <form action="/add-slot" method="post" style="margin-left: 140px;">
       <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
       <input type="hidden" name="dayToAddSlot" id="dayToAddSlot">
+
       <select name="slottoadd" id="slotToAdd" required>
         <% const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8','8-9','9-10','10-11']; %>
         <% allSlots.forEach(slot => { %>
           <option value="<%= slot %>"><%= formatTime(slot) %></option>
         <% }); %>
       </select>
+
       <button class="add-slot-button" type="submit" onclick="saveLastSelectedDay()">Add Slot</button>
     </form>
   </div>
@@ -1009,75 +1012,98 @@ function formatHour(hour) {
 
 <!-- This is onclick function for change slote accordingly days -->
 <script>
-  function showSlots(day) {
-    // Update the selected day in the slots section
-    document.getElementById('selectedDay').innerText = day;
-    document.getElementById('dayToAddSlot').value = day;
+    function showSlots(day) {
+        // Update the selected day in the slots section
+        document.getElementById('selectedDay').innerText = day;
+        document.getElementById('dayToAddSlot').value = day;
 
-    // Fetch slots for the selected day
-    const slotsContainer = document.getElementById('slotsContainer');
-    slotsContainer.innerHTML = ''; // Clear previous slots
+        // Fetch slots for the selected day
+        const slotsContainer = document.getElementById('slotsContainer');
+        slotsContainer.innerHTML = ''; // Clear previous slots
 
-    const employeeDays = <%- JSON.stringify(new_employee.days) %>;
-    const dayObj = employeeDays.find(d => d.day === day);
+        const employeeDays = <%- JSON.stringify(new_employee.days) %>;
+        const dayObj = employeeDays.find(d => d.day === day);
+        const selectedSlots = dayObj ? dayObj.slots : [];
 
-    if (dayObj && dayObj.slots.length > 0) {
-      dayObj.slots.forEach(slot => {
-        const slotDiv = document.createElement('div');
-        slotDiv.className = 'day-row';
-        const [start, end] = slot.split('-');
-        slotDiv.innerHTML = `
-          <div class="time-slot">
-            <div>${formatHour(start)}</div>
-            <span>-</span>
-            <div>${formatHour(end)}</div>
-          </div>
-          <form action="/removeslot" method="post">
-            <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
-            <input type="hidden" name="dayToRemoveSlot" value="${day}">
-            <input type="hidden" name="slotToRemove" value="${slot}">
-            <button class="remove-slot" type="submit"><i class="fa-solid fa-trash"></i></button>
-          </form>
-        `;
-        slotsContainer.appendChild(slotDiv);
-      });
-    }else{
-      const emptyDiv = document.createElement('div');
-      emptyDiv.className = 'day-row';
-      emptyDiv.innerHTML = `<div class="time-slot">No slots available for ${day}</div>`;
-      slotsContainer.appendChild(emptyDiv);
+        console.log("hey luck its working now", selectedSlots);
+        if (dayObj && dayObj.slots.length > 0) {
+            dayObj.slots.forEach(slot => {
+                const slotDiv = document.createElement('div');
+                slotDiv.className = 'day-row';
+                const [start, end] = slot.split('-');
+                slotDiv.innerHTML = `
+                    <div class="time-slot">
+                        <div>${formatHour(start)}</div>
+                        <span>-</span>
+                        <div>${formatHour(end)}</div>
+                    </div>
+                    <form action="/removeslot" method="post">
+                        <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
+                        <input type="hidden" name="dayToRemoveSlot" value="${day}">
+                        <input type="hidden" name="slotToRemove" value="${slot}">
+                        <button class="remove-slot" type="submit"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                `;
+                slotsContainer.appendChild(slotDiv);
+            });
+        } else {
+            const emptyDiv = document.createElement('div');
+            emptyDiv.className = 'day-row';
+            emptyDiv.innerHTML = `<div class="time-slot">No slots available for ${day}</div>`;
+            slotsContainer.appendChild(emptyDiv);
+        }
+
+        // Filter out the already selected slots from the dropdown
+        const allSlots = ['12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8','8-9','9-10','10-11'];
+        const availableSlots = allSlots.filter(slot => !selectedSlots.includes(slot));
+
+        const slotToAddSelect = document.getElementById('slotToAdd');
+        slotToAddSelect.innerHTML = ''; // Clear previous options
+        availableSlots.forEach(slot => {
+            const option = document.createElement('option');
+            option.value = slot;
+            option.text = formatTime(slot);
+            slotToAddSelect.appendChild(option);
+        });
+
+
+
+        // Show the slots section
+        document.getElementById('slotsSection').style.display = 'block';
+
+        // Save the selected day to localStorage
+        localStorage.setItem('lastSelectedDay', day);
     }
 
-    // Show the slots section
-    document.getElementById('slotsSection').style.display = 'block';
-
-    // Save the selected day to localStorage
-    localStorage.setItem('lastSelectedDay', day);
+    function formatHour(hour) {
+      const h = parseInt(hour);
+      const period = h > 12 ? 'AM' : 'PM';
+      const adjustedHour = h % 12 || 12; // Convert 0 to 12 for AM
+      const formattedHour = `${String(adjustedHour).padStart(2, '0')}:00 ${period}`;
+      return formattedHour;
   }
 
-  function formatHour(hour) {
-    const h = parseInt(hour);
-    const period = h > 12 ? 'AM' : 'PM';
-    const formattedHour = `${h % 12 || 12} ${period}`;
-    return formattedHour;
+  function formatTime(slot) {
+      const [start, end] = slot.split('-');
+      return `${formatHour(start)} - ${formatHour(end)}`;
   }
 
-  function saveLastSelectedDay() {
-    const selectedDay = document.getElementById('selectedDay').innerText;
-    localStorage.setItem('lastSelectedDay', selectedDay);
-  }
+    function saveLastSelectedDay() {
+        const selectedDay = document.getElementById('selectedDay').innerText;
+        localStorage.setItem('lastSelectedDay', selectedDay);
+    }
 
-  // Automatically show slots for the last selected day (or Sunday if no previous selection) on page load
-  window.onload = function() {
-    const lastSelectedDay = localStorage.getItem('lastSelectedDay') || 'Sunday';
-    showSlots(lastSelectedDay);
-  };
+    // Automatically show slots for the last selected day (or Sunday if no previous selection) on page load
+    window.onload = function() {
+        const lastSelectedDay = localStorage.getItem('lastSelectedDay') || 'Sunday';
+        showSlots(lastSelectedDay);
+    };
 </script>
 
 
 
 
-<!-- This code is under construction for khilesh side -->
+<!-- --------------------------------This code is under construction for khilesh side ---------------------------------------------->
 
 
 
