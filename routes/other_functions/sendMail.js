@@ -19,10 +19,13 @@ async function sendMail(to, subject, text, html) {
       // send mail with defined transport object
       const info = await transporter.sendMail({
         from: '"SWAAYATT" <swaayatt.interviews@gmail.com>', // sender address
+
         // for deployemet
         to: to, 
+
         // for testing
-        // to: 'khileshnature28@gmail.com', //this is for testing pupous 
+        // to: 'khileshmaskare03@gmail.com', //this is for testing pupous 
+        
         cc: "pulkit.upadhyay@deepeigen.com", // list of receivers
         subject: subject, // Subject line
         text: text, // plain text body

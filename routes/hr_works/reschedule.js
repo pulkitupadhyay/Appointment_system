@@ -101,25 +101,53 @@ if(!user){
 
     var to1 = employee.email;
     var subject1 = "Appointment Rescheduled!";
-    var text1 = `Hey ${employee.name} This mail is to inform you that your appointment with
-      ${user.name} is resceduled on ${formattedDate} AT ${TS.time}.`;
-    var html1 = `<p style="font-size:1rem;   ">Hey ${employee.name} <br> This mail is to inform you that 
-    your appointment with ${user.name} is rescheduled. <br> 
-    Reason of rescheduling: ${reschedule_text} <br>
-    Here are the details : <br> Date  : ${formattedDate} <br> Time  :  ${TS.time} <br> Meeting Link: ${employee.link}. `;
+   
+
+    var text1 = ` Dear ${employee.name} <br> I hope this message finds you well. I am writing to inform you that there has been a change in your appointment schedule with ${user.name}. The details are as follows:`
+
+
+    var html1 = 
+          `<ul>
+            <li>New Date: ${formattedDate}</li>
+            <li>New Time: ${TS.time}</li>
+            <li>Meeting Link: ${employee.link}</li>
+          </ul>
+          <br>
+          <p>Reason : ${reschedule_text}</p>
+          <p>We apologize for any inconvenience caused due to this rescheduling. Should you have any questions or concerns, please feel free to reach out to us.
+            Best regards,</p>
+          <br>
+          <p>Swaayatt Robots Pvt. Ltd. </p>  
+          `
+
 
     sendMail(to1, subject1, text1, html1);
 
     var to2 = user.email;
     var subject2 = "Appointment Rescheduled!";
-    var text2 = `Hey ${user.name} This mail is to inform you that your appointment
-      with ${employee.name} is rescheduled on ${formattedDate} AT ${TS.time}. Please Contact
-       HR departmet if there are any queries.`;
-    var html2 = `<p style="font-size:1rem;   ">Hey ${user.name} <br> This mail is to inform you that  your appointment with ${employee.name} is rescheduled. <br> 
-    Reason of rescheduling ${reschedule_text} <br>
+  
 
-     Here are the deteails <br> Date  : ${formattedDate} <br> Time  :  ${TS.time}  <br> Meeting Link: ${employee.link}.  <br> Best Of Luck <br> Swaayatt Robots Pvt.Ltd. </p>`;
+    var text2 = ` Dear ${user.name} <br> I hope this message finds you well. I am writing to inform you that there has been a change in your appointment schedule with ${employee.name}. The details are as follows:`
+
+
+    var html2 = 
+          `<ul>
+            <li>New Date: ${formattedDate}</li>
+            <li>New Time: ${TS.time}</li>
+            <li>Meeting Link: ${employee.link}</li>
+          </ul>
+          <br>
+          <p>Reason : ${reschedule_text}</p>
+          <p>We apologize for any inconvenience caused due to this rescheduling. Should you have any questions or concerns, please feel free to reach out to us.
+            Best regards,</p>
+          <br>
+          <p>Swaayatt Robots Pvt. Ltd. </p>`
+
     sendMail(to2, subject2, text2, html2);
+
+
+
+
 
     req.flash('message', 'The appointment or meeting is rescheduled!!!')
 
