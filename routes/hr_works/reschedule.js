@@ -103,7 +103,7 @@ if(!user){
     var subject1 = "Appointment Rescheduled!";
    
 
-    var text1 = ` Dear ${employee.name} <br> I hope this message finds you well. I am writing to inform you that there has been a change in your appointment schedule with ${user.name}. The details are as follows:`
+    var text1 = ` Dear ${employee.name} <br> I hope this message finds you well. I am writing to inform you that there has been a change in your appointment with ${user.name} has been reschedule. The details are as follows:`
 
 
     var html1 = 
@@ -127,7 +127,7 @@ if(!user){
     var subject2 = "Appointment Rescheduled!";
   
 
-    var text2 = ` Dear ${user.name} <br> I hope this message finds you well. I am writing to inform you that there has been a change in your appointment schedule with ${employee.name}. The details are as follows:`
+    var text2 = ` Dear ${user.name} <br> I hope this message finds you well. I am writing to inform you that there has been a change in your appointment with ${employee.name} has been reschedule. The details are as follows:`
 
 
     var html2 = 
