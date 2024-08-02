@@ -121,7 +121,8 @@ body {
     padding: 20px;
     display: flex;
     align-items: center;
-    flex-direction: column
+    flex-direction: column;
+    background-color: #E6EAF0;
 }
 
 h2,
