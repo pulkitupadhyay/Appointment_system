@@ -1,0 +1,39 @@
+Appointment system configuration file 
+
+for testing pourpuse we have to make changes in the following files :: 
+
+
+
+setup a local mongodb server in your system ***** most important 
+
+
+
+1. .env file 
+
+if there is no .env file you will have to make one env file and input certain parameters in that 
+
+MONGO_URI="mongodb+srv://pulkit_ji:EkJTiZhfUWss7Qk1@cluster0.xbds8cy.mongodb.net/appointment_systems_database?retryWrites=true&w=majority"
+ACCESSKEYID="AKIAZYANV5AOAYFJQN66"
+SECRETACCESSKEY="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"
+BUCKETNAME="swaayattappointmentsystem"
+BUCKETREGION="us-west-1"
+NAME="pulkit"
+
+
+now you have to change********(only comment out the current mongo uri because it is only for deployment ))********* the mongo_uri to your local mongodb clustur instance which is running on you local system on port 27017
+
+2. routes/other_functions/send_mail 
+
+    there is the options parameter in the senmail function ***to*** 
+	if you are deployign comment out the code for testing and if you are testing comment out the code for testing. 
+
+3  routes/other_functions/send_mail_cc 
+
+	same as  routes/other_functions/send_mail 
+
+
+now you are good to go with the run command * npx nodemon * 
+
+
+
+

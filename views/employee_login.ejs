@@ -6,85 +6,196 @@
     <title>Email Login</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
-        .main {
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: #E6EAF0;
         }
 
         .container {
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-            width: 25rem;
-            background-color: #f8f9fa;
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            height: 80%;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #FFFFFF;
         }
 
-        h1 {
-            font-family: sans-serif;
-            font-weight: bold;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #007bff;
+        .left-side {
+            flex: 1;
+            background: url('images/teamwork.png') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
-        form {
+        .left-side img {
+            max-width: 150px;
+        }
+
+        .right-side {
+            flex: 1;
+            padding: 30px;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: center;
         }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ced4da;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        .right-side h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #333333;
+            text-align: center;
         }
 
-        input[type="text"]:focus {
-            border-color: #007bff;
-            outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        button[type="submit"] {
-            width: 100%;
-            padding: 1rem;
+        .form-control {
+            border-radius: 20px;
+            padding: 10px 15px;
+        }
+
+        .btn {
+            border-radius: 20px;
+            padding: 10px 30px;
+            background-color: #6C63FF;
+            color: white;
             border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: bold;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.15s ease-in-out;
+            margin-top: 10px;
+            width: 100%;
         }
 
-        button[type="submit"]:hover {
-            background-color: #0056b3;
+        .btn:hover {
+            background-color: #5752d4;
+        }
+
+        .right-side .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .right-side .form-check-label {
+            margin-left: 10px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .right-side .forgot-password {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #6C63FF;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .right-side .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(230, 234, 240, 0.6);
+        }
+
+        .circle1 {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            left: -50px;
+        }
+
+        .circle2 {
+            width: 100px;
+            height: 100px;
+            bottom: -25px;
+            right: -25px;
+        }
+
+        .circle3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: -75px;
+            transform: translateY(-50%);
+        }
+
+        .circle4 {
+            width: 80px;
+            height: 80px;
+            bottom: 50%;
+            right: -40px;
+            transform: translateY(50%);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: 100%;
+            }
+
+            .left-side, .right-side {
+                flex: none;
+                height: 55%;
+                padding: 20px;
+            }
+
+            .left-side {
+                order: 2;
+            }
+
+            .right-side {
+                order: 1;
+            }
         }
     </style>
 </head>
 <body>
-  <%- include('./alert_msg.ejs') %>
-  
-    <div class="main">
-        <div class="container">
-            <h1>Email Login</h1>
+    <%- include('./alert_msg.ejs') %>
+    <div class="loader-container" id="loaderContainer">
+        <div class="loader"></div>
+    </div>
+    <div class="container">
+        <div class="left-side">
+        </div>
+        <div class="right-side">
+            <h2>Email Login</h2>
             <form action="/employee_login" method="post">
-                <input class="form-control" type="text" name="employee_email" placeholder="Enter your email" required>
-                <button class="btn btn-primary mt-3" type="submit">Login</button>
+                <div class="form-group">
+                    <label for="employee_email">Email</label>
+                    <input type="email" class="form-control" name="employee_email" id="employee_email" placeholder="Enter your email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
             </form>
         </div>
     </div>
+    <script>
+        function showLoader() {
+            document.getElementById('loaderContainer').style.display = 'flex';
+        }
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        function hideLoader() {
+            document.getElementById('loaderContainer').style.display = 'none';
+        }
+
+        window.addEventListener('beforeunload', showLoader);
+        window.addEventListener('load', hideLoader);
+    </script>
 </body>
 </html>
