@@ -326,7 +326,7 @@ function formatHour(hour) {
       margin-left: 140px;
       font-size: 1.5vw;
       gap: 5px;
-      color: black;
+      color: red;
     }
 
     .time-slot div {
@@ -342,7 +342,7 @@ function formatHour(hour) {
     .add-slot-button {
       padding: 5px 14px;
       border-radius: 4px;
-      background-color: #2c3e50;
+      background:linear-gradient(135deg, #6b8cff, #3a64d8);
       color: white;
       border: none;
       cursor: pointer;
@@ -402,6 +402,7 @@ function formatHour(hour) {
   /* border: none; 
   border-top: 1px solid var(--color-grey-3, #CCCCCC);  */
 }
+    }
 
 </style>
 
@@ -412,9 +413,9 @@ function formatHour(hour) {
         margin-left: 10%;">
           <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Availability</h1>
           <div style="display: flex; align-items: center;">
-            <div style="width: 6px; height: 40px; background-color: #2c3e50; margin-right: 15px; border-radius: 4px;">
+            <div style="width: 6px; height: 40px; background-color: #0069FF; margin-right: 15px; border-radius: 4px;">
             </div>
-            <h2 style="font-size: 24px; margin: 0; color: #2c3e50;">Schedule</h2>
+            <h2 style="font-size: 24px; margin: 0; color: #0069FF;">Schedule</h2>
           </div>
           <p style="margin-top: 10px; color: #666666; font-size: 18px;">Check your availability and manage your schedule
             easily.</p>
@@ -618,7 +619,7 @@ function formatHour(hour) {
           }
 
           .card a {
-            color: #2c3e50;
+            color: #0069FF;
             text-decoration: none;
           }
 
@@ -627,7 +628,7 @@ function formatHour(hour) {
           }
 
           .btn-copy {
-            color: #2c3e50;
+            color: #0069FF;
             background-color: transparent;
             border: none;
             padding: 10px 20px;
@@ -670,6 +671,8 @@ function formatHour(hour) {
             margin-right: -20px;
             margin-left: -20px;
             border-top-left-radius: 4px;
+      background:linear-gradient(135deg, #6b8cff, #3a64d8);
+
             border-top-right-radius: 4px;
           }
 
@@ -686,9 +689,9 @@ function formatHour(hour) {
 <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
   <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Events Types</h1>
   <div style="display: flex; align-items: center;">
-    <div style="width: 6px; height: 40px; background-color: #2c3e50; margin-right: 15px; border-radius: 4px;">
+    <div style="width: 6px; height: 40px; background-color: #0069FF; margin-right: 15px; border-radius: 4px;">
     </div>
-    <h2 style="font-size: 24px; margin: 0; color: #2c3e50;">Create Event / Invite People</h2>
+    <h2 style="font-size: 24px; margin: 0; color: #0069FF;">Create Event / Invite People</h2>
   </div>
   <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore different types of events and create or
     invite people to them.</p>
@@ -696,7 +699,7 @@ function formatHour(hour) {
 
         <div class="container">
           <div class="card">
-            <div data-id="card-cap" class="cap" style="background-color:#2c3e50;"></div>
+            <div data-id="card-cap" class="cap" ></div>
             <h3>1 Hour Event</h3>
             <input type="text" id="linkInput" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
             <p> One Hour</p>
@@ -708,7 +711,7 @@ function formatHour(hour) {
           </div>
 
           <div class="card">
-            <div data-id="card-cap" class="cap" style="background-color:#2c3e50;"></div>
+            <div data-id="card-cap" class="cap" ></div>
             <h3>30 Min Meeting</h3>
             <input type="text" id="linkInput1" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
             <p><strong>Duration:</strong> 30 Min</p>
@@ -772,14 +775,14 @@ function formatHour(hour) {
           }
         
           .meeting a {
-            color: #2c3e50;
+            color: #0069FF;
             text-decoration: none;
             /* font-weight: bold; */
             transition: color 0.3s ease, font-weight 0.3s ease;
           }
         
           .meeting a:hover {
-            color: #2c3e50;
+            color: #0069FF;
             font-weight: bold;
           }
         
@@ -799,7 +802,7 @@ function formatHour(hour) {
             position: absolute;
             width: 12px;
             height: 12px;
-            background-color: #2c3e50;
+            background-color: #0069FF;
             border-radius: 50%;
             left: -32px;
             top: 50%;
@@ -815,8 +818,8 @@ function formatHour(hour) {
         <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
           <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Scheduled Events</h1>
           <div style="display: flex; align-items: center;">
-            <div style="width: 6px; height: 40px; background-color: #2c3e50; margin-right: 15px; border-radius: 4px;"></div>
-            <h2 style="font-size: 24px; margin: 0; color: #2c3e50; font-weight: normal;">All Meetings</h2>
+            <div style="width: 6px; height: 40px; background-color: #0069FF; margin-right: 15px; border-radius: 4px;"></div>
+            <h2 style="font-size: 24px; margin: 0; color: #0069FF; font-weight: normal;">All Meetings</h2>
           </div>
           <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore all scheduled meetings at a glance.</p>
         </div>
@@ -890,7 +893,7 @@ function formatHour(hour) {
 
         copyButton.addEventListener("click", () => {
           navigator.clipboard.writeText(linkInput.value).then(() => {
-            copyButton.innerHTML = "<i class='fas fa-check' style='color: #2c3e50;'></i> Copied ";
+            copyButton.innerHTML = "<i class='fas fa-check' style='color: #0069FF;'></i> Copied ";
             setTimeout(() => {
               copyButton.innerHTML = "<i class='fa fa-copy'></i> Copy Link";
             }, 2000);
