@@ -191,7 +191,7 @@ function cal_func() {
             const formattedDate = y
 
             var html_to_appent = ``;
-
+            hideInitialMessage(); 
             if (count >= 2) {
               html_to_appent = `No empty slots on ${formattedDate} please try another date.`
 
@@ -371,276 +371,347 @@ cal_func();
           (the_meet_div.innerHTML = `
 
 <style>
-body {
-          font-family: 'Arial', sans-serif;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          margin: 0;
-          background-color: #f5f5f5;
-      }
-
-      form {
-          display: flex;
-          flex-direction: column;
-          background-color: #fff;
-          padding: 20px;
-          border-radius: 15px;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-      }
-
-      input {
-          padding: 10px;
-          margin: 8px 0;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          font-size: 16px;
-          outline: none;
-      }
-
-      #time-picker {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction:column;
-      }
-
-      #hour, #minute {
-          width: 40px;
-      }
-
-      span {
-          font-size: 18px;
-      }
-
-      #ampm {
-          width: 60px;
-      }
-
-      .fbtn {
-          width: 100%;
-          padding: 15px;
-          background-color: #3498db;
-          color: #fff;
-          border: none;
-          border-radius: 5px;
-          font-size: 16px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-      }
-
-      .fbtn:hover {
-          background-color: #2980b9;
-      }
-</style>
-<style>
-h1{
+ #initialMessage{
+  margin-top: 25px;
   text-align: center;
+  h1{
+    text-wrap: nowrap;
+        font-size: 24px;
+        font-weight: 700;
+        /* text-align: center; */
+        margin-left: 40px;
+  }
+  p{
+    margin-left: 42px;
+  }
 }
-h2{
-  margin-top: 1%;
+body, h1, p, div, input, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.mainDiv h2{
-  font-size: 1rem !important  ;
-}
-form input{
-  font-size: 1rem !important  ;
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
 }
-.main{
+
+/* Main container styling */
+.cap {
+  background-color: #2c3e50;
+  height: 15px;
+  margin-top: -20px;
+  margin-right: auto;
+  margin-left: -20px;
+  width: 897px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+      border: 2px solid #e0e0e0;
+}
+
+/* Header and meeting info styling */
+.header_top {
+  font-size: 25px;
+    font-weight: 700;
+    line-height: 24px;
+    color: rgba(26, 26, 26, 0.61);
+    margin-bottom: 5px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.meeting-type {
+  font-size: 30px;
+    font-weight: 700;
+    line-height: 32px;
+    color: rgb(26, 26, 26);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.duration {
+  font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: rgba(26, 26, 26, 0.61);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Note section styling */
+.note {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #ffcccc;
+  border-left: 4px solid #ff0000;
+  font-size: 0.9rem;
+}
+.mainddddd{
+  display: flex ;
+   border: 1px solid #e0e0e0;
+}
+/* Calendar container styling */
+#container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  /* background-color: #f9f9f9; */
+  padding: 20px;
+  /* border-radius: 10px; */
+  border-right: 1px solid #e0e0e0;
+    margin-left: 35px;
+  /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
 }
 
 #header {
-  padding: 10px;
-  background-color: #1E90FF;
-  color: white;
-  font-size: 18px;
-  font-family: sans-serif;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-}
-#header button {
-background-color:#92a1d1;
-}
-#header .icons {
-  display: flex;
-}
-
-#header .icons span {
-  height: 38px;
-  width: 38px;
-  margin: 0 1px;
-  cursor: pointer;
-  color: #000;
-  text-align: center;
-  line-height: 38px;
-  font-size: 1.9rem;
-  user-select: none;
-  border-radius: 50%;
-}
-
-#header .icons span:last-child {
-  margin-right: -10px;
-  
-}
-
-
-#header .icons span:hover {
-  background:  rgb(202, 201, 201);
-  /* color: rgba(247, 241, 241, 0.938);  */
-  color:  #d36c6c;
-}
-
-
-#container {
-width: 964px;
-}
-#weekdays {
+  align-items: center;
   width: 100%;
-  display: flex;
-  color: #247BA0;
-  margin-left: 5%;
-  font-weight: bold;
 }
-#weekdays div {
-width: 100px;
-padding-top: 5%;
-padding-left:1%;
-padding-bottom: 0px !important;
-}
-#calendar {
-width: 90%;
-margin: auto;
-display: flex;
-flex-wrap: wrap;
-}
-.day {
-width: 100px;
-padding: 10px;
-height: 100px;
-margin: 5px;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-}
-.day {
+
+.icons {
   cursor: pointer;
-  box-sizing: border-box;
-  background-color: white;
-  box-shadow: 0 5px 25px rgb(1 1 1 / 15%);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border-bottom: 6px solid #4285F4;
-  border-radius: 8px;
-  justify-content: center;
-  text-align: center;
+  font-size: 1.5rem;
 }
+
+#monthDisplay {
+  font-weight: 400;
+    font-size: 1.5rem;
+}
+
+#weekdays {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+  /* border-bottom: 2px solid #ddd; */
+}
+
+#weekdays div {
+  width: 14.28%;
+    text-align: center;
+    padding: 10px 0;
+    /* font-weight: bold; */
+    color: rgba(26, 26, 26, 0.61);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.day {
+  width: 100%;
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--primary-color-level4, rgba(0, 105, 255, 0.065));
+    color: #0069FF;
+    font-weight: 700;
+}
+
 .day:hover {
-  background-color: #73ACDC !important;
+  background-color: #e6f7ff;
 }
 
-.day + #currentDay {
-background-color:#e8f4fa;
+.day.padding {
+  background-color: white;
 }
-.event {
-font-size: 10px;
-padding: 3px;
-background-color: #58bae4;
-color: white;
-border-radius: 5px;
-max-height: 55px;
-overflow: hidden;
+
+.clicked {
+  background-color: #89abc9;
+  color: #fff;
 }
-.padding {
-cursor: default !important;
-background-color: #FFFCFF !important;
-box-shadow: none !important;
-}
+
+/* Modal styling */
 #newEventModal, #deleteEventModal {
-display: none;
-z-index: 20;
-padding: 25px;
-background-color: #e8f4fa;
-box-shadow: 0px 0px 3px black;
-border-radius: 5px;
-width: 350px;
-top: 100px;
-left: calc(50% - 175px);
-position: absolute;
-font-family: sans-serif;
-}
-#eventTitleInput {
-padding: 10px;
-width: 100%;
-box-sizing: border-box;
-margin-bottom: 25px;
-border-radius: 3px;
-outline: none;
-border: none;
-box-shadow: 0px 0px 3px gray;
-}
-#eventTitleInput.error {
-border: 2px solid red;
-}
-#cancelButton, #deleteButton {
-background-color: #d36c6c;
-}
-#saveButton, #closeButton {
-background-color: #92a1d1;
-}
-#eventText {
-font-size: 14px;
-}
-#modalBackDrop {
-display: none;
-top: 0px;
-left: 0px;
-z-index: 10;
-width: 100vw;
-height: 100vh;
-position: absolute;
-background-color: rgba(0,0,0,0.8);
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  z-index: 1000;
 }
 
-@media only screen and (min-width: 1024px) {
-  .mt-5, .my-5 {
-    margin-top: 10.5rem!important;
+#newEventModal h2, #deleteEventModal h2 {
+  margin-bottom: 10px;
 }
-  }
-  @media only screen and (min-width: 1864px) {
-  .mt-5, .my-5 {
-    margin-top: 1.5rem!important;
+
+#newEventModal input, #deleteEventModal p {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
 }
+
+#newEventModal button, #deleteEventModal button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#newEventModal button:hover, #deleteEventModal button:hover {
+  background-color: #0056b3;
+}
+
+#modalBackDrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+}
+
+/* Time picker styling */
+.last_for_display_time {
+  margin-top: 20px;
+  text-align: center;
+  scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+     /*  scrollbar styles */
+         .last_for_display_time::-webkit-scrollbar {
+            width: 5px;
+        }
+        .last_for_display_time::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .last_for_display_time::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+        .last_for_display_time::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+.fbtn {
+  all: unset;
+  padding: 10px;
+  cursor: pointer;
+  width: 70%;
+  height: 30px;
+  border: 2px solid var(--primary-color-level2, rgba(0, 105, 255, 0.5));
+  color: #0069FF;
+  margin-top: 10px;
+  font: inherit;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.fbtn:hover {
+  border: 2px solid #0069FF;
+
+}
+
+.clicked {
+  background-color: #0056b3;
+}
+#nextButton,#backButton{
+  background-color: var(--primary-color-level4, rgba(0, 105, 255, 0.065));
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: var(--primary-color, rgb(0, 105, 255));
+}
+#backButton:hover{
+background-color: #e6f7ff;
+}
+#nextButton:hover{
+  background-color: #e6f7ff;
   }
+@media (max-width: 768px) {
+  #container {
+    padding: 10px;
+  }
+
+  .header_top {
+    font-size: 1.2rem;
+  }
+
+  .meeting-type {
+    font-size: 1rem;
+  }
+
+  .duration {
+    font-size: 0.9rem;
+  }
+
+  #weekdays div {
+    padding: 5px 0;
+  }
+
+  .day {
+    padding: 15px;
+  }
+}
+
 </style>
+
 <div class="main">
+<div data-id="card-cap" class="cap"></div>
+
 <a href="/hr_dashbord" style="text-align:left;" ><svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c.2 35.5-28.5 64.3-64 64.3H128.1c-35.3 0-64-28.7-64-64V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24zM352 224a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zm-96 96c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16H384c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80H256z"/></svg>GO Back TO Meetings</a>
 
 
 
 
 
-
-
-<h1 class="my-5" style="font-family: sans-serif; font-weight: bold;" text-shadow: 0rem 0.5rem 1.5rem #92a1d1;>Create 30 Min meeting with  ${capitalizeFirstLetter(
-            employee.name
-          )} </h1> 
-
-
-
+ <div class="header_top">Book meeting with</div>
+<div class="meeting-type"> ${capitalizeFirstLetter(
+  employee.name
+)} </div>
+<div class="duration">🕒 30 Minute</div>
 
 
 
 
 
 
-<div class="mainddddd" style="width: 90%; display: flex; flex-direction: row;box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7) !important;  padding: 1.5%; border: 2px solid #1E90FF;">
+
+
+
+
+
+
+<div class="mainddddd" >
 <div id="container">
 <div id="header">
 <div class="icons">
@@ -653,13 +724,13 @@ background-color: rgba(0,0,0,0.8);
 </div>
 
 <div id="weekdays">
-<div>Sunday</div>
-<div>Monday</div>
-<div>Tuesday</div>
-<div>Wednesday</div>
-<div>Thursday</div>
-<div>Friday</div>
-<div>Saturday</div>
+<div>Sun</div>
+<div>Mon</div>
+<div>Tue</div>
+<div>Wed</div>
+<div>Thu</div>
+<div>Fri</div>
+<div>Sat</div>
 </div>
 
 <div id="calendar"></div>
@@ -686,7 +757,13 @@ background-color: rgba(0,0,0,0.8);
 <div id="modalBackDrop"></div>
 
 
-
+ <div id="modalBackDrop"></div>
+        <div id="initialMessage">
+          <h1>Date-specific hours</h1>
+          <p>Please select a appoinment according to ${capitalizeFirstLetter(
+            employee.name
+          )}'s available time.</p>
+      </div>
 
 <div class="last_for_display_time" style="width:295px; padding-top: 6%;"></div>
 
@@ -703,6 +780,10 @@ background-color: rgba(0,0,0,0.8);
     })(k)
   );
 }
+function hideInitialMessage() {
+  document.getElementById('initialMessage').style.display = 'none';
+}
+
 function showMeetingSection(e) {
   document.querySelectorAll(".meeting-section").forEach(function (e) {
     e.classList.remove("active");

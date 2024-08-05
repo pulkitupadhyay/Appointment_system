@@ -12,562 +12,6 @@
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<!-- <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
-
-  body {
-    line-height: 1.5;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-  }
-
-  body.hidden-scrolling {
-    overflow-y: hidden;
-  }
-
-  * {
-    margin: 0;
-    box-sizing: border-box;
-  }
-
-  .container {
-    max-width: 1170px;
-    margin: auto;
-  }
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-
-  /*home section*/
-  .home-section {
-    width: 100%;
-    display: block;
-    min-height: 100vh;
-    background-image: url('../img/home.jpg');
-    background-position: center top;
-    background-size: cover;
-  }
-
-  /* body{
-  background-color: #000000;
-}
-h1,h2,h3,h4,p{
-  color: white  ;
-} */
-  /* responsive */
-
-  @media (max-width: 575.98px) {
-    .my-4 {
-      flex-direction: column !important;
-    }
-
-    .mainDiv {
-      width: 100% !important;
-      flex-direction: column !important;
-      padding: 3% !important;
-    }
-
-    .dayofweek {
-      padding: 3% !important;
-      margin-top: 5px;
-    }
-
-    .header .logo a {
-      font-size: 26px !important;
-      /* .meeting {
-  margin-left: -46px;
-} */
-    }
-
-    .header {
-      padding: 0px !important;
-    }
-
-    .header .logo {
-      padding: 0 15px !important;
-    }
-
-    .header-main {
-      padding: 0px 0px !important;
-    }
-
-    .meeting {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 1.1) !important;
-    }
-
-    .custom-button {
-
-      margin: 4px 57px !important;
-    }
-
-    #copyButton,
-    #copyButton1 {
-      margin: 4px 62px !important;
-    }
-  }
-
-  @media (min-width: 1024px) and (max-width: 1439px) {
-    .mainDiv {
-      width: 100% !important;
-    }
-  }
-
- 
-</style>
-<style>
-  h1,
-  p {
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    padding: 1%;
-  }
-
-  h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 2rem;
-  }
-
-  p,
-  h4 {
-    font-size: 1rem;
-  }
-
-  h2 {
-    font-size: 1rem;
-
-  }
-
-
-  .main {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  label {
-    font-weight: bold;
-
-  }
-</style>
-
-
-<style>
-  .mainDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 80%;
-    padding: 2%;
-    margin: 0 auto;
-    box-shadow: 0rem 0.5rem 1.5rem 0.5rem rgba(167, 164, 164, 0.7);
-    border-radius: 10px;
-  }
-
-  .meeting {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .meeting h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
-    font-weight: 800;
-  }
-
-  .meeting h2:first-child {
-    font-size: 22px;
-  }
-
-  .meeting h2:nth-child(2),
-  .meeting h2:nth-child(3),
-  .meeting h2:nth-child(4),
-  .meeting h2:nth-child(5) {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-
-  .meeting h2:last-child {
-    font-size: 16px;
-    margin-top: 10px;
-    color: #007bff;
-  }
-
-
-    .btbt {
-            display: none;
-          }
-
-          .dayofweek {
-            /* border: 2px solid red; */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-radius: 10px;
-            /* background-color: #333; */
-            /* backdrop-filter: blur(10px);  */
-            /* background-color: rgba(173, 216, 230, 0.4); */
-            color: #333;
-            font-weight: bold;
-            font-weight: bold;
-            padding: 1%;
-            gap: 10px;
-            box-shadow: 0 10px 4px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-          }
-
-          .dayofweek:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-            background-color: #5a85ff;
-            color: #fff;
-          }
-
-          .dayofweek button[type="submit"] {
-            background-color: transparent;
-            border: none;
-            color: red;
-            font-weight: bolder;
-            font-size: 14px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            /* position: relative; */
-            /* z-index: -1; */
-          }
-
-          .dayofweek button[type="submit"]:hover {
-            transform: scale(1.2);
-          }
-
-          .dayofweek button[type="submit"]:hover::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 80%;
-            border-radius: 50%;
-            margin-left: -5px;
-            margin-top: 1px;
-            border: 2px solid rgba(255, 0, 0, 0.5);
-            /* background-color: rgba(129, 124, 124, 0.8); */
-          }
-
-          .custom-button {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            padding: 8px 0px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 95px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border-radius: 8px;
-          }
-
-          .custom-button:hover {
-            background-color: #0056b3;
-          }
-</style> -->
-
-
-
-
-
-<!-- <style>
-  
-  /*header*/
-  .header {
-    position: sticky;
-    width: 100%;
-    left: 0;
-    top: 0;
-    z-index: 99;
-    padding: 15px;
-  }
-
-  .header-main {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-radius: 4px;
-  }
-
-  .header .logo {
-    padding: 0 15px;
-  }
-
-  .header .logo a {
-    font-size: 30px;
-    text-transform: capitalize;
-    color: #fffefe;
-    font-weight: 600;
-  }
-
-  .header .nav-menu {
-    padding: 0 15px;
-  }
-
-  .header .menu>.menu-item {
-    display: inline-block;
-    margin-left: 30px;
-    position: relative;
-  }
-
-  .header .menu>.menu-item>a {
-    display: block;
-    padding: 12px 0;
-    font-size: 16px;
-    color: #f1eeee;
-    text-transform: capitalize;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .header .menu>.menu-item>a .plus {
-    display: inline-block;
-    height: 12px;
-    width: 12px;
-    position: relative;
-    margin-left: 5px;
-    pointer-events: none;
-  }
-
-  .header .menu>.menu-item>a .plus:before,
-  .header .menu>.menu-item>a .plus:after {
-    content: '';
-    position: absolute;
-    box-sizing: border-box;
-    left: 50%;
-    top: 50%;
-    background-color: #000000;
-    height: 2px;
-    width: 100%;
-    transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
-  }
-
-  .header .menu>.menu-item:hover>a .plus:before,
-  .header .menu>.menu-item:hover>a .plus:after {
-    background-color: #e91e63;
-  }
-
-  .header .menu>.menu-item>a .plus:after {
-    transform: translate(-50%, -50%) rotate(-90deg);
-  }
-
-  .header .menu>.menu-item>.sub-menu>.menu-item>a:hover,
-  .header .menu>.menu-item:hover>a {
-    color: #e91e63;
-  }
-
-  .header .menu>.menu-item>.sub-menu {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 220px;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    background-color: #ffffff;
-    padding: 10px 0;
-    border-top: 3px solid #e91e63;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  @media(max-width: 991px) {
-    .header .menu-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .header .nav-menu {
-      position: fixed;
-      right: -280px;
-      visibility: hidden;
-      width: 280px;
-      height: 100%;
-      top: 0;
-      overflow-y: auto;
-      background-color: #222222;
-      z-index: 1000;
-      padding: 15px 0;
-      transition: all 0.5s ease;
-    }
-
-    .header .nav-menu.open {
-      visibility: visible;
-      right: 0px;
-    }
-
-    .header .menu>.menu-item {
-      display: block;
-      margin: 0;
-    }
-
-    .header .menu>.menu-item-has-children>a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header .menu>.menu-item>a {
-      color: #ffffff;
-      padding: 12px 15px;
-      border-bottom: 1px solid #333333;
-    }
-
-    .header .menu>.menu-item:first-child>a {
-      border-top: 1px solid #333333;
-    }
-
-    .header .menu>.menu-item>a .plus:before,
-    .header .menu>.menu-item>a .plus:after {
-      background-color: #ffffff;
-    }
-
-    .header .menu>.menu-item-has-children.active>a .plus:after {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    .header .menu>.menu-item>.sub-menu {
-      width: 100%;
-      position: relative;
-      opacity: 1;
-      visibility: visible;
-      border: none;
-      background-color: transparent;
-      box-shadow: none;
-      transform: translateY(0px);
-      padding: 0px;
-      left: auto;
-      top: auto;
-      max-height: 0;
-      overflow: hidden;
-    }
-
-    .header .menu>.menu-item>.sub-menu>.menu-item>a {
-      padding: 12px 45px;
-      color: #ffffff;
-      border-bottom: 1px solid #333333;
-    }
-
-    .header .close-nav-menu,
-    .header .open-nav-menu {
-      display: flex;
-    }
-  }
-  @media(min-width: 992px) {
-    .header .menu>.menu-item-has-children:hover>.sub-menu {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .header .menu>.menu-item-has-children:hover>a .plus:after {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-  }
-
-  .header .menu>.menu-item>.sub-menu>.menu-item {
-    display: block;
-  }
-
-  .header .menu>.menu-item>.sub-menu>.menu-item>a {
-    display: block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #f7f3f3;
-    transition: all 0.3s ease;
-    text-transform: capitalize;
-  }
-
-  .header .open-nav-menu {
-    height: 34px;
-    width: 40px;
-    margin-right: 15px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .header .open-nav-menu span {
-    display: block;
-    height: 3px;
-    width: 24px;
-    background-color: #000000;
-    position: relative;
-  }
-
-  .header .open-nav-menu span:before,
-  .header .open-nav-menu span:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000000;
-    box-sizing: border-box;
-  }
-
-  .header .open-nav-menu span:before {
-    top: -7px;
-  }
-
-  .header .open-nav-menu span:after {
-    top: 7px;
-  }
-
-  .header .close-nav-menu {
-    height: 40px;
-    width: 40px;
-    background-color: #ffffff;
-    margin: 0 0 15px 15px;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .header .close-nav-menu img {
-    width: 16px;
-  }
-
-  .header .menu-overlay {
-    position: fixed;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.5);
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-</style> -->
-
-
 
 <style>
 html {
@@ -581,7 +25,7 @@ body {
   }
   
   nav {
-    background-color: #1E90FF;
+    background-color: #2c3e50;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -863,7 +307,7 @@ function formatHour(hour) {
       background-color: transparent;
       color: rgb(26, 26, 26);
       transition: all 0.3s;
-      margin-left: -170px;
+      /* margin-left: -170px; */
     }
 
     .remove-slot:hover {
@@ -880,8 +324,9 @@ function formatHour(hour) {
       display: flex;
       align-items: center;
       margin-left: 140px;
-      font-size: 1vw;
-      color: red;
+      font-size: 1.5vw;
+      gap: 5px;
+      color: black;
     }
 
     .time-slot div {
@@ -897,7 +342,7 @@ function formatHour(hour) {
     .add-slot-button {
       padding: 5px 14px;
       border-radius: 4px;
-      background-color: #0c82ff;
+      background-color: #2c3e50;
       color: white;
       border: none;
       cursor: pointer;
@@ -914,12 +359,18 @@ function formatHour(hour) {
     }
 
     @media screen and (max-width: 768px) {
+      nav{
+        width: 100%;
+      }
+      .logo {
+    font-size: 18px;
+}
       .container_1 {
         grid-template-columns: 1fr;
       }
 
       .time-slot, form {
-        margin-left: 0;
+        margin-left: 0!important;
       }
 
       .day-row {
@@ -929,8 +380,22 @@ function formatHour(hour) {
 
       .availability {
         margin-top: 10px;
+        margin-left: 110px;
       }
+      .day-link{
+        margin-left: 40px;
+      }
+      .btn-copy {
+        margin-left: 0!important;
     }
+    .time-slot {
+    font-size: 5.5vw;
+    }
+    .time-slot div {
+      padding: 7px 6px;
+      text-wrap: nowrap;
+    }
+
     hr {
   margin-left: -20px;
   margin-right: -20px;
@@ -947,9 +412,9 @@ function formatHour(hour) {
         margin-left: 10%;">
           <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Availability</h1>
           <div style="display: flex; align-items: center;">
-            <div style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
+            <div style="width: 6px; height: 40px; background-color: #2c3e50; margin-right: 15px; border-radius: 4px;">
             </div>
-            <h2 style="font-size: 24px; margin: 0; color: #1E90FF;">Schedule</h2>
+            <h2 style="font-size: 24px; margin: 0; color: #2c3e50;">Schedule</h2>
           </div>
           <p style="margin-top: 10px; color: #666666; font-size: 18px;">Check your availability and manage your schedule
             easily.</p>
@@ -1036,13 +501,13 @@ function formatHour(hour) {
                         <div>${formatHour(start)}</div>
                         <span>-</span>
                         <div>${formatHour(end)}</div>
-                    </div>
+                  
                     <form action="/removeslot" method="post">
                         <input type="hidden" name="emp_id" value="<%= new_employee._id %>">
                         <input type="hidden" name="dayToRemoveSlot" value="${day}">
                         <input type="hidden" name="slotToRemove" value="${slot}">
                         <button class="remove-slot" type="submit"><i class="fa-solid fa-trash"></i></button>
-                    </form>
+                    </form>  </div>
                 `;
                 slotsContainer.appendChild(slotDiv);
             });
@@ -1153,7 +618,7 @@ function formatHour(hour) {
           }
 
           .card a {
-            color: #007BFF;
+            color: #2c3e50;
             text-decoration: none;
           }
 
@@ -1162,7 +627,7 @@ function formatHour(hour) {
           }
 
           .btn-copy {
-            color: #007BFF;
+            color: #2c3e50;
             background-color: transparent;
             border: none;
             padding: 10px 20px;
@@ -1221,9 +686,9 @@ function formatHour(hour) {
 <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
   <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Events Types</h1>
   <div style="display: flex; align-items: center;">
-    <div style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;">
+    <div style="width: 6px; height: 40px; background-color: #2c3e50; margin-right: 15px; border-radius: 4px;">
     </div>
-    <h2 style="font-size: 24px; margin: 0; color: #1E90FF;">Create Event / Invite People</h2>
+    <h2 style="font-size: 24px; margin: 0; color: #2c3e50;">Create Event / Invite People</h2>
   </div>
   <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore different types of events and create or
     invite people to them.</p>
@@ -1231,7 +696,7 @@ function formatHour(hour) {
 
         <div class="container">
           <div class="card">
-            <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
+            <div data-id="card-cap" class="cap" style="background-color:#2c3e50;"></div>
             <h3>1 Hour Event</h3>
             <input type="text" id="linkInput" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
             <p> One Hour</p>
@@ -1243,7 +708,7 @@ function formatHour(hour) {
           </div>
 
           <div class="card">
-            <div data-id="card-cap" class="cap" style="background-color:#007BFF;"></div>
+            <div data-id="card-cap" class="cap" style="background-color:#2c3e50;"></div>
             <h3>30 Min Meeting</h3>
             <input type="text" id="linkInput1" value="https://swaayatt.com/employee/<%=new_employee._id%>" readonly>
             <p><strong>Duration:</strong> 30 Min</p>
@@ -1307,14 +772,14 @@ function formatHour(hour) {
           }
         
           .meeting a {
-            color: #007bff;
+            color: #2c3e50;
             text-decoration: none;
             /* font-weight: bold; */
             transition: color 0.3s ease, font-weight 0.3s ease;
           }
         
           .meeting a:hover {
-            color: #1e90ff;
+            color: #2c3e50;
             font-weight: bold;
           }
         
@@ -1334,7 +799,7 @@ function formatHour(hour) {
             position: absolute;
             width: 12px;
             height: 12px;
-            background-color: #007bff;
+            background-color: #2c3e50;
             border-radius: 50%;
             left: -32px;
             top: 50%;
@@ -1350,8 +815,8 @@ function formatHour(hour) {
         <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
           <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Scheduled Events</h1>
           <div style="display: flex; align-items: center;">
-            <div style="width: 6px; height: 40px; background-color: #1E90FF; margin-right: 15px; border-radius: 4px;"></div>
-            <h2 style="font-size: 24px; margin: 0; color: #1E90FF; font-weight: normal;">All Meetings</h2>
+            <div style="width: 6px; height: 40px; background-color: #2c3e50; margin-right: 15px; border-radius: 4px;"></div>
+            <h2 style="font-size: 24px; margin: 0; color: #2c3e50; font-weight: normal;">All Meetings</h2>
           </div>
           <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore all scheduled meetings at a glance.</p>
         </div>
@@ -1425,7 +890,7 @@ function formatHour(hour) {
 
         copyButton.addEventListener("click", () => {
           navigator.clipboard.writeText(linkInput.value).then(() => {
-            copyButton.innerHTML = "<i class='fas fa-check' style='color: #007BFF;'></i> Copied ";
+            copyButton.innerHTML = "<i class='fas fa-check' style='color: #2c3e50;'></i> Copied ";
             setTimeout(() => {
               copyButton.innerHTML = "<i class='fa fa-copy'></i> Copy Link";
             }, 2000);
