@@ -122,7 +122,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* background-color: #E6EAF0; */
+    background-color: #E6EAF0;
 }
 
 h2,
@@ -301,6 +301,11 @@ li button:focus {
 }
 
 .for_add_empl svg {
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    transform: translateY(-50%) rotate(0deg);
+    transform-origin: center; 
     height: 3rem;
     width: 3rem;
     fill: white;
@@ -314,7 +319,7 @@ li button:focus {
 }
 
 .for_add_empl svg:hover {
-    transform: rotate(90deg);
+    transform: translateY(-50%) rotate(90deg);
 }
 
 .add-employee-text {

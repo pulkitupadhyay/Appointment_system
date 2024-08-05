@@ -226,7 +226,7 @@ function cal_func() {
                         var new_string = `${formattedDate} <form action="/fake_login" method="post" >
     
                           <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
-                                 <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+                                 <input type="string" name="employee_id" value="${employee._id}" style="display:none;"  >
 
    
       
@@ -275,7 +275,7 @@ function cal_func() {
                         var new_string = `<form action="/fake_login" method="post" >
     
     <input type="string" name="date_of_ap" value="${formattedDate}" style="display:none;" >
-    <input type="string" name="employee_id" value="<%=employee._id%>" style="display:none;"  >
+    <input type="string" name="employee_id" value="${employee._id}" style="display:none;"  >
 
    
       
