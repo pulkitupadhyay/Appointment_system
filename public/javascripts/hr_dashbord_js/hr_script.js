@@ -682,9 +682,25 @@ background-color: #e6f7ff;
     padding: 15px;
   }
 }
+  .menu-toggle {
+    display: none;
+    cursor: pointer;
+}
 
+.menu-toggle.active svg {
+    fill: white;
+}
+    @media (max-width: 768px) {
+     .menu-toggle {
+        display: block;
+      }
+          }
 </style>
-
+ <div class="menu-toggle" onclick="toggleMenu()">
+        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" style="position: absolute; left: 280%; z-index: 999;">
+            <path d="M4 6h16v2H4zm0 4h16v2H4zm0 4h16v2H4z" />
+        </svg>
+    </div>
 <div class="main">
 <div data-id="card-cap" class="cap"></div>
 
@@ -785,6 +801,13 @@ background-color: #e6f7ff;
       };
     })(k)
   );
+}
+
+function toggleMenu() {
+  var nav = document.getElementById('left-navigation');
+  var toggleButton = document.querySelector('.menu-toggle');
+  toggleButton.classList.toggle('active');
+  nav.classList.toggle('show');
 }
 function hideInitialMessage() {
   document.getElementById('initialMessage').style.display = 'none';
