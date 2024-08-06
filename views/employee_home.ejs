@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meetings Slots</title>
 </head>
-<link rel="stylesheet" href=
-"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -381,19 +380,36 @@ function formatHour(hour) {
       .availability {
         margin-top: 10px;
         margin-left: 110px;
+        font-size: 13px;
+      }
+      label{
+        font-size: 14px;
       }
       .day-link{
         margin-left: 40px;
+        font-size: 10px;
       }
       .btn-copy {
         margin-left: 0!important;
     }
     .time-slot {
-    font-size: 5.5vw;
+    font-size: 4.5vw;
     }
     .time-slot div {
       padding: 7px 6px;
       text-wrap: nowrap;
+      font-size: 12px;
+    }
+    select {
+      font-size: 12px;
+    }
+    .slots{
+      h1{
+        font-size: 22px;
+      }
+      .add-slot-button {
+        font-size: 10px;
+      }
     }
 
     hr {
@@ -401,6 +417,20 @@ function formatHour(hour) {
   margin-right: -20px;
   /* border: none; 
   border-top: 1px solid var(--color-grey-3, #CCCCCC);  */
+}
+.heading_avail{
+  font-size: 30px!important;
+}
+.heading_sched{
+  font-size: 22px!important;
+}
+.heading_para{
+  font-size: 14px!important;
+}
+.meetings{
+  h1{
+    font-size: 22px;
+  }
 }
     }
 
@@ -411,13 +441,13 @@ function formatHour(hour) {
       <div class="main">
         <div style="padding: 20px; border-radius: 10px;
         margin-left: 10%;">
-          <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Availability</h1>
+          <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;" class="heading_avail">Availability</h1>
           <div style="display: flex; align-items: center;">
             <div style="width: 6px; height: 40px; background-color: #0069FF; margin-right: 15px; border-radius: 4px;">
             </div>
-            <h2 style="font-size: 24px; margin: 0; color: #0069FF;">Schedule</h2>
+            <h2 style="font-size: 24px; margin: 0; color: #0069FF;" class="heading_sched">Schedule</h2>
           </div>
-          <p style="margin-top: 10px; color: #666666; font-size: 18px;">Check your availability and manage your schedule
+          <p style="margin-top: 10px; color: #666666; font-size: 18px;"class="heading_para">Check your availability and manage your schedule
             easily.</p>
         </div>
 
@@ -663,7 +693,22 @@ function formatHour(hour) {
             .card {
               width: 100%;
             }
+            .card h3, .card h1 {
+              font-size: 18px;
+            }
+            .card p {
+              font-size: 13px;
+            }
+            .btn-copy {
+              font-size: 14px;
+            }
+            .meeting h2 {
+              font-size: 18px !important;
+            }
+            .meeting p {
+              font-size: 11px;
           }
+        }
 
           .cap {
             height: 7px;
@@ -687,13 +732,13 @@ function formatHour(hour) {
 
 
 <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
-  <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Events Types</h1>
+  <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;" class="heading_avail">Events Types</h1>
   <div style="display: flex; align-items: center;">
     <div style="width: 6px; height: 40px; background-color: #0069FF; margin-right: 15px; border-radius: 4px;">
     </div>
-    <h2 style="font-size: 24px; margin: 0; color: #0069FF;">Create Event / Invite People</h2>
+    <h2 style="font-size: 24px; margin: 0; color: #0069FF;"class="haeding_"sched>Create Event / Invite People</h2>
   </div>
-  <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore different types of events and create or
+  <p style="margin-top: 10px; color: #666666; font-size: 18px;"class="heading_para">Explore different types of events and create or
     invite people to them.</p>
 </div>
 
@@ -813,15 +858,39 @@ function formatHour(hour) {
           .meeting:nth-child(odd)::before {
             left: 660px;
           }
+          @media (max-width: 768px) {
+  .mainDiv_meeting {
+    padding: 0 10px;
+  }
+
+  .meeting {
+    width: 100%;
+    max-width: none; 
+    transform: none; 
+    opacity: 1; 
+    transition: none; 
+  }
+
+  .timeline {
+    display: none; 
+  }
+
+  .meeting::before {
+    left: 0!important;
+    right: auto; 
+    background-color: transparent;
+  }
+  
+}
         </style>
         
         <div style="padding: 20px; border-radius: 10px; margin-left: 10%;">
-          <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;">Scheduled Events</h1>
+          <h1 style="font-size: 34px; margin-bottom: 10px; color: #333333;" class="heading_avail">Scheduled Events</h1>
           <div style="display: flex; align-items: center;">
             <div style="width: 6px; height: 40px; background-color: #0069FF; margin-right: 15px; border-radius: 4px;"></div>
-            <h2 style="font-size: 24px; margin: 0; color: #0069FF; font-weight: normal;">All Meetings</h2>
+            <h2 style="font-size: 24px; margin: 0; color: #0069FF; font-weight: normal;" class="heading_sched">All Meetings</h2>
           </div>
-          <p style="margin-top: 10px; color: #666666; font-size: 18px;">Explore all scheduled meetings at a glance.</p>
+          <p style="margin-top: 10px; color: #666666; font-size: 18px;" class="heading_para">Explore all scheduled meetings at a glance.</p>
         </div>
         <div class="mainDiv_meeting" id="mainDiv_meeting">
           <div class="timeline"></div>

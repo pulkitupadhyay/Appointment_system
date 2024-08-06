@@ -123,8 +123,13 @@
       }
 
       .custom-btn {
-        margin: 8px -8px;
+        margin: 8px -2px;
+        text-wrap: nowrap;
+        font-size: 12px;
+      }
+      .again{
         text-wrap: wrap;
+
       }
 
       .custom-side-nav {
@@ -167,12 +172,33 @@
       .meet-card-details {
         h3 {
           margin: 0px 0px 7px 15px !important;
+          font-size: 18px !important;
         }
 
         h4 {
           margin: 0px 0px 7px 15px !important;
+          font-size: 12px;
         }
       }
+      #details-btn{
+        font-size: 12px;
+      }
+      .custom-bold {
+    font-weight: 300;
+    font-size: 14px;
+}
+.custom-info-section {
+  padding: 8px;
+}
+.custom-side-nav h2, .meet-card, .meeting-card {
+    font-size: 15px;
+}
+.custom-info-section h2 {
+  font-size: 17px;
+}
+.custom-option {
+  font-size: 10px;
+}
     }
 
     @media screen and (max-width: 768px) {
@@ -316,24 +342,20 @@
                   <div class="meet-card"
                     style=" display: flex; flex-direction: column !important;justify-content: space-around;align-items: center;">
 
-                    <div
-                      style="width: 100%; display: flex; flex-direction: row !important;justify-content: space-around;align-items: center;">
-                      <div class="meet-card-details">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                          class="bi bi-clock-fill" viewBox="0 0 16 16">
-                          <path
-                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                    <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between;; align-items: center;">
+                      <div class="meet-card-details" style="display: flex; align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
                         </svg>
-                        <% const militaryTime=todaysTimeSlots[i].time ; const [hours, minutes]=militaryTime.split(':');
-                          dateObject.setHours(hours); dateObject.setMinutes(minutes); const
-                          formattedTime=dateObject.toLocaleTimeString('en-US', { hour: 'numeric' , minute: 'numeric' ,
-                          hour12: true }); dateObject.setMinutes(dateObject.getMinutes() + 30); const
-                          newFormattedTime=dateObject.toLocaleTimeString('en-US', { hour: 'numeric' , minute: 'numeric'
-                          , hour12: true }); %>
-
-                          <h4>
-                            <%=formattedTime %> - <%=newFormattedTime %>
-                          </h4>
+                        <% const militaryTime = todaysTimeSlots[i].time; const [hours, minutes] = militaryTime.split(':');
+                        dateObject.setHours(hours); dateObject.setMinutes(minutes); 
+                        const formattedTime = dateObject.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }); 
+                        dateObject.setMinutes(dateObject.getMinutes() + 30); 
+                        const newFormattedTime = dateObject.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }); %>
+                        
+                        <h4 style="margin-left: 8px;">
+                          <%= formattedTime %> - <%= newFormattedTime %>
+                        </h4>
                       </div>
                       <div class="meet-card-details">
                         <h3 style=" font-size: 1.36em; font-weight: bold;   margin:0px 0px 7px 0px;">
@@ -519,10 +541,8 @@
                   <div class="meet-card"
                     style=" display: flex; flex-direction: column !important;align-items: center;  ">
 
-                    <div
-                      style=" width: 100%; display: flex; flex-direction: row !important;justify-content: space-around;align-items: center;">
-
-                      <div class="meet-card-details">
+                    <div style="width: 100%; display: flex; flex-direction: row; justify-content: space-between;; align-items: center;">
+                      <div class="meet-card-details" style="display: flex; align-items: center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                           class="bi bi-clock-fill" viewBox="0 0 16 16">
                           <path
@@ -538,7 +558,8 @@
 
 
 
-                          <h4>
+                          <h4 style="margin-left: 8px;">
+
                             <%=formattedTime %> - <%=newFormattedTime %>
                           </h4>
                       </div>
@@ -582,7 +603,7 @@
                             <path
                               d="M288 32H213.2c-27.1 0-51.3 17.1-60.3 42.6L35.1 407.2c-2.1 5.9-3.1 12-3.1 18.2C32 455.5 56.5 480 86.6 480H288V416c0-17.7 14.3-32 32-32s32 14.3 32 32v64h32V352c0-23.7 12.9-44.4 32-55.4V272c0-58.3 44.6-106.2 101.5-111.5L487.1 74.6C478 49.1 453.9 32 426.8 32H352V96c0 17.7-14.3 32-32 32s-32-14.3-32-32V32zm64 192v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zm176 16c17.7 0 32 14.3 32 32v48H496V272c0-17.7 14.3-32 32-32zm-80 32v48c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32V272c0-44.2-35.8-80-80-80s-80 35.8-80 80z" />
                           </svg>Report This Event</a>
-                        <button class="custom-btn" onclick="showInfo('<%=i%>','show_reschedule_form_<%=i%>')"><svg
+                        <button class="custom-btn again" onclick="showInfo('<%=i%>','show_reschedule_form_<%=i%>')"><svg
                             style="padding-right: 4%;" xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                             viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
                             <path
