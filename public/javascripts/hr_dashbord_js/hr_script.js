@@ -598,6 +598,8 @@ body {
   text-align: center;
   scrollbar-width: thin;
     scrollbar-color: #888 #f1f1f1;
+    overflow-y: auto;
+    height: 400px;
 }
      /*  scrollbar styles */
          .last_for_display_time::-webkit-scrollbar {
