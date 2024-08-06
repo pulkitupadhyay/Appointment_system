@@ -7,24 +7,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   </head>
   <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-    crossorigin="anonymous"
-  />
-  <link
-    rel="stylesheet"
-    href="/stylesheets//with_perticuler/with_perticuler.css"
-  />
-
+    rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+  <link rel="stylesheet"href="/stylesheets//with_perticuler/with_perticuler.css"/>
+<style>
+  #initialMessage{
+  margin-top: 25px;
+  text-align: center;
+  h1{
+    text-wrap: nowrap;
+        font-size: 24px;
+        font-weight: 700;
+        /* text-align: center; */
+        margin-left: 40px;
+  }
+  p{
+    margin-left: 42px;
+  }
+}
+</style>
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script>
@@ -54,7 +57,7 @@ resetInactivityTimer();
       <% function capitalizeFirstLetter(str) { %> <% return str.replace(/^\w/,
       (c) => c.toUpperCase()); %> <%}%>
 
-      <h1
+      <!-- <h1
       class="my-4"
       style="
         font-family: sans-serif;
@@ -64,9 +67,19 @@ resetInactivityTimer();
       "
     >
       Book 1 Hour meeting with <%= capitalizeFirstLetter(employee.name); %>
-    </h1>
+    </h1> -->
+
+
+<div data-id="card-cap" class="cap"></div>
+
+    <div class="header_top">Book meeting with</div>
+<div class="meeting-type"> <%= capitalizeFirstLetter(employee.name); %></div>
+<div class="duration">🕒 1 Hour</div>
+
+
     <div style="
       margin-top: -10px;
+      margin-bottom: 10px;
       padding: 10px;
       background-color: #ffcccc;
       border-left: 4px solid #ff0000;
@@ -79,8 +92,9 @@ resetInactivityTimer();
   </p>
 </div>
 
-  
-      <div class="mainddddd">
+
+      <div class="mainddddd" >
+        
         <div id="container">
           <div id="header">
             <div class="icons">
@@ -97,13 +111,13 @@ resetInactivityTimer();
           </div>
 
           <div id="weekdays">
-            <div class="Sunday">Sunday</div>
-            <div class="Monday">Monday</div>
-            <div class="Tuesday">Tuesday</div>
-            <div class="Wednesday">Wednesday</div>
-            <div class="Thursday">Thursday</div>
-            <div class="Friday">Friday</div>
-            <div class="Saturday">Saturday</div>
+            <div class="Sunday">Sun</div>
+            <div class="Monday">Mon</div>
+            <div class="Tuesday">Tue</div>
+            <div class="Wednesday">Wed</div>
+            <div class="Thursday">Thu</div>
+            <div class="Friday">Fri</div>
+            <div class="Saturday">Sat</div>
           </div>
 
           <div id="calendar"></div>
@@ -128,7 +142,11 @@ resetInactivityTimer();
         </div>
 
         <div id="modalBackDrop"></div>
-
+        <div id="initialMessage">
+          <h1>Date-specific hours</h1>
+          <p>Please select a appoinment according to <%= capitalizeFirstLetter(employee.name); %>'s available time.</p>
+      </div>
+      
         <div
           class="last_for_display_time"
           style="width: 295px; padding-top: 6%"
@@ -137,11 +155,15 @@ resetInactivityTimer();
     </div>
 
     <script>
+       function hideInitialMessage() {
+    document.getElementById('initialMessage').style.display = 'none';
+}
       function changeColor(button) {
         button.classList.add("clicked");
       }
     </script>
     <script>
+     
 
       const employee = JSON.parse(`<%- JSON.stringify(employee) %>`);
       let nav = 0;
@@ -340,6 +362,7 @@ console.log(count)
 
 
               daySquare.addEventListener("click", () => {
+                hideInitialMessage(); 
                 
                 var html_to_appent = ``;
                 html_to_appent= `${html_to_appent} ${formattedDate}`
@@ -386,21 +409,24 @@ else{
           
                                 </form>`;
                       
-                      html_to_appent = `${html_to_appent} ${new_string}`;
-                              }else{
+                      // html_to_appent = `${html_to_appent} ${new_string}`;
+                      html_to_appent = ` ${new_string}`;
+
+                              }
+                              else{
                                 html_to_appent = `${html_to_appent} `;
                               
                               }
                             }
                             else{
-                                html_to_appent = `${html_to_appent} ${employee.name} is not free on ${formattedDate}`;
+                                html_to_appent = ` ${employee.name} is not free on ${formattedDate}`;
                                 break;
                               }
                     } else {
-                      var new_string = ` <form   style="background-color:red;" >
+                      var new_string = ` <form>
       
      
-                        <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
+                        <button style="display:flex; flex-direction: column;justify-content:center;align-items:center; color:red" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
 
 
           </form>`;
@@ -454,10 +480,10 @@ else{
                     }
                      else {
                       
-                    var new_string = ` <div style="background-color:red;" >
+                    var new_string = ` <div>
       
      
-      <button type="button" style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
+      <button type="button" style="display:flex; flex-direction: column;justify-content:center;align-items:center;color:red" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
       
                 </div>`;
                       
@@ -473,7 +499,7 @@ else{
 
 
 
-              html_to_appent = ` <div id="time-picker">${html_to_appent} </div>`;
+              html_to_appent = ` <div id="time-picker" style="text-align: center;">${html_to_appent} </div>`;
 
 document.querySelector(".last_for_display_time").innerHTML =
   html_to_appent;

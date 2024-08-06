@@ -12,7 +12,7 @@
     border-radius: 10px
 }
 
-.for_form_add_emp strong,
+.for_form_foremp strong,
 .navbar a {
     color: #333
 }
@@ -34,7 +34,7 @@ body {
 }
 
 #left-navigation {
-    width: 300px;
+    width: 322px;
     background-color: #2c3e50;
     color: #ecf0f1;
     padding: 20px;
@@ -66,7 +66,7 @@ body {
 #employee-list {
     list-style-type: none;
     padding: 0;
-    height: 32rem;
+    height: 40rem;
     overflow-y: scroll;
     border-bottom: 1px solid white;
 }
@@ -121,7 +121,8 @@ body {
     padding: 20px;
     display: flex;
     align-items: center;
-    flex-direction: column
+    flex-direction: column;
+    background-color: #E6EAF0;
 }
 
 h2,
@@ -139,14 +140,28 @@ p {
 
 li button {
     margin-left: 1rem;
-    padding: .5rem;
-    border-radius: 1rem
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    background: linear-gradient(45deg, #f0f0f0, #ffffff); 
+    color: black; 
+    border: none; 
+    cursor: pointer;
+    font-weight: bold; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: transform .3s, box-shadow .3s; 
 }
 
 li button:hover {
-    transform: scale(1.1);
-    transition: transform .3s
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); 
 }
+
+li button:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); 
+}
+
+
 
 .meeting-card {
     width: 65%;
@@ -266,27 +281,65 @@ li button:hover {
 .custom-cancel-btn {
     background-color: #e74c3c
 }
-
 .for_add_empl {
-    position: sticky;
+    position: absolute;
     bottom: 0;
-    top: 90%
+    top: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6b8cff, #3a64d8); 
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: width 0.4s, border-radius 0.4s, box-shadow 0.4s, height 0.4s;
+    width: 3rem;
+    height: 3rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
 }
 
+/* .for_add_empl.expanded {
+    height: 7rem;
+} */
+
+
 .for_add_empl svg {
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    transform: translateY(-50%) rotate(0deg);
+    transform-origin: center; 
     height: 3rem;
     width: 3rem;
     fill: white;
-    transition: transform .4s
+    transition: transform 0.4s;
+}
+
+.for_add_empl:hover {
+    width: 12rem; 
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); 
 }
 
 .for_add_empl svg:hover {
-    transition: transform .4s;
-    transform: rotate(90deg)
+    transform: translateY(-50%) rotate(90deg);
 }
 
-.for_add_empl:not(:hover) svg {
-    transform: rotate(0)
+.add-employee-text {
+    color: white;
+    margin-left: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s;
+    display: none;
+}
+
+.for_add_empl:hover .add-employee-text {
+    opacity: 1;
+    display: inline;
+    transform: translateX(0.2rem); 
 }
 
 .for_form_add_emp {
@@ -295,7 +348,8 @@ li button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     padding: 20px;
     width: 80%;
-    max-width: 400px
+    max-width: 400px;
+    margin-bottom: 100px;
 }
 
 .for_form_add_emp input {
