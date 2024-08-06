@@ -68,16 +68,24 @@
     // console.log(emploiesData);
 
     function toggleMenu() {
-      var nav = document.getElementById('left-navigation');
-      nav.classList.toggle('show');
-    }
+    var nav = document.getElementById('left-navigation');
+    var toggleButton = document.querySelector('.menu-toggle');
+    toggleButton.classList.toggle('active');
+    nav.classList.toggle('show');
+}
+
 
   </script>
   <style>
     .menu-toggle {
-      display: none;
-      cursor: pointer;
-    }
+    display: none;
+    cursor: pointer;
+}
+
+.menu-toggle.active svg {
+    fill: white;
+}
+
 
     @media (max-width: 768px) {
       #left-navigation {
@@ -144,6 +152,9 @@
       .submit_type {
         margin-top: 8%;
         margin-left: 14%;
+      }
+      html{
+        width: 145%;
       }
 
     }
@@ -250,7 +261,7 @@
       </div>
 
 
-      <div class="for_add_empl" onclick="showInfo('i','for_form_add_emp')">
+      <div class="for_add_empl" onclick="showInfo('i','for_form_add_emp')" id="addEmpButton">
         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
           <path
             d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
@@ -264,11 +275,12 @@
 
     <div id="meeting-section">
       <div class="menu-toggle" onclick="toggleMenu()">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" style="    position: absolute;
-        left: 136%;z-index: 999;">
-          <path d="M4 6h16v2H4zm0 4h16v2H4zm0 4h16v2H4z" />
+        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" style="position: absolute; left: 136%; z-index: 999;">
+            <path d="M4 6h16v2H4zm0 4h16v2H4zm0 4h16v2H4z" />
         </svg>
-      </div>
+    </div>
+    
+    
       <h2 class="left-aligned" style="width: 50%;"><svg style="fill: #3498db; padding-right:1%; "
           xmlns="http://www.w3.org/2000/svg" height="21" width="25" viewBox="0 0 640 512">
           <path
@@ -713,7 +725,12 @@
 
     <script src="/javascripts/hr_dashbord_js/hr_script.js"></script>
 
+<script>
+  document.getElementById('addEmpButton').addEventListener('click', function() {
+    this.classList.toggle('expanded');
+});
 
+</script>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
