@@ -20,11 +20,11 @@ async function sendMail(to, subject, text, html) {
       const info = await transporter.sendMail({
         from: '"SWAAYATT" <swaayatt.interviews@gmail.com>', // sender address
         // for deployemet
-        // to: to, 
+        to: to, 
 
         // for testing
-        to: 'aakritijha2000@gmail.com', //this is for testing pupous 
-        // cc: "pulkit.upadhyay@deepeigen.com", // list of receivers
+        // to: 'aakritijha2000@gmail.com', 
+        cc: "pulkit.upadhyay@deepeigen.com,vipinjoshi@swaayatt.com", // list of receivers
         subject: subject, // Subject line
         text: text, // plain text body
         html: html, // html body
