@@ -12,7 +12,7 @@
     border-radius: 10px
 }
 
-.for_form_add_emp strong,
+.for_form_foremp strong,
 .navbar a {
     color: #333
 }
@@ -301,9 +301,9 @@ li button:focus {
     margin-top: 20px;
 }
 
-.for_add_empl.expanded {
+/* .for_add_empl.expanded {
     height: 6rem;
-}
+} */
 
 
 .for_add_empl svg {

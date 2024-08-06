@@ -246,10 +246,10 @@ function cal_func() {
                       break;
                     }
                   } else {
-                    var new_string = ` <form   style="background-color:red;" >
+                    var new_string = ` <form>
     
    
-                      <button style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
+                      <button style="display:flex; flex-direction: column;justify-content:center;align-items:center; color:red" class="fbtn" type="btn" onclick="changeColor(this)">12:00 PM <font> Already Occupied</font></button>
 
 
         </form>`;
@@ -302,10 +302,10 @@ function cal_func() {
                   }
                   else {
 
-                    var new_string = ` <div style="background-color:red;" >
+                    var new_string = ` <div>
     
    
-    <button type="button" style="display:flex; flex-direction: column;justify-content:center;align-items:center;" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
+    <button type="button" style="display:flex; flex-direction: column;justify-content:center;align-items:center;color:red" class="fbtn" type="btn" onclick="changeColor(this)">0${k}:00 PM <font> Already Occupied</font></button>
     
               </div>`;
 
